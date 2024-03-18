@@ -1,0 +1,34 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Your Website</title>
+</head>
+<body>
+    <div id="root"></div>
+    <header>
+        <div class="container">
+            <div class="menu-profile-container">
+                <div class="menu-button">Меню</div>
+                <div class="profile-icon">Профиль</div>
+            </div>
+        </div>
+        <hr>
+    </header>
+    <div class="container">
+        <div class="center-block">
+            <div class="rounded-box"><a href="page1.html" class="menu-button" onclick="startCourse()">Start Course</a></div>
+            <div class="rounded-box"><a href="page2.html" class="profile-icon" onclick="goToPage('page2.html')">Page2</a></div>
+        </div>
+    </div>
+
+<script>
+    function goToPage(page) {
+        window.location.href = page;
+    }
+</script>
+</body>
+</html>

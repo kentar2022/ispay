@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chechen Words</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <div id="chechenText" class="text-container">
+            <h2>Chechen Text</h2>
+            <div id="chechenBlock"></div>
+        </div>
+
+        <div id="russianText" class="text-container">
+            <h2>Russian Text</h2>
+            <div id="russianBlock"></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var selectedBlocks = []; 
+
+            fetchData();
+
+            function fetchData() {
+                $.ajax({
+                    url: 'load_phrases.php',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        displayText('chechenBlock', data.chechenWords, 'chechenText');
+                        displayText('russianBlock', data.russianWords, 'russianText');
+
+                        $('.phrase').on('click', function () {
+                            selectBlock($(this));
+                        });
+                    },
+                    error: function (error) {
+                        console.error('Ошибка при получении данных:', error);
+                    }
+                });
+            }
+
+            function displayText(containerId, words, textContainerId) {
+                var container = $('#' + containerId);
+                container.empty();
+
+                words.forEach(function (word, index) {
+                    container.append('<p class="phrase" data-id="' + index + '">' + word + '</p>');
+                });
+
+                $('#' + textContainerId).find('.phrase').addClass('phrase');
+            }
+
+            function selectBlock(clickedBlock) {
+                var containerId = clickedBlock.closest('.text-container').attr('id');
+
+                // Очистка массива, если выбрано более двух блоков
+                if (selectedBlocks.length >= 2) {
+                    selectedBlocks = [];
+                }
+
+                // Добавление блока в массив
+                selectedBlocks.push({
+                    containerId: containerId,
+                    blockId: clickedBlock.data('id')
+                });
+
+                // Если выбраны два блока, вызвать проверку
+                if (selectedBlocks.length === 2) {
+                    checkMatchingIds();
+                }
+            }
+
+            function checkMatchingIds() {
+                var chechenId = selectedBlocks.find(item => item.containerId === 'chechenText').blockId;
+                var russianId = selectedBlocks.find(item => item.containerId === 'russianText').blockId;
+
+                if (chechenId === russianId) {
+                    alert('Поздравляем, вы победили!');
+                } else {
+                    alert('К сожалению, вы проиграли. Попробуйте еще раз.');
+                }
+
+                // Очистка массива после проверки
+                selectedBlocks = [];
+            }
+        });
+    </script>
+</body>
+</html>

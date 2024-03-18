@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Course 1",
+    "tasks": [
+      { "question": "Task 1", "answer": "A" },
+      { "question": "Task 2", "answer": "B" }
+      // Add more tasks as needed
+    ]
+  },
+  {
+    "name": "Course 2",
+    "tasks": [
+      { "question": "Task 1", "answer": "C" },
+      { "question": "Task 2", "answer": "D" }
+      // Add more tasks as needed
+    ]
+  }
+  // Add more courses as needed
+]
