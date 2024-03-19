@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phrase Windows</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="style.css">
 <style>
     .window {
         border: 1px solid #ccc;
         padding: 10px;
         margin: 10px;
-            
     }
     .active {
         display: block;
@@ -23,6 +23,7 @@
         padding: 10px 20px;
         cursor: pointer;
     }
+
 </style>
 </head>
 <body>
@@ -30,8 +31,12 @@
 <button id="nextBtn">Next Phrase</button>
 <div id="priceDisplay"></div>
 
+<div class="progress-container">
+    <div class="progress" id="progress"></div>
+</div>
 
 <script src="ScoreManager.js"></script>
+<script src="progressbar.js"></script>
 <script>
 $(document).ready(function() {
     var phrases = []; 
@@ -68,6 +73,9 @@ $(document).ready(function() {
         
         $('.window').removeClass('active');
         $('.window').eq(index).addClass('active');
+
+        // Обновляем шкалу прогресса
+        updateProgressBar(index);
     }
    
     $('#nextBtn').click(function() {
@@ -81,6 +89,12 @@ $(document).ready(function() {
         
         displayWindow(currentWindowIndex);
     });
+
+    // Функция для обновления шкалы прогресса
+    function updateProgressBar(index) {
+        var progressHeight = (index + 1) * (100 / phrases.length);
+        $('#progress').css('height', progressHeight + '%');
+    }
 });
 
 </script>
