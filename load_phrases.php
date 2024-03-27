@@ -17,14 +17,14 @@ if ($conn->connect_error) {
 }
 
 // Select data from the first_lesson table
-$sql = "SELECT fl.* FROM first_lesson fl INNER JOIN russian_words rw ON fl.id = rw.id";
+$sql = "SELECT fl.*, rw.word_russian FROM first_lesson fl INNER JOIN russian_words rw ON fl.id = rw.id";
 $result = $conn->query($sql);
 
 // Fetch data and return as JSON
 $data = array();
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        // Добавляем данные в массив только если id из обеих таблиц совпадает
+        // Добавляем данные в массив
         $data[] = $row;
     }
 }

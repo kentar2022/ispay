@@ -34,70 +34,16 @@
 <div class="progress-container">
     <div class="progress" id="progress"></div>
 </div>
+<input type="text" id="textInput" placeholder="Введите текст на русском">
+<button id="submitButton">Проверить</button>
+
+<div id="warningMessage" style="display: none;">Введенный текст не соответствует</div>
 
 <script src="ScoreManager.js"></script>
 <script src="progressbar.js"></script>
-<script>
-$(document).ready(function() {
-    var phrases = []; 
-    var currentWindowIndex = 0; 
+<script src="Validator.js"></script>
 
-    
-    $.ajax({
-        url: 'load_phrases.php', 
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            console.log('Получены данные:', data); 
-            phrases = data;
-            displayWindow(currentWindowIndex); 
-        },
-        error: function(error) {
-            console.error('Ошибка при загрузке фраз:', error);
-        }
-    });
 
-    
-    function displayWindow(index) {
-        // Получаем текущее окно
-        var currentWindow = $('.window');
-
-       
-        if (currentWindow.length > 0) {
-            currentWindow.text(phrases[index].text);
-        } else { 
-            var windowContent = '<div class="window">' + phrases[index].text + '</div>';
-            $('#windowsContainer').append(windowContent);
-        }
-
-        
-        $('.window').removeClass('active');
-        $('.window').eq(index).addClass('active');
-
-        // Обновляем шкалу прогресса
-        updateProgressBar(index);
-    }
-   
-    $('#nextBtn').click(function() {
-        currentWindowIndex++; 
-
-        
-        if (currentWindowIndex >= phrases.length) {
-            currentWindowIndex = 0; 
-        }
-
-        
-        displayWindow(currentWindowIndex);
-    });
-
-    // Функция для обновления шкалы прогресса
-    function updateProgressBar(index) {
-        var progressHeight = (index + 1) * (100 / phrases.length);
-        $('#progress').css('height', progressHeight + '%');
-    }
-});
-
-</script>
 
 
 </body>

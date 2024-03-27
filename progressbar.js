@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+/*document.addEventListener('DOMContentLoaded', function() {
     var progressContainer = document.querySelector('.progress-container');
     var progress = document.getElementById('progress');
     var increaseButton = document.getElementById('increaseButton');
@@ -25,3 +25,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     increaseButton.addEventListener('click', increaseProgress);
 });
+*/

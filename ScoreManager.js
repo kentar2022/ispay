@@ -25,36 +25,62 @@ $(document).ready(function () {
     }
 
     function displayWindow(index) {
-        let price = parseInt(data[index].price);
-        totalPrice += price;
+        var windowContainer = $('#windowsContainer');
+        windowContainer.empty();
+        var currentWindow = $('#' + data[index].id); 
 
-        let windowContent = '<div class="window">' + data[index].text + '</div>';
-        $('#windowsContainer').empty().append(windowContent);
+        if (currentWindow.length > 0) {
+            currentWindow.text(data[index].text);
+        } else {
+            
+            var windowContent = '<div id="' + data[index].id + '" class="window active">' + data[index].text + '</div>';
+            windowContainer.append(windowContent);
+        }
 
+        
         $('.window').removeClass('active');
-        $('.window').eq(index).addClass('active');
+        $('#' + data[index].id).addClass('active');
 
-        currentIndex = index;
-        $('#priceDisplay').text('Total Price: ' + totalPrice);
-
-        // Обновляем шкалу прогресса
-        updateProgressBar();
+        
+        updateProgressBar(index);
     }
 
     $('#nextBtn').on('click', function () {
-        // Увеличиваем индекс, чтобы перейти к следующей фразе
+
         currentIndex++;
-        // Если достигнут конец массива, переходим к началу
+
         if (currentIndex >= data.length) {
             currentIndex = 0;
         }
-        // Показываем окно с новой фразой
+
         displayWindow(currentIndex);
     });
 
-    // Функция для обновления шкалы прогресса
+
     function updateProgressBar() {
         var filledSteps = Math.floor((totalPrice / 15) * 100 / (100 / 15));
         $('#progress').css('height', (filledSteps * (100 / 15)) + '%');
+    }
+
+    var phrases = [];
+    var currentWindowIndex = 0;
+
+    $.ajax({
+        url: 'load_phrases.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log('Получены данные:', data);
+            phrases = data;
+            displayWindow(currentWindowIndex);
+        },
+        error: function (error) {
+            console.error('Ошибка при загрузке фраз:', error);
+        }
+    });
+
+    function updateProgressBar(index) {
+        var progressHeight = (index + 1) * (100 / phrases.length);
+        $('#progress').css('height', progressHeight + '%');
     }
 });
