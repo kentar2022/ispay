@@ -11,25 +11,25 @@ $dbname = "chechen";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Select data from the first_lesson table
+
 $sql = "SELECT fl.*, rw.word_russian FROM first_lesson fl INNER JOIN russian_words rw ON fl.id = rw.id";
 $result = $conn->query($sql);
 
-// Fetch data and return as JSON
+
 $data = array();
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        // Добавляем данные в массив
+        
         $data[] = $row;
     }
 }
 echo json_encode($data);
 
-// Close connection
+
 $conn->close();
 ?>

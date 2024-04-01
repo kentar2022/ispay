@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var totalPrice = 0;
-    var data;
     var currentIndex = 0;
+    var data; // Переместил определение переменной data
 
     fetchData();
 
@@ -11,17 +11,14 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'json',
             success: function (responseData) {
-                data = responseData;
-                handleData(data);
+                console.log('Получены данные:', responseData);
+                data = responseData; // Обновил данные
+                displayWindow(currentIndex);
             },
             error: function (error) {
-                console.error('Ошибка при получении данных:', error);
+                console.error('Ошибка при загрузке фраз:', error);
             }
         });
-    }
-
-    function handleData(data) {
-        displayWindow(0);
     }
 
     function displayWindow(index) {
@@ -32,21 +29,17 @@ $(document).ready(function () {
         if (currentWindow.length > 0) {
             currentWindow.text(data[index].text);
         } else {
-            
             var windowContent = '<div id="' + data[index].id + '" class="window active">' + data[index].text + '</div>';
             windowContainer.append(windowContent);
         }
 
-        
         $('.window').removeClass('active');
         $('#' + data[index].id).addClass('active');
 
-        
-        updateProgressBar(index);
+        updateProgressBar(index, data.length);
     }
 
     $('#nextBtn').on('click', function () {
-
         currentIndex++;
 
         if (currentIndex >= data.length) {
@@ -56,31 +49,8 @@ $(document).ready(function () {
         displayWindow(currentIndex);
     });
 
-
-    function updateProgressBar() {
-        var filledSteps = Math.floor((totalPrice / 15) * 100 / (100 / 15));
-        $('#progress').css('height', (filledSteps * (100 / 15)) + '%');
-    }
-
-    var phrases = [];
-    var currentWindowIndex = 0;
-
-    $.ajax({
-        url: 'load_phrases.php',
-        method: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            console.log('Получены данные:', data);
-            phrases = data;
-            displayWindow(currentWindowIndex);
-        },
-        error: function (error) {
-            console.error('Ошибка при загрузке фраз:', error);
-        }
-    });
-
-    function updateProgressBar(index) {
-        var progressHeight = (index + 1) * (100 / phrases.length);
+    function updateProgressBar(index, length) {
+        var progressHeight = (index + 1) * (100 / length);
         $('#progress').css('height', progressHeight + '%');
     }
 });
