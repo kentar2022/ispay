@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var data; 
+    var data;
     var currentIndex = 0;
 
     fetchData(); 
@@ -40,14 +40,18 @@ $(document).ready(function () {
     }
 
     
-    $('#submitButton').on('click', function () {
+    $('#nextBtn').on('click', function () {
         var userInput = parseInt($('#textInput').val()); 
-        var currentBlockId = $('#' + data[currentIndex].id).attr('id'); 
+        var currentBlockId = data[currentIndex].id;
 
         if (userInput === parseInt(currentBlockId)) { 
-            alert('Фраза найдена в данных!');
+            currentIndex++;
+            if (currentIndex >= data.length) {
+                currentIndex = 0;
+            }
+            displayWindow(currentIndex);
         } else {
-            alert('Фраза не найдена в данных.');
+            alert('Неверный ID блока.');
         }
     });
 
@@ -57,12 +61,4 @@ $(document).ready(function () {
         $('#progress').css('height', progressHeight + '%');
     }
 
-    
-    $('#nextBtn').on('click', function () {
-        currentIndex++;
-        if (currentIndex >= data.length) {
-            currentIndex = 0;
-        }
-        displayWindow(currentIndex);
-    });
 });
