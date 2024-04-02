@@ -20,7 +20,6 @@ $(document).ready(function () {
         });
     }
 
-    
     function displayWindow(index) {
         var windowContainer = $('#windowsContainer');
         windowContainer.empty();
@@ -37,25 +36,28 @@ $(document).ready(function () {
         $('#' + data[index].id).addClass('active');
 
         updateProgressBar(index);
+        
+        // Найти значение word_russian в строке с соответствующим ID
+        var currentData = data.find(item => item.id === $('#' + data[index].id).attr('id'));
+        var wordRussian = currentData ? currentData.word_russian : 'Соответствующая строка не найдена';
+        console.log('Слово на русском:', wordRussian);
     }
 
-    
     $('#nextBtn').on('click', function () {
-        var userInput = parseInt($('#textInput').val()); 
-        var currentBlockId = data[currentIndex].id;
+        var userInput = $('#textInput').val().trim(); // Получаем введенное пользователем значение
+        var currentWordRussian = data[currentIndex].word_russian.toLowerCase(); // Получаем перевод из данных и приводим его к нижнему регистру
 
-        if (userInput === parseInt(currentBlockId)) { 
+        if (userInput.toLowerCase() === currentWordRussian) { 
             currentIndex++;
             if (currentIndex >= data.length) {
                 currentIndex = 0;
             }
             displayWindow(currentIndex);
         } else {
-            alert('Неверный ID блока.');
+            alert('Неверный перевод фразы.');
         }
     });
 
-    
     function updateProgressBar(index) {
         var progressHeight = (index + 1) * (100 / data.length);
         $('#progress').css('height', progressHeight + '%');
