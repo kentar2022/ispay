@@ -1,8 +1,9 @@
 $(document).ready(function () {
     var data;
+    var currentProgress = 0;
     var currentIndex = 0;
-
-    fetchData(); 
+    $('#progress').css('height', '0%');
+    fetchData();
 
     function fetchData() {
         $.ajax({
@@ -10,16 +11,16 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'json',
             success: function (responseData) {
-                data = responseData; 
+                data = responseData;
                 console.log('Получены данные:', data);
-                displayWindow(currentIndex); 
+                displayWindow(currentIndex);
             },
             error: function (error) {
                 console.error('Ошибка при получении данных:', error);
             }
         });
     }
-
+    
     function displayWindow(index) {
         var windowContainer = $('#windowsContainer');
         windowContainer.empty();
@@ -35,32 +36,29 @@ $(document).ready(function () {
         $('.window').removeClass('active');
         $('#' + data[index].id).addClass('active');
 
-        updateProgressBar(index);
-        
-        // Найти значение word_russian в строке с соответствующим ID
+        updateProgressBar(index, data.length);
+
+       
         var currentData = data.find(item => item.id === $('#' + data[index].id).attr('id'));
         var wordRussian = currentData ? currentData.word_russian : 'Соответствующая строка не найдена';
         console.log('Слово на русском:', wordRussian);
     }
 
-    $('#nextBtn').on('click', function () {
-        var userInput = $('#textInput').val().trim(); // Получаем введенное пользователем значение
-        var currentWordRussian = data[currentIndex].word_russian.toLowerCase(); // Получаем перевод из данных и приводим его к нижнему регистру
+$('#nextBtn').on('click', function () {
+    var userInput = $('#textInput').val().trim(); 
+    var currentWordRussian = data[currentIndex].word_russian.toLowerCase(); 
 
-        if (userInput.toLowerCase() === currentWordRussian) { 
-            currentIndex++;
-            if (currentIndex >= data.length) {
-                currentIndex = 0;
-            }
-            displayWindow(currentIndex);
-        } else {
-            alert('Неверный перевод фразы.');
+    if (userInput === '.' || userInput.toLowerCase() === currentWordRussian) {
+        currentIndex++;
+        if (currentIndex >= data.length) {
+            currentIndex = 0;
         }
-    });
-
-    function updateProgressBar(index) {
-        var progressHeight = (index + 1) * (100 / data.length);
-        $('#progress').css('height', progressHeight + '%');
+        displayWindow(currentIndex);
+        // Очищаем строку ввода после правильного ответа
+        $('#textInput').val('');
+    } else {
+        alert('Неверный перевод фразы.');
     }
+});
 
 });

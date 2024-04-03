@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    flex-direction: row; /* Добавлено свойство для расположения блоков в ряд */
+    flex-direction: row; 
 }
 
 .text-container {
@@ -19,34 +19,25 @@ body {
     font-size: 1.2em; 
 }
 
-#chechenText {
-    text-align: right;
-    margin-right: 250px;
-}
-
-#russianText {
-    text-align: left;
-    margin-left: 250px;
-}
 .phrase {
     background: linear-gradient(135deg, #ddd, #00bcd4);
     border: 2px solid #00bcd4;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
-    max-width: calc(100% - 20px); /* Ограничение ширины с учетом padding и border */
+    max-width: calc(100% - 20px); 
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis; /* Добавление многоточия для текста, не помещающегося в блок */
+    text-overflow: ellipsis; 
     max-width: 300px;
 }
-#russianBlock, #chechenBlock{
-    border: 1px red solid !important;   
-}
+
 .window {
     border: 1px solid #ccc;
     padding: 10px;
     margin: 10px;
+    font-size: 38px;
+    border: none;
 }
 .active {
     display: block;
@@ -67,8 +58,8 @@ body {
     right: 130px;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px; /* ширина шкалы */
-    height: 340px; /* высота шкалы */
+    width: 30px; 
+    height: 340px;
     background-color: #DCDCDC;
     overflow: hidden; 
     border-radius: 10px;
@@ -78,7 +69,57 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #48D1CC;
+    background-color: #ff0081;
     transition: height 0.5s ease; 
  /*   border-radius: 10px;*/
+}
+.particle {
+    position: absolute;
+    background-color: #48D1CC;
+    width: 4px;
+    height: 4px;
+     border-radius: 50%;
+    animation: particleAnimation 0.4s ease forwards;
+}
+@keyframes particleAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) translateX(-20px);
+  }
+}
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+    
+#textInput {
+    width: 300px;
+    padding: 20px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-top: 280px; 
+    margin-bottom: 180px; 
+
+}
+
+#closeButton {
+    position: fixed;
+    top: 20px;
+    right: 120px;
+    cursor: pointer;
+    font-size: 52px; 
+    color: #808080; 
+    background-color: transparent; 
+    border: none; 
+    padding: 0;
+    z-index: 9999;
 }
