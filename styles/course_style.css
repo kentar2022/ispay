@@ -1,4 +1,5 @@
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -20,8 +21,18 @@ header {
 nav {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: row; 
 }
 
+.text-container {
+    width: 45%;
+    padding: 20px;
+    border: 1px solid transparent;
+    margin: 10px;
+    font-size: 1.2em; 
+}
 .nav-item {
     margin: 0 10px;
     padding: 5px 10px;
@@ -30,6 +41,18 @@ nav {
     cursor: pointer;
 }
 
+.phrase {
+    background: linear-gradient(135deg, #ddd, #00bcd4);
+    border: 2px solid #00bcd4;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: calc(100% - 20px); 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+    max-width: 300px;
+}
 
 main {
     display: flex;
@@ -39,7 +62,23 @@ main {
     justify-content: center;
 }
 
-
+.window {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    font-size: 38px;
+    border: none;
+}
+.active {
+    display: block;
+}
+#nextBtn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+}
 a {
     text-decoration: none;
     color: #333;
@@ -56,8 +95,49 @@ a {
     cursor: pointer;
     transition: background-color 0.3s ease; 
 }
+.window.active {
+    display: block;
+}
+.progress-container {
+    position: fixed;
+    right: 130px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px; 
+    height: 340px;
+    background-color: #DCDCDC;
+    overflow: hidden; 
+    border-radius: 10px;
+}
+.progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff0081;
+    transition: height 0.5s ease; 
+ /*   border-radius: 10px;*/
+}
+.particle {
+    position: absolute;
+    background-color: #48D1CC;
+    width: 4px;
+    height: 4px;
+     border-radius: 50%;
+    animation: particleAnimation 0.4s ease forwards;
+}
 
+@keyframes particleAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) translateX(-20px);
+  }
 
+}
 .menu-button:hover,
 .profile-icon:hover {
     background-color: #0056b3; 
@@ -81,17 +161,15 @@ hr {
     justify-content: center;
     height: 100vh;
 }
-    
+
 #textInput {
     width: 300px;
-    padding: 20px;
+    padding: 10px;
     font-size: 16px;
     border: 2px solid #ccc;
     border-radius: 5px;
-    margin-top: 280px; 
-    margin-bottom: 180px; 
+    margin-top: 20px;
 }
-
 
 .courses {
     width: 1000px;
@@ -100,6 +178,18 @@ hr {
     flex-wrap: wrap;
     justify-content: flex-end;
     justify-content: space-around;
+}
+
+#closeButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 50px; 
+    color: #FF00FF; 
+    background-color: transparent; 
+    border: none; 
+    padding-right: 108px; 
 }
 
 .course {
@@ -124,7 +214,6 @@ hr {
         width: calc(50% - 20px);
     }
 }
-
 
 .course img {
     width: 100%; 
