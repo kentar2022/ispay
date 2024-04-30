@@ -9,26 +9,31 @@ $username = "kentar";
 $password = "password"; 
 $dbname = "chechen";
 
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Проверка подключения
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Получение данных из таблицы
-$sql = "SELECT * FROM lesson_status";
+
+$sql = "SELECT * FROM user_levels";
 $result = $conn->query($sql);
 
+
 if ($result->num_rows > 0) {
-    // Возвращаем данные в формате JSON
-    $rows = array();
+    
+    $data = array();
     while($row = $result->fetch_assoc()) {
-        $rows[] = $row;
+        $data[] = $row;
     }
-    echo json_encode($rows);
+    
+    echo json_encode($data);
 } else {
-    echo "0 results";
+    echo json_encode([]); 
 }
+
+
 $conn->close();
 ?>

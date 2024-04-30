@@ -7,7 +7,6 @@
     <title>Course Lessons</title>
     <link rel="stylesheet" href="styles/chechen_lessons_menu_style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 <body>
 
@@ -19,43 +18,60 @@
 
 
 <div class="lessons-container">
-    <a href="chechen_lesson1.html" class="lesson-block">
+    <a href="chechen_lesson.html" class="lesson-block goToLessonBtn" id="1">
+        <div class="lesson-status"></div>
+    </a>
+    <a href="chechen_lesson.html" class="lesson-block" id="2">
+        <div class="lesson-status"></div>
+    </a>
+    <a href="chechen_lesson.html" class="lesson-block" id="3">
+        <div class="lesson-status"></div>
+    </a>
+    <a href="chechen_lesson.html" class="lesson-block" id="4">
         <div></div>
     </a>
-    <a href="chechen_lesson2.html" class="lesson-block">
+    <a href="chechen_lesson.html" class="lesson-block" id="5">
         <div></div>
     </a>
-    <a href="chechen_lesson3.html" class="lesson-block">
+    <a href="chechen_lesson.html" class="lesson-block" id="6">
         <div></div>
     </a>
-    <a href="chechen_lesson4.html" class="lesson-block">
+    <a href="chechen_lesson.html" class="lesson-block" id="7">
         <div></div>
     </a>
-    <a href="chechen_lesson5.html" class="lesson-block">
+    <a href="chechen_lesson.html" class="lesson-block" id="8">
         <div></div>
     </a>
-    <a href="chechen_lesson6.html" class="lesson-block">
+    <a href="chechen_lesson.html" class="lesson-block" id="9">
         <div></div>
     </a>
-    <a href="chechen_lesson7.html" class="lesson-block">
-        <div></div>
-    </a>
-    <a href="chechen_lesson8.html" class="lesson-block">
-        <div></div>
-    </a>
-    <a href="chechen_lesson9.html" class="lesson-block">
-        <div></div>
-    </a>
-    <a href="chechen_lesson10.html" class="lesson-block">
+    <a href="chechen_lesson.html" class="lesson-block" id="10">
         <div></div>
     </a>
 </div>
+
 <script type="text/javascript">
 function toggleHiddenBlock() {
     const mainBlock = document.querySelector('.main-block');
     mainBlock.classList.toggle('active');
 }
+
+
+
+$(document).ready(function () {
+    $('.lesson-block').click(function () {
+        var lessonId = $(this).attr('id');
+        localStorage.setItem('lessonId', lessonId); 
+        window.location.href = 'Validator.js'; 
+    });
+});
+
+
+
 </script>
+
+<script src="lessons_switch.js"></script>
 <script src="block_status.regulator.js"></script>
+
 </body>
 </html>

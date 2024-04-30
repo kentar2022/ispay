@@ -16,6 +16,13 @@
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
   box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
 }
+
+#completionMessage {
+  display: none;
+  margin-top: 20px;
+}
+
+
 .bubbly-button:focus {
   outline: 0;
 }

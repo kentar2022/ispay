@@ -83,3 +83,4 @@ body {
 .main-block.active + .hidden-block {
     height: 200px; 
 }
+

@@ -11,25 +11,27 @@ $dbname = "chechen";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+if (!isset($_POST['table'])) {
+    die('Table parameter is missing.');
+}
 
-$sql = "SELECT fl.*, rw.word_russian FROM first_lesson fl INNER JOIN russian_words rw ON fl.id = rw.id";
+$tableName = $_POST['table'];
+
+$sql = "SELECT {$tableName}.*, rw.word_russian FROM {$tableName} INNER JOIN russian_words rw ON {$tableName}.id = rw.id";
 $result = $conn->query($sql);
-
 
 $data = array();
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        
         $data[] = $row;
     }
 }
-echo json_encode($data);
 
+echo json_encode($data);
 
 $conn->close();
 ?>
