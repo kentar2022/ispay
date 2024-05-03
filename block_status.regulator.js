@@ -21,7 +21,7 @@ function loadLessonStatus() {
                         break;
                     case "3":
                         
-                        $(this).css("background-color", "#FF00FF"); 
+                        $(this).css("background-color", "#f3166b"); 
                         break;
                     default:
                         
@@ -39,3 +39,4 @@ function loadLessonStatus() {
 $(document).ready(function() {
     loadLessonStatus();
 });
+/*#15E670*/

@@ -79,9 +79,9 @@ main {
     transform: translateX(-50%);
     padding: 10px 20px;
 }
+
 a {
     text-decoration: none;
-    color: #333;
 }
 
 
@@ -193,8 +193,8 @@ hr {
 }
 
 .course {
-    width: calc(25.33% - 20px);
-    height: 150px;
+    width: 220px;
+    height: 160px;
     margin: 10px;
     position: relative; 
     border-radius: 30px;
@@ -228,4 +228,10 @@ hr {
 .course img {
     border-radius: 30px;
     width: 50%;
+}
+
+.coursesPage{
+    width: 70%;
+    margin-left: 250px;
+    
 }

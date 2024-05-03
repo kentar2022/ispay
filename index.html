@@ -1,76 +1,184 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/chechen_lessons_menu_style.css">
+    <link rel="stylesheet" href="styles/course_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Your Website</title>
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="menu-profile-container">
-                <div class="menu-button">Меню</div>
-                <div class="profile-icon"><a href="profile.html">Профиль</a></div>
-            </div>
-        </div>
     </header>
-    <div class="container">
-        <main>
-            <div class="center-block">
+<div class="container">
+    <main>
+        <div class="center-block">
+        </div>
+        <aside>
+            <div class="aside-item" id="menuText">
+                <a href="#" class="nav-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 48 48">
+                        <path d="M 6 9 A 2.0002 2.0002 0 1 0 6 13 L 42 13 A 2.0002 2.0002 0 1 0 42 9 L 6 9 z M 6 22 A 2.0002 2.0002 0 1 0 6 26 L 42 26 A 2.0002 2.0002 0 1 0 42 22 L 6 22 z M 6 35 A 2.0002 2.0002 0 1 0 6 39 L 42 39 A 2.0002 2.0002 0 1 0 42 35 L 6 35 z">
+                        </path>
+                    </svg>
+                    <span id="menuTextTranslation">Меню</span>
+                </a>
             </div>
-            <aside>
-                <div class="aside-item">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 48 48">
-                            <path d="M 6 9 A 2.0002 2.0002 0 1 0 6 13 L 42 13 A 2.0002 2.0002 0 1 0 42 9 L 6 9 z M 6 22 A 2.0002 2.0002 0 1 0 6 26 L 42 26 A 2.0002 2.0002 0 1 0 42 22 L 6 22 z M 6 35 A 2.0002 2.0002 0 1 0 6 39 L 42 39 A 2.0002 2.0002 0 1 0 42 35 L 6 35 z">
-                            </path>
-                        </svg>Меню
+            <div class="aside-item" id="coursesPageBtn" onclick="togglePages('coursesPage')">
+                <a href="#">
+                    <svg fill="#000000" width="35px" height="35px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path d="M31.514 11.177l-15.514-7.467-15.514 7.467 2.186 1.318v11.529h1.066v-10.886l3.199 1.929v13.223h18.126v-13.219l6.451-3.894zM16 4.893l13.275 6.39-13.267 8.008-13.282-8.009 13.274-6.39zM23.997 27.224h-15.994v-11.514l8.005 4.827 7.989-4.823v11.51z">
+                        </path>
+                    </svg>
+                    <span id="coursesPageTextTranslation">Список курсов</span>
+                </a>
+            </div>
+            <div class="aside-item" id="ratingsPageBtn">
+                <a href="#">
+                    <svg fill="#000000" height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 491.813 491.813" xml:space="preserve">
+                        <path d="M491.352,170.948L429.774,49.696c-0.725-1.427-2.19-2.325-3.79-2.325H65.829c-0.047,0-0.093,0.009-0.141,0.01
+                            c-0.082,0.003-0.163,0.01-0.245,0.017c-0.19,0.018-0.377,0.048-0.562,0.09c-0.057,0.014-0.114,0.021-0.17,0.036
+                            c-0.242,0.066-0.475,0.156-0.699,0.263c-0.021,0.01-0.044,0.014-0.065,0.024c-0.034,0.017-0.061,0.042-0.095,0.06
+                            c-0.189,0.1-0.37,0.212-0.542,0.34c-0.042,0.03-0.085,0.057-0.125,0.089c-0.189,0.15-0.365,0.318-0.527,0.501
+                            c-0.043,0.048-0.08,0.1-0.121,0.148c-0.118,0.146-0.227,0.301-0.327,0.463c-0.036,0.059-0.072,0.115-0.105,0.176
+                            c-0.021,0.037-0.046,0.071-0.065,0.109L0.461,170.948c-0.797,1.569-0.544,3.468,0.636,4.773l241.51,267.319
+                            c0.806,0.892,1.951,1.401,3.152,1.401c0,0,0.001,0,0.001,0c1.201,0,2.346-0.508,3.152-1.399l241.803-267.319
+                            C491.896,174.418,492.15,172.519,491.352,170.948z M455.063,202.467H383.62c-2.347,0-4.25,1.902-4.25,4.25
+                            c0,2.348,1.903,4.25,4.25,4.25h63.754l-186.93,206.655l106.913-240.499h110.63L455.063,202.467z M150.62,275.467h-47.954
+                            l-88.849-98.344h109.162l107.859,240.213L110.345,283.967h40.275c2.347,0,4.25-1.902,4.25-4.25
+                            C154.87,277.369,152.967,275.467,150.62,275.467z M16.587,157.967H87.62c2.347,0,4.25-1.902,4.25-4.25c0-2.348-1.903-4.25-4.25-4.25
+                            H20.904L65.776,61.11l53.113,107.514H11.175L16.587,157.967z M412.113,69.467H303.62c-2.347,0-4.25,1.902-4.25,4.25
+                            c0,2.348,1.903,4.25,4.25,4.25h104.195l-44.342,87.708L255.939,55.87h163.048L412.113,69.467z M165.332,138.967h52.288
+                            c2.347,0,4.25-1.902,4.25-4.25c0-2.348-1.903-4.25-4.25-4.25h-43.856l67.889-68.442l-0.04,106.599H135.916L165.332,138.967z
+                             M301.62,143.967h28.696l24.146,24.656h-104.35l0.04-106.514l71.84,73.357H301.62c-2.347,0-4.25,1.902-4.25,4.25
+                            C297.37,142.065,299.273,143.967,301.62,143.967z M241.609,177.123l-0.092,243.245L132.296,177.123H241.609z M250.109,177.123
+                            h107.946l-108.038,243.03L250.109,177.123z M126.899,165.643L89.019,88.967h63.601c2.347,0,4.25-1.902,4.25-4.25
+                            c0-2.348-1.903-4.25-4.25-4.25h-67.8L72.669,55.87h163.115L126.899,165.643z M371.508,168.623L425.95,60.94l38.865,76.527H401.62
+                            c-2.347,0-4.25,1.902-4.25,4.25c0,2.348,1.903,4.25,4.25,4.25h67.511l11.506,22.656H371.508z"/>
+                    </svg>
+                    <span id="ratingsPageTextTranslation">Рейтинги</span>
+                </a>
+            </div>
+            <div class="aside-item" id="lessonsPageBtn" onclick="togglePages('lessonsPage')"><a href="#"><span id="lessonsPageTextTranslation">Задания</span></a></div>
+            <div class="aside-item" id="settingsPageBtn" onclick="togglePages('settingsPage')"><a href="#"><span id="settingsPageTextTranslation">Настройки</span></a></div>
+            <div class="aside-item"><a href="#"><span id="shopTextTranslation">Магазин</span></a></div>
+        </aside>
+    </main>
+</div>
+
+
+    <div id="lessonsPage" class="page lessonsPage">
+        <div class="container">
+            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="hidden-block"></div>
+        </div>
+
+        <div class="lessons-container">
+            <a href="chechen_lesson.html" class="lesson-block goToLessonBtn" id="1">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="chechen_lesson.html" class="lesson-block" id="2">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="chechen_lesson.html" class="lesson-block" id="3">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="chechen_lesson.html" class="lesson-block" id="4">
+                <div></div>
+            </a>
+            <a href="chechen_lesson.html" class="lesson-block" id="5">
+                <div></div>
+            </a>
+            <a href="chechen_lesson.html" class="lesson-block" id="6">
+                <div></div>
+            </a>
+            <a href="chechen_lesson.html" class="lesson-block" id="7">
+                <div></div>
+            </a>
+            <a href="chechen_lesson.html" class="lesson-block" id="8">
+                <div></div>
+            </a>
+            <a href="chechen_lesson.html" class="lesson-block" id="9">
+                <div></div>
+            </a>
+            <a href="chechen_lesson.html" class="lesson-block" id="10">
+                <div></div>
+            </a>
+        </div>
+    </div>
+ 
+
+
+    <div id="coursesPage" class="page hidden coursesPage">
+        <div class="container"> 
+            <main>
+                <div class="courses">
+                    <a href="chechen_lessons_menu.html" class="course settingsPage">
+                        <img src="courses_flags/chechen.png" alt="Flag">
+                        <h3 id="courseChechenTranslation">Чеченский язык 1</h3>
+                    </a>
+                    <a href="ingush_language.html" class="course">
+                        <img src="courses_flags/ingush.png" alt="Flag">
+                        <h3 id="courseIngushTranslation">Ингушский язык</h3>
+                    </a>
+                    <a href="adyge_language.html" class="course">
+                        <img src="courses_flags/adyge.png" alt="Flag">
+                        <h3 id="courseAdygeTranslation">Черкесский язык</h3>
+                    </a>
+                    <a href="udmurt_language.html" class="course">
+                        <img src="courses_flags/udmurt.png" alt="Flag">
+                        <h3 id="courseUdmurtTranslation">Удмуртский язык</h3>
+                    </a>
+                    <a href="tatar_language.html" class="course">
+                        <img src="courses_flags/tatar.png" alt="Flag">
+                        <h3 id="courseTatarTranslation">Татарский язык</h3>
+                    </a>
+                    <a href="chuvash_language.html" class="course">
+                        <img src="courses_flags/chuvash.png" alt="Flag">
+                        <h3 id="courseChuvashTranslation">Чувашский язык</h3>
                     </a>
                 </div>
-                <div class="aside-item">
-                    <a href="courses.html"><svg width="35px" height="35px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <path d="M31.514 11.177l-15.514-7.467-15.514 7.467 2.186 1.318v11.529h1.066v-10.886l3.199 1.929v13.223h18.126v-13.219l6.451-3.894zM16 4.893l13.275 6.39-13.267 8.008-13.282-8.009 13.274-6.39zM23.997 27.224h-15.994v-11.514l8.005 4.827 7.989-4.823v11.51z" fill="#000000">
-                            </path>
-                        </svg>Список курсов
-                    </a>
-                </div>
-                <div class="aside-item">
-                    <a href="#">
-                        <svg fill="#000000" height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 491.813 491.813" xml:space="preserve">
-                            <path d="M491.352,170.948L429.774,49.696c-0.725-1.427-2.19-2.325-3.79-2.325H65.829c-0.047,0-0.093,0.009-0.141,0.01
-                                c-0.082,0.003-0.163,0.01-0.245,0.017c-0.19,0.018-0.377,0.048-0.562,0.09c-0.057,0.014-0.114,0.021-0.17,0.036
-                                c-0.242,0.066-0.475,0.156-0.699,0.263c-0.021,0.01-0.044,0.014-0.065,0.024c-0.034,0.017-0.061,0.042-0.095,0.06
-                                c-0.189,0.1-0.37,0.212-0.542,0.34c-0.042,0.03-0.085,0.057-0.125,0.089c-0.189,0.15-0.365,0.318-0.527,0.501
-                                c-0.043,0.048-0.08,0.1-0.121,0.148c-0.118,0.146-0.227,0.301-0.327,0.463c-0.036,0.059-0.072,0.115-0.105,0.176
-                                c-0.021,0.037-0.046,0.071-0.065,0.109L0.461,170.948c-0.797,1.569-0.544,3.468,0.636,4.773l241.51,267.319
-                                c0.806,0.892,1.951,1.401,3.152,1.401c0,0,0.001,0,0.001,0c1.201,0,2.346-0.508,3.152-1.399l241.803-267.319
-                                C491.896,174.418,492.15,172.519,491.352,170.948z M455.063,202.467H383.62c-2.347,0-4.25,1.902-4.25,4.25
-                                c0,2.348,1.903,4.25,4.25,4.25h63.754l-186.93,206.655l106.913-240.499h110.63L455.063,202.467z M150.62,275.467h-47.954
-                                l-88.849-98.344h109.162l107.859,240.213L110.345,283.967h40.275c2.347,0,4.25-1.902,4.25-4.25
-                                C154.87,277.369,152.967,275.467,150.62,275.467z M16.587,157.967H87.62c2.347,0,4.25-1.902,4.25-4.25c0-2.348-1.903-4.25-4.25-4.25
-                                H20.904L65.776,61.11l53.113,107.514H11.175L16.587,157.967z M412.113,69.467H303.62c-2.347,0-4.25,1.902-4.25,4.25
-                                c0,2.348,1.903,4.25,4.25,4.25h104.195l-44.342,87.708L255.939,55.87h163.048L412.113,69.467z M165.332,138.967h52.288
-                                c2.347,0,4.25-1.902,4.25-4.25c0-2.348-1.903-4.25-4.25-4.25h-43.856l67.889-68.442l-0.04,106.599H135.916L165.332,138.967z
-                                 M301.62,143.967h28.696l24.146,24.656h-104.35l0.04-106.514l71.84,73.357H301.62c-2.347,0-4.25,1.902-4.25,4.25
-                                C297.37,142.065,299.273,143.967,301.62,143.967z M241.609,177.123l-0.092,243.245L132.296,177.123H241.609z M250.109,177.123
-                                h107.946l-108.038,243.03L250.109,177.123z M126.899,165.643L89.019,88.967h63.601c2.347,0,4.25-1.902,4.25-4.25
-                                c0-2.348-1.903-4.25-4.25-4.25h-67.8L72.669,55.87h163.115L126.899,165.643z M371.508,168.623L425.95,60.94l38.865,76.527H401.62
-                                c-2.347,0-4.25,1.902-4.25,4.25c0,2.348,1.903,4.25,4.25,4.25h67.511l11.506,22.656H371.508z"/>
-                        </svg>Рейтинги
-                    </a>
-                </div>
-                <div class="aside-item"><a href="#">Задания</a></div>
-                <div class="aside-item"><a href="#">Настройки</a></div>
-                <div class="aside-item"><a href="#">Магазин</a></div>
-            </aside>
-        </main>
+            </main>
+        </div>
     </div>
 
+
+<div id="settingsPage" class="settingsPage page hidden ">
+    <div class="container">
+        <h2 id="settingsHeaderTextTranslation">Настройки</h2>
+        <div>
+            <h3>Выбор языка интерфейса:</h3>
+            <input type="radio" id="langRussianSettings" name="language" value="russian" onclick="changeLanguage('russian')">
+            <label for="langRussianSettings"><span id="settingsLangRussianTranslation">Русский</span></label><br>
+            <input type="radio" id="langEnglishSettings" name="language" value="english" onclick="changeLanguage('english')">
+            <label for="langEnglishSettings"><span id="settingsLangEnglishTranslation">Английский</span></label><br>
+            <input type="radio" id="langFrenchSettings" name="language" value="french" onclick="changeLanguage('french')">
+            <label for="langFrenchSettings"><span id="settingsLangFrenchTranslation">Французский</span></label><br>
+        </div>
+
+        <div>
+            <h3><span id="settingsThemeSelectionTranslation">Выбор темы страницы:</span></h3>
+            <input type="radio" id="themeLight" name="theme" value="light" onchange="setTheme()">
+            <label for="themeLight"><span id="settingsThemeLightTranslation">Светлая тема</span></label><br>
+            <input type="radio" id="themeDark" name="theme" value="dark" onchange="setTheme()">
+            <label for="themeDark"><span id="settingsThemeDarkTranslation">Темная тема</span></label><br>
+            <input type="radio" id="themeDark2" name="theme" value="dark2" onchange="setTheme()">
+            <label for="themeDark2"><span id="settingsThemeDark2Translation">Темная тема 2</span></label><br>
+        </div>
+    </div>
+</div>
+
+
+
 <script>
-    function goToPage(page) {
-        window.location.href = page;
-    }
+
 </script>
+<script src="lessons_switch.js"></script>
+<script src="block_status.regulator.js"></script>
+<script src="toggle.js"></script>
+<script src="settings.js"></script>
 </body>
 </html>
+
+
