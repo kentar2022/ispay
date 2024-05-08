@@ -3,22 +3,39 @@ $(document).ready(function () {
     var currentIndex = 0;
     var correctAnswersCount = 0;
 
-    // Получаем ID урока из localStorage
+
+    var currentTheme = localStorage.getItem('currentTheme');
+    var bodyColor = localStorage.getItem('bodyColor');
+    var linkColor = localStorage.getItem('linkColor');
+    var fillColor = localStorage.getItem('fillColor');
+    var profilePageTextColor = localStorage.getItem('profilePageTextColor');
+    var settingsPageTextColor = localStorage.getItem('settingsPageTextColor');
+    var coursesPageColor = localStorage.getItem('coursesPageColor');
+    console.log('Актуальная тема в Validator.js:', currentTheme);
+
+    // Устанавливаем цвета элементов в соответствии с выбранной темой
+    $('body').css('background-color', bodyColor);
+    $('#windowsContainer').css('color', profilePageTextColor); 
+    $('#nextBtn').css('background-color', linkColor);
+    $('.progress').css('background-color', linkColor);
+
+
+    
     var lessonId = localStorage.getItem('lessonId');
     
-    // Проверяем, что lessonId не равен null (что означает, что он был сохранен на предыдущей странице)
+    
     if (lessonId !== null) {
         console.log('Received lesson ID:', lessonId);
-        // Загружаем урок на основе полученного ID
+        
         loadLesson(lessonId);
     } else {
         console.log('No lesson ID found.');
     }
     
-    // Опционально: Очищаем localStorage после использования, если это необходимо
+    
     localStorage.removeItem('lessonId');
 
-    // Функция загрузки фраз из указанной таблицы
+    
     function loadPhrases(tableName) {
         $.ajax({
             url: 'load_phrases.php',
@@ -26,8 +43,8 @@ $(document).ready(function () {
             data: { table: tableName },
             success: function (response) {
                 console.log('Phrases loaded:', response);
-                data = response; // Сохраняем полученные данные
-                displayWindow(currentIndex); // Отображаем первую фразу урока
+                data = response; 
+                displayWindow(currentIndex); 
             },
             error: function (xhr, status, error) {
                 console.error(error);
@@ -96,7 +113,10 @@ $(document).ready(function () {
         if (userInput === '.' || userInput.toLowerCase() === currentWordRussian) {
             correctAnswersCount++;
             if (correctAnswersCount === 15) {
-                window.location.href = 'chechen_lessons_menu.html';
+                
+                $('.main-block').addClass('hidden');
+                $('.success-message').addClass('flex');
+                $('.success-message').removeClass('hidden');
                 return;
             }
             currentIndex++;
@@ -110,4 +130,6 @@ $(document).ready(function () {
         }
     });
 
+
 });
+

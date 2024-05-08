@@ -1,0 +1,28 @@
+.custom-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+label {
+    font-size: 20px;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+.settingsPage {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    position: fixed;
+    right: 40%;
+}
+
+
+.settingsPage h3,.settingsPage h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}

@@ -10,22 +10,32 @@
 </head>
 
 <body>
+<div class="main-block">
+    <div class="center-container">
+      <div id="windowsContainer"></div>
+      <input type="text" id="textInput" placeholder="Введите текст на русском">
+    </div>
 
-<div class="center-container">
-  <div id="windowsContainer"></div>
-  <input type="text" id="textInput" placeholder="Введите текст на русском">
+
+    <button id="nextBtn" class="bubbly-button">Next Phrase</button>
+
+
+    <div class="progress-container">
+      <div class="progress" id="progress"></div>
+      <div class="particle"></div>
+    </div>
+
+    <div id="closeButton">&times;</div>
 </div>
+<div class="success-message hidden">
+    Поздравляем! Вы успешно завершили урок.
 
+    <div class="correct-answers">
+        Количество правильных ответов: <span id="correctAnswersCount" class="yellow-text">0</span>
+    </div>
 
-<button id="nextBtn" class="bubbly-button">Next Phrase</button>
-
-
-<div class="progress-container">
-  <div class="progress" id="progress"></div>
-  <div class="particle"></div>
+    <div>&times;</div>
 </div>
-
-<div id="closeButton">&times;</div>
 
 
 <!--<div id="warningMessage" style="display: none;">Введенный текст не соответствует</div>-->
@@ -62,7 +72,6 @@ for (var i = 0; i < bubblyButtons.length; i++) {
 });
 
 $(document).ready(function () {
-    
     $('#closeButton').on('click', function () {
         window.location.href = 'index.html';
     });

@@ -5,7 +5,11 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/chechen_lessons_menu_style.css">
     <link rel="stylesheet" href="styles/course_style.css">
+    <link rel="stylesheet" href="styles/settings.css">
+    <link rel="stylesheet" href="styles/profile.css">
+    <link rel="stylesheet" href="styles/coursesPage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Your Website</title>
 </head>
 <body>
@@ -16,13 +20,13 @@
         <div class="center-block">
         </div>
         <aside>
-            <div class="aside-item" id="menuText">
+            <div class="aside-item" id="menuText" onclick="togglePages('profilePage')">
                 <a href="#" class="nav-button">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 48 48">
                         <path d="M 6 9 A 2.0002 2.0002 0 1 0 6 13 L 42 13 A 2.0002 2.0002 0 1 0 42 9 L 6 9 z M 6 22 A 2.0002 2.0002 0 1 0 6 26 L 42 26 A 2.0002 2.0002 0 1 0 42 22 L 6 22 z M 6 35 A 2.0002 2.0002 0 1 0 6 39 L 42 39 A 2.0002 2.0002 0 1 0 42 35 L 6 35 z">
                         </path>
                     </svg>
-                    <span id="menuTextTranslation">Меню</span>
+                    <span id="menuTextTranslation">Профиль</span>
                 </a>
             </div>
             <div class="aside-item" id="coursesPageBtn" onclick="togglePages('coursesPage')">
@@ -63,6 +67,7 @@
             <div class="aside-item" id="lessonsPageBtn" onclick="togglePages('lessonsPage')"><a href="#"><span id="lessonsPageTextTranslation">Задания</span></a></div>
             <div class="aside-item" id="settingsPageBtn" onclick="togglePages('settingsPage')"><a href="#"><span id="settingsPageTextTranslation">Настройки</span></a></div>
             <div class="aside-item"><a href="#"><span id="shopTextTranslation">Магазин</span></a></div>
+            <div class="aside-item"><a href="#">Выход</a></div>
         </aside>
     </main>
 </div>
@@ -110,45 +115,47 @@
  
 
 
-    <div id="coursesPage" class="page hidden coursesPage">
-        <div class="container"> 
-            <main>
-                <div class="courses">
-                    <a href="chechen_lessons_menu.html" class="course settingsPage">
-                        <img src="courses_flags/chechen.png" alt="Flag">
-                        <h3 id="courseChechenTranslation">Чеченский язык 1</h3>
-                    </a>
-                    <a href="ingush_language.html" class="course">
-                        <img src="courses_flags/ingush.png" alt="Flag">
-                        <h3 id="courseIngushTranslation">Ингушский язык</h3>
-                    </a>
-                    <a href="adyge_language.html" class="course">
-                        <img src="courses_flags/adyge.png" alt="Flag">
-                        <h3 id="courseAdygeTranslation">Черкесский язык</h3>
-                    </a>
-                    <a href="udmurt_language.html" class="course">
-                        <img src="courses_flags/udmurt.png" alt="Flag">
-                        <h3 id="courseUdmurtTranslation">Удмуртский язык</h3>
-                    </a>
-                    <a href="tatar_language.html" class="course">
-                        <img src="courses_flags/tatar.png" alt="Flag">
-                        <h3 id="courseTatarTranslation">Татарский язык</h3>
-                    </a>
-                    <a href="chuvash_language.html" class="course">
-                        <img src="courses_flags/chuvash.png" alt="Flag">
-                        <h3 id="courseChuvashTranslation">Чувашский язык</h3>
-                    </a>
-                </div>
-            </main>
-        </div>
+<div id="coursesPage" class="page hidden coursesPage">
+    <div class="container"> 
+        <main>
+            <div class="courses">
+                <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                    <img src="courses_flags/chechen.png" alt="Flag">
+                    <h3 id="courseChechenTranslation">Чеченский язык</h3>
+                </a>
+               <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                    <img src="courses_flags/ingush.png" alt="Flag">
+                    <h3 id="courseIngushTranslation">Ингушский язык</h3>
+                </a>
+                <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                    <img src="courses_flags/adyge.png" alt="Flag">
+                    <h3 id="courseAdygeTranslation">Черкесский язык</h3>
+                </a>
+                <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                    <img src="courses_flags/udmurt.png" alt="Flag">
+                    <h3 id="courseUdmurtTranslation">Удмуртский язык</h3>
+                </a>
+                <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                    <img src="courses_flags/tatar.png" alt="Flag">
+                    <h3 id="courseTatarTranslation">Татарский язык</h3>
+                </a>
+                <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                    <img src="courses_flags/chuvash.png" alt="Flag">
+                    <h3 id="courseChuvashTranslation">Чувашский язык</h3>
+                </a>
+            </div>
+        </main>
     </div>
+</div>
 
 
-<div id="settingsPage" class="settingsPage page hidden ">
-    <div class="container">
+
+
+<div id="settingsPage" class="settingsPage page hidden">
+    <div class=" custom-container">
         <h2 id="settingsHeaderTextTranslation">Настройки</h2>
         <div>
-            <h3>Выбор языка интерфейса:</h3>
+            <h3 id="settingsLangSelectionTranslation">Выбор языка страницы:</h3>
             <input type="radio" id="langRussianSettings" name="language" value="russian" onclick="changeLanguage('russian')">
             <label for="langRussianSettings"><span id="settingsLangRussianTranslation">Русский</span></label><br>
             <input type="radio" id="langEnglishSettings" name="language" value="english" onclick="changeLanguage('english')">
@@ -171,6 +178,109 @@
 
 
 
+<div id="profilePage" class="profilePage page hidden">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="profile-info">
+                    <img src="profile-pic/user-avatar.jpg" alt="User Avatar">
+                        <div class="">
+                            <h2 id="userInfoHeaderTranslation">Информация о пользователе</h2>
+                            <p id="userNameTranslation">Имя: Username</p>
+                            <p id="userEmailTranslation">Email: user@example.com</p>
+                            <p id="userCountryTranslation">Страна: Страна пользователя</p>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                        <div class="profile-courses-block">
+                            <h2 id="coursesHeaderTranslation">Курсы</h2>
+                            <div class="profile-courses">
+                                <a href="chechen_lessons_menu.html" class="profile-course">
+                                    <img src="courses_flags/chechen.png" alt="Flag">
+                                    <h6 id="profileChechenTranslation">Чеченский язык</h6>
+                                </a>
+                                <a href="ingush_language.html" class="profile-course">
+                                    <img src="courses_flags/ingush.png" alt="Flag">
+                                    <h6 id="profileIngushTranslation">Ингушский язык</h6>
+                                </a>
+                                <a href="adyge_language.html" class="profile-course">
+                                    <img src="courses_flags/adyge.png" alt="Flag">
+                                    <h6 id="profileAdygeTranslation">Черкесский язык</h6>
+                                </a>
+                                <a href="udmurt_language.html" class="profile-course">
+                                    <img src="courses_flags/udmurt.png" alt="Flag">
+                                    <h6 id="profileUdmurtTranslation">Удмуртский язык</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                        <div class="profile-about">
+                            <h2 id="aboutHeaderTranslation">О себе</h2>
+                            <p id="aboutDescriptionTranslation">Краткое описание пользователя. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet purus diam.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="profile-stats">
+                    <h2 id="statsHeaderTranslation">Статистика</h2>
+                    <p id="scoreTranslation">Количество очков: <span id="score"></span></p>
+                    <p id="completedLessonsTranslation">Количество пройденных уроков: <span id="lessonsCompleted"></span></p>
+                    <p id="globalRankTranslation">Место в общей статистике: <span id="overallRank"></span></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <hr>
+                    <div class="gift-section">
+                        <h2 id="dailyGiftsHeaderTranslation">Ежедневные подарки</h2>
+                        <div>
+                            <div class="gift-item">
+                                <img src="images/chest.png" alt="Gift 1">
+                                <p><span id="giftItemTranslation1">День </span> 1</p>
+                            </div>
+                            <div class="gift-item">
+                                <img src="images/chest.png" alt="Gift 2">
+                                <p><span id="giftItemTranslation2">День </span> 2</p>
+                            </div>
+                            <div class="gift-item">
+                                <img src="images/chest.png" alt="Gift 3">
+                                <p><span id="giftItemTranslation3">День </span> 3</p>
+                            </div>
+                            <div class="gift-item">
+                                <img src="images/chest.png" alt="Gift 4">
+                                <p><span id="giftItemTranslation4">День </span> 4</p>
+                            </div>
+                            <div class="gift-item">
+                                <img src="images/chest.png" alt="Gift 5">
+                                <p><span id="giftItemTranslation5">День </span> 5</p>
+                            </div>
+                            <div class="gift-item">
+                                <img src="images/chest.png" alt="Gift 6">
+                                <p><span id="giftItemTranslation6">День </span> 6</p>
+                            </div>
+                            <div class="gift-item">
+                                <img src="images/chest.png" alt="Gift 7">
+                                <p><span id="giftItemTranslation7">День </span> 7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="premium-offer">
+            <p id="premiumOfferTranslation">Получите доступ к дополнительным возможностям с премиум подпиской!</p>
+            <a href="#" class="btn btn-primary" id="subscribeBtnTranslation">Подписаться на премиум</a>
+        </div>
+    </div>
+</div>  
+
+
+
 <script>
 
 </script>
@@ -178,6 +288,7 @@
 <script src="block_status.regulator.js"></script>
 <script src="toggle.js"></script>
 <script src="settings.js"></script>
+<script src="statsHandler.js"></script>
 </body>
 </html>
 
