@@ -2,6 +2,11 @@ $(document).ready(function () {
     var data;
     var currentIndex = 0;
     var correctAnswersCount = 0;
+    var requiredCorrectAnswers = 15;
+    var score = 0; // Переменная для отслеживания количества очков
+    var correctAnswersTotal = 0; // Количество правильных ответов
+    var answersCount = 0; // Количество ответов
+
 
 
     var currentTheme = localStorage.getItem('currentTheme');
@@ -18,6 +23,7 @@ $(document).ready(function () {
     $('#windowsContainer').css('color', profilePageTextColor); 
     $('#nextBtn').css('background-color', linkColor);
     $('.progress').css('background-color', linkColor);
+    $('.success-message div, correct-answers').css('color', settingsPageTextColor);
 
 
     
@@ -77,6 +83,7 @@ $(document).ready(function () {
         var currentData = data.find(item => item.id === $('#' + data[index].id).attr('id'));
         var wordRussian = currentData ? currentData.word_russian : 'Соответствующая строка не найдена';
         console.log('Слово на русском:', wordRussian);
+
     }
 
     // Функция загрузки урока на основе его ID
@@ -101,35 +108,45 @@ $(document).ready(function () {
         loadPhrases(lessonTable);
     }
 
-    // Обработчик кнопки "Далее"
-    $('#nextBtn').on('click', function () {
+        $('#nextBtn').on('click', function () {
         var userInput = $('#textInput').val().trim();
         if (!data || !data[currentIndex]) {
             console.error('No data or invalid index:', data, currentIndex);
             return;
         }
+
+        // Увеличиваем счетчик ответов
+        answersCount++;
+
         var currentWordRussian = data[currentIndex].word_russian.toLowerCase();
 
         if (userInput === '.' || userInput.toLowerCase() === currentWordRussian) {
-            correctAnswersCount++;
-            if (correctAnswersCount === 15) {
-                
-                $('.main-block').addClass('hidden');
-                $('.success-message').addClass('flex');
-                $('.success-message').removeClass('hidden');
-                return;
-            }
-            currentIndex++;
-            if (currentIndex >= data.length) {
-                currentIndex = 0;
-            }
-            displayWindow(currentIndex);
-            $('#textInput').val('');
-        } else {
-            alert('Неверный перевод фразы.');
+            // Получаем значение price и добавляем его к количеству очков
+            var currentData = data.find(item => item.id === $('#' + data[currentIndex].id).attr('id'));
+            var price = currentData ? parseInt(currentData.price) : 0;
+            score += price;
+
+            // Увеличиваем общее количество правильных ответов
+            correctAnswersTotal++;
+            console.log(correctAnswersTotal);
         }
+
+        // Если достигнуто 15 ответов, показываем сообщение об успешном завершении урока
+        if (answersCount === 15) {
+            $('.main-block').addClass('hidden');
+            $('.success-message').addClass('flex');
+            $('.success-message').removeClass('hidden');
+            $('#correctAnswersCount').text(correctAnswersTotal); // Обновляем количество правильных ответов
+            $('#scoreCount').text(score); // Обновляем количество очков
+            return;
+        }
+
+        currentIndex++;
+        if (currentIndex >= data.length) {
+            currentIndex = 0;
+        }
+        displayWindow(currentIndex);
+        $('#textInput').val('');
     });
-
-
 });
 
