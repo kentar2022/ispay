@@ -21,6 +21,7 @@ if (!isset($_POST['table'])) {
 
 $tableName = $_POST['table'];
 
+// Запрос для получения данных из указанной таблицы и таблицы russian_words
 $sql = "SELECT {$tableName}.*, rw.word_russian FROM {$tableName} INNER JOIN russian_words rw ON {$tableName}.id = rw.id";
 $result = $conn->query($sql);
 

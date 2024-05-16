@@ -173,7 +173,7 @@ hr {
 }
 
 
-#closeButton {
+.closeButton {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -211,4 +211,10 @@ hr {
 
 .flex{
     display: flex;
+}
+.phrase-image {
+    max-width: 100%; /* Максимальная ширина изображения будет равна ширине контейнера */
+    max-height: 200px; /* Максимальная высота изображения будет 200px */
+    display: block; /* Установка display на block, чтобы изображение корректно отображалось */
+    margin: 10px auto; /* Центрирование изображения по горизонтали с отступами по вертикали */
 }

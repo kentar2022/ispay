@@ -133,3 +133,12 @@ a {
 .lessonsPage{
     margin-left: 300px;
 }
+.lessonsPage img{
+    width: 200px;
+    height: auto;
+    margin-left: 500px;
+}
+#languageSelect, #languageSelect option{
+    font-size: 24px;
+    border: none;
+}

@@ -29,6 +29,16 @@
                     <span id="menuTextTranslation">Профиль</span>
                 </a>
             </div>
+            <div class="aside-item" id="languageSelectContainer">
+                <select id="languageSelect" class="a" onchange="showLanguage(this.value)">
+                    <option value="Chechen" id="courseChechenTranslation" class="a">Чеченский язык</option>
+                    <option value="Ingush" id="courseIngushTranslation" class="a">Ингушский язык</option>
+                    <option value="Adyge" id="courseAdygeTranslation" class="a">Черкесский язык</option>
+                    <option value="Udmurt" id="courseUdmurtTranslation" class="a">Удмуртский язык</option>
+                    <option value="Tatar" id="courseTatarTranslation" class="a">Татарский язык</option>
+                    <option value="Chuvash" id="courseChuvashTranslation" class="a">Чувашский язык</option>
+                </select>
+            </div>
             <div class="aside-item" id="coursesPageBtn" onclick="togglePages('coursesPage')">
                 <a href="#">
                     <svg fill="#000000" width="35px" height="35px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -72,13 +82,14 @@
     </main>
 </div>
 
+<div id="languagesContainer" class="hidden">
 
-    <div id="lessonsPage" class="page lessonsPage">
+    <div id="lessonsPageChechen" class="page hidden lessonsPage">
+        <img src="courses_flags/chechen.png" alt="">
         <div class="container">
             <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
             <div class="hidden-block"></div>
         </div>
-
         <div class="lessons-container">
             <a href="chechen_lesson.html" class="lesson-block goToLessonBtn" id="1">
                 <div class="lesson-status"></div>
@@ -112,34 +123,241 @@
             </a>
         </div>
     </div>
- 
+     
 
-<!---->
+
+    <div id="lessonsPageIngush" class="page hidden lessonsPage">
+        <img src="courses_flags/ingush.png" alt="">
+        <div class="container">
+            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="hidden-block"></div>
+        </div>
+
+        <div class="lessons-container">
+            <a href="ingush_lesson.html" class="lesson-block goToLessonBtn" id="ingush_1">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_2">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_3">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_4">
+                <div></div>
+            </a>
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_5">
+                <div></div>
+            </a>
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_6">
+                <div></div>
+            </a>
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_7">
+                <div></div>
+            </a>
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_8">
+                <div></div>
+            </a>
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_9">
+                <div></div>
+            </a>
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_10">
+                <div></div>
+            </a>
+        </div>
+    </div>
+
+    <div id="lessonsPageAdyge" class="page hidden lessonsPage">
+        <img src="courses_flags/adyge.png" alt="">
+        <div class="container">
+            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="hidden-block"></div>
+        </div>
+
+        <div class="lessons-container">
+            <a href="adyge_lesson.html" class="lesson-block goToLessonBtn" adyge_id="1">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="2">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="3">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="4">
+                <div></div>
+            </a>
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="5">
+                <div></div>
+            </a>
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="6">
+                <div></div>
+            </a>
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="7">
+                <div></div>
+            </a>
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="8">
+                <div></div>
+            </a>
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="9">
+                <div></div>
+            </a>
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="10">
+                <div></div>
+            </a>
+        </div>
+    </div>
+
+    <div id="lessonsPageUdmurt" class="page hidden lessonsPage">
+        <img src="courses_flags/udmurt.png" alt="">
+        <div class="container">
+            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="hidden-block"></div>
+        </div>
+
+        <div class="lessons-container">
+            <a href="udmurt_lesson.html" class="lesson-block goToLessonBtn" udmurt_id="1">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="2">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="3">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="4">
+                <div></div>
+            </a>
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="5">
+                <div></div>
+            </a>
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="6">
+                <div></div>
+            </a>
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="7">
+                <div></div>
+            </a>
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="8">
+                <div></div>
+            </a>
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="9">
+                <div></div>
+            </a>
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="10">
+                <div></div>
+            </a>
+        </div>
+    </div>
+
+    <div id="lessonsPageTatar" class="page hidden lessonsPage">
+        <img src="courses_flags/tatar.png" alt="">
+        <div class="container">
+            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="hidden-block"></div>
+        </div>
+
+        <div class="lessons-container">
+            <a href="tatar_lesson.html" class="lesson-block goToLessonBtn" tatar_id="1">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="2">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="3">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="4">
+                <div></div>
+            </a>
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="5">
+                <div></div>
+            </a>
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="6">
+                <div></div>
+            </a>
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="7">
+                <div></div>
+            </a>
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="8">
+                <div></div>
+            </a>
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="9">
+                <div></div>
+            </a>
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="10">
+                <div></div>
+            </a>
+        </div>
+    </div>
+
+    <div id="lessonsPageChuvash" class="page hidden lessonsPage">
+        <img src="courses_flags/chuvash.png" alt="">
+        <div class="container">
+            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="hidden-block"></div>
+        </div>
+
+        <div class="lessons-container">
+            <a href="chuvash_lesson.html" class="lesson-block goToLessonBtn" chuvash_id="1">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="chuvash_lesson.html" class="lesson-block" chuvash_id="2">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="chuvash_lesson.html" class="lesson-block" chuvash_id="3">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="chuvash_lesson.html" class="lesson-block" chuvash_id="4">
+                <div></div>
+            </a>
+            <a href="chuvash_lesson.html" class="lesson-block" chuvash_id="5">
+                <div></div>
+            </a>
+            <a href="chuvash_lesson.html" class="lesson-block" chuvash_id="6">
+                <div></div>
+            </a>
+            <a href="chuvash_lesson.html" class="lesson-block" chuvash_id="7">
+                <div></div>
+            </a>
+            <a href="chuvash_lesson.html" class="lesson-block" chuvash_id="8">
+                <div></div>
+            </a>
+            <a href="chuvash_lesson.html" class="lesson-block" chuvash_id="9">
+                <div></div>
+            </a>
+            <a href="chuvash_lesson.html" class="lesson-block" chuvash_id="10">
+                <div></div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--
 <div id="coursesPage" class="page hidden coursesPage">
     <div class="container"> 
         <main>
             <div class="courses">
-                <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                <a href="#" class="course" onclick="showLanguage('Chechen')">
                     <img src="courses_flags/chechen.png" alt="Flag">
                     <h3 id="courseChechenTranslation">Чеченский язык</h3>
                 </a>
-               <a href="#" class="course" onclick="togglePages('lessonsPage')">
+               <a href="#" class="course" onclick="showLanguage('Ingush')">
                     <img src="courses_flags/ingush.png" alt="Flag">
                     <h3 id="courseIngushTranslation">Ингушский язык</h3>
                 </a>
-                <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                <a href="#" class="course" onclick="showLanguage('Adyge')">
                     <img src="courses_flags/adyge.png" alt="Flag">
                     <h3 id="courseAdygeTranslation">Черкесский язык</h3>
                 </a>
-                <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                <a href="#" class="course" onclick="showLanguage('Udmurt')">
                     <img src="courses_flags/udmurt.png" alt="Flag">
                     <h3 id="courseUdmurtTranslation">Удмуртский язык</h3>
                 </a>
-                <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                <a href="#" class="course" onclick="showLanguage('Tatar')">
                     <img src="courses_flags/tatar.png" alt="Flag">
                     <h3 id="courseTatarTranslation">Татарский язык</h3>
                 </a>
-                <a href="#" class="course" onclick="togglePages('lessonsPage')">
+                <a href="#" class="course" onclick="showLanguage('Chuvash')">
                     <img src="courses_flags/chuvash.png" alt="Flag">
                     <h3 id="courseChuvashTranslation">Чувашский язык</h3>
                 </a>
@@ -147,7 +365,7 @@
         </main>
     </div>
 </div>
-
+-->
 
 
 
@@ -291,5 +509,4 @@
 <script src="statsHandler.js"></script>
 </body>
 </html>
-
 

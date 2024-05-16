@@ -4,11 +4,13 @@ var themeDark = document.getElementById('themeDark');
 var themeDark2 = document.getElementById('themeDark2');
 
 // Переменные для ссылок, иконок SVG и текстовых элементов
-var links = document.querySelectorAll('a');
+var links = document.querySelectorAll('a, .a');
 var svgIcons = document.querySelectorAll('svg');
 var settingsPageText = document.querySelectorAll('.settingsPage *');
 var coursesPageLinks = document.querySelectorAll('.courses a');
 var profilePageElements = document.querySelectorAll('.profilePage *');
+var selectLanguages = document.querySelectorAll('select > option, #languageSelect');
+
 
 // Функция для применения стилей в соответствии с текущей темой
 function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor) {
@@ -28,6 +30,11 @@ function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, cou
     profilePageElements.forEach(function(element) {
         element.style.color = profilePageTextColor;
     });
+    selectLanguages.forEach(function(element) {
+        element.style.backgroundColor = bodyColor;
+    });
+    
+    document.getElementById('languageSelectContainer').style.backgroundColor = bodyColor;
 
     // Сохраняем выбранные цвета в локальном хранилище
     localStorage.setItem('bodyColor', bodyColor);

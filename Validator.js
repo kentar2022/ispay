@@ -6,6 +6,7 @@ $(document).ready(function () {
     var score = 0; // Переменная для отслеживания количества очков
     var correctAnswersTotal = 0; // Количество правильных ответов
     var answersCount = 0; // Количество ответов
+    var userEmail = "example@example.com";
 
 
 
@@ -58,7 +59,6 @@ $(document).ready(function () {
         });
     }
 
-    // Функция отображения фразы на странице
     function displayWindow(index) {
         if (!data || !data[index]) {
             console.error('No data or invalid index:', data, index);
@@ -75,6 +75,13 @@ $(document).ready(function () {
             windowContainer.append(windowContent);
         }
 
+        // Проверяем наличие ссылки на изображение
+        if (data[index].image_url) {
+            var imageUrl = data[index].image_url;
+            var imageElement = $('<img>').attr('src', imageUrl).addClass('phrase-image');
+            windowContainer.append(imageElement);
+        }
+
         $('.window').removeClass('active');
         $('#' + data[index].id).addClass('active');
 
@@ -83,8 +90,81 @@ $(document).ready(function () {
         var currentData = data.find(item => item.id === $('#' + data[index].id).attr('id'));
         var wordRussian = currentData ? currentData.word_russian : 'Соответствующая строка не найдена';
         console.log('Слово на русском:', wordRussian);
-
     }
+
+     function updateProgress(userId) {
+        $.ajax({
+            type: "POST",
+            url: "update_progress.php", // Замените на адрес вашего PHP скрипта для обновления прогресса пользователя
+            data: { user_id: userId, new_score: score },
+            success: function (response) {
+                console.log("Прогресс пользователя успешно обновлен:", response);
+                // Очищаем переменные и выполняем другие действия после успешного обновления прогресса
+                score = 0;
+                correctAnswersTotal = 0;
+                answersCount = 0;
+            },
+            error: function (xhr, status, error) {
+                console.error("Ошибка при обновлении прогресса пользователя:", error);
+            }
+        });
+    }
+
+     function updateLevel(lessonId, userId) {
+        $.ajax({
+            type: "POST",
+            url: "update_level.php",
+            data: { lesson_id: lessonId, user_id: userId }, // Убедитесь, что имена параметров совпадают
+            success: function(response) {
+                console.log("Уровень пользователя успешно обновлен:", response);
+            },
+            error: function(xhr, status, error) {
+                console.error("Ошибка при обновлении уровня пользователя:", error);
+            }
+        });
+    }
+
+       function getUserId(userEmail, lessonId) { // Добавляем lessonId как параметр
+        $.ajax({
+            type: "POST",
+            url: "getUserId.php",
+            data: { user_email: userEmail },
+            success: function(response) {
+                // При успешном получении ID пользователя
+                console.log("User ID:", response);
+                // Вызываем функцию updateProgress, передавая полученный ID пользователя
+                updateProgress(response.user_id);
+                updateLevel(lessonId, response.user_id); // Передаем lessonId в функцию updateLevel
+
+            },
+            error: function(xhr, status, error) {
+                // Обработка ошибки
+                console.error("Ошибка при получении ID пользователя:", error);
+            }
+        });
+    }
+
+
+    // Функция для обработки нажатия на блок с фразой
+    $('#windowsContainer').on('click', '.window', function () {
+        var currentWindowId = $(this).attr('id');
+        var currentData = data.find(item => item.id === currentWindowId);
+        if (currentData) {
+            var wordRussian = currentData.word_russian;
+            // Создаем элемент для вывода слова на русском
+            var wordRussianElement = $('<div>').text(wordRussian).addClass('word-russian');
+            // Удаляем предыдущий элемент с русским словом, если такой есть
+            $('.word-russian').remove();
+            // Вставляем новый элемент с русским словом под текущим окном с фразой
+            $(this).after(wordRussianElement);
+            
+            // Возвращаем фокус на строку ввода
+            $('#textInput').focus();
+        } else {
+            console.error('Соответствующая строка не найдена');
+        }
+    });
+
 
     // Функция загрузки урока на основе его ID
     function loadLesson(lessonId) {
@@ -138,6 +218,7 @@ $(document).ready(function () {
             $('.success-message').removeClass('hidden');
             $('#correctAnswersCount').text(correctAnswersTotal); // Обновляем количество правильных ответов
             $('#scoreCount').text(score); // Обновляем количество очков
+            getUserId(userEmail, lessonId);
             return;
         }
 
@@ -149,4 +230,3 @@ $(document).ready(function () {
         $('#textInput').val('');
     });
 });
-
