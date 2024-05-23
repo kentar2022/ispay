@@ -13,6 +13,7 @@
     <title>Your Website</title>
 </head>
 <body>
+    <script src="block_status.regulator.js"></script>
     <header>
     </header>
 <div class="container">
@@ -30,13 +31,13 @@
                 </a>
             </div>
             <div class="aside-item" id="languageSelectContainer">
-                <select id="languageSelect" class="a" onchange="showLanguage(this.value)">
-                    <option value="Chechen" id="courseChechenTranslation" class="a">Чеченский язык</option>
-                    <option value="Ingush" id="courseIngushTranslation" class="a">Ингушский язык</option>
-                    <option value="Adyge" id="courseAdygeTranslation" class="a">Черкесский язык</option>
-                    <option value="Udmurt" id="courseUdmurtTranslation" class="a">Удмуртский язык</option>
-                    <option value="Tatar" id="courseTatarTranslation" class="a">Татарский язык</option>
-                    <option value="Chuvash" id="courseChuvashTranslation" class="a">Чувашский язык</option>
+                <select id="languageSelect" class="a" onchange="showLanguage(this.value); selectLanguage(this.value)">
+                    <option value="chechen" id="courseChechenTranslation" class="a">Чеченский язык</option>
+                    <option value="ingush" id="courseIngushTranslation" class="a">Ингушский язык</option>
+                    <option value="adyge" id="courseAdygeTranslation" class="a">Черкесский язык</option>
+                    <option value="udmurt" id="courseUdmurtTranslation" class="a">Удмуртский язык</option>
+                    <option value="tatar" id="courseTatarTranslation" class="a">Татарский язык</option>
+                    <option value="chuvash" id="courseChuvashTranslation" class="a">Чувашский язык</option>
                 </select>
             </div>
             <div class="aside-item" id="coursesPageBtn" onclick="togglePages('coursesPage')">
@@ -83,132 +84,131 @@
 </div>
 
 <div id="languagesContainer" class="hidden">
-
-    <div id="lessonsPageChechen" class="page hidden lessonsPage">
+    <div id="lessonsPagechechen" class="page hidden lessonsPage">
         <img src="courses_flags/chechen.png" alt="">
         <div class="container">
             <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
             <div class="hidden-block"></div>
         </div>
         <div class="lessons-container">
-            <a href="chechen_lesson.html" class="lesson-block goToLessonBtn" id="1">
+                <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=1" class="lesson-block goToLessonBtn" test="1" data-language="chechen" data-table="lessons_chechen" data-lang-id="1">
+                    <div class="lesson-status"></div>
+                </a>
+            <a href="chechen_lesson.html" class="lesson-block" id="2" data-language="chechen" data-table="lessons_chechen" data-lang-id="2">
                 <div class="lesson-status"></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="2">
+            <a href="chechen_lesson.html" class="lesson-block" id="3" data-language="chechen" data-table="lessons_chechen" data-lang-id="3">
                 <div class="lesson-status"></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="3">
-                <div class="lesson-status"></div>
-            </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="4">
+            <a href="chechen_lesson.html" class="lesson-block" id="4" data-language="chechen" data-table="lessons_chechen" data-lang-id="4">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="5">
+            <a href="chechen_lesson.html" class="lesson-block" id="5" data-language="chechen" data-table="lessons_chechen" data-lang-id="5">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="6">
+            <a href="chechen_lesson.html" class="lesson-block" id="6" data-language="chechen" data-table="lessons_chechen" data-lang-id="6">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="7">
+            <a href="chechen_lesson.html" class="lesson-block" id="7" data-language="chechen" data-table="lessons_chechen" data-lang-id="7">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="8">
+            <a href="chechen_lesson.html" class="lesson-block" id="8" data-language="chechen" data-table="lessons_chechen" data-lang-id="8">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="9">
+            <a href="chechen_lesson.html" class="lesson-block" id="9" data-language="chechen" data-table="lessons_chechen" data-lang-id="9">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="10">
+            <a href="chechen_lesson.html" class="lesson-block" id="10" data-language="chechen" data-table="lessons_chechen" data-lang-id="10">
                 <div></div>
             </a>
         </div>
     </div>
-     
+
+         
 
 
-    <div id="lessonsPageIngush" class="page hidden lessonsPage">
+    <div id="lessonsPageingush" class="page hidden lessonsPage">
         <img src="courses_flags/ingush.png" alt="">
         <div class="container">
             <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
             <div class="hidden-block"></div>
         </div>
-
         <div class="lessons-container">
-            <a href="ingush_lesson.html" class="lesson-block goToLessonBtn" id="ingush_1">
+            <a href="lessons_pages/ingush_lesson.html?language=ingush&lesson_id=1" class="lesson-block goToLessonBtn" id="ingush_1" data-language="ingush" data-table="lessons_ingush" data-lang-id="1">
                 <div class="lesson-status"></div>
             </a>
-            <a href="ingush_lesson.html" class="lesson-block" id="ingush_2">
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_2" data-language="ingush" data-table="lessons_ingush" data-lang-id="2">
                 <div class="lesson-status"></div>
             </a>
-            <a href="ingush_lesson.html" class="lesson-block" id="ingush_3">
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_3" data-language="ingush" data-table="lessons_ingush" data-lang-id="3">
                 <div class="lesson-status"></div>
             </a>
-            <a href="ingush_lesson.html" class="lesson-block" id="ingush_4">
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_4" data-language="ingush" data-table="lessons_ingush" data-lang-id="4">
                 <div></div>
             </a>
-            <a href="ingush_lesson.html" class="lesson-block" id="ingush_5">
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_5" data-language="ingush" data-table="lessons_ingush" data-lang-id="5">
                 <div></div>
             </a>
-            <a href="ingush_lesson.html" class="lesson-block" id="ingush_6">
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_6" data-language="ingush" data-table="lessons_ingush" data-lang-id="6">
                 <div></div>
             </a>
-            <a href="ingush_lesson.html" class="lesson-block" id="ingush_7">
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_7" data-language="ingush" data-table="lessons_ingush" data-lang-id="7">
                 <div></div>
             </a>
-            <a href="ingush_lesson.html" class="lesson-block" id="ingush_8">
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_8" data-language="ingush" data-table="lessons_ingush" data-lang-id="8">
                 <div></div>
             </a>
-            <a href="ingush_lesson.html" class="lesson-block" id="ingush_9">
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_9" data-language="ingush" data-table="lessons_ingush" data-lang-id="9">
                 <div></div>
             </a>
-            <a href="ingush_lesson.html" class="lesson-block" id="ingush_10">
+            <a href="ingush_lesson.html" class="lesson-block" id="ingush_10" data-language="ingush" data-table="lessons_ingush" data-lang-id="10">
                 <div></div>
             </a>
         </div>
     </div>
 
-    <div id="lessonsPageAdyge" class="page hidden lessonsPage">
+
+    <div id="lessonsPageadyge" class="page hidden lessonsPage">
         <img src="courses_flags/adyge.png" alt="">
         <div class="container">
             <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
             <div class="hidden-block"></div>
         </div>
-
         <div class="lessons-container">
-            <a href="adyge_lesson.html" class="lesson-block goToLessonBtn" adyge_id="1">
+            <a href="lessons_pages/adyge_lesson.html?language=adyge&lesson_id=1" class="lesson-block goToLessonBtn" adyge_id="1" data-language="adyge" data-lang-id="1">
                 <div class="lesson-status"></div>
             </a>
-            <a href="adyge_lesson.html" class="lesson-block" adyge_id="2">
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="2" data-language="adyge" data-lang-id="2">
                 <div class="lesson-status"></div>
             </a>
-            <a href="adyge_lesson.html" class="lesson-block" adyge_id="3">
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="3" data-language="adyge" data-lang-id="3">
                 <div class="lesson-status"></div>
             </a>
-            <a href="adyge_lesson.html" class="lesson-block" adyge_id="4">
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="4" data-language="adyge" data-lang-id="4">
                 <div></div>
             </a>
-            <a href="adyge_lesson.html" class="lesson-block" adyge_id="5">
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="5" data-language="adyge" data-lang-id="5">
                 <div></div>
             </a>
-            <a href="adyge_lesson.html" class="lesson-block" adyge_id="6">
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="6" data-language="adyge" data-lang-id="6">
                 <div></div>
             </a>
-            <a href="adyge_lesson.html" class="lesson-block" adyge_id="7">
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="7" data-language="adyge" data-lang-id="7">
                 <div></div>
             </a>
-            <a href="adyge_lesson.html" class="lesson-block" adyge_id="8">
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="8" data-language="adyge" data-lang-id="8">
                 <div></div>
             </a>
-            <a href="adyge_lesson.html" class="lesson-block" adyge_id="9">
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="9" data-language="adyge" data-lang-id="9">
                 <div></div>
             </a>
-            <a href="adyge_lesson.html" class="lesson-block" adyge_id="10">
+            <a href="adyge_lesson.html" class="lesson-block" adyge_id="10" data-language="adyge" data-lang-id="10">
                 <div></div>
             </a>
         </div>
     </div>
 
-    <div id="lessonsPageUdmurt" class="page hidden lessonsPage">
+    <div id="lessonsPageudmurt" class="page hidden lessonsPage">
         <img src="courses_flags/udmurt.png" alt="">
         <div class="container">
             <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
@@ -216,40 +216,40 @@
         </div>
 
         <div class="lessons-container">
-            <a href="udmurt_lesson.html" class="lesson-block goToLessonBtn" udmurt_id="1">
+            <a href="lessons_pages/udmurt_lesson.html?language=udmurt&lesson_id=1" class="lesson-block goToLessonBtn" udmurt_id="1" data-language="udmurt" data-lang-id="1">
                 <div class="lesson-status"></div>
             </a>
-            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="2">
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="2" data-language="udmurt" data-lang-id="2">
                 <div class="lesson-status"></div>
             </a>
-            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="3">
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="3" data-language="udmurt" data-lang-id="3">
                 <div class="lesson-status"></div>
             </a>
-            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="4">
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="4" data-language="udmurt" data-lang-id="4">
                 <div></div>
             </a>
-            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="5">
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="5" data-language="udmurt" data-lang-id="5">
                 <div></div>
             </a>
-            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="6">
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="6" data-language="udmurt" data-lang-id="6">
                 <div></div>
             </a>
-            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="7">
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="7" data-language="udmurt" data-lang-id="7">
                 <div></div>
             </a>
-            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="8">
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="8" data-language="udmurt" data-lang-id="8">
                 <div></div>
             </a>
-            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="9">
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="9" data-language="udmurt" data-lang-id="9">
                 <div></div>
             </a>
-            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="10">
+            <a href="udmurt_lesson.html" class="lesson-block" udmurt_id="10" data-language="udmurt" data-lang-id="10">
                 <div></div>
             </a>
         </div>
     </div>
 
-    <div id="lessonsPageTatar" class="page hidden lessonsPage">
+    <div id="lessonsPagetatar" class="page hidden lessonsPage">
         <img src="courses_flags/tatar.png" alt="">
         <div class="container">
             <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
@@ -257,40 +257,40 @@
         </div>
 
         <div class="lessons-container">
-            <a href="tatar_lesson.html" class="lesson-block goToLessonBtn" tatar_id="1">
+            <a href="lessons_pages/tatar_lesson.html?language=tatar&lesson_id=1" class="lesson-block goToLessonBtn" id="1"  data-language="tatar" data-lang-id="1">
                 <div class="lesson-status"></div>
             </a>
-            <a href="tatar_lesson.html" class="lesson-block" tatar_id="2">
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="2" data-language="tatar" data-lang-id="2">
                 <div class="lesson-status"></div>
             </a>
-            <a href="tatar_lesson.html" class="lesson-block" tatar_id="3">
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="3" data-language="tatar" data-lang-id="3">
                 <div class="lesson-status"></div>
             </a>
-            <a href="tatar_lesson.html" class="lesson-block" tatar_id="4">
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="4" data-language="tatar" data-lang-id="4">
                 <div></div>
             </a>
-            <a href="tatar_lesson.html" class="lesson-block" tatar_id="5">
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="5" data-language="tatar" data-lang-id="5">
                 <div></div>
             </a>
-            <a href="tatar_lesson.html" class="lesson-block" tatar_id="6">
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="6" data-language="tatar" data-lang-id="6">
                 <div></div>
             </a>
-            <a href="tatar_lesson.html" class="lesson-block" tatar_id="7">
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="7" data-language="tatar" data-lang-id="7">
                 <div></div>
             </a>
-            <a href="tatar_lesson.html" class="lesson-block" tatar_id="8">
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="8" data-language="tatar" data-lang-id="8">
                 <div></div>
             </a>
-            <a href="tatar_lesson.html" class="lesson-block" tatar_id="9">
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="9" data-language="tatar" data-lang-id="9">
                 <div></div>
             </a>
-            <a href="tatar_lesson.html" class="lesson-block" tatar_id="10">
+            <a href="tatar_lesson.html" class="lesson-block" tatar_id="10" data-language="tatar" data-lang-id="10">
                 <div></div>
             </a>
         </div>
     </div>
 
-    <div id="lessonsPageChuvash" class="page hidden lessonsPage">
+    <div id="lessonsPagechuvash" class="page hidden lessonsPage">
         <img src="courses_flags/chuvash.png" alt="">
         <div class="container">
             <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
@@ -298,7 +298,7 @@
         </div>
 
         <div class="lessons-container">
-            <a href="chuvash_lesson.html" class="lesson-block goToLessonBtn" chuvash_id="1">
+            <a href="lessons_pages/chuvash_lesson.html?language=chuvash&lesson_id=1" class="lesson-block goToLessonBtn" chuvash_id="1" >
                 <div class="lesson-status"></div>
             </a>
             <a href="chuvash_lesson.html" class="lesson-block" chuvash_id="2">
@@ -501,10 +501,17 @@
 
 <script>
 
+    function selectLanguage(language) {
+        console.log('Selected language:', language); // Отладка: вывод выбранного языка
+        localStorage.setItem('language', language); // Сохраняем выбранный язык в localStorage
+    }
+
+
 </script>
-<script src="lessons_switch.js"></script>
+
 <script src="block_status.regulator.js"></script>
 <script src="toggle.js"></script>
+<!--<script src="send_id.js"></script>-->
 <script src="settings.js"></script>
 <script src="statsHandler.js"></script>
 </body>

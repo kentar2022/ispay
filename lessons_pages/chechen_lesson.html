@@ -5,14 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phrase Windows</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="styles/course_style.css">
-<link rel="stylesheet" href="styles/button_style.css">
+<link rel="stylesheet" href="../styles/course_style.css">
+<link rel="stylesheet" href="../styles/button_style.css">
 </head>
 
 <body>
 <div class="main-block">
     <div class="center-container">
       <div id="windowsContainer"></div>
+      <div id="hintBlock" class="hint-block"></div>
       <input type="text" id="textInput" placeholder="Введите текст на русском">
     </div>
 
@@ -25,7 +26,7 @@
       <div class="particle"></div>
     </div>
 
-    <div id="closeButton">&times;</div>
+    <div class="closeButton">&times;</div>
 </div>
 
 <div class="success-message hidden">
@@ -38,15 +39,14 @@
         Очков за урок: <span id="scoreCount" class="yellow-text !important"></span>
     </div>
 
-    <div id="closeButton">&times;</div>
+    <div class="closeButton">&times;</div>
 </div>
 
 
 <!--<div id="warningMessage" style="display: none;">Введенный текст не соответствует</div>-->
 
-<script src="progressbar.js"></script>
-<script src="Validator.js"></script>
-
+<script src="../scripts/progressbar.js"></script>
+<script src="../scripts/Validator.js"></script>
 
 <script type="text/javascript">
 var animateButton = function(e) {
@@ -76,16 +76,11 @@ for (var i = 0; i < bubblyButtons.length; i++) {
 });
 
 $(document).ready(function () {
-    $('#closeButton').on('click', function () {
-        window.location.href = 'index.html';
+    $('.closeButton').on('click', function () {
+        window.location.href = '../index.html';
     });
 });
 
-var urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('lesson_id')) {
-    var lessonId = urlParams.get('lesson_id');
-    console.log('Lesson ID from URL:', lessonId);
-}
 </script>
 
 </body>

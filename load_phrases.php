@@ -5,23 +5,22 @@ error_reporting(E_ALL);
 header('Content-Type: application/json');
 
 $servername = "localhost";
-$username = "kentar"; 
-$password = "password"; 
-$dbname = "chechen";
+$username = "kentar";
+$password = "password";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+if (!isset($_POST['table']) || !isset($_POST['language'])) {
+    die('Table or language parameter is missing.');
+}
+
+$tableName = $_POST['table'];
+$language = $_POST['language'];
+
+$conn = new mysqli($servername, $username, $password, $language);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if (!isset($_POST['table'])) {
-    die('Table parameter is missing.');
-}
-
-$tableName = $_POST['table'];
-
-// Запрос для получения данных из указанной таблицы и таблицы russian_words
 $sql = "SELECT {$tableName}.*, rw.word_russian FROM {$tableName} INNER JOIN russian_words rw ON {$tableName}.id = rw.id";
 $result = $conn->query($sql);
 

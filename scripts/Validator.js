@@ -38,7 +38,7 @@ $(document).ready(function () {
 
     function loadPhrases(language, tableName) {
         $.ajax({
-            url: '../load_phrases.php',
+            url: 'load_phrases.php',
             method: 'POST',
             data: { language: language, table: tableName },
             success: function (response) {
@@ -88,7 +88,7 @@ $(document).ready(function () {
     function updateProgress(userId) {
         $.ajax({
             type: "POST",
-            url: "../update_progress.php", // Замените на адрес вашего PHP скрипта для обновления прогресса пользователя
+            url: "update_progress.php", // Замените на адрес вашего PHP скрипта для обновления прогресса пользователя
             data: { user_id: userId, new_score: score },
             success: function (response) {
                 console.log("Прогресс пользователя успешно обновлен:", response);
@@ -106,7 +106,7 @@ $(document).ready(function () {
     function updateLevel(lessonId, userId) {
         $.ajax({
             type: "POST",
-            url: "../update_level.php",
+            url: "update_level.php",
             data: { lesson_id: lessonId, user_id: userId }, // Убедитесь, что имена параметров совпадают
             success: function(response) {
                 console.log("Уровень пользователя успешно обновлен:", response);
@@ -120,7 +120,7 @@ $(document).ready(function () {
     function getUserId(userEmail, lessonId) {
         $.ajax({
             type: "POST",
-            url: "../getUserId.php",
+            url: "getUserId.php",
             data: { user_email: userEmail },
             success: function(response) {
                 // При успешном получении ID пользователя

@@ -1,8 +1,9 @@
 // Функция для загрузки данных о прогрессе пользователя
-function loadUserProgress() {
+function loadUserProgress(language) {
     $.ajax({
         url: 'load_lessons_status.php', // Путь к PHP скрипту для загрузки данных
-        method: 'GET',
+        method: 'POST', // Изменяем метод на POST для передачи языка
+        data: { language: language }, // Передаем параметр языка
         success: function(response) {
             // Обработка полученных данных
             console.log('User progress loaded:', response);
@@ -61,5 +62,10 @@ function loadPhrases(tableName) {
     });
 }
 
-// Вызываем функцию для загрузки данных о прогрессе пользователя
-loadUserProgress();
+var language = localStorage.getItem('language'); // Получаем значение языка из localStorage
+
+if (language !== null) {
+    loadUserProgress(language); // Вызываем функцию загрузки прогресса пользователя с передачей языка
+} else {
+    console.log('Language not found.');
+}
