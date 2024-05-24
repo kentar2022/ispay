@@ -1,5 +1,4 @@
 <?php
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -8,31 +7,33 @@ header('Content-Type: application/json');
 $servername = "localhost";
 $username = "kentar";
 $password = "password";
-$dbname = "chechen";
 
-// Создание подключения
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Проверка соединения
-if ($conn->connect_error) {
-    die(json_encode(array("error" => "Ошибка подключения к базе данных: " . $conn->connect_error)));
+if (!isset($_POST['language'])) {
+    die('Language parameter is missing.');
 }
 
-// Получение данных из POST запроса (например, идентификатора пользователя и количества очков)
-$user_id = isset($_POST['user_id']) ? $_POST['user_id'] : null;
-$new_score = isset($_POST['new_score']) ? $_POST['new_score'] : null;
+$language = $_POST['language'];
 
-// Проверка наличия данных
-if ($user_id !== null && $new_score !== null) {
-    // Обновление прогресса пользователя
-    $sql_update_progress = "UPDATE progress SET total_score = total_score + $new_score WHERE id = $user_id";
+$conn = new mysqli($servername, $username, $password, $language);
 
+// Проверяем наличие данных в массиве $_POST
+if (isset($_POST['user_id']) && isset($_POST['new_score'])) {
+    $userId = $_POST['user_id'];
+    $newScore = $_POST['new_score'];
 
-    if ($conn->query($sql_update_progress) === TRUE) {
+    // Подготовленный запрос для обновления значения total_score
+    $stmt = $conn->prepare("UPDATE progress SET total_score = total_score + ? WHERE id = ?");
+    $stmt->bind_param("ii", $newScore, $userId);
+
+    // Выполнение запроса
+    if ($stmt->execute()) {
         echo json_encode(array("success" => "Прогресс пользователя успешно обновлен."));
     } else {
-        echo json_encode(array("error" => "Ошибка при обновлении прогресса пользователя: " . $conn->error));
+        echo json_encode(array("error" => "Ошибка при обновлении прогресса пользователя: " . $stmt->error));
     }
+
+    // Закрытие запроса
+    $stmt->close();
 } else {
     echo json_encode(array("error" => "Отсутствуют необходимые данные для обновления прогресса пользователя."));
 }

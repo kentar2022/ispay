@@ -85,29 +85,29 @@ $(document).ready(function () {
         console.log('Слово на русском:', wordRussian);
     }
 
-    function updateProgress(userId) {
-        $.ajax({
-            type: "POST",
-            url: "../update_progress.php", // Замените на адрес вашего PHP скрипта для обновления прогресса пользователя
-            data: { user_id: userId, new_score: score },
-            success: function (response) {
-                console.log("Прогресс пользователя успешно обновлен:", response);
-                // Очищаем переменные и выполняем другие действия после успешного обновления прогресса
-                score = 0;
-                correctAnswersTotal = 0;
-                answersCount = 0;
-            },
-            error: function (xhr, status, error) {
-                console.error("Ошибка при обновлении прогресса пользователя:", error);
-            }
-        });
+    function updateProgress(userId, language) {
+    $.ajax({
+        type: "POST",
+        url: "../update_progress.php",
+        data: { user_id: userId, new_score: score, language: language },
+        success: function(response) {
+            console.log("Прогресс пользователя успешно обновлен:", response);
+            // Очищаем переменные и выполняем другие действия после успешного обновления прогресса
+            score = 0;
+            correctAnswersTotal = 0;
+            answersCount = 0;
+        },
+        error: function(xhr, status, error) {
+            console.error("Ошибка при обновлении прогресса пользователя:", error);
+        }
+    });
     }
 
-    function updateLevel(lessonId, userId) {
+    function updateLevel(lessonId, userId, language) {
         $.ajax({
             type: "POST",
             url: "../update_level.php",
-            data: { lesson_id: lessonId, user_id: userId }, // Убедитесь, что имена параметров совпадают
+            data: { lesson_id: lessonId, user_id: userId, language: language },
             success: function(response) {
                 console.log("Уровень пользователя успешно обновлен:", response);
             },

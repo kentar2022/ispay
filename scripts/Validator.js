@@ -38,7 +38,7 @@ $(document).ready(function () {
 
     function loadPhrases(language, tableName) {
         $.ajax({
-            url: 'load_phrases.php',
+            url: '../load_phrases.php',
             method: 'POST',
             data: { language: language, table: tableName },
             success: function (response) {
@@ -85,14 +85,15 @@ $(document).ready(function () {
         console.log('Слово на русском:', wordRussian);
     }
 
-    function updateProgress(userId) {
+
+    function updateProgress(userId, language) {
+        console.log("Отправка данных в updateProgress:", { user_id: userId, new_score: score, language: language });
         $.ajax({
             type: "POST",
-            url: "update_progress.php", // Замените на адрес вашего PHP скрипта для обновления прогресса пользователя
-            data: { user_id: userId, new_score: score },
+            url: "../update_progress.php",
+            data: { user_id: userId, new_score: score, language: language },
             success: function (response) {
                 console.log("Прогресс пользователя успешно обновлен:", response);
-                // Очищаем переменные и выполняем другие действия после успешного обновления прогресса
                 score = 0;
                 correctAnswersTotal = 0;
                 answersCount = 0;
@@ -103,11 +104,12 @@ $(document).ready(function () {
         });
     }
 
-    function updateLevel(lessonId, userId) {
+    function updateLevel(lessonId, userId, language) {
+        console.log("Отправка данных в updateLevel:", { lesson_id: lessonId, user_id: userId, language: language });
         $.ajax({
             type: "POST",
-            url: "update_level.php",
-            data: { lesson_id: lessonId, user_id: userId }, // Убедитесь, что имена параметров совпадают
+            url: "../update_level.php",
+            data: { lesson_id: lessonId, user_id: userId, language: language },
             success: function(response) {
                 console.log("Уровень пользователя успешно обновлен:", response);
             },
@@ -117,25 +119,28 @@ $(document).ready(function () {
         });
     }
 
-    function getUserId(userEmail, lessonId) {
+    function getUserId(userEmail, lessonId, language) {
+        console.log("Отправка данных в getUserId:", { user_email: userEmail });
         $.ajax({
             type: "POST",
-            url: "getUserId.php",
+            url: "../getUserId.php",
             data: { user_email: userEmail },
             success: function(response) {
-                // При успешном получении ID пользователя
                 console.log("User ID:", response);
-                // Вызываем функцию updateProgress, передавая полученный ID пользователя
-                updateProgress(response.user_id);
-                updateLevel(lessonId, response.user_id); // Передаем lessonId в функцию updateLevel
-
+                updateProgress(response.user_id, language);
+                updateLevel(lessonId, response.user_id, language);
             },
             error: function(xhr, status, error) {
-                // Обработка ошибки
                 console.error("Ошибка при получении ID пользователя:", error);
             }
         });
     }
+
+
+
+
+
+
 
     // Функция для обработки нажатия на блок с фразой
     $('#windowsContainer').on('click', '.window', function () {
@@ -209,7 +214,7 @@ $(document).ready(function () {
             $('.success-message').removeClass('hidden');
             $('#correctAnswersCount').text(correctAnswersTotal); // Обновляем количество правильных ответов
             $('#scoreCount').text(score); // Обновляем количество очков
-            getUserId(userEmail, lessonId);
+            getUserId(userEmail, lessonId, language);
             return;
         }
 
