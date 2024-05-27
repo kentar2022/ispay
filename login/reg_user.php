@@ -1,39 +1,25 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
 
+session_start();
+require 'config.php';
 
-$db_host = 'localhost';
-$db_user = 'kentar';
-$db_password = 'password';
-$db_name = 'ispay';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $csrf_token = bin2hex(random_bytes(32));
 
-$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
-
-if ($conn->connect_error) {
-  die("Database connection eror: " . $conn->connect_error);
+    $stmt = $pdo->prepare("INSERT INTO users (username, email, password, csrf_token) VALUES (?, ?, ?, ?)");
+    if ($stmt->execute([$username, $email, $password, $csrf_token])) {
+        $_SESSION['csrf_token'] = $csrf_token;
+        header("Location: login.html");
+    } else {
+        echo "Registration failed.";
+    }
 }
-
-if (isset($_POST['email']) && isset($_POST['password'])) {
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-
-  $sql = "INSERT INTO users (email, password) VALUES (?, ?)";
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("ss", $email, $password);
-
-  if ($stmt->execute()) {
-    header('Location: ../profile.html');
-  } else {
-    echo "Erreur lors de l'inscription.";
-  }
-
-  $stmt->close();
-} else {
-  echo "Veuillez remplir tout les champs.";
-}
-
-$conn->close();
 ?>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/library_style.css">
+    <title>Language Learning Library</title>
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <li><a href="#">Профиль</a></li>
+            <li><a href="#">Чеченский язык</a></li>
+            <li><a href="#">Список курсов</a></li>
+            <li><a href="#">Рейтинги</a></li>
+            <li><a href="#">Задания</a></li>
+            <li><a href="#">Настройки</a></li>
+            <li><a href="#">Магазин</a></li>
+            <li><a href="#">Выход</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="nav-button">Меню</div>
+        <div class="tabs">
+            <div class="tab" onclick="showSection('phonetics')">
+                <!-- SVG for phonetics -->
+                <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
+            </div>
+            <div class="tab" onclick="showSection('grammar')">
+                <!-- SVG for grammar -->
+                <svg viewBox="0 0 24 24"><path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"/></svg>
+            </div>
+            <div class="tab" onclick="showSection('verbs')">
+                <!-- SVG for verbs -->
+                <svg viewBox="0 0 24 24"><path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"/></svg>
+            </div>
+            <div class="tab" onclick="showSection('alphabet')">
+                <!-- SVG for alphabet -->
+                <svg viewBox="0 0 24 24"><path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"/></svg>
+            </div>
+        </div>
+        <div id="chechen" class="language-content">
+            <div id="phonetics" class="info-block">
+                <p>Фонетическая система чеченского языка включает сложную структуру гласных и согласных звуков. Гласные представлены в большом количестве, включающем краткие, долгие и умлаутированные формы. Согласные звуки включают разнообразие, от простых до фарингальных и абруптивных звуков, с распределением по различным местам артикуляции. <br>Чеченский язык содержит от 40 до 60 согласных звуков в зависимости от диалекта и анализа. Это больше, чем в большинстве европейских языков, но меньше, чем в некоторых других кавказских языках.</p>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Носовые</th>
+                        <th>Взрывные</th>
+                        <th>Аффрикаты</th>
+                        <th>Фрикативные</th>
+                        <th>Ротические</th>
+                        <th>Аппроксиманты</th>
+                    </tr>
+                    <tr>
+                        <th>Губные</th>
+                        <td>[m], [mˠ]</td>
+                        <td>[pʰ], [b], [p:], [pˠ], [bˠ], [p:ˠ]</td>
+                        <td></td>
+                        <td>([f]), ([v])</td>
+                        <td></td>
+                        <td>[w], ([ʋ]), [wˠ]</td>
+                    </tr>
+                    <tr>
+                        <th>Альвеолярные</th>
+                        <td>[n], [nˠ]</td>
+                        <td>[tʰ], [d], [t:], [tˠ], [dˠ], [t:ˠ]</td>
+                        <td>[t͡sʰ], [d͡z], [t͡s'], [t͡s:], [t͡sˠ], [d͡zˠ], [t͡s:ˠ]</td>
+                        <td>[s], [z], [sˠ], [zˠ]</td>
+                        <td>[r], [ɾ], [ɾˠ]</td>
+                        <td>[l], [lˠ]</td>
+                    </tr>
+                    <tr>
+                        <th>Постальвеолярные</th>
+                        <td></td>
+                        <td>[t̠ʲ], [d̠ʲ], [t̠ʲ:], [d͡ʒˠ]</td>
+                        <td>[t̠ʲ͡ʃ], [d̠ʲ͡ʒ], [t̠ʲ͡ʃ:], [t̠ʲ͡ʃˠ], [d̠ʲ͡ʒˠ], [t̠ʲ͡ʃ:ˠ]</td>
+                        <td>[ʃ], [ʒ], [ʃˠ], [ʒˠ]</td>
+                        <td></td>
+                        <td>[j]</td>
+                    </tr>
+                    <tr>
+                        <th>Заднеязычные</th>
+                        <td></td>
+                        <td>[kʰ], [g], [k:], [kˠ]</td>
+                        <td></td>
+                        <td>[x], [ɣ]</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Увулярные</th>
+                        <td></td>
+                        <td>[qʰ], [q], [q:ˠ]</td>
+                        <td></td>
+                        <td>[ʜ]</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Фарингальные</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Глоттальные</th>
+                        <td></td>
+                        <td>[ʔ]</td>
+                        <td></td>
+                        <td>[h]</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="grammar" class="info-block">
+                <p>Грамматическая структура чеченского языка характеризуется сложными системами склонения, спряжения и словообразования. Существительные изменяются по числам, падежам и одушевлённости. Глаголы склоняются по лицам, числам, временам и залогам. Порядок слов в предложении относительно свободный, но обычно следует порядку SOV (субъект-объект-глагол).</p>
+            </div>
+            <div id="verbs" class="info-block">
+                <p>Глагольная система чеченского языка включает несколько времен, залогов и аспектов. Основные времена включают настоящее, прошедшее и будущее, а также несколько форм прошедшего времени, отражающих степень завершенности действия. Залоги включают активный, пассивный и рефлексивный, а также различные аспекты, которые могут указывать на длительность, повторяемость или завершенность действия.</p>
+            </div>
+            <div id="alphabet" class="info-block active">
+                <div class="alphabet-container">
+                    <div class="alphabet-item">А а<span>[ɑ/ɑ]</span></div>
+                    <div class="alphabet-item">Аь аь<span>[æ/æ]</span></div>
+                    <div class="alphabet-item">Б б<span>[b]</span></div>
+                    <div class="alphabet-item">В в<span>[v]</span></div>
+                    <div class="alphabet-item">Г г<span>[g]</span></div>
+                    <div class="alphabet-item">ГӀ гӀ<span>[ɡ]</span></div>
+                    <div class="alphabet-item">Д д<span>[d]</span></div>
+                    <div class="alphabet-item">Е е<span>[e/e]</span></div>
+                    <div class="alphabet-item">Ё ё<span>[jo]</span></div>
+                    <div class="alphabet-item">Ж ж<span>[ʒ]</span></div>
+                    <div class="alphabet-item">З з<span>[z]</span></div>
+                    <div class="alphabet-item">И и<span>[i]</span></div>
+                    <div class="alphabet-item">Й й<span>[j]</span></div>
+                    <div class="alphabet-item">К к<span>[k]</span></div>
+                    <div class="alphabet-item">Кх кх<span>[kʰ]</span></div>
+                    <div class="alphabet-item">Къ къ<span>[q]</span></div>
+                    <div class="alphabet-item">КӀ кӀ<span>[kʼ]</span></div>
+                    <div class="alphabet-item">Л л<span>[l]</span></div>
+                    <div class="alphabet-item">М м<span>[m]</span></div>
+                    <div class="alphabet-item">Н н<span>[n]</span></div>
+                    <div class="alphabet-item">О о<span>[o]</span></div>
+                    <div class="alphabet-item">Оь оь<span>[ɵ]</span></div>
+                    <div class="alphabet-item">П п<span>[p]</span></div>
+                    <div class="alphabet-item">ПӀ пӀ<span>[pʼ]</span></div>
+                    <div class="alphabet-item">Р р<span>[r]</span></div>
+                    <div class="alphabet-item">С с<span>[s]</span></div>
+                    <div class="alphabet-item">Т т<span>[t]</span></div>
+                    <div class="alphabet-item">ТӀ тӀ<span>[tʼ]</span></div>
+                    <div class="alphabet-item">У у<span>[u]</span></div>
+                    <div class="alphabet-item">Уь уь<span>[y]</span></div>
+                    <div class="alphabet-item">Ф ф<span>[f]</span></div>
+                    <div class="alphabet-item">Х х<span>[x]</span></div>
+                    <div class="alphabet-item">Хь хь<span>[xʲ]</span></div>
+                    <div class="alphabet-item">ХӀ хӀ<span>[xʼ]</span></div>
+                    <div class="alphabet-item">Ц ц<span>[ts]</span></div>
+                    <div class="alphabet-item">ЦӀ цӀ<span>[tsʼ]</span></div>
+                    <div class="alphabet-item">Ч ч<span>[tʃ]</span></div>
+                    <div class="alphabet-item">ЧӀ чӀ<span>[tʃʼ]</span></div>
+                    <div class="alphabet-item">Ш ш<span>[ʃ]</span></div>
+                    <div class="alphabet-item">Щ щ<span>[ʃtʃ]</span></div>
+                    <div class="alphabet-item">Ъ ъ<span>[ʕ]</span></div>
+                    <div class="alphabet-item">Ы ы<span>[ɨ]</span></div>
+                    <div class="alphabet-item">Ь ь<span>[j]</span></div>
+                    <div class="alphabet-item">Э э<span>[e]</span></div>
+                    <div class="alphabet-item">Ю ю<span>[ju]</span></div>
+                    <div class="alphabet-item">Я я<span>[ja]</span></div>
+                    <div class="alphabet-item">Ӏ ӏ<span>[ʔ]</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('.info-block');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Handle the menu button click
+        document.querySelector('.nav-button').addEventListener('click', function() {
+            document.querySelector('.nav').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
