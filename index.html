@@ -75,10 +75,10 @@
                     <span id="ratingsPageTextTranslation">Рейтинги</span>
                 </a>
             </div>
-            <div class="aside-item" id="lessonsPageBtn" onclick="togglePages('lessonsPage')"><a href="#"><span id="lessonsPageTextTranslation">Задания</span></a></div>
+            <div class="aside-item" id="lessonsPageBtn" onclick="togglePages('lessonsPage')"><a href="library.html"><span id="lessonsPageTextTranslation">Библиотека</span></a></div>
             <div class="aside-item" id="settingsPageBtn" onclick="togglePages('settingsPage')"><a href="#"><span id="settingsPageTextTranslation">Настройки</span></a></div>
             <div class="aside-item"><a href="#"><span id="shopTextTranslation">Магазин</span></a></div>
-            <div class="aside-item"><a href="#">Выход</a></div>
+            <div class="aside-item"><a href="login/logout.php">Выход</a></div>
         </aside>
     </main>
 </div>
@@ -402,12 +402,13 @@
             <div class="col-md-9">
                 <div class="profile-info">
                     <img src="profile-pic/user-avatar.jpg" alt="User Avatar">
-                        <div class="">
-                            <h2 id="userInfoHeaderTranslation">Информация о пользователе</h2>
-                            <p id="userNameTranslation">Имя: Username</p>
-                            <p id="userEmailTranslation">Email: user@example.com</p>
-                            <p id="userCountryTranslation">Страна: Страна пользователя</p>
-                        </div>
+                    <div class="">
+                        <h2 class="userInfoHeaderTranslation" id="userInfoHeaderTranslation">Информация о пользователе</h2>
+                        <p class="userNameTranslation" id="userNameTranslation">Имя: <span class="mainNickname"></span></p>
+                        <p class="userEmailTranslation" id="userEmailTranslation">Email: <span class="mainEmail"></span></p>
+                        <p class="userCountryTranslation" id="userCountryTranslation">Страна: <span class="mainCountry"></span></p>
+                        <button id="editProfileBtn" class="btn btn-primary">Редактировать профиль</button>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -497,14 +498,131 @@
     </div>
 </div>  
 
-
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Информация о пользователе</h2>
+        <p class="userNameTranslation editable">Имя: <span class="nickname"></span></p>
+        <p class="userEmailTranslation editable">Email: <span class="email"></span></p>
+        <p class="userCountryTranslation editable">Страна: <span class="country"></span></p>
+        <form id="updateForm" action="login/update_profile.php" method="POST" style="display:none;">
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+            <input type="hidden" name="field" id="field">
+            <input type="text" name="value" id="value">
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</div>
 
 <script>
 
-    function selectLanguage(language) {
-        console.log('Selected language:', language); // Отладка: вывод выбранного языка
-        localStorage.setItem('language', language); // Сохраняем выбранный язык в localStorage
+function selectLanguage(language) {
+    console.log('Selected language:', language); // Отладка: вывод выбранного языка
+    localStorage.setItem('language', language); // Сохраняем выбранный язык в localStorage
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Элементы модального окна и кнопки
+    var modal = document.getElementById("profileModal");
+    var btn = document.getElementById("editProfileBtn");
+    var span = document.getElementsByClassName("close")[0];
+
+    // Открытие модального окна и загрузка информации о пользователе
+    btn.onclick = function() {
+        modal.style.display = "block";
+        getUserInfo(updateModalInfo);
     }
+
+    // Закрытие модального окна при нажатии на крестик
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Закрытие модального окна при клике вне его
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Проверка сессии при загрузке страницы
+    checkSession();
+
+    // Загрузка информации о пользователе при загрузке страницы
+    getUserInfo(updateMainAndModalInfo);
+
+    // Обработка двойного клика для редактирования полей
+    document.querySelectorAll('.editable').forEach(item => {
+        item.addEventListener('dblclick', function() {
+            const span = this.querySelector('span');
+            const field = span.id;
+            const value = span.textContent;
+            const input = document.getElementById('value');
+            input.value = value;
+            document.getElementById('field').value = field;
+            document.getElementById('updateForm').style.display = 'block';
+            input.focus();
+        });
+    });
+});
+
+// Функция для получения информации о пользователе
+function getUserInfo(callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'login/profile.php', true);
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            var user = JSON.parse(xhr.responseText);
+            console.log("User ID: " + user.user_id);  // Выводим ID пользователя в консоль
+            callback(user);
+        } else {
+            console.error('Ошибка получения информации о пользователе: ' + xhr.statusText);
+        }
+    };
+    xhr.onerror = function() {
+        console.error('Ошибка отправки запроса');
+    };
+    xhr.send();
+}
+
+// Функция для обновления информации о пользователе в основной части страницы и модальном окне
+function updateMainAndModalInfo(user) {
+    document.querySelector('.mainNickname').textContent = user.nickname;
+    document.querySelector('.mainEmail').textContent = user.email;
+    document.querySelector('.mainCountry').textContent = user.country;
+
+    document.querySelector('.nickname').textContent = user.nickname;
+    document.querySelector('.email').textContent = user.email;
+    document.querySelector('.country').textContent = user.country;
+}
+
+
+// Функция для обновления информации о пользователе в модальном окне
+function updateModalInfo(user) {
+    document.querySelector('.nickname').textContent = user.nickname;
+    document.querySelector('.email').textContent = user.email;
+    document.querySelector('.country').textContent = user.country;
+}
+
+// Функция для проверки сессии
+function checkSession() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'login/profile.php', true);
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            console.log('Сессия активна');
+        } else {
+            console.error('Сессия не активна');
+            window.location.href = 'login/login.html';
+        }
+    };
+    xhr.onerror = function() {
+        console.error('Ошибка проверки сессии');
+    };
+    xhr.send();
+}
+
+
 
 
 </script>

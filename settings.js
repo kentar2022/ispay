@@ -126,10 +126,10 @@ themeDark2.addEventListener('change', setTheme);
 
 var texts = {
     russian: {
-        menu: "Меню",
+        menu: "Профиль",
         coursesPage: "Список курсов",
         ratingsPage: "Рейтинги",
-        lessonsPage: "Задания",
+        lessonsPage: "Библиотека",
         settingsPage: "Настройки",
         shop: "Магазин",
         settingsHeaderText: "Настройки",
@@ -148,9 +148,9 @@ var texts = {
         courseTatar: "Татарский язык",
         courseChuvash: "Чувашский язык",
         userInfoHeader: "Информация о пользователе",
-        userName: "Имя: Username",
-        userEmail: "Email: user@example.com",
-        userCountry: "Страна: Страна пользователя",
+        userName: "Имя:",
+        userEmail: "Email:",
+        userCountry: "Страна:",
         coursesHeader: "Курсы",
         aboutHeader: "О себе",
         aboutDescription: "Краткое описание пользователя. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet purus diam.",
@@ -168,7 +168,7 @@ var texts = {
         menu: "Profile",
         coursesPage: "Course List",
         ratingsPage: "Ratings",
-        lessonsPage: "Assignments",
+        lessonsPage: "Library",
         settingsPage: "Settings",
         shop: "Shop",
         settingsHeaderText: "Settings",
@@ -187,9 +187,9 @@ var texts = {
         courseTatar: "Tatar Language",
         courseChuvash: "Chuvash Language",
         userInfoHeader: "User Information",
-        userName: "Name: Username",
-        userEmail: "Email: user@example.com",
-        userCountry: "Country: User Country",
+        userName: "Name:",
+        userEmail: "Email:",
+        userCountry: "Country:",
         coursesHeader: "Courses",
         aboutHeader: "About Me",
         aboutDescription: "Brief user description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet purus diam.",
@@ -206,7 +206,7 @@ var texts = {
         menu: "Profile",
         coursesPage: "Liste des cours",
         ratingsPage: "Classements",
-        lessonsPage: "Devoirs",
+        lessonsPage: "Bibliothèque",
         settingsPage: "Paramètres",
         shop: "Magasin",
         settingsHeaderText: "Paramètres",
@@ -225,9 +225,9 @@ var texts = {
         courseTatar: "Langue tatare",
         courseChuvash: "Langue tchouvache",
         userInfoHeader: "Informations sur l'utilisateur",
-        userName: "Nom: Nom d'utilisateur",
-        userEmail: "Email: utilisateur@example.com",
-        userCountry: "Pays: Pays de l'utilisateur",
+        userName: "Nom:",
+        userEmail: "Email:",
+        userCountry: "Pays:",
         coursesHeader: "Cours",
         aboutHeader: "À propos de moi",
         aboutDescription: "Description succincte de l'utilisateur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet purus diam.",
@@ -274,10 +274,10 @@ function changeLanguage(language) {
   /*  document.getElementById("profileTatarTranslation").innerText = texts[language].courseTatar;
     document.getElementById("profileChuvashTranslation").innerText = texts[language].courseChuvash;*/
 
-    document.getElementById("userInfoHeaderTranslation").innerText = texts[language].userInfoHeader;
+    /*document.getElementById("userInfoHeaderTranslation").innerText = texts[language].userInfoHeader;
     document.getElementById("userNameTranslation").innerText = texts[language].userName;
     document.getElementById("userEmailTranslation").innerText = texts[language].userEmail;
-    document.getElementById("userCountryTranslation").innerText = texts[language].userCountry;
+    document.getElementById("userCountryTranslation").innerText = texts[language].userCountry;*/
 
     document.getElementById("coursesHeaderTranslation").innerText = texts[language].coursesHeader;
 
