@@ -72,6 +72,7 @@ main {
 .active {
     display: block;
 }
+
 #nextBtn {
     position: fixed;
     bottom: 20px;
@@ -189,6 +190,7 @@ hr {
     display: none;
 }
 
+
 .center-container {
     text-align: center;
 }
@@ -217,4 +219,25 @@ hr {
     max-height: 200px; /* Максимальная высота изображения будет 200px */
     display: block; /* Установка display на block, чтобы изображение корректно отображалось */
     margin: 10px auto; /* Центрирование изображения по горизонтали с отступами по вертикали */
+}
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.tab {
+    background-color: #293133;
+    border: 2px solid rgb(21, 230, 112);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.tab svg {
+    width: 30px;
+    height: 30px;
+    fill: rgb(21, 230, 112);
 }

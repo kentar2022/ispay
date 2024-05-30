@@ -15,9 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $csrf_token = bin2hex(random_bytes(32));
 
     // Вставка данных в таблицу user_auth.users
-    $stmt = $pdo->prepare("INSERT INTO users (email, password, csrf_token) VALUES (?, ?, ?)");
+    $stmt = $pdo_user_auth->prepare("INSERT INTO users (email, password, csrf_token) VALUES (?, ?, ?)");
     if ($stmt->execute([$email, $password, $csrf_token])) {
-        $user_id = $pdo->lastInsertId();
+        $user_id = $pdo_user_auth->lastInsertId();
         
         // Вставка данных в таблицу ispay.users
         $stmt_ispay = $pdo_ispay->prepare("INSERT INTO users (user_id, email) VALUES (?, ?)");
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $_SESSION['csrf_token'] = $csrf_token;
         $_SESSION['user_id'] = $user_id;  // Сохранение user_id в сессии
-        header("Location: login.php");
+        header("Location: login.html");
     } else {
         echo "Registration failed.";
     }

@@ -8,11 +8,14 @@ $(document).ready(function () {
 
 
 
-function toggleHiddenBlock() {
-    const mainBlock = document.querySelector('.main-block');
-    mainBlock.classList.toggle('active');
+function toggleHiddenBlock(language) {
+    const mainBlocks = document.querySelectorAll('.main-block');
+    mainBlocks.forEach(mainBlock => {
+        if (mainBlock.dataset.language === language) {
+            mainBlock.classList.toggle('active');
+        }
+    });
 }
-
 
 
 function togglePages(pageId) {
