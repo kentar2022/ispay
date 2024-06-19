@@ -66,7 +66,7 @@ main {
     border: 1px solid #ccc;
     padding: 10px;
     margin: 10px;
-    font-size: 38px;
+    font-size: 58px;
     border: none;
 }
 .active {
@@ -104,8 +104,8 @@ a {
     right: 130px;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px; 
-    height: 340px;
+    width: 40px; 
+    height: 400px;
     background-color: #DCDCDC;
     overflow: hidden; 
     border-radius: 10px;
@@ -215,10 +215,11 @@ hr {
     display: flex;
 }
 .phrase-image {
-    max-width: 100%; /* Максимальная ширина изображения будет равна ширине контейнера */
-    max-height: 200px; /* Максимальная высота изображения будет 200px */
-    display: block; /* Установка display на block, чтобы изображение корректно отображалось */
-    margin: 10px auto; /* Центрирование изображения по горизонтали с отступами по вертикали */
+    max-width: 100%; 
+    width: 400px;
+    max-height: 250px; 
+    display: block; 
+    margin: 10px auto;
 }
 .tabs {
     display: flex;

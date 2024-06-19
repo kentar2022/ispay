@@ -103,10 +103,13 @@ function loadTheme() {
     if (savedTheme) {
         if (savedTheme === 'dark') {
             setThemeDark();
+            themeDark.checked = true;
         } else if (savedTheme === 'dark2') {
             setThemeDark2();
+            themeDark2.checked = true;
         } else {
             setThemeLight();
+            themeLight.checked = true;
         }
     }
 }
@@ -114,14 +117,12 @@ function loadTheme() {
 // Вызываем функцию загрузки темы при загрузке страницы
 window.onload = function() {
     loadTheme();
-    loadLanguage();
 };
 
 // Добавляем слушатели событий для элементов выбора темы
 themeLight.addEventListener('change', setTheme);
 themeDark.addEventListener('change', setTheme);
 themeDark2.addEventListener('change', setTheme);
-
 
 
 var texts = {
@@ -161,7 +162,16 @@ var texts = {
         dailyGiftsHeader: "Ежедневные подарки",
         premiumOffer: "Получите доступ к дополнительным возможностям с премиум подпиской!",
         subscribeBtn: "Подписаться на премиум",
-        giftElement: "День"
+        giftElement: "День",
+        profileModalHeader: "Информация о пользователе",
+        profileModalName: "Имя",
+        profileModalEmail: "Email",
+        profileModalCountry: "Страна",
+        profileModalSaveButton: "Сохранить",
+        editProfileBtn: "Редактировать профиль",
+        logoutBtn: "Выход",
+        LanguageInformation: "Полезная информация"
+
 
     },
     english: {
@@ -200,7 +210,15 @@ var texts = {
         dailyGiftsHeader: "Daily Gifts",
         premiumOffer: "Unlock additional features with a premium subscription!",
         subscribeBtn: "Subscribe to Premium",
-        giftElement: "Day"
+        giftElement: "Day",
+        profileModalHeader: "User Information",
+        profileModalName: "Name",
+        profileModalEmail: "Email",
+        profileModalCountry: "Country",
+        profileModalSaveButton: "Save",
+        editProfileBtn: "Edit Profile",
+        logoutBtn: "Logout",
+        LanguageInformation: "Helpful information"
     },
     french: {
         menu: "Profile",
@@ -238,7 +256,16 @@ var texts = {
         dailyGiftsHeader: "Cadeaux quotidiens",
         premiumOffer: "Débloquez des fonctionnalités supplémentaires avec un abonnement premium !",
         subscribeBtn: "Souscrire à Premium",
-        giftElement: "Jour"
+        giftElement: "Jour",
+        profileModalHeader: "Informations de l'utilisateur",
+        profileModalName: "Nom",
+        profileModalEmail: "Email",
+        profileModalCountry: "Pays",
+        profileModalSaveButton: "Sauvegarder",
+        editProfileBtn: "Modifier le profil",
+        logoutBtn: "Déconnexion",
+        LanguageInformation: "Information utile"
+
     }
 };
 
@@ -249,6 +276,8 @@ function changeLanguage(language) {
     document.getElementById("lessonsPageTextTranslation").innerText = texts[language].lessonsPage;
     document.getElementById("settingsPageTextTranslation").innerText = texts[language].settingsPage;
     document.getElementById("shopTextTranslation").innerText = texts[language].shop;
+    
+    document.getElementById("logoutButton").innerText = texts[language].logoutBtn;
 
     document.getElementById("settingsHeaderTextTranslation").innerText = texts[language].settingsHeaderText;
     document.getElementById("settingsLangRussianTranslation").innerText = texts[language].settingsLangRussian;
@@ -291,8 +320,8 @@ function changeLanguage(language) {
 
     document.getElementById("dailyGiftsHeaderTranslation").innerText = texts[language].dailyGiftsHeader;
 
-    document.getElementById("premiumOfferTranslation").innerText = texts[language].premiumOffer;
-    document.getElementById("subscribeBtnTranslation").innerText = texts[language].subscribeBtn;
+    /*document.getElementById("premiumOfferTranslation").innerText = texts[language].premiumOffer;
+    document.getElementById("subscribeBtnTranslation").innerText = texts[language].subscribeBtn;*/
 
     document.getElementById('giftItemTranslation1').innerText = texts[language].giftElement;
     document.getElementById('giftItemTranslation2').innerText = texts[language].giftElement;
@@ -302,18 +331,83 @@ function changeLanguage(language) {
     document.getElementById('giftItemTranslation6').innerText = texts[language].giftElement;
     document.getElementById('giftItemTranslation7').innerText = texts[language].giftElement;
 
+    document.getElementById("profileModalHeaderTranslation").innerText = texts[language].profileModalHeader;
+    document.getElementById("profileModalNameTranslation").innerHTML = texts[language].profileModalName + ": <span id='nickname' class='nickname'></span>";
+    document.getElementById("profileModalEmailTranslation").innerHTML = texts[language].profileModalEmail + ": <span id='email' class='email'></span>";
+    document.getElementById("profileModalCountryTranslation").innerHTML = texts[language].profileModalCountry + ": <span id='country' class='country'></span>";
+    document.getElementById("profileModalSaveButtonTranslation").innerText = texts[language].profileModalSaveButton;
+
+    var LanguageInformationElements = document.querySelectorAll(".LanguageInformation");
+    LanguageInformationElements.forEach(function(element) {
+        element.innerText = texts[language].LanguageInformation;
+    });
+
+
+
+       // Получение данных пользователя из localStorage
+    var nickname = localStorage.getItem('nickname');
+    var email = localStorage.getItem('email');
+    var country = localStorage.getItem('country');
+
+    // Отладочный вывод для проверки извлечения
+    /*console.log('Retrieved from localStorage:');
+    console.log('Name: ' + nickname);
+    console.log('Email: ' + email);
+    console.log('Country: ' + country);*/
+
+    document.getElementById("userInfoHeaderTranslation").innerText = texts[language].userInfoHeader;
+    document.getElementById("userNameTranslation").innerHTML = texts[language].userName + ' <span class="mainNickname"></span>';
+    document.getElementById("userEmailTranslation").innerHTML = texts[language].userEmail + ' <span class="mainEmail"></span>';
+    document.getElementById("userCountryTranslation").innerHTML = texts[language].userCountry + ' <span class="mainCountry"></span>';
+    document.getElementById("editProfileBtn").innerText = texts[language].editProfileBtn;
+
+
+
+
+    // Установка данных пользователя в соответствующие элементы
+    if (nickname) {
+        document.querySelector('.mainNickname').textContent = nickname;
+    }
+    if (email) {
+        document.querySelector('.mainEmail').textContent = email;
+    }
+    if (country) {
+        document.querySelector('.mainCountry').textContent = country;
+    }
     localStorage.setItem('currentLanguage', language);
 }
+
+
+
+// Функция для загрузки языка при загрузке страницы
+function loadLanguage() {
+    var savedLanguage = localStorage.getItem('currentLanguage');
+    if (savedLanguage) {
+        document.getElementById("langRussianSettings").checked = (savedLanguage === 'russian');
+        document.getElementById("langEnglishSettings").checked = (savedLanguage === 'english');
+        document.getElementById("langFrenchSettings").checked = (savedLanguage === 'french');
+    } else {
+        var radios = document.getElementsByName('language');
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                savedLanguage = radios[i].value;
+                break;
+            }
+        }
+    }
+    setLanguage(savedLanguage);
+}
+
 
 function setLanguage(language) {
     changeLanguage(language);
+    console.log('language is ' + language)
     localStorage.setItem('currentLanguage', language);
 }
+// Вызываем функцию загрузки темы при загрузке страницы
+window.onload = function() {
+    loadTheme();
+    loadLanguage();
+    setLanguage();
 
-function loadLanguage() {
-    var savedLanguage = localStorage.getItem('currentLanguage');
-
-    if (savedLanguage) {
-        changeLanguage(savedLanguage);
-    }
-}
+};

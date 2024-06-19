@@ -1,52 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style type="text/css">
-    .custom-bg-gray {
-      background-color: #434B4D !important;
-    }
-    .block {
-      width: 400px;
-      height: 800px;
-      margin: 20px;
-      padding: 20px;
-      background-color: #F8F8FF;
-    }
-    .btn_submit {
-      background-color: #C5001A;
-      border: none;
-      margin: 20px 0px 40px 0px;
-    }
-    .glav {
-      display: flex;
-      justify-content: space-evenly;
-    }
-    h1 {
-      color: #C5001A;
-      font-size: 28px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .title {
+            background-color: #434B4D;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+            width: 100%;
+            text-align: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            width: 500px;
+            border: 2px solid rgb(21, 230, 112);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        .form-control {
+            width: calc(100% - 24px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn-primary {
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(21, 230, 112);
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .card-title{
+          font-size: 25px;
+        }
+        .form-label{
+          font-size: 20px;
+        }
+        .line { 
+          position: fixed;
+          top: 50%;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: rgb(21, 230, 112);
+          z-index: 0;
+        }
+    </style>
 </head>
 <body>
-<div class="registration-block block">
-    <div class="col-md-12">
-      <h1>Créer un compte d'employé</h1>
-      <form action="reg_user.php" method="POST">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email:</label>
-          <input type="email" class="form-control" id="email" name="email" required>
+<!--<div class="title">
+  <h1>Login</h1>
+</div>-->
+<div class="container">
+  <div class="line"></div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Créer un compte</h5>
+            <form method="post" action="reg_user.php"> 
+                <div class="mb-3">
+                    <label for="email" class="form-label">Adresse e-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Mot de passe:</label>
-          <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary btn_submit">Enregister les données</button>
-      </form>
     </div>
-  </div>
+</div>
 
+<script>
+    function applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor) {
+        document.body.style.backgroundColor = bodyColor;
+        document.querySelector('.card').style.backgroundColor = cardColor;
+        document.querySelector('.card').style.borderColor = borderColor;
+        document.querySelector('.btn-primary').style.backgroundColor = buttonColor;
+
+        var textElements = document.querySelectorAll('.card-title, .form-label');
+        textElements.forEach(function(element) {
+            element.style.color = textColor;
+        });
+    }
+
+    function setThemeLight() {
+        var bodyColor = '#ffffff';
+        var cardColor = '#f9f9f9';
+        var textColor = '#000000';
+        var borderColor = '#15E670';
+        var buttonColor = '#15E670';
+
+        applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor);
+    }
+
+    function setThemeDark() {
+        var bodyColor = '#293133';
+        var cardColor = '#434B4D';
+        var textColor = '#ffffff';
+        var borderColor = '#15E670';
+        var buttonColor = '#15E670';
+
+        applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor);
+    }
+
+    function setThemeDark2() {
+        var bodyColor = '#293133';
+        var cardColor = '#434B4D';
+        var textColor = '#ffffff';
+        var borderColor = '#f3166b';
+        var buttonColor = '#f3166b';
+
+        applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor);
+    }
+
+    function loadTheme() {
+        var savedTheme = localStorage.getItem('currentTheme');
+
+        if (savedTheme) {
+            if (savedTheme === 'dark') {
+                setThemeDark();
+            } else if (savedTheme === 'dark2') {
+                setThemeDark2();
+            } else {
+                setThemeLight();
+            }
+        }
+    }
+
+    window.onload = function() {
+        loadTheme();
+    };
+</script>
 </body>
 </html>
+

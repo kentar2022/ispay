@@ -78,7 +78,7 @@
             <div class="aside-item" id="lessonsPageBtn" onclick="togglePages('lessonsPage')"><a href="library.html"><span id="lessonsPageTextTranslation">Библиотека</span></a></div>
             <div class="aside-item" id="settingsPageBtn" onclick="togglePages('settingsPage')"><a href="#"><span id="settingsPageTextTranslation">Настройки</span></a></div>
             <div class="aside-item"><a href="#"><span id="shopTextTranslation">Магазин</span></a></div>
-            <div class="aside-item"><a href="login/logout.php">Выход</a></div>
+            <div class="aside-item"><a id="logoutButton" href="login/logout.php">Выход</a></div>
         </aside>
     </main>
 </div>
@@ -87,12 +87,12 @@
     <div id="lessonsPagechechen" class="page hidden lessonsPage">
         <img src="courses_flags/chechen.png" alt="">
         <div class="container">
-            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()">Полезная информация</div>
             <div class="hidden-block">
                 <div class="tabs">
                     <div class="tab" onclick="showSection('phonetics')">
                         <!-- SVG for phonetics -->
-                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
                     </div>
                     <div class="tab" onclick="showSection('grammar')">
                         <!-- SVG for grammar -->
@@ -110,34 +110,34 @@
             </div>
         </div>
         <div class="lessons-container">
-                <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=1" class="lesson-block goToLessonBtn" test="1" data-language="chechen" data-table="lessons_chechen" data-lang-id="1">
-                    <div class="lesson-status"></div>
-                </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="2" data-language="chechen" data-table="lessons_chechen" data-lang-id="2">
+            <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=1" class="lesson-block goToLessonBtn" test="1" data-language="chechen" data-table="lessons_chechen" data-lang-id="1">
                 <div class="lesson-status"></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="3" data-language="chechen" data-table="lessons_chechen" data-lang-id="3">
+            <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=2" class="lesson-block" id="2" data-language="chechen" data-table="lessons_chechen" data-lang-id="2">
                 <div class="lesson-status"></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="4" data-language="chechen" data-table="lessons_chechen" data-lang-id="4">
+            <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=3" class="lesson-block" id="3" data-language="chechen" data-table="lessons_chechen" data-lang-id="3">
+                <div class="lesson-status"></div>
+            </a>
+            <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=4" class="lesson-block" id="4" data-language="chechen" data-table="lessons_chechen" data-lang-id="4">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="5" data-language="chechen" data-table="lessons_chechen" data-lang-id="5">
+            <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=5" class="lesson-block" id="5" data-language="chechen" data-table="lessons_chechen" data-lang-id="5">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="6" data-language="chechen" data-table="lessons_chechen" data-lang-id="6">
+            <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=6" class="lesson-block" id="6" data-language="chechen" data-table="lessons_chechen" data-lang-id="6">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="7" data-language="chechen" data-table="lessons_chechen" data-lang-id="7">
+            <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=7" class="lesson-block" id="7" data-language="chechen" data-table="lessons_chechen" data-lang-id="7">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="8" data-language="chechen" data-table="lessons_chechen" data-lang-id="8">
+            <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=8" class="lesson-block" id="8" data-language="chechen" data-table="lessons_chechen" data-lang-id="8">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="9" data-language="chechen" data-table="lessons_chechen" data-lang-id="9">
+            <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=9" class="lesson-block" id="9" data-language="chechen" data-table="lessons_chechen" data-lang-id="9">
                 <div></div>
             </a>
-            <a href="chechen_lesson.html" class="lesson-block" id="10" data-language="chechen" data-table="lessons_chechen" data-lang-id="10">
+            <a href="lessons_pages/chechen_lesson.html?language=chechen&lesson_id=10" class="lesson-block" id="10" data-language="chechen" data-table="lessons_chechen" data-lang-id="10">
                 <div></div>
             </a>
         </div>
@@ -149,12 +149,12 @@
     <div id="lessonsPageingush" class="page hidden lessonsPage">
         <img src="courses_flags/ingush.png" alt="">
         <div class="container">
-            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()">Полезная информация</div>
             <div class="hidden-block">
                 <div class="tabs">
                     <div class="tab" onclick="showSection('phonetics')">
                         <!-- SVG for phonetics -->
-                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
                     </div>
                     <div class="tab" onclick="showSection('grammar')">
                         <!-- SVG for grammar -->
@@ -209,12 +209,12 @@
     <div id="lessonsPageadyge" class="page hidden lessonsPage">
         <img src="courses_flags/adyge.png" alt="">
         <div class="container">
-            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()">Полезная информация</div>
             <div class="hidden-block">
                 <div class="tabs">
                     <div class="tab" onclick="showSection('phonetics')">
                         <!-- SVG for phonetics -->
-                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
                     </div>
                     <div class="tab" onclick="showSection('grammar')">
                         <!-- SVG for grammar -->
@@ -268,12 +268,12 @@
     <div id="lessonsPageudmurt" class="page hidden lessonsPage">
         <img src="courses_flags/udmurt.png" alt="">
         <div class="container">
-            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()">Полезная информация</div>
             <div class="hidden-block">
                 <div class="tabs">
                     <div class="tab" onclick="showSection('phonetics')">
                         <!-- SVG for phonetics -->
-                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
                     </div>
                     <div class="tab" onclick="showSection('grammar')">
                         <!-- SVG for grammar -->
@@ -328,12 +328,12 @@
     <div id="lessonsPagetatar" class="page hidden lessonsPage">
         <img src="courses_flags/tatar.png" alt="">
         <div class="container">
-            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()">Полезная информация</div>
             <div class="hidden-block">
                 <div class="tabs">
                     <div class="tab" onclick="showSection('phonetics')">
                         <!-- SVG for phonetics -->
-                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
                     </div>
                     <div class="tab" onclick="showSection('grammar')">
                         <!-- SVG for grammar -->
@@ -388,12 +388,12 @@
     <div id="lessonsPagechuvash" class="page hidden lessonsPage">
         <img src="courses_flags/chuvash.png" alt="">
         <div class="container">
-            <div class="main-block" onclick="toggleHiddenBlock()">Полезная информация</div>
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()">Полезная информация</div>
             <div class="hidden-block">
                 <div class="tabs">
                     <div class="tab" onclick="showSection('phonetics')">
                         <!-- SVG for phonetics -->
-                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
                     </div>
                     <div class="tab" onclick="showSection('grammar')">
                         <!-- SVG for grammar -->
@@ -516,13 +516,13 @@
             <div class="col-md-9">
                 <div class="profile-info">
                     <img src="profile-pic/user-avatar.jpg" alt="User Avatar">
-                    <div class="">
-                        <h2 class="userInfoHeaderTranslation" id="userInfoHeaderTranslation">Информация о пользователе</h2>
-                        <p class="userNameTranslation" id="userNameTranslation">Имя: <span class="mainNickname"></span></p>
-                        <p class="userEmailTranslation" id="userEmailTranslation">Email: <span class="mainEmail"></span></p>
-                        <p class="userCountryTranslation" id="userCountryTranslation">Страна: <span class="mainCountry"></span></p>
+                    <div id="userInfoContainer">
+                        <h2 id="userInfoHeaderTranslation">Информация о пользователе</h2>
+                        <p class="userNameTranslation" id="userNameTranslation">Имя: <span class="mainNickname" id="mainNickname"></span></p>
+                        <p class="userEmailTranslation" id="userEmailTranslation">Email: <span class="mainEmail" id="mainEmail"></span></p>
+                        <p class="userCountryTranslation" id="userCountryTranslation">Страна: <span class="mainCountry" id="mainCountry"></span></p>
                         <button id="editProfileBtn" class="btn btn-primary">Редактировать профиль</button>
-                    </div>
+                    </div>  
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -605,28 +605,29 @@
                 </div>
             </div>
         </div>
-        <div class="premium-offer">
+        <!--<div class="premium-offer">
             <p id="premiumOfferTranslation">Получите доступ к дополнительным возможностям с премиум подпиской!</p>
             <a href="#" class="btn btn-primary" id="subscribeBtnTranslation">Подписаться на премиум</a>
-        </div>
+        </div>-->
     </div>
 </div>  
 
 <div id="profileModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Информация о пользователе</h2>
-        <p class="userNameTranslation editable">Имя: <span id="nickname" class="nickname"></span></p>
-        <p class="userEmailTranslation editable">Email: <span id="email" class="email"></span></p>
-        <p class="userCountryTranslation editable">Страна: <span id="country" class="country"></span></p>
+        <h2 id="profileModalHeaderTranslation">Информация о пользователе</h2>
+        <p class="profileModalNameTranslation editable" id="profileModalNameTranslation">Имя: <span id="nickname" class="nickname"></span></p>
+        <p class="profileModalEmailTranslation editable" id="profileModalEmailTranslation">Email: <span id="email" class="email"></span></p>
+        <p class="profileModalCountryTranslation editable" id="profileModalCountryTranslation">Страна: <span id="country" class="country"></span></p>
         <form id="updateForm" action="login/update_profile.php" method="POST" style="display:none;">
             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
             <input type="hidden" name="field" id="field">
             <input type="text" name="value" id="value">
-            <button type="submit">Сохранить</button>
+            <button type="submit" id="profileModalSaveButtonTranslation">Сохранить</button>
         </form>
     </div>
 </div>
+
 
 <script>
 
@@ -644,9 +645,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (xhr.status == 200) {
             console.log('Сессия активна');
             var user = JSON.parse(xhr.responseText);
-            document.getElementById('userNameTranslation').textContent = 'Имя: ' + user.nickname;
-            document.getElementById('userEmailTranslation').textContent = 'Email: ' + user.email;
-            document.getElementById('userCountryTranslation').textContent = 'Страна: ' + user.country;
+            updateUserInfo(user);
+            updateModalInfo(user);
         } else {
             console.error('Сессия не активна');
             window.location.href = 'login/login.html';
@@ -659,10 +659,8 @@ document.addEventListener('DOMContentLoaded', function() {
     xhr.send();
 });
 
-function selectLanguage(language) {
-    console.log('Selected language:', language); // Отладка: вывод выбранного языка
-    localStorage.setItem('language', language); // Сохраняем выбранный язык в localStorage
-}
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
     // Элементы модального окна и кнопки
@@ -691,8 +689,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Проверка сессии при загрузке страницы
     checkSession();
 
-    // Загрузка информации о пользователе при загрузке страницы
-    getUserInfo(updateMainAndModalInfo);
 
     // Обработка двойного клика для редактирования полей
     document.querySelectorAll('.editable').forEach(item => {
@@ -708,6 +704,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function updateUserInfo(user) {
+
+    document.querySelector('.mainNickname').textContent = user.nickname;
+    document.querySelector('.mainEmail').textContent = user.email;
+    document.querySelector('.mainCountry').textContent = user.country;
+
+    localStorage.setItem('nickname', user.nickname);
+    localStorage.setItem('email', user.email);
+    localStorage.setItem('country', user.country);
+
+   /* console.log('Saved to localStorage:');
+    console.log('Nickname: ' + localStorage.getItem('nickname'));
+    console.log('Email: ' + localStorage.getItem('email'));
+    console.log('Country: ' + localStorage.getItem('country'));*/
+}
+
+// Функция для обновления информации о пользователе в модальном окне
+function updateModalInfo(user) {
+   /* console.log('Updating modal info...');
+    console.log('Name: ' + user.nickname);
+    console.log('Email: ' + user.email);
+    console.log('Country: ' + user.country);*/
+
+    document.querySelector('.nickname').textContent = user.nickname;
+    document.querySelector('.email').textContent = user.email;
+    document.querySelector('.country').textContent = user.country;
+}
+
+
+
+
 
 // Функция для получения информации о пользователе
 function getUserInfo(callback) {
@@ -728,24 +756,7 @@ function getUserInfo(callback) {
     xhr.send();
 }
 
-// Функция для обновления информации о пользователе в основной части страницы и модальном окне
-function updateMainAndModalInfo(user) {
-   /* document.querySelector('.mainNickname').textContent = user.nickname;
-    document.querySelector('.mainEmail').textContent = user.email;
-    document.querySelector('.mainCountry').textContent = user.country;
 
-    document.querySelector('.nickname').textContent = user.nickname;
-    document.querySelector('.email').textContent = user.email;
-    document.querySelector('.country').textContent = user.country;
-}
-*/
-}
-// Функция для обновления информации о пользователе в модальном окне
-function updateModalInfo(user) {
-    document.querySelector('.nickname').textContent = user.nickname;
-    document.querySelector('.email').textContent = user.email;
-    document.querySelector('.country').textContent = user.country;
-}
 
 // Функция для проверки сессии
 function checkSession() {
@@ -753,7 +764,7 @@ function checkSession() {
     xhr.open('GET', 'login/profile.php', true);
     xhr.onload = function() {
         if (xhr.status == 200) {
-            console.log('Сессия активна');
+          /*  console.log('Сессия активна');*/
         } else {
             console.error('Сессия не активна');
             window.location.href = 'login/login.html';
@@ -767,13 +778,13 @@ function checkSession() {
 
 
 
-
 </script>
 
 <script src="block_status.regulator.js"></script>
 <script src="toggle.js"></script>
 <!--<script src="send_id.js"></script>-->
 <script src="settings.js"></script>
+<script src="scripts/navigation.js"></script>
 <script src="statsHandler.js"></script>
 </body>
 </html>

@@ -1,51 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
-  <style>
-    .container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    .title {
-      background-color: #434B4D;
-      color: #fff;
-      padding: 20px;
-      margin: 0px;
-      text-align: center;
-    }
-    .card {
-      width: 300px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .title {
+            background-color: #434B4D;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+            width: 100%;
+            text-align: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            width: 500px;
+            border: 2px solid rgb(21, 230, 112);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        .form-control {
+            width: calc(100% - 24px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn-primary {
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(21, 230, 112);
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .card-title {
+            font-size: 25px;
+        }
+        .form-label {
+            font-size: 20px;
+        }
+        .line { 
+            position: fixed;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgb(21, 230, 112);
+            z-index: 0;
+        }
+    </style>
 </head>
 <body>
-<div class="title">
-  <h1>Login</h1>
-</div>
 <div class="container">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Entrer</h5>
-      <form method="post" action="login_handler.php">
-        <div class="mb-3">
-          <label for="email" class="form-label">Adresse e-mail</label>
-          <input type="email" class="form-control" id="email" name="email" required>
+    <div class="line"></div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title" id="loginTitleTranslation">Entrer</h5>
+            <form method="post" action="login_handler.php"> 
+                <div class="mb-3">
+                    <label for="email" class="form-label" id="emailLabelTranslation">Adresse e-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label" id="passwordLabelTranslation">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitBtnTranslation">Entrer</button>
+            </form>
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Mot de passe</label>
-          <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Entrer</button>
-      </form>
     </div>
-  </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+    function applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor, lineColor) {
+        document.body.style.backgroundColor = bodyColor;
+        document.querySelector('.card').style.backgroundColor = cardColor;
+        document.querySelector('.card').style.borderColor = borderColor;
+        document.querySelector('.btn-primary').style.backgroundColor = buttonColor;
+        document.querySelector('.line').style.backgroundColor = lineColor;
+
+        var textElements = document.querySelectorAll('.card-title, .form-label');
+        textElements.forEach(function(element) {
+            element.style.color = textColor;
+        });
+    }
+
+       function setThemeLight() {
+        console.log('Setting theme to Light');
+        var bodyColor = '#ffffff';
+        var cardColor = '#f9f9f9';
+        var textColor = '#000000';
+        var borderColor = '#15E670';
+        var buttonColor = '#15E670';
+
+        applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor);
+        localStorage.setItem('currentTheme', 'light');
+        console.log('Theme set to Light');
+    }
+
+    function setThemeDark() {
+        console.log('Setting theme to Dark');
+        var bodyColor = '#293133';
+        var cardColor = '#434B4D';
+        var textColor = '#ffffff';
+        var borderColor = '#15E670';
+        var buttonColor = '#15E670';
+        
+        applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor);
+        localStorage.setItem('currentTheme', 'dark');
+        console.log('Theme set to Dark');
+    }
+
+    function setThemeDark2() {
+        console.log('Setting theme to Dark2');
+        var bodyColor = '#293133';
+        var cardColor = '#434B4D';
+        var textColor = '#ffffff';
+        var borderColor = '#f3166b';
+        var buttonColor = '#f3166b';
+        var lineColor = '#f3166b';
+
+        applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor, lineColor);
+        localStorage.setItem('currentTheme', 'dark2');
+        console.log('Theme set to Dark2');
+    }
+
+    function loadTheme() {
+        var savedTheme = localStorage.getItem('currentTheme');
+        console.log('Saved theme from localStorage:', savedTheme);
+        
+        if (savedTheme) {
+            if (savedTheme === 'dark') {
+                setThemeDark();
+            } else if (savedTheme === 'dark2') {
+                setThemeDark2();
+            } else {
+                setThemeLight();
+            }
+        } else {
+            setThemeLight(); // Default theme if none is saved
+            console.log('No saved theme, setting to default Light theme');
+        }
+    }
+
+        var texts = {
+        russian: {
+            loginTitle: "Войти",
+            emailLabel: "Адрес электронной почты",
+            passwordLabel: "Пароль",
+            submitBtn: "Войти"
+        },
+        english: {
+            loginTitle: "Login",
+            emailLabel: "Email Address",
+            passwordLabel: "Password",
+            submitBtn: "Login"
+        },
+        french: {
+            loginTitle: "Entrer",
+            emailLabel: "Adresse e-mail",
+            passwordLabel: "Mot de passe",
+            submitBtn: "Entrer"
+        }
+    };
+
+    function changeLanguage(language) {
+        console.log('Changing language to:', language);
+        document.getElementById("loginTitleTranslation").innerText = texts[language].loginTitle;
+        document.getElementById("emailLabelTranslation").innerText = texts[language].emailLabel;
+        document.getElementById("passwordLabelTranslation").innerText = texts[language].passwordLabel;
+        document.getElementById("submitBtnTranslation").innerText = texts[language].submitBtn;
+        console.log('Language changed to:', language);
+        localStorage.setItem('currentLanguage', language);
+    }
+
+    function loadLanguage() {
+        var savedLanguage = localStorage.getItem('currentLanguage');
+        console.log('Saved language from localStorage:', savedLanguage);
+        if (savedLanguage) {
+            changeLanguage(savedLanguage);
+        }
+    }
+
+    
+    window.onload = function() {
+        console.log('Page loaded');
+        loadLanguage();
+        loadTheme();
+    };
+
+</script>
 </body>
 </html>

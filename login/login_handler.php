@@ -3,9 +3,21 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-header('Content-Type: application/json');
+
+ini_set('session.gc_maxlifetime', 86400); // 24 часа
+ini_set('session.cookie_lifetime', 86400); // 24 часа
+
+session_set_cookie_params([
+    'lifetime' => 86400, // 24 часа
+    'path' => '/',
+    'domain' => '', // Оставьте пустым для текущего домена
+    'secure' => false, // Установите в true, если используете HTTPS
+    'httponly' => true, // Сессионные куки доступны только через HTTP(S)
+    'samesite' => 'Strict' // Защита от CSRF
+]);
 
 session_start();
+
 require 'config.php';  // Подключение к базе данных user_auth
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -38,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user && password_verify($password, $user['password'])) {
         // Успешный вход в систему
         $_SESSION['user_id'] = $user['id'];
-        $_SESSION['csrf_token'] = $user['csrf_token'];
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Генерация нового CSRF токена
         echo json_encode(['success' => true]);
         header("Location: ../index.html");  // Перенаправление на index.html
         exit();

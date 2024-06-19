@@ -114,41 +114,51 @@
         td {
             background-color: #293133;
         }
-        .alphabet-container {
-            width: 100%;
-            max-width: 500px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #293133;
-            color: white;
-            margin: 0 auto;
-        }
-        .alphabet-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #293133;
-            border: 2px solid #15E670;
-            border-radius: 10px;
-            width: 80px;
-            height: 80px;
-            color: white;
-            font-size: 20px;
-        }
-        .alphabet-item span {
-            margin-top: 5px;
-            font-size: 14px;
-            color: #15E670;
-        }
-        .table-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+.alphabet-container {
+    width: 100%;
+    max-width: 500px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #293133;
+    color: white;
+    margin: 0 auto;
+}
+.alphabet-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #293133;
+    border: 2px solid #15E670;
+    border-radius: 10px;
+    width: 80px;
+    height: 80px;
+    color: white;
+    font-size: 20px;
+}
+.alphabet-item span {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #15E670;
+}
+.table-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
 #phonetics{
     min-width: 1000px;
+}
+
+.language-content { 
+    display: none; 
+}
+.info-block { 
+    display: none; 
+}
+.info-block.active { 
+    display: block; 
 }

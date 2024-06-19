@@ -20,7 +20,6 @@
         </ul>
     </div>
     <div class="content">
-        <div class="nav-button">Меню</div>
         <div class="tabs">
             <div class="tab" onclick="showSection('phonetics')">
                 <!-- SVG for phonetics -->
@@ -39,6 +38,7 @@
                 <svg viewBox="0 0 24 24"><path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"/></svg>
             </div>
         </div>
+
         <div id="chechen" class="language-content">
             <div id="phonetics" class="info-block">
                 <p>Фонетическая система чеченского языка включает сложную структуру гласных и согласных звуков. Гласные представлены в большом количестве, включающем краткие, долгие и умлаутированные формы. Согласные звуки включают разнообразие, от простых до фарингальных и абруптивных звуков, с распределением по различным местам артикуляции. <br>Чеченский язык содержит от 40 до 60 согласных звуков в зависимости от диалекта и анализа. Это больше, чем в большинстве европейских языков, но меньше, чем в некоторых других кавказских языках.</p>
@@ -175,20 +175,86 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        function showSection(sectionId) {
-            var sections = document.querySelectorAll('.info-block');
-            sections.forEach(function(section) {
-                section.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-        }
 
-        // Handle the menu button click
-        document.querySelector('.nav-button').addEventListener('click', function() {
-            document.querySelector('.nav').classList.toggle('active');
-        });
-    </script>
+        <div id="ingush" class="language-content">
+            <div id="phonetics" class="info-block">ingush1</div>
+            <div id="grammar" class="info-block">ingush2</div>
+            <div id="verbs" class="info-block">ingush3</div>
+            <div id="alphabet" class="info-block">ingush4</div>
+        </div>
+        <div id="adyge" class="language-content">
+            <div id="phonetics" class="info-block">adyge1</div>
+            <div id="grammar" class="info-block">adyge2</div>
+            <div id="verbs" class="info-block">adyge3</div>
+            <div id="alphabet" class="info-block">adyge4</div>
+        </div>
+        <div id="udmurt" class="language-content">
+            <div id="phonetics" class="info-block">udmurt1</div>
+            <div id="grammar" class="info-block">udmurt2</div>
+            <div id="verbs" class="info-block">udmurt3</div>
+            <div id="alphabet" class="info-block">udmurt4</div>
+        </div>
+        <div id="tatar" class="language-content">
+            <div id="phonetics" class="info-block">tatar1</div>
+            <div id="grammar" class="info-block">tatar2</div>
+            <div id="verbs" class="info-block">tatar3</div>
+            <div id="alphabet" class="info-block">
+                <div class="alphabet-container">
+                    <div class="alphabet-item">А а<span>[ɑ/ɑ]</span></div>
+                    <div class="alphabet-item">Ә ә<span>[æ/æ]</span></div>
+                    <div class="alphabet-item">Б б<span>[b]</span></div>
+                    <div class="alphabet-item">В в<span>[v]</span></div>
+                    <div class="alphabet-item">Г г<span>[ɡ]</span></div>
+                    <div class="alphabet-item">Д д<span>[d]</span></div>
+                    <div class="alphabet-item">Е е<span>[e]</span></div>
+                    <div class="alphabet-item">Ё ё<span>[jo/jo]</span></div>
+                    <div class="alphabet-item">Ж ж<span>[ʒ]</span></div>
+                    <div class="alphabet-item">Җ җ<span>[ʤ]</span></div>
+                    <div class="alphabet-item">З з<span>[z]</span></div>
+                    <div class="alphabet-item">И и<span>[i]</span></div>
+                    <div class="alphabet-item">Й й<span>[j]</span></div>
+                    <div class="alphabet-item">К к<span>[k]</span></div>
+                    <div class="alphabet-item">Л л<span>[l]</span></div>
+                    <div class="alphabet-item">М м<span>[m]</span></div>
+                    <div class="alphabet-item">Н н<span>[n]</span></div>
+                    <div class="alphabet-item">Ң ң<span>[ŋ]</span></div>
+                    <div class="alphabet-item">О о<span>[o]</span></div>
+                    <div class="alphabet-item">Ө ө<span>[ɵ]</span></div>
+                    <div class="alphabet-item">П п<span>[p]</span></div>
+                    <div class="alphabet-item">Р р<span>[r]</span></div>
+                    <div class="alphabet-item">С с<span>[s]</span></div>
+                    <div class="alphabet-item">Т т<span>[t]</span></div>
+                    <div class="alphabet-item">У у<span>[u]</span></div>
+                    <div class="alphabet-item">Ү ү<span>[y]</span></div>
+                    <div class="alphabet-item">Ф ф<span>[f]</span></div>
+                    <div class="alphabet-item">Х х<span>[x]</span></div>
+                    <div class="alphabet-item">Һ һ<span>[h]</span></div>
+                    <div class="alphabet-item">Ц ц<span>[ts]</span></div>
+                    <div class="alphabet-item">Ч ч<span>[ʧ]</span></div>
+                    <div class="alphabet-item">Ш ш<span>[ʃ]</span></div>
+                    <div class="alphabet-item">Щ щ<span>[ɕː]</span></div>
+                    <div class="alphabet-item">Ъ ъ</div>
+                    <div class="alphabet-item">Ы ы<span>[ɨ]</span></div>
+                    <div class="alphabet-item">Ь ь</div>
+                    <div class="alphabet-item">Э э<span>[ɛ]</span></div>
+                    <div class="alphabet-item">Ю ю<span>[ju/ju]</span></div>
+                    <div class="alphabet-item">Я я<span>[ja/ja]</span></div>
+                </div>
+            </div>
+        </div>
+        <div id="chuvash" class="language-content">
+            <div id="phonetics" class="info-block">chuvash1</div>
+            <div id="grammar" class="info-block">chuvash2</div>
+            <div id="verbs" class="info-block">chuvash3</div>
+            <div id="alphabet" class="info-block">chuvash4</div>
+        </div>
+    </div>
+
+
+    </div>
+
+
+
+<script src="scripts/library.js"></script>
 </body>
 </html>
