@@ -59,43 +59,93 @@ $(document).ready(function () {
         });
     }
 
-    function displayWindow(index) {
-        if (!data || !data.questions || !data.questions[index]) {
-            console.error('No data or invalid index:', data, index);
-            return;
-        }
+function displayWindow(index) {
+    if (!data || !data.questions || !data.questions[index]) {
+        console.error('No data or invalid index:', data, index);
+        return;
+    }
 
-        var windowContainer = $('#windowsContainer');
-        windowContainer.empty();
-        var currentWindow = $('#' + data.questions[index].id);
+    var windowContainer = $('#windowsContainer');
+    var answerOptionsContainer = $('#answerOptionsContainer');
+    windowContainer.empty();
+    answerOptionsContainer.empty(); // Очищаем контейнер для ответов
 
-        if (currentWindow.length > 0) {
-            currentWindow.text(data.questions[index].text);
-        } else {
-            var windowContent = '<div id="' + data.questions[index].id + '" class="window active">' + data.questions[index].text + '</div>';
-            windowContainer.append(windowContent);
-        }
+    var currentQuestion = data.questions[index];
+    var currentWindow = $('#' + currentQuestion.id);
 
-        if (data.questions[index].image_url) {
-            var imageUrl = data.questions[index].image_url;
-            var imageElement = $('<img>').attr('src', imageUrl).addClass('phrase-image');
-            windowContainer.append(imageElement);
-        }
+    if (currentWindow.length > 0) {
+        currentWindow.text(currentQuestion.text);
+    } else {
+        var windowContent = '<div id="' + currentQuestion.id + '" class="window active">' + currentQuestion.text + '</div>';
+        windowContainer.append(windowContent);
+    }
 
-        $('.window').removeClass('active');
-        $('#' + data.questions[index].id).addClass('active');
+    if (currentQuestion.image_url) {
+        var imageUrl = currentQuestion.image_url;
+        var imageElement = $('<img>').attr('src', imageUrl).addClass('phrase-image');
+        windowContainer.append(imageElement);
+    }
 
-        updateProgressBar(index, data.questions.length);
+    $('.window').removeClass('active');
+    $('#' + currentQuestion.id).addClass('active');
 
-        var currentAnswerColumn = "word_" + currentLanguage.toLowerCase();
-        var currentAnswer = data.answers[index][currentAnswerColumn];
+    updateProgressBar(index, data.questions.length);
 
-        console.log('Current Answer:', currentAnswer);
+    var currentAnswerColumn = "word_" + currentLanguage.toLowerCase();
+    var currentAnswer = data.answers[index][currentAnswerColumn];
+
+    console.log('Current Answer:', currentAnswer);
+
+    $('#hintBlock').hide(); // Скрываем подсказку изначально
+
+    if (currentQuestion.task_type === "multiple_choice" && data.answers[index].possible_answers) {
+        // Получаем список возможных ответов
+        var possibleAnswers = data.answers[index].possible_answers.split(',');
+
+        // Отображаем каждый возможный ответ
+        possibleAnswers.forEach(answer => {
+            var isCorrect = answer.trim() === data.answers[index].word_russian;
+            var answerBlock = $('<div>')
+                .addClass('answer-block')
+                .text(answer.trim())
+                .attr('data-correct', isCorrect); // Добавляем атрибут, чтобы указать правильный ответ
+
+            answerOptionsContainer.append(answerBlock);
+        });
+
+        $('.answer-block').on('click', function () {
+            var isCorrect = $(this).attr('data-correct') === 'true';
+            if (isCorrect) {
+                $(this).addClass('correct');
+                alert('Правильно!');
+                // Переход к следующему вопросу
+                currentIndex++;
+                if (currentIndex >= data.questions.length) {
+                    currentIndex = 0;
+                }
+                displayWindow(currentIndex);
+            } else {
+                $(this).addClass('incorrect');
+                alert('Неправильно, попробуйте снова.');
+            }
+        });
+
+        // Скрываем текстовое поле ввода и кнопку "Далее" для заданий типа multiple_choice
+        $('#textInput').hide();
+        $('#nextBtn').hide();
+        $('#hintBlock').show(); // Показываем подсказку сразу для multiple_choice заданий
+    } else {
+        // Показываем текстовое поле ввода и кнопку "Далее" для обычных заданий
+        $('#textInput').show();
+        $('#nextBtn').show();
 
         $('#windowsContainer').on('click', '.window', function () {
             $('#hintBlock').text(currentAnswer).show();
         });
     }
+}
+
+
 
 
     // Функция для получения ID пользователя и обновления прогресса и уровня
@@ -128,51 +178,53 @@ $(document).ready(function () {
 
     // Функция обработки нажатия на кнопку "Далее"
     $('#nextBtn').on('click', function () {
-        var userInput = $('#textInput').val().trim();
         if (!data || !data.questions || !data.questions[currentIndex]) {
             console.error('No data or invalid index:', data, currentIndex);
             return;
         }
 
-        // Увеличиваем счетчик ответов
-        answersCount++;
-
         var currentQuestion = data.questions[currentIndex];
-        var currentAnswerColumn = "word_" + currentLanguage.toLowerCase();
-        var currentAnswer = data.answers[currentIndex][currentAnswerColumn];
+        $('#hintBlock').text(currentAnswer).hide(); // Скрываем подсказку при нажатии на кнопку "Далее"
 
-        if (checkAnswer(userInput, currentAnswer)) {
-            // Получаем значение price из текущего вопроса и добавляем его к количеству очков
-            var price = parseInt(currentQuestion.price) || 0; // Преобразуем значение к числу
-            console.log('Price:', price);
-            score += price;
-            console.log('Updated score:', score);
+        // Если текущий вопрос не multiple_choice, обрабатываем как обычно
+        if (currentQuestion.task_type !== "multiple_choice") {
+            var userInput = $('#textInput').val().trim();
 
-            // Увеличиваем общее количество правильных ответов
-            correctAnswersTotal++;
+            // Увеличиваем счетчик ответов
+            answersCount++;
+
+            var currentAnswerColumn = "word_" + currentLanguage.toLowerCase();
+            var currentAnswer = data.answers[currentIndex][currentAnswerColumn];
+
+            if (checkAnswer(userInput, currentAnswer)) {
+                var price = parseInt(currentQuestion.price) || 0; // Преобразуем значение к числу
+                console.log('Price:', price);
+                score += price;
+                console.log('Updated score:', score);
+
+                // Увеличиваем общее количество правильных ответов
+                correctAnswersTotal++;
+            }
+
+            if (answersCount === requiredCorrectAnswers) {
+                $('.main-block').addClass('hidden');
+                $('.success-message').addClass('flex');
+                $('.success-message').removeClass('hidden');
+                $('#correctAnswersCount').text(correctAnswersTotal); // Обновляем количество правильных ответов
+                $('#scoreCount').text(score); // Обновляем количество очков
+                getUserId(lessonId, language);
+                return;
+            }
+
+            currentIndex++;
+            if (currentIndex >= data.questions.length) {
+                currentIndex = 0;
+            }
+            displayWindow(currentIndex);
+            $('#textInput').val('');
+
+            $('#hintBlock').hide(); // Скрываем подсказку для следующего вопроса
         }
-
-        // Если достигнуто 15 ответов, показываем сообщение об успешном завершении урока
-        if (answersCount === requiredCorrectAnswers) {
-            $('.main-block').addClass('hidden');
-            $('.success-message').addClass('flex');
-            $('.success-message').removeClass('hidden');
-            $('#correctAnswersCount').text(correctAnswersTotal); // Обновляем количество правильных ответов
-            $('#scoreCount').text(score); // Обновляем количество очков
-            getUserId(lessonId, language);
-            return;
-        }
-
-        currentIndex++;
-        if (currentIndex >= data.questions.length) {
-            currentIndex = 0;
-        }
-        displayWindow(currentIndex);
-        $('#textInput').val('');
-
-        // Скрываем блок с подсказкой
-        $('#hintBlock').hide();
-
     });
 
     // Функция для получения и обновления прогресса пользователя

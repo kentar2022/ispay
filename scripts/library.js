@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var selectedLanguage = localStorage.getItem('language');
-    var selectedSection = localStorage.getItem('selectedSection');
+    const selectedLanguage = localStorage.getItem('selectedLanguage');
+    const selectedSection = localStorage.getItem('selectedSection');
 
     if (selectedLanguage && selectedSection) {
         console.log(`Selected Language: ${selectedLanguage}`);
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Показать выбранный раздел
-        const sectionContent = document.querySelector(`#${selectedLanguage} #${selectedSection}`);
+        const sectionContent = document.querySelector(`#${selectedLanguage}-${selectedSection}`);
         if (sectionContent) {
             sectionContent.classList.add('active');
         } else {
@@ -26,20 +26,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function showSection(section) {
+
+
+function showSection(language, section) {
     const selectedLanguage = localStorage.getItem('selectedLanguage');
     
-    if (selectedLanguage) {
+    if (selectedLanguage === language) {
         localStorage.setItem('selectedSection', section);
-        const sectionContent = document.querySelector(`#${selectedLanguage} .info-block.active`);
-        if (sectionContent) {
-            sectionContent.classList.remove('active');
-        }
-        const newSectionContent = document.querySelector(`#${selectedLanguage} #${section}`);
-        if (newSectionContent) {
-            newSectionContent.classList.add('active');
+        
+        const activeSection = document.querySelector(`#${selectedLanguage}-${section}`);
+        if (activeSection) {
+            // Удалить класс 'active' у всех info-block в выбранном языке
+            const activeLanguage = document.getElementById(selectedLanguage);
+            if (activeLanguage) {
+                const allSections = activeLanguage.querySelectorAll('.info-block');
+                allSections.forEach(block => block.classList.remove('active'));
+            }
+            
+            // Добавить класс 'active' к выбранному section
+            activeSection.classList.add('active');
+        } else {
+            console.error(`Section ${section} not found for language ${language}`);
         }
     } else {
-        console.error('No selected language in localStorage');
+        console.error('Selected language does not match');
     }
 }

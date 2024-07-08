@@ -46,7 +46,6 @@ function togglePages(pageId) {
 
 
 
-
 function showLanguage(languageId) {
     console.log("languageId:" + languageId);
     var languageBlockToShow = document.getElementById('lessonsPage' + languageId);

@@ -20,28 +20,23 @@
         </ul>
     </div>
     <div class="content">
-        <div class="tabs">
-            <div class="tab" onclick="showSection('phonetics')">
-                <!-- SVG for phonetics -->
-                <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
-            </div>
-            <div class="tab" onclick="showSection('grammar')">
-                <!-- SVG for grammar -->
-                <svg viewBox="0 0 24 24"><path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"/></svg>
-            </div>
-            <div class="tab" onclick="showSection('verbs')">
-                <!-- SVG for verbs -->
-                <svg viewBox="0 0 24 24"><path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"/></svg>
-            </div>
-            <div class="tab" onclick="showSection('alphabet')">
-                <!-- SVG for alphabet -->
-                <svg viewBox="0 0 24 24"><path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"/></svg>
-            </div>
-        </div>
-
         <div id="chechen" class="language-content">
-            <div id="phonetics" class="info-block">
-                <p>Фонетическая система чеченского языка включает сложную структуру гласных и согласных звуков. Гласные представлены в большом количестве, включающем краткие, долгие и умлаутированные формы. Согласные звуки включают разнообразие, от простых до фарингальных и абруптивных звуков, с распределением по различным местам артикуляции. <br>Чеченский язык содержит от 40 до 60 согласных звуков в зависимости от диалекта и анализа. Это больше, чем в большинстве европейских языков, но меньше, чем в некоторых других кавказских языках.</p>
+            <div class="tabs">
+                <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'phonetics')">
+                    <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
+                </div>
+                <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'grammar')">
+                    <svg viewBox="0 0 24 24"><path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"/></svg>
+                </div>
+                <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'verbs')">
+                    <svg viewBox="0 0 24 24"><path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"/></svg>
+                </div>
+                <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'alphabet')">
+                    <svg viewBox="0 0 24 24"><path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"/></svg>
+                </div>
+            </div>
+            <div id="chechen-phonetics" class="info-block phonetics">
+                <p>Чеченский язык удивляет богатством звуков. Здесь много гласных: коротких, длинных и с необычным звучанием. Согласные звуки тоже интересны — от простых до экзотических. Например, есть губные звуки, как [pʰ] и [w], альвеолярные, такие как [n] и [z], и увулярные звуки, как [qʰ] и [ʜ].<br>Всего в чеченском языке насчитывается от 40 до 60 согласных, в зависимости от диалекта. Это больше, чем в большинстве европейских языков, но меньше, чем в некоторых других кавказских. </p>
                 <table>
                     <tr>
                         <th></th>
@@ -54,46 +49,84 @@
                     </tr>
                     <tr>
                         <th>Губные</th>
-                        <td>[m], [mˠ]</td>
-                        <td>[pʰ], [b], [p:], [pˠ], [bˠ], [p:ˠ]</td>
+                        <td><span data-phoneme="m">[m]</span>, <span data-phoneme="m2">[mˠ]</span></td>
+                        <td>
+                            <span data-phoneme="p">[pʰ]</span>, <span data-phoneme="b">[b]</span>, 
+                            <span data-phoneme="p2">[p:]</span>, <span data-phoneme="p3">[pˠ]</span>, 
+                            <span data-phoneme="b2">[bˠ]</span>, <span data-phoneme="p4">[p:ˠ]</span>
+                        </td>
                         <td></td>
-                        <td>([f]), ([v])</td>
+                        <td><span data-phoneme="f">([f])</span>, <span data-phoneme="v">([v])</span></td>
                         <td></td>
-                        <td>[w], ([ʋ]), [wˠ]</td>
+                        <td>
+                            <span data-phoneme="w">[w]</span>, <span data-phoneme="v2">([ʋ])</span>, 
+                            <span data-phoneme="w2">[wˠ]</span>
+                        </td>
                     </tr>
                     <tr>
                         <th>Альвеолярные</th>
-                        <td>[n], [nˠ]</td>
-                        <td>[tʰ], [d], [t:], [tˠ], [dˠ], [t:ˠ]</td>
-                        <td>[t͡sʰ], [d͡z], [t͡s'], [t͡s:], [t͡sˠ], [d͡zˠ], [t͡s:ˠ]</td>
-                        <td>[s], [z], [sˠ], [zˠ]</td>
-                        <td>[r], [ɾ], [ɾˠ]</td>
-                        <td>[l], [lˠ]</td>
+                        <td><span data-phoneme="n">[n]</span>, <span data-phoneme="n2">[nˠ]</span></td>
+                        <td>
+                            <span data-phoneme="t">[tʰ]</span>, <span data-phoneme="d">[d]</span>, 
+                            <span data-phoneme="t2">[t:]</span>, <span data-phoneme="t3">[tˠ]</span>, 
+                            <span data-phoneme="d2">[dˠ]</span>, <span data-phoneme="t4">[t:ˠ]</span>
+                        </td>
+                        <td>
+                            <span data-phoneme="ts">[t͡sʰ]</span>, <span data-phoneme="dz">[d͡z]</span>, 
+                            <span data-phoneme="ts2">[t͡s']</span>, <span data-phoneme="ts3">[t͡s:]</span>, 
+                            <span data-phoneme="ts4">[t͡sˠ]</span>, <span data-phoneme="dz2">[d͡zˠ]</span>, 
+                            <span data-phoneme="ts5">[t͡s:ˠ]</span>
+                        </td>
+                        <td>
+                            <span data-phoneme="s">[s]</span>, <span data-phoneme="z">[z]</span>, 
+                            <span data-phoneme="s2">[sˠ]</span>, <span data-phoneme="z2">[zˠ]</span>
+                        </td>
+                        <td>
+                            <span data-phoneme="r">[r]</span>, <span data-phoneme="r2">[ɾ]</span>, 
+                            <span data-phoneme="r3">[ɾˠ]</span>
+                        </td>
+                        <td><span data-phoneme="l">[l]</span>, <span data-phoneme="l2">[lˠ]</span></td>
                     </tr>
                     <tr>
                         <th>Постальвеолярные</th>
                         <td></td>
-                        <td>[t̠ʲ], [d̠ʲ], [t̠ʲ:], [d͡ʒˠ]</td>
-                        <td>[t̠ʲ͡ʃ], [d̠ʲ͡ʒ], [t̠ʲ͡ʃ:], [t̠ʲ͡ʃˠ], [d̠ʲ͡ʒˠ], [t̠ʲ͡ʃ:ˠ]</td>
-                        <td>[ʃ], [ʒ], [ʃˠ], [ʒˠ]</td>
+                        <td>
+                            <span data-phoneme="t5">[t̠ʲ]</span>, <span data-phoneme="d3">[d̠ʲ]</span>, 
+                            <span data-phoneme="t6">[t̠ʲ:]</span>, <span data-phoneme="dz3">[d͡ʒˠ]</span>
+                        </td>
+                        <td>
+                            <span data-phoneme="t7">[t̠ʲ͡ ʃ]</span>, <span data-phoneme="d4">[d̠ʲ͡ʒ]</span>, 
+                            <span data-phoneme="t8">[t̠ʲ͡ʃ:]</span>, <span data-phoneme="t9">[t̠ʲ͡ʃˠ]</span>, 
+                            <span data-phoneme="d5">[d̠ʲ͡ʒˠ]</span>, <span data-phoneme="t10">[t̠ʲ͡ʃ:ˠ]</span>
+                        </td>
+                        <td>
+                            <span data-phoneme="sh">[ʃ]</span>, <span data-phoneme="zh">[ʒ]</span>, 
+                            <span data-phoneme="sh2">[ʃˠ]</span>, <span data-phoneme="zh2">[ʒˠ]</span>
+                        </td>
                         <td></td>
-                        <td>[j]</td>
+                        <td><span data-phoneme="j">[j]</span></td>
                     </tr>
                     <tr>
                         <th>Заднеязычные</th>
                         <td></td>
-                        <td>[kʰ], [g], [k:], [kˠ]</td>
+                        <td>
+                            <span data-phoneme="k">[kʰ]</span>, <span data-phoneme="g">[g]</span>, 
+                            <span data-phoneme="k2">[k:]</span>, <span data-phoneme="k3">[kˠ]</span>
+                        </td>
                         <td></td>
-                        <td>[x], [ɣ]</td>
+                        <td><span data-phoneme="x">[x]</span>, <span data-phoneme="gamma">[ɣ]</span></td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Увулярные</th>
                         <td></td>
-                        <td>[qʰ], [q], [q:ˠ]</td>
+                        <td>
+                            <span data-phoneme="q">[qʰ]</span>, <span data-phoneme="q2">[q]</span>, 
+                            <span data-phoneme="q3">[q:ˠ]</span>
+                        </td>
                         <td></td>
-                        <td>[ʜ]</td>
+                        <td><span data-phoneme="h">[ʜ]</span></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -109,21 +142,337 @@
                     <tr>
                         <th>Глоттальные</th>
                         <td></td>
-                        <td>[ʔ]</td>
+                        <td><span data-phoneme="glottal">[ʔ]</span></td>
                         <td></td>
-                        <td>[h]</td>
+                        <td><span data-phoneme="h2">[h]</span></td>
                         <td></td>
                         <td></td>
                     </tr>
                 </table>
             </div>
-            <div id="grammar" class="info-block">
-                <p>Грамматическая структура чеченского языка характеризуется сложными системами склонения, спряжения и словообразования. Существительные изменяются по числам, падежам и одушевлённости. Глаголы склоняются по лицам, числам, временам и залогам. Порядок слов в предложении относительно свободный, но обычно следует порядку SOV (субъект-объект-глагол).</p>
+
+            <div id="chechen-grammar" class="info-block">
+                <div class="navigation-block" id="grammar-navigation">
+                    <button class="toggle-btn" onclick="toggleNavigation('grammar-navigation')">Скрыть</button>
+                    <h2>Меню</h2>
+                    <ul>
+                        <li><a href="#grammatical-structure">Грамматическая структура</a></li>
+                        <li><a href="#nominal-classes">Именные классы</a></li>
+                        <li><a href="#case-system">Падежная система</a></li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2 id="grammatical-structure">Грамматическая структура чеченского языка</h2>
+                    <p>Чеченский язык имеет сложную грамматическую структуру, которая включает агглютинативно-флективную морфологию. Это означает, что слова изменяются добавлением префиксов и суффиксов.</p>
+
+                    <h3 id="nominal-classes">Именные классы</h3>
+                    <p>В чеченском языке есть 6 различных классов существительных. Каждый класс требует особого вида приставки для изменения прилагательных и глаголов, связанных с ними.</p>
+                    <table>
+                        <caption>Таблица именных классов</caption>
+                        <thead>
+                            <tr>
+                                <th>Класс</th>
+                                <th>Пример</th>
+                                <th>Префикс ед.ч.</th>
+                                <th>Префикс мн.ч.</th>
+                                <th>Пример согласования</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1. в-</td>
+                                <td>кӏант (мальчик)</td>
+                                <td>в-</td>
+                                <td>б- / д-</td>
+                                <td>веза кӏант (тяжёлый мальчик)</td>
+                            </tr>
+                            <tr>
+                                <td>2. й-</td>
+                                <td>зуда (женщина)</td>
+                                <td>й-</td>
+                                <td>б- / д-</td>
+                                <td>йеза зуда (тяжёлая женщина)</td>
+                            </tr>
+                            <tr>
+                                <td>3. й- II</td>
+                                <td>пхьагал (заяц)</td>
+                                <td>й-</td>
+                                <td>й-</td>
+                                <td>йеза пхьагал (тяжёлый заяц)</td>
+                            </tr>
+                            <tr>
+                                <td>4. д-</td>
+                                <td>наж (дуб)</td>
+                                <td>д-</td>
+                                <td>д-</td>
+                                <td>деза наж (тяжёлый дуб)</td>
+                            </tr>
+                            <tr>
+                                <td>5. б-</td>
+                                <td>мангал (коса)</td>
+                                <td>б-</td>
+                                <td>б-, ю-</td>
+                                <td>беза мангал (тяжёлая коса)</td>
+                            </tr>
+                            <tr>
+                                <td>6. б- II</td>
+                                <td>Ӏаж (яблоко)</td>
+                                <td>б-</td>
+                                <td>д-</td>
+                                <td>беза Ӏаж (тяжёлое яблоко)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>       
+
+                <div class="info-section">
+                    <h3 id="case-system">Падежная система</h3>
+                    <p>Чеченский язык имеет 8 основных падежей и дополнительные формы местного падежа для указания местоположения и направления.</p>
+                    
+                    <table>
+                        <caption>Таблица падежей</caption>
+                        <thead>
+                            <tr>
+                                <th>Падеж</th>
+                                <th>Окончания ед.ч.</th>
+                                <th>Окончания мн.ч.</th>
+                                <th>Вопросы</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Именительный</td>
+                                <td>-</td>
+                                <td>-(а)ш, -и(й)</td>
+                                <td>Кто? Что?</td>
+                            </tr>
+                            <tr>
+                                <td>Родительный</td>
+                                <td>-(а)н</td>
+                                <td>-ийн, -ин</td>
+                                <td>Чей? Чего?</td>
+                            </tr>
+                            <tr>
+                                <td>Дательный</td>
+                                <td>-на</td>
+                                <td>-(а)шана</td>
+                                <td>Кому? Чему?</td>
+                            </tr>
+                            <tr>
+                                <td>Эргативный</td>
+                                <td>-о, -(а)с</td>
+                                <td>-(а)ша</td>
+                                <td>Кто? Что?</td>
+                            </tr>
+                            <tr>
+                                <td>Вещественный</td>
+                                <td>-х, -ах</td>
+                                <td>-ях, -их</td>
+                                <td>О ком? О чём?</td>
+                            </tr>
+                            <tr>
+                                <td>Творительный</td>
+                                <td>-ца</td>
+                                <td>-(а)шца</td>
+                                <td>С кем? Чем?</td>
+                            </tr>
+                            <tr>
+                                <td>Местный (пребывание)</td>
+                                <td>-ехь, -гахь</td>
+                                <td>-(а)шкахь</td>
+                                <td>Где?</td>
+                            </tr>
+                            <tr>
+                                <td>Сравнительный</td>
+                                <td>-л</td>
+                                <td>-ял, -ил</td>
+                                <td>Чем кто? Чем что?</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div id="verbs" class="info-block">
-                <p>Глагольная система чеченского языка включает несколько времен, залогов и аспектов. Основные времена включают настоящее, прошедшее и будущее, а также несколько форм прошедшего времени, отражающих степень завершенности действия. Залоги включают активный, пассивный и рефлексивный, а также различные аспекты, которые могут указывать на длительность, повторяемость или завершенность действия.</p>
+
+            <div id="chechen-verbs" class="info-block">
+                <div class="navigation-block" id="verbs-navigation">
+                    <button class="toggle-btn" onclick="toggleNavigation('verbs-navigation')">Скрыть</button>
+                    <h2>Меню</h2>
+                    <ul>
+                        <li><a href="#chechen-verbs">Глаголы в чеченском языке</a></li>
+                        <li><a href="#verb-copula">Глагол-связка (копула)</a></li>
+                        <li><a href="#verb-conjugation">Спряжение глаголов</a></li>
+                        <li><a href="#verb-tenses">Времена</a></li>
+                        <li><a href="#mood">Наклонения</a></li>
+                    </ul>
+                </div>
+
+                <p>Глагольная система чеченского языка включает несколько времен, наклонений и аспектов. Основные времена включают настоящее, прошедшее и будущее, а также несколько форм прошедшего времени, которые показывают, насколько завершено действие. В чеченском языке есть активный, пассивный и рефлексивный залоги, а также различные аспекты, которые могут указывать на длительность, повторяемость или завершенность действия.</p>
+                
+                <h3 id="verb-copula">Глагол-связка (копула)</h3>
+                <p>В чеченском языке глагол-связка <strong>быть</strong> в настоящем времени не опускается и меняется в зависимости от подлежащего.</p>
+                <ul>
+                    <li>Хьо лекха <strong>ву</strong> — ты высокий (о мужчине)</li>
+                    <li>Хьо лекха <strong>ю</strong> — ты высокая (о женщине)</li>
+                    <li>И дитт доккха <strong>ду</strong> — то дерево большое</li>
+                    <li>Хӏорд кӏорга <strong>бу</strong> — море глубокое</li>
+                </ul>
+                <p>В прошедшем времени окончание -у заменяется на -ара, а в будущем перед ним добавляется хира.</p>
+                <ul>
+                    <li>Хьо лекха <strong>вара</strong> — ты был высоким</li>
+                    <li>Хьо лекха <strong>хира ву</strong> — ты будешь высоким</li>
+                </ul>
+
+                <h3 id="verb-conjugation">Спряжение глаголов</h3>
+                <p>Глаголы изменяются по лицам, числам и временам.</p>
+                
+                <table>
+                    <caption>Спряжение глаголов</caption>
+                    <thead>
+                        <tr>
+                            <th>Время</th>
+                            <th>1-е лицо ед. ч.</th>
+                            <th>2-е лицо ед. ч.</th>
+                            <th>3-е лицо ед. ч.</th>
+                            <th>1-е лицо мн. ч.</th>
+                            <th>2-е лицо мн. ч.</th>
+                            <th>3-е лицо мн. ч.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Настоящее</td>
+                            <td>-у</td>
+                            <td>-уш</td>
+                            <td>-у</td>
+                            <td>-ам</td>
+                            <td>-аш</td>
+                            <td>-ан</td>
+                        </tr>
+                        <tr>
+                            <td>Прошедшее</td>
+                            <td>-о</td>
+                            <td>-о</td>
+                            <td>-о</td>
+                            <td>-ем</td>
+                            <td>-еш</td>
+                            <td>-ен</td>
+                        </tr>
+                        <tr>
+                            <td>Будущее</td>
+                            <td>-дий</td>
+                            <td>-дий</td>
+                            <td>-дий</td>
+                            <td>-дашим</td>
+                            <td>-дашим</td>
+                            <td>-дашин</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="verb-tenses">Времена</h3>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Времена</th>
+                            <th>Делать</th>
+                            <th>Рассказывать</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Настоящее простое</td>
+                            <td>До</td>
+                            <td>Дуьйцу</td>
+                        </tr>
+                        <tr>
+                            <td>Настоящее длительное</td>
+                            <td>Деш ву</td>
+                            <td>Дуьйцуш ву</td>
+                        </tr>
+                        <tr>
+                            <td>Совершенное прошедшее</td>
+                            <td>Дина</td>
+                            <td>Дийцина</td>
+                        </tr>
+                        <tr>
+                            <td>Предпрошедшее</td>
+                            <td>Динера</td>
+                            <td>Дийцинера</td>
+                        </tr>
+                        <tr>
+                            <td>Несовершенное прошедшее</td>
+                            <td>Дора</td>
+                            <td>Дуьйцура</td>
+                        </tr>
+                        <tr>
+                            <td>Недавнее увиденное прошедшее</td>
+                            <td>Ди</td>
+                            <td>Дийци</td>
+                        </tr>
+                        <tr>
+                            <td>Давнее увиденное прошедшее</td>
+                            <td>Дира</td>
+                            <td>Дийцира</td>
+                        </tr>
+                        <tr>
+                            <td>Длительное прошедшее</td>
+                            <td>Деш вара</td>
+                            <td>Дуьйцуш вара</td>
+                        </tr>
+                        <tr>
+                            <td>Будущее</td>
+                            <td>Дийр ду</td>
+                            <td>Дуьйцур ду</td>
+                        </tr>
+                        <tr>
+                            <td>Длительное будущее</td>
+                            <td>Деш хир ву</td>
+                            <td>Дуьйцуш хир ву</td>
+                        </tr>
+                        <tr>
+                            <td>Возможное будущее</td>
+                            <td>Дор</td>
+                            <td>Дуьйцур</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="mood">Наклонения</h3>
+                <p>В чеченском языке есть несколько наклонений: повелительное, понудительное и эвиденциальность.</p>
+
+                <h4>Повелительное наклонение</h4>
+                <p>Повелительное наклонение используется для команд или просьб и имеет 5 видов:</p>
+                <ul>
+                    <li><strong>Простое повеление:</strong> Дийца — говори, рассказывай</li>
+                    <li><strong>Вежливое повеление:</strong> Дийцахьа — пожалуйста, говори</li>
+                    <li>Дийцийша — пожалуйста, говорите</li>
+                    <li><strong>Приказное повеление:</strong> Дийцал — говори (сейчас!)</li>
+                    <li><strong>Обязывающее повеление:</strong> Дийцалахь — говори (когда меня не будет)</li>
+                    <li><strong>Категорическое повеление:</strong> Дуьцийла — да поговорит!</li>
+                </ul>
+
+                <h4>Понудительное наклонение</h4>
+                <p>Понудительное наклонение выражает принуждение и заставление что-либо сделать.</p>
+                <ul>
+                    <li>Деша — читать</li>
+                    <li>Дешита — принудить читать</li>
+                </ul>
+
+                <h4>Эвиденциальность</h4>
+                <p>Эвиденциальность выражается с помощью увиденных и неувиденных прошедших времён, которые показывают, видел ли говорящий действие или нет.</p>
+
+                <h5>Примеры:</h5>
+                <ul>
+                    <li><strong>Увиденное недавнее прошедшее:</strong> Ахьмада кехат язди — Ахмед написал письмо (я увидел это).</li>
+                    <li><strong>Увиденное давнее прошедшее:</strong> Ахьмада кехат яздира — Ахмед написал (я увидел это).</li>
+                    <li><strong>Неувиденное прошедшее:</strong> Ахьмада кехат яздина хилла — Ахмед написал письмо (как говорят, я не видел это).</li>
+                    <li><strong>Неувиденное давнее прошедшее:</strong> Ахьмада кехат яздина хиллера — Ахмед написал письмо (давно в прошлом).</li>
+                    <li><strong>Длительное неувиденное прошедшее:</strong> Малика цӏа йогӏучу хенахь Ахьмад кехат яздеш хиллера — когда Малика шла домой, Ахмед писал письмо (я не увидел это).</li>
+                </ul>
             </div>
-            <div id="alphabet" class="info-block active">
+
+            <div id="chechen-alphabet" class="info-block">
                 <div class="alphabet-container">
                     <div class="alphabet-item">А а<span>[ɑ/ɑ]</span></div>
                     <div class="alphabet-item">Аь аь<span>[æ/æ]</span></div>
@@ -176,85 +525,2717 @@
             </div>
         </div>
 
-        <div id="ingush" class="language-content">
-            <div id="phonetics" class="info-block">ingush1</div>
-            <div id="grammar" class="info-block">ingush2</div>
-            <div id="verbs" class="info-block">ingush3</div>
-            <div id="alphabet" class="info-block">ingush4</div>
-        </div>
-        <div id="adyge" class="language-content">
-            <div id="phonetics" class="info-block">adyge1</div>
-            <div id="grammar" class="info-block">adyge2</div>
-            <div id="verbs" class="info-block">adyge3</div>
-            <div id="alphabet" class="info-block">adyge4</div>
-        </div>
-        <div id="udmurt" class="language-content">
-            <div id="phonetics" class="info-block">udmurt1</div>
-            <div id="grammar" class="info-block">udmurt2</div>
-            <div id="verbs" class="info-block">udmurt3</div>
-            <div id="alphabet" class="info-block">udmurt4</div>
-        </div>
         <div id="tatar" class="language-content">
-            <div id="phonetics" class="info-block">tatar1</div>
-            <div id="grammar" class="info-block">tatar2</div>
-            <div id="verbs" class="info-block">tatar3</div>
-            <div id="alphabet" class="info-block">
-                <div class="alphabet-container">
-                    <div class="alphabet-item">А а<span>[ɑ/ɑ]</span></div>
-                    <div class="alphabet-item">Ә ә<span>[æ/æ]</span></div>
-                    <div class="alphabet-item">Б б<span>[b]</span></div>
-                    <div class="alphabet-item">В в<span>[v]</span></div>
-                    <div class="alphabet-item">Г г<span>[ɡ]</span></div>
-                    <div class="alphabet-item">Д д<span>[d]</span></div>
-                    <div class="alphabet-item">Е е<span>[e]</span></div>
-                    <div class="alphabet-item">Ё ё<span>[jo/jo]</span></div>
-                    <div class="alphabet-item">Ж ж<span>[ʒ]</span></div>
-                    <div class="alphabet-item">Җ җ<span>[ʤ]</span></div>
-                    <div class="alphabet-item">З з<span>[z]</span></div>
-                    <div class="alphabet-item">И и<span>[i]</span></div>
-                    <div class="alphabet-item">Й й<span>[j]</span></div>
-                    <div class="alphabet-item">К к<span>[k]</span></div>
-                    <div class="alphabet-item">Л л<span>[l]</span></div>
-                    <div class="alphabet-item">М м<span>[m]</span></div>
-                    <div class="alphabet-item">Н н<span>[n]</span></div>
-                    <div class="alphabet-item">Ң ң<span>[ŋ]</span></div>
-                    <div class="alphabet-item">О о<span>[o]</span></div>
-                    <div class="alphabet-item">Ө ө<span>[ɵ]</span></div>
-                    <div class="alphabet-item">П п<span>[p]</span></div>
-                    <div class="alphabet-item">Р р<span>[r]</span></div>
-                    <div class="alphabet-item">С с<span>[s]</span></div>
-                    <div class="alphabet-item">Т т<span>[t]</span></div>
-                    <div class="alphabet-item">У у<span>[u]</span></div>
-                    <div class="alphabet-item">Ү ү<span>[y]</span></div>
-                    <div class="alphabet-item">Ф ф<span>[f]</span></div>
-                    <div class="alphabet-item">Х х<span>[x]</span></div>
-                    <div class="alphabet-item">Һ һ<span>[h]</span></div>
-                    <div class="alphabet-item">Ц ц<span>[ts]</span></div>
-                    <div class="alphabet-item">Ч ч<span>[ʧ]</span></div>
-                    <div class="alphabet-item">Ш ш<span>[ʃ]</span></div>
-                    <div class="alphabet-item">Щ щ<span>[ɕː]</span></div>
-                    <div class="alphabet-item">Ъ ъ</div>
-                    <div class="alphabet-item">Ы ы<span>[ɨ]</span></div>
-                    <div class="alphabet-item">Ь ь</div>
-                    <div class="alphabet-item">Э э<span>[ɛ]</span></div>
-                    <div class="alphabet-item">Ю ю<span>[ju/ju]</span></div>
-                    <div class="alphabet-item">Я я<span>[ja/ja]</span></div>
-                </div>
+
+        <div class="tabs">
+            <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'phonetics')">
+                <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
+            </div>
+            <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'grammar')">
+                <svg viewBox="0 0 24 24"><path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"/></svg>
+            </div>
+            <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'verbs')">
+                <svg viewBox="0 0 24 24"><path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"/></svg>
+            </div>
+            <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'alphabet')">
+                <svg viewBox="0 0 24 24"><path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"/></svg>
             </div>
         </div>
-        <div id="chuvash" class="language-content">
-            <div id="phonetics" class="info-block">chuvash1</div>
-            <div id="grammar" class="info-block">chuvash2</div>
-            <div id="verbs" class="info-block">chuvash3</div>
-            <div id="alphabet" class="info-block">chuvash4</div>
+
+        <div id="tatar-phonetics" class="info-block phonetics">
+            <p>Татарский язык богат и разнообразен по звукам. В его фонетике присутствуют как твердые, так и мягкие гласные, что влияет на звучание слов и их значения. Например, гласные звуки могут быть короткими или длинными: [a] и [ä], [i] и [ï]. Среди согласных звуков есть как обычные, так и специфические для тюркских языков, такие как [ŋ], [ʃ] и [ʒ]. Сочетание различных гласных и согласных звуков создает уникальный фонетический рисунок татарского языка.</p>
+            
+            <h3>Гласные</h3>
+            <p>Татарский язык имеет 10 гласных звуков, один из которых имеет дифтонгоидный характер. Некоторые гласные звуки могут быть неполного образования.</p>
+            <table>
+                <tr>
+                    <th>Гласные</th>
+                    <th>Примеры</th>
+                </tr>
+                <tr>
+                    <td>[a]</td>
+                    <td>алма (яблоко)</td>
+                </tr>
+                <tr>
+                    <td>[ä]</td>
+                    <td>кәеф (настроение)</td>
+                </tr>
+                <tr>
+                    <td>[i]</td>
+                    <td>ике (два)</td>
+                </tr>
+                <tr>
+                    <td>[ï]</td>
+                    <td>ы (специфический звук, нет эквивалента в русском)</td>
+                </tr>
+                <tr>
+                    <td>[ü]</td>
+                    <td>үзе (сам)</td>
+                </tr>
+                <tr>
+                    <td>[ö]</td>
+                    <td>көл (смеяться)</td>
+                </tr>
+                <tr>
+                    <td>[u]</td>
+                    <td>ул (он)</td>
+                </tr>
+                <tr>
+                    <td>[o]</td>
+                    <td>ор (бежать)</td>
+                </tr>
+                <tr>
+                    <td>[e]</td>
+                    <td>эч (внутри)</td>
+                </tr>
+                <tr>
+                    <td>[ä]</td>
+                    <td>бәет (песня)</td>
+                </tr>
+            </table>
+            <p>В первом слоге вместо общетюркских у, ү, и используются о, ө, е, и наоборот.</p>
+            
+            <h3>Согласные</h3>
+            <p>В татарском языке существует 28 согласных звуков, включая звуки из русского, арабского и персидского языков. Сочетания заднеязычных /ʁ/ и /q/ с переднеязычными гласными встречаются в заимствованиях, например, гомер /ʁøˈmer/ («жизнь»).</p>
+            <table>
+                <tr>
+                    <th>Губные</th>
+                    <th>Альвеолярные</th>
+                    <th>Постальвеолярные</th>
+                    <th>Палатальные</th>
+                    <th>Велярные</th>
+                    <th>Увулярные</th>
+                    <th>Глоттальные</th>
+                </tr>
+                <tr>
+                    <td>м /m/</td>
+                    <td>н /n/</td>
+                    <td></td>
+                    <td></td>
+                    <td>ң /ŋ/</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>п /p/, б /b/</td>
+                    <td>т /t/, д /d/</td>
+                    <td></td>
+                    <td></td>
+                    <td>к /k/, г /ɡ/</td>
+                    <td>к, къ /q/, г, гъ /ʁ~ɢ/</td>
+                    <td>ъ, э, ь /ʔ/</td>
+                </tr>
+                <tr>
+                    <td>ф /f/, в /v/</td>
+                    <td>с /s/, з /z/</td>
+                    <td>ш /ʃ/, ж /ʒ/</td>
+                    <td>ч /tɕ~ɕ/, җ /dʑ~ʑ/</td>
+                    <td></td>
+                    <td>х /χ/</td>
+                    <td>һ /h/</td>
+                </tr>
+                <tr>
+                    <td>в, у /w/</td>
+                    <td>л /l/</td>
+                    <td></td>
+                    <td>й /j/</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>р /r/</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <h3>Фонетические изменения</h3>
+            <p>В татарском языке происходят различные фонетические изменения, которые не отражены в орфографии. Например, после о или ө, неокруглённые гласные [ı] и [e] становятся округлёнными: коры/qorı > [qoro]. Также встречается ассимиляция согласных и упрощение конечных согласных кластеров.</p>
+            
+            <h3>Произношение и ударение</h3>
+            <p>Ударение в татарских словах обычно падает на последний слог. Однако в некоторых случаях оно может смещаться на предыдущий слог, например, в заимствованиях из русского языка.</p>
         </div>
-    </div>
+
+        <div id="tatar-grammar" class="info-block">
+            <div class="navigation-block" id="grammar-navigation">
+                <button class="toggle-btn" onclick="toggleNavigation('grammar-navigation')">Скрыть</button>
+                <h2>Меню</h2>
+                <ul>
+                    <li><a href="#grammatical-structure">Грамматическая структура</a></li>
+                    <li><a href="#cases">Падежи</a></li>
+                    <li><a href="#nouns">Имена существительные</a></li>
+                    <li><a href="#pronouns">Местоимения</a></li>
+                </ul>
+            </div>
+            <div class="info-section">
+                <h2 id="grammatical-structure">Грамматическая структура татарского языка</h2>
+                <p>Татарский язык относится к агглютинативным языкам, что означает, что слова формируются путём присоединения суффиксов к корню. Каждая морфема имеет своё значение, и порядок их следования строго фиксирован. Например, слово "өйләндерәчәкмен" (я буду женить) включает корень "өй" (дом) и несколько суффиксов, обозначающих различные грамматические категории.</p>
+
+                <h3 id="cases">Падежи</h3>
+                <p>В татарском языке есть шесть падежей, которые используются для обозначения различных синтаксических отношений. Падежи помогают определить, кто выполняет действие, над чем или с кем оно совершается, и где происходит действие.</p>
+                <table>
+                    <caption>Таблица падежей</caption>
+                    <thead>
+                        <tr>
+                            <th>Падеж</th>
+                            <th>Окончание</th>
+                            <th>Примеры</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Именительный</td>
+                            <td>-</td>
+                            <td>киш (ночь)</td>
+                        </tr>
+                        <tr>
+                            <td>Родительный</td>
+                            <td>-нең</td>
+                            <td>кишнең (ночи)</td>
+                        </tr>
+                        <tr>
+                            <td>Дательный</td>
+                            <td>-гә / -ка</td>
+                            <td>кишкә (к ночи)</td>
+                        </tr>
+                        <tr>
+                            <td>Винительный</td>
+                            <td>-ны / -не</td>
+                            <td>кишне (ночь)</td>
+                        </tr>
+                        <tr>
+                            <td>Местный</td>
+                            <td>-дә / -да</td>
+                            <td>киштә (в ночи)</td>
+                        </tr>
+                        <tr>
+                            <td>Исходный</td>
+                            <td>-дән / -дан</td>
+                            <td>киштән (из ночи)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="nouns">Имена существительные</h3>
+                <p>Татарские существительные склоняются по падежам и числам. Суффиксы падежей изменяются в зависимости от последних согласных существительного. Например, существительные, оканчивающиеся на п/к, озвончаются до б/г (китабым), когда добавляется притяжательный суффикс. В таблице ниже показаны падежные суффиксы в варианте с задними гласными.</p>
+                <table>
+                    <caption>Склонение существительных</caption>
+                    <thead>
+                        <tr>
+                            <th>Падеж</th>
+                            <th>После звонких согласных</th>
+                            <th>После носовых согласных</th>
+                            <th>После глухих согласных</th>
+                            <th>Особые окончания</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Именительный (баш килеш)</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Винительный (төшем килеше)</td>
+                            <td>-ны (-nı)</td>
+                            <td>-н (-n)</td>
+                            <td>-ны (-nı)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Родительный (иялек килеше)</td>
+                            <td>-ның (-nıñ)</td>
+                            <td>-ның (-nıñ)</td>
+                            <td>-ның (-nıñ)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Дательный (юнәлеш килеше)</td>
+                            <td>-га (-ğa)</td>
+                            <td>-ка (-qa)</td>
+                            <td>-а, -на (-a, -na)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Местный (урын-вакыт килеше)</td>
+                            <td>-да (-da)</td>
+                            <td>-та (-ta)</td>
+                            <td>-нда (-nda)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Исходный (чыгыш килеше)</td>
+                            <td>-дан (-dan)</td>
+                            <td>-нан (-nan)</td>
+                            <td>-тан (-tan)</td>
+                            <td>-ннан (-nnan)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="pronouns">Местоимения</h3>
+                <p>Склонение местоимений в татарском языке отличается определённой нерегулярностью. В таблицах ниже приведены примеры склонения личных и указательных местоимений.</p>
+                
+                <h4>Личные местоимения</h4>
+                <table>
+                    <caption>Склонение личных местоимений</caption>
+                    <thead>
+                        <tr>
+                            <th>Падеж</th>
+                            <th>Я</th>
+                            <th>Ты</th>
+                            <th>Он/она/оно</th>
+                            <th>Мы</th>
+                            <th>Вы</th>
+                            <th>Они</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Именительный</td>
+                            <td>мин (min)</td>
+                            <td>син (sin)</td>
+                            <td>ул (ul)</td>
+                            <td>без (bez)</td>
+                            <td>сез (sez)</td>
+                            <td>алар (alar)</td>
+                        </tr>
+                        <tr>
+                            <td>Винительный</td>
+                            <td>мине (mine)</td>
+                            <td>сине (sine)</td>
+                            <td>аны (anı)</td>
+                            <td>безне (bezne)</td>
+                            <td>сезне (sezne)</td>
+                            <td>аларны (alarnı)</td>
+                        </tr>
+                        <tr>
+                            <td>Родительный</td>
+                            <td>минем (minem)</td>
+                            <td>синең (sineñ)</td>
+                            <td>аның (anıñ)</td>
+                            <td>безнең (bezneñ)</td>
+                            <td>сезнең (sezneñ)</td>
+                            <td>аларның (alarnıñ)</td>
+                        </tr>
+                        <tr>
+                            <td>Дательный</td>
+                            <td>миңа (miña)</td>
+                            <td>сиңа (siña)</td>
+                            <td>аңа (aña)</td>
+                            <td>безгә (bezgä)</td>
+                            <td>сезгә (sezgä)</td>
+                            <td>аларга (alarğa)</td>
+                        </tr>
+                        <tr>
+                            <td>Местный</td>
+                            <td>миндә (mindä)</td>
+                            <td>синдә (sindä)</td>
+                            <td>анда (anda)</td>
+                            <td>бездә (bezdä)</td>
+                            <td>сездә (sezdä)</td>
+                            <td>аларда (alarda)</td>
+                        </tr>
+                        <tr>
+                            <td>Исходный</td>
+                            <td>миннән (minnän)</td>
+                            <td>синнән (sinnän)</td>
+                            <td>аннан (annan)</td>
+                            <td>бездән (bez-dän)</td>
+                            <td>сездән (sez-dän)</td>
+                            <td>алардан (alar-dan)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Указательные местоимения</h4>
+                <table>
+                    <caption>Склонение указательных местоимений</caption>
+                    <thead>
+                        <tr>
+                            <th>Падеж</th>
+                            <th>Этот</th>
+                            <th>Тот</th>
+                            <th>Эти</th>
+                            <th>Те</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Именительный</td>
+                            <td>бу (bu)</td>
+                            <td>шул (şul)</td>
+                            <td>болар (bolar)</td>
+                            <td>шулар (şular)</td>
+                        </tr>
+                        <tr>
+                            <td>Винительный</td>
+                            <td>моны (monı)</td>
+                            <td>шуны (şunı)</td>
+                            <td>боларны (bolarnı)</td>
+                            <td>шуларны (şularnı)</td>
+                        </tr>
+                        <tr>
+                            <td>Родительный</td>
+                            <td>моның (monıñ)</td>
+                            <td>шуның (şunıñ)</td>
+                            <td>боларның (bolarnıñ)</td>
+                            <td>шуларның (şularnıñ)</td>
+                        </tr>
+                        <tr>
+                            <td>Дательный</td>
+                            <td>моңа (moña)</td>
+                            <td>шуңа (şuña)</td>
+                            <td>боларга (bolarğa)</td>
+                            <td>шуларга (şularğa)</td>
+                        </tr>
+                        <tr>
+                            <td>Местный</td>
+                            <td>монда (monda)</td>
+                            <td>шунда (şunda)</td>
+                            <td>боларда (bolarda)</td>
+                            <td>шуларда (şularda)</td>
+                        </tr>
+                        <tr>
+                            <td>Исходный</td>
+                            <td>моннан (monnan)</td>
+                            <td>шуннан (şunnan)</td>
+                            <td>болардан (bolardan)</td>
+                            <td>шулардан (şulardan)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Вопросительные местоимения</h4>
+                <table>
+                    <caption>Склонение вопросительных местоимений</caption>
+                    <thead>
+                        <tr>
+                            <th>Падеж</th>
+                            <th>Кто?</th>
+                            <th>Что?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Именительный</td>
+                            <td>кем (kem)</td>
+                            <td>нәрсә (närsä)</td>
+                        </tr>
+                        <tr>
+                            <td>Винительный</td>
+                            <td>кемне (kemne)</td>
+                            <td>нәрсәне (närsäne)</td>
+                        </tr>
+                        <tr>
+                            <td>Родительный</td>
+                            <td>кемнең (kemneñ)</td>
+                            <td>нәрсәнең (närsäneñ)</td>
+                        </tr>
+                        <tr>
+                            <td>Дательный</td>
+                            <td>кемгә (kemgä)</td>
+                            <td>нәрсәгә (närsägä)</td>
+                        </tr>
+                        <tr>
+                            <td>Местный</td>
+                            <td>кемдә (kemdä)</td>
+                            <td>нәрсәдә (närsädä)</td>
+                        </tr>
+                        <tr>
+                            <td>Исходный</td>
+                            <td>кемнән (kemnän)</td>
+                            <td>нәрсәдән (närsädän)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="tatar-alphabet" class="info-block">
+            <div class="alphabet-container">
+                <div class="alphabet-item">А а<span>[ɑ/ɑ]</span></div>
+                <div class="alphabet-item">Ә ә<span>[æ/æ]</span></div>
+                <div class="alphabet-item">Б б<span>[b]</span></div>
+                <div class="alphabet-item">В в<span>[v]</span></div>
+                <div class="alphabet-item">Г г<span>[ɡ]</span></div>
+                <div class="alphabet-item">Д д<span>[d]</span></div>
+                <div class="alphabet-item">Е е<span>[e]</span></div>
+                <div class="alphabet-item">Ё ё<span>[jo/jo]</span></div>
+                <div class="alphabet-item">Ж ж<span>[ʒ]</span></div>
+                <div class="alphabet-item">Җ җ<span>[ʤ]</span></div>
+                <div class="alphabet-item">З з<span>[z]</span></div>
+                <div class="alphabet-item">И и<span>[i]</span></div>
+                <div class="alphabet-item">Й й<span>[j]</span></div>
+                <div class="alphabet-item">К к<span>[k]</span></div>
+                <div class="alphabet-item">Л л<span>[l]</span></div>
+                <div class="alphabet-item">М м<span>[m]</span></div>
+                <div class="alphabet-item">Н н<span>[n]</span></div>
+                <div class="alphabet-item">Ң ң<span>[ŋ]</span></div>
+                <div class="alphabet-item">О о<span>[o]</span></div>
+                <div class="alphabet-item">Ө ө<span>[ɵ]</span></div>
+                <div class="alphabet-item">П п<span>[p]</span></div>
+                <div class="alphabet-item">Р р<span>[r]</span></div>
+                <div class="alphabet-item">С с<span>[s]</span></div>
+                <div class="alphabet-item">Т т<span>[t]</span></div>
+                <div class="alphabet-item">У у<span>[u]</span></div>
+                <div class="alphabet-item">Ү ү<span>[y]</span></div>
+                <div class="alphabet-item">Ф ф<span>[f]</span></div>
+                <div class="alphabet-item">Х х<span>[x]</span></div>
+                <div class="alphabet-item">Һ һ<span>[h]</span></div>
+                <div class="alphabet-item">Ц ц<span>[ts]</span></div>
+                <div class="alphabet-item">Ч ч<span>[ʧ]</span></div>
+                <div class="alphabet-item">Ш ш<span>[ʃ]</span></div>
+                <div class="alphabet-item">Щ щ<span>[ɕː]</span></div>
+                <div class="alphabet-item">Ъ ъ</div>
+                <div class="alphabet-item">Ы ы<span>[ɨ]</span></div>
+                <div class="alphabet-item">Ь ь</div>
+                <div class="alphabet-item">Э э<span>[ɛ]</span></div>
+                <div class="alphabet-item">Ю ю<span>[ju/ju]</span></div>
+                <div class="alphabet-item">Я я<span>[ja/ja]</span></div>
+            </div>
+        </div>
+
+        <div id="tatar-verbs" class="info-block">
+            <div class="navigation-block" id="verbs-navigation">
+                <button class="toggle-btn" onclick="toggleNavigation('verbs-navigation')">Скрыть</button>
+                <h2>Меню</h2>
+                <ul>
+                    <li><a href="#verb-conjugation">Спряжение глаголов</a></li>
+                    <li><a href="#verb-tenses">Времена</a></li>
+                    <li><a href="#personal-inflections">Личные окончания</a></li>
+                    <li><a href="#predicatives">Предикативы</a></li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h2 id="verb-conjugation">Спряжение глаголов</h2>
+                <p>Глаголы в татарском языке изменяются по лицам, числам и временам. В зависимости от окончаний и суффиксов, глаголы могут выражать настоящее, прошедшее или будущее время.</p>
+                
+                <h3 id="verb-tenses">Времена</h3>
+                <table>
+                    <caption>Таблица времён</caption>
+                    <thead>
+                        <tr>
+                            <th>Время</th>
+                            <th>После звонких согласных</th>
+                            <th>После глухих согласных</th>
+                            <th>После гласных</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Настоящее</td>
+                            <td>-а (-a)</td>
+                            <td>-ый (-ıy)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Прошедшее определённое</td>
+                            <td>-ды (-dı)</td>
+                            <td>-ты (-tı)</td>
+                            <td>-ды (-dı)</td>
+                        </tr>
+                        <tr>
+                            <td>Прошедшее неопределённое</td>
+                            <td>-ган (-ğan)</td>
+                            <td>-кан (-qan)</td>
+                            <td>-ган (-ğan)</td>
+                        </tr>
+                        <tr>
+                            <td>Будущее определённое</td>
+                            <td>-ачак (-açaq)</td>
+                            <td>-ячак (-yaçaq)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Будущее неопределённое</td>
+                            <td>-ар/-ыр (-ar/-ır)</td>
+                            <td>-р (-r)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Условное</td>
+                            <td colspan="3">-са (-sa)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Неличные формы времён</h3>
+                <table>
+                    <caption>Таблица неличных форм времён</caption>
+                    <thead>
+                        <tr>
+                            <th>Форма</th>
+                            <th>После звонких согласных</th>
+                            <th>После глухих согласных</th>
+                            <th>После гласных</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Деепричастие настоящего времени</td>
+                            <td>-учы (-uçı)</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Деепричастие прошедшего времени</td>
+                            <td>-ган (-ğan)</td>
+                            <td>-кан (-qan)</td>
+                            <td>-ган (-ğan)</td>
+                        </tr>
+                        <tr>
+                            <td>Деепричастие будущего времени</td>
+                            <td>-асы (-ası)</td>
+                            <td>-ыйсы (-ıysı)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Определённое будущее деепричастие</td>
+                            <td>-ачак (-açaq)</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Неопределённое будущее деепричастие</td>
+                            <td>-ар/-ыр (-ar/-ır)</td>
+                            <td>-р (-r)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Глагольное деепричастие</td>
+                            <td>-ып (-ıp)</td>
+                            <td>-п (-p)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Деепричастие перед действием</td>
+                            <td>-ганчы (-ğançı)</td>
+                            <td>-канчы (-qançı)</td>
+                            <td>-ганчы (-ğançı)</td>
+                        </tr>
+                        <tr>
+                            <td>Деепричастие после действия</td>
+                            <td>-гач (-ğaç)</td>
+                            <td>-кач (-qaç)</td>
+                            <td>-гач (-ğaç)</td>
+                        </tr>
+                        <tr>
+                            <td>Глагольное существительное</td>
+                            <td colspan="3">-у</td>
+                        </tr>
+                        <tr>
+                            <td>Инфинитив</td>
+                            <td>-мак (-maq)</td>
+                            <td>-арга/-ырга (-arğa/-ırğa)</td>
+                            <td>-рга (-rğa)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Распределение суффиксов настоящего времени сложно: суффиксы зависят от окончания основы глагола (согласный или гласный). В неопределённом будущем времени также есть особенности, связанные с инфинитивом.</p>
+                <p>Времена могут отрицаться с помощью суффикса -ма, но в неопределённом будущем времени и в глагольном деепричастии используются -мас и -мыйча соответственно. Вопросительные формы образуются с помощью суффикса -мы.</p>
 
 
-    </div>
+                <h3 id="personal-inflections">Личные окончания</h3>
+                <table>
+                    <caption>Личные окончания</caption>
+                    <thead>
+                        <tr>
+                            <th>Лицо</th>
+                            <th>1-е лицо ед. ч.</th>
+                            <th>2-е лицо ед. ч.</th>
+                            <th>3-е лицо ед. ч.</th>
+                            <th>1-е лицо мн. ч.</th>
+                            <th>2-е лицо мн. ч.</th>
+                            <th>3-е лицо мн. ч.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Тип I</td>
+                            <td>-мын/-м (-mın/-m)</td>
+                            <td>-сың (-sıñ)</td>
+                            <td>-∅</td>
+                            <td>-быз (-bız)</td>
+                            <td>-сыз (-sız)</td>
+                            <td>-лар/-нар (-lar/-nar)</td>
+                        </tr>
+                        <tr>
+                            <td>Тип II</td>
+                            <td>-м (-m)</td>
+                            <td>-ң (-ñ)</td>
+                            <td>-∅</td>
+                            <td>-к (-q, -k)</td>
+                            <td>-быз (-ğız)</td>
+                            <td>-лар/-нар (-lar/-nar)</td>
+                        </tr>
+                        <tr>
+                            <td>Повелительное</td>
+                            <td>-ыйм (-ıym)</td>
+                            <td>-∅</td>
+                            <td>-сын (-sın)</td>
+                            <td>-ыйк (-ıyq)</td>
+                            <td>-(ы)гыз (-ığız)</td>
+                            <td>-сыннар (-sınnar)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Прошедшее определённое и условное времена используют личные окончания типа II. В настоящем времени используется краткое окончание (-м). После гласных, первая форма повелительного наклонения опускает последний гласный.</p>
+
+                <h3 id="predicatives">Предикативы</h3>
+                <table>
+                    <caption>Таблица предикативов</caption>
+                    <thead>
+                        <tr>
+                            <th>Лицо</th>
+                            <th>После звонких согласных</th>
+                            <th>После глухих согласных</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1-е лицо ед. ч.</td>
+                            <td>-мын (-mın)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>2-е лицо ед. ч.</td>
+                            <td>-сың (-sıñ)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>3-е лицо</td>
+                            <td>-дыр (-dır)</td>
+                            <td>-тыр (-tır)</td>
+                        </tr>
+                        <tr>
+                            <td>1-е лицо мн. ч.</td>
+                            <td>-быз (-bız)</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>2-е лицо мн. ч.</td>
+                            <td>-сыз (-sız)</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Эти предикативные суффиксы сейчас редко используются или вовсе вышли из употребления.</p>
+            </div>
+        </div>
+        </div>
+        
+
+            <div id="ingush" class="language-content">
+                <div id="ingush-phonetics" class="info-block">ingush1</div>
+                <div id="ingush-grammar" class="info-block">ingush2</div>
+                <div id="ingush-verbs" class="info-block">ingush3</div>
+                <div id="ingush-alphabet" class="info-block">ingush4</div>
+            </div>
+            <div id="adyge" class="language-content">
+                <div id="adyghe-phonetics" class="info-block">
+                <table>
+                    <thead>
+                        <tr>
+                            <th rowspan="2"> </th>
+                            <th colspan="8">Consonants</th>
+                        </tr>
+                        <tr>
+                            <th>Labial</th>
+                            <th>Alveolar</th>
+                            <th>Post-alveolar</th>
+                            <th>Alveolo-palatal</th>
+                            <th>Velar</th>
+                            <th>Uvular</th>
+                            <th>Pharyngeal</th>
+                            <th>Glottal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nasal</td>
+                            <td>m <span>[m]</span></td>
+                            <td>n <span>[n]</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Plosive</td>
+                            <td>p <span>[p]</span></td>
+                            <td>t <span>[t]</span></td>
+                            <td></td>
+                            <td></td>
+                            <td>k <span>[k]</span></td>
+                            <td>q <span>[q]</span></td>
+                            <td></td>
+                            <td>ʔ <span>[ʔ]</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>b <span>[b]</span></td>
+                            <td>d <span>[d]</span></td>
+                            <td></td>
+                            <td></td>
+                            <td>ɡ <span>[ɡ]</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Affricate</td>
+                            <td></td>
+                            <td>t͡s <span>[t͡s]</span></td>
+                            <td>t͡ʃ <span>[t͡ʃ]</span></td>
+                            <td></td>
+                            <td></td>
+                            <td>q͡χ <span>[q͡χ]</span></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>d͡z <span>[d͡z]</span></td>
+                            <td>d͡ʒ <span>[d͡ʒ]</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Fricative</td>
+                            <td>f <span>[f]</span></td>
+                            <td>s <span>[s]</span></td>
+                            <td>ɬ <span>[ɬ]</span></td>
+                            <td>ʃ <span>[ʃ]</span></td>
+                            <td>ɕ <span>[ɕ]</span></td>
+                            <td>x <span>[x]</span></td>
+                            <td>χ <span>[χ]</span></td>
+                            <td>ħ <span>[ħ]</span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>v <span>[v]</span></td>
+                            <td>z <span>[z]</span></td>
+                            <td>ɮ <span>[ɮ]</span></td>
+                            <td>ʒ <span>[ʒ]</span></td>
+                            <td>ʑ <span>[ʑ]</span></td>
+                            <td>ɣ <span>[ɣ]</span></td>
+                            <td>ʁ <span>[ʁ]</span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Approximant</td>
+                            <td></td>
+                            <td>l <span>[l]</span></td>
+                            <td></td>
+                            <td>j <span>[j]</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Trill</td>
+                            <td></td>
+                            <td>r <span>[r]</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+                <div id="adyge-grammar" class="info-block">adyge2</div>
+                <div id="adyge-verbs" class="info-block">adyge3</div>
+                <div id="adyge-alphabet" class="info-block">adyge4</div>
+            </div>
+
+            <div id="udmurt" class="language-content">
+                <div class="tabs">
+                    <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'phonetics')">
+                        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"/></svg>
+                    </div>
+                    <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'grammar')">
+                        <svg viewBox="0 0 24 24"><path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"/></svg>
+                    </div>
+                    <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'verbs')">
+                        <svg viewBox="0 0 24 24"><path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"/></svg>
+                    </div>
+                    <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'alphabet')">
+                        <svg viewBox="0 0 24 24"><path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"/></svg>
+                    </div>
+                    <div class="tab" onclick="showSection(localStorage.getItem('selectedLanguage'), 'cases')">
+                        <svg viewBox="0 0 24 24"><path d="M2 7h20v2H2V7zm0 4h14v2H2v-2zm0 4h18v2H2v-2z"/></svg>
+                    </div>
+                </div>
+                <div id="udmurt-phonetics" class="info-block">
+                        <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2"> </th>
+                                <th colspan="5">Consonants</th>
+                            </tr>
+                            <tr>
+                                <th>Labial</th>
+                                <th>Alveolar</th>
+                                <th>Post-alveolar</th>
+                                <th>Palatal</th>
+                                <th>Velar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nasal</td>
+                                <td>m <span>[m]</span></td>
+                                <td>n <span>[n]</span></td>
+                                <td>—</td>
+                                <td>ɲ <span>[ɲ]</span></td>
+                                <td>ŋ <span>[ŋ]</span></td>
+                            </tr>
+                            <tr>
+                                <td>Plosive</td>
+                                <td>p <span>[p]</span></td>
+                                <td>t <span>[t]</span></td>
+                                <td>tʃ <span>[t͡ʃ]</span></td>
+                                <td>tʲ <span>[tʲ]</span></td>
+                                <td>k <span>[k]</span></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>b <span>[b]</span></td>
+                                <td>d <span>[d]</span></td>
+                                <td>dʒ <span>[d͡ʒ]</span></td>
+                                <td>dʲ <span>[dʲ]</span></td>
+                                <td>ɡ <span>[ɡ]</span></td>
+                            </tr>
+                            <tr>
+                                <td>Affricate</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>ʃ <span>[ʃ]</span></td>
+                                <td>ʑ <span>[ʑ]</span></td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>—</td>
+                                <td>t͡s <span>[t͡s]</span></td>
+                                <td>ʒ <span>[ʒ]</span></td>
+                                <td>—</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>Fricative</td>
+                                <td>f <span>[f]</span></td>
+                                <td>s <span>[s]</span></td>
+                                <td>—</td>
+                                <td>ɕ <span>[ɕ]</span></td>
+                                <td>x <span>[x]</span></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>v <span>[v]</span></td>
+                                <td>z <span>[z]</span></td>
+                                <td>ʒ <span>[ʒ]</span></td>
+                                <td>—</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>Approximant</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>j <span>[j]</span></td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>Lateral</td>
+                                <td>—</td>
+                                <td>l <span>[l]</span></td>
+                                <td>—</td>
+                                <td>ʎ <span>[ʎ]</span></td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>Trill</td>
+                                <td>—</td>
+                                <td>r <span>[r]</span></td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div id="udmurt-grammar" class="info-block">
+                    <h2 id="congruence-of-adjectives-and-nouns">Согласование прилагательных и существительных</h2>
+                        <p>В удмуртских нейтральных именных группах нет согласования прилагательных и существительных, т.е. нет склонения прилагательных, как в инессивной именной группе <i>бадӟым гуртын</i> 'в большом селе' (ср. финскую инессивную фразу <i>isossa kylässä</i> 'в большом селе', где <i>iso</i> 'большой' склоняется в соответствии с главным существительным). Однако, как упоминалось ранее, в удмуртских прилагательных в нейтральных атрибутивных (непредикативных) именных группах может быть множественный маркер, когда существительное стоит во множественном числе.</p>
+                        <h2 id="determinative">Определительное значение</h2>
+                        <p>В удмуртском языке есть суффикс, подчеркивающий определенность. Его функция заключается в том, чтобы выделить и отделить характеристики референта от группы других подобных референтов. Суффикс притяжательного местоимения третьего лица единственного числа -ез/-эз и -из, а также множественного числа -ыз действует как определительный суффикс. Определительное прилагательное склоняется, как в третьем лице единственного или множественного числа, а существительное склоняется без какого-либо другого маркера.</p>
+                        <h3 id="determinative-suffix">Определительный суффикс</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Падеж</th>
+                                    <th>Нейтральный</th>
+                                    <th>Английский</th>
+                                    <th>Определительный</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5"><b>Единственное число</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Номинатив</td>
+                                    <td>бадӟым гурт</td>
+                                    <td>(a) big village</td>
+                                    <td>бадӟымез гурт</td>
+                                    <td>(specifically) a big village</td>
+                                </tr>
+                                <tr>
+                                    <td>Инесив</td>
+                                    <td>бадӟым гуртын</td>
+                                    <td>in a big village</td>
+                                    <td>бадӟымаз гуртын</td>
+                                    <td>in the (specifically) big village</td>
+                                </tr>
+                                <tr>
+                                    <td>Иллатив</td>
+                                    <td>бадӟым гуртэ</td>
+                                    <td>to a big village</td>
+                                    <td>бадӟымаз гуртэ</td>
+                                    <td>to the (specifically) big village</td>
+                                </tr>
+                                <tr>
+                                    <td>Элатив</td>
+                                    <td>бадӟым гуртысь</td>
+                                    <td>from a big village</td>
+                                    <td>бадӟымысьтыз гуртысь</td>
+                                    <td>from the (specifically) big village</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5"><b>Множественное число</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Номинатив</td>
+                                    <td>бадӟым(есь) гуртъëс</td>
+                                    <td>(the) big villages</td>
+                                    <td>бадӟымъëсыз гуртъëс</td>
+                                    <td>the (specifically) big villages</td>
+                                </tr>
+                                <tr>
+                                    <td>Инесив</td>
+                                    <td>бадӟым(есь) гуртъëсын</td>
+                                    <td>in the big villages</td>
+                                    <td>бадӟымъëсаз гуртъëсын</td>
+                                    <td>in the (specifically) big villages</td>
+                                </tr>
+                                <tr>
+                                    <td>Иллатив</td>
+                                    <td>бадӟым(есь) гуртъëсы</td>
+                                    <td>to the big villages</td>
+                                    <td>бадӟымъëсаз гуртъëсы</td>
+                                    <td>to the (specifically) big villages</td>
+                                </tr>
+                                <tr>
+                                    <td>Элатив</td>
+                                    <td>бадӟым(есь) гуртъëсысь</td>
+                                    <td>from a big village</td>
+                                    <td>бадӟымъëсысьтыз гуртъëсысь</td>
+                                    <td>from the (specifically) big village</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 id="comparative">Сравнительная степень</h2>
+                        <p>Сравнительная степень используется, когда два референта сравниваются друг с другом, но субъект сравнения не обязательно должен быть выражен.</p>
+                        <p>Суффикс сравнительной степени в удмуртском языке -гес. Субъект сравнения может быть выражен либо в аблативе, либо в структуре с постпозицией <i>сярысь</i>. Если субъект сравнения выражен, суффикс сравнительной степени может быть опущен.</p>
+                        <h3 id="comparative-examples">Примеры сравнительной степени</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Удмуртский</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Скал ыжлэсь бадӟым(гес) ~ Скал ыж сярысь бадӟым(гес)</td>
+                                    <td>A cow is larger than a sheep</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 id="superlative">Превосходная степень</h2>
+                        <p>В удмуртском языке нет суффикса превосходной степени. Превосходная степень выражается с помощью русской частицы <i>самой</i> или неопределённых выражений <i>ваньмызлэсь</i>, <i>котькинлэсь</i> или <i>котьмалэсь</i>.</p>
+                        <h3 id="superlative-examples">Примеры превосходной степени</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Удмуртский</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>самой ~ ваньмызлэсь ~ котькинлэсь ~ котьмалэсь бадӟым</td>
+                                    <td>biggest (of them all)</td>
+                                </tr>
+                                <tr>
+                                    <td>самой ~ ваньмызлэсь ~ котькинлэсь ~ котьмалэсь выль</td>
+                                    <td>newest (of them all)</td>
+                                </tr>
+                                <tr>
+                                    <td>самой ~ ваньмызлэсь ~ котькинлэсь ~ котьмалэсь дун</td>
+                                    <td>cleanest (of them all)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 id="postpositions">Постпозиции</h3>
+                        Удмуртский язык использует постпозиции вместо предлогов. Большая часть основ удмуртских постпозиций имеет локативное значение и может спрягаться в локативных падежах. Например, "выл" означает "верх" или "поверхность" и может изменяться во всех локативных падежах: (инесив) вылын, (элатив) вылысь, (иллатив) вылэ, (пролатив) вылтӥ, (эгрессив) вылысен, (терминатив) вылозь и (аллатив) выллань.
+
+                        Однако у многих постпозиций в парадигму спряжения включено меньше семи локативных падежей. Обычно парадигма состоит из инесивного, элативного и иллативного падежей. Как и имена существительные иностранного уральского происхождения, некоторые постпозиции имеют в своей основе согласный, например, вис(к-), 'между'.
+
+                        Некоторые распространенные постпозиции:
+
+                        <h4>Постпозиции</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Основа</th>
+                                    <th>Пример (инесив)</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>азь</td>
+                                    <td>азьын</td>
+                                    <td>in front of</td>
+                                </tr>
+                                <tr>
+                                    <td>выл</td>
+                                    <td>вылын</td>
+                                    <td>on top of</td>
+                                </tr>
+                                <tr>
+                                    <td>дор</td>
+                                    <td>дорын</td>
+                                    <td>next to, at</td>
+                                </tr>
+                                <tr>
+                                    <td>бӧрсьы</td>
+                                    <td>бӧрсьыын</td>
+                                    <td>in back of/behind</td>
+                                </tr>
+                                <tr>
+                                    <td>пум</td>
+                                    <td>пумын</td>
+                                    <td>at the end of</td>
+                                </tr>
+                                <tr>
+                                    <td>ул</td>
+                                    <td>улын</td>
+                                    <td>under</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        Иллативный падеж может варьироваться между -э/-е и -ы. Иллативная форма постпозиции "пал" (сторона) — "пала" (к стороне).
+
+                        <h4>Постпозиции</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Основа</th>
+                                    <th>Пример (иллатив)</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3"><b>-э/-е</b></td>
+                                </tr>
+                                <tr>
+                                    <td>азь</td>
+                                    <td>азе</td>
+                                    <td>to the front of</td>
+                                </tr>
+                                <tr>
+                                    <td>выл</td>
+                                    <td>вылэ</td>
+                                    <td>to the top of</td>
+                                </tr>
+                                <tr>
+                                    <td>пум</td>
+                                    <td>пуме</td>
+                                    <td>to the end of</td>
+                                </tr>
+                                <tr>
+                                    <td>ул</td>
+                                    <td>улыэ</td>
+                                    <td>under</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>-ы</b></td>
+                                </tr>
+                                <tr>
+                                    <td>дор</td>
+                                    <td>доры</td>
+                                    <td>next to, at</td>
+                                </tr>
+                                <tr>
+                                    <td>шор</td>
+                                    <td>шоры</td>
+                                    <td>to the centre of</td>
+                                </tr>
+                                <tr>
+                                    <td>сьӧр</td>
+                                    <td>сьӧры</td>
+                                    <td>to the behind of</td>
+                                </tr>
+                                <tr>
+                                    <td>вис(к-)</td>
+                                    <td>вискы</td>
+                                    <td>between</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        Существует также небольшая группа не склоняющихся постпозиций, помимо тех, которые склоняются в локативных падежах (ср. финское "kanssa", "с (кем-либо)", которое всегда требует генитивного падежа: "ystävän kanssa" - "с другом"). Несколько примеров:
+
+                        <h4>Постпозиции</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Постпозиция</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>артэ</td>
+                                    <td>next to</td>
+                                </tr>
+                                <tr>
+                                    <td>бере</td>
+                                    <td>after</td>
+                                </tr>
+                                <tr>
+                                    <td>быдэ</td>
+                                    <td>all, each</td>
+                                </tr>
+                                <tr>
+                                    <td>валче</td>
+                                    <td>together; because of, due to</td>
+                                </tr>
+                                <tr>
+                                    <td>дыръя</td>
+                                    <td>during</td>
+                                </tr>
+                                <tr>
+                                    <td>кузя</td>
+                                    <td>along</td>
+                                </tr>
+                                <tr>
+                                    <td>сямен</td>
+                                    <td>in the way of/ -wise</td>
+                                </tr>
+                                <tr>
+                                    <td>сярысь</td>
+                                    <td>about</td>
+                                </tr>
+                                <tr>
+                                    <td>ӵоже</td>
+                                    <td>within</td>
+                                </tr>
+                                <tr>
+                                    <td>ӵош</td>
+                                    <td>together</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        Большинство существительных в удмуртских постпозиционных фразах находятся в именительном падеже, но есть несколько постпозиций, которые требуют, чтобы существительное было в дательном, аблативном или инструментальном падежах:
+
+                        <h4>Примеры</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Пример</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2"><b>Именительный падеж</b></td>
+                                </tr>
+                                <tr>
+                                    <td>ӝок вылын</td>
+                                    <td>on top of a/the table</td>
+                                </tr>
+                                <tr>
+                                    <td>писпу сьӧрысь</td>
+                                    <td>from behind a/the tree</td>
+                                </tr>
+                                <tr>
+                                    <td>анай сярысь</td>
+                                    <td>about (a) mother</td>
+                                </tr>
+                                <tr>
+                                    <td>университет бере</td>
+                                    <td>after university</td>
+                                </tr>
+                                <tr>
+                                    <td>тон понна</td>
+                                    <td>because of you</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><b>Дательный падеж</b></td>
+                                </tr>
+                                <tr>
+                                    <td>арлы быдэ</td>
+                                    <td>every year</td>
+                                </tr>
+                                <tr>
+                                    <td>тӧллы пумит</td>
+                                    <td>against the wind</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><b>Аблативный падеж</b></td>
+                                </tr>
+                                <tr>
+                                    <td>талэсь азьло</td>
+                                    <td>before this</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><b>Инструментальный падеж</b></td>
+                                </tr>
+                                <tr>
+                                    <td>анаен ӵош</td>
+                                    <td>with mother</td>
+                                </tr>
+                                <tr>
+                                    <td>соин валче</td>
+                                    <td>because of it</td>
+                                </tr>
+                                <tr>
+                                    <td>монэн артэ</td>
+                                    <td>next to me</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+                <div id="udmurt-cases" class="info-block">
+                <div class="navigation-block" id="udmurt-grammar-navigation">
+                    <button class="toggle-btn" onclick="toggleNavigation('udmurt-grammar-navigation')">Скрыть</button>
+                    <h2>Меню</h2>
+                    <ul>
+                        <li><a href="#pronouns">Личные местоимения</a></li>
+                        <li><a href="#reflexive-pronouns">Возвратные местоимения</a></li>
+                        <li><a href="#interrogative-pronouns">Вопросительные местоимения</a></li>
+                        <li><a href="#nouns">Склонение существительных</a></li>
+                        <li><a href="#pronouns-declension">Склонение местоимений</a></li>
+                        <li><a href="#possessive-suffixes">Притяжательные суффиксы</a></li>
+                        <li><a href="#plural">Множественное число</a></li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h2 id="pronouns">Личные местоимения</h2>
+                    <p>Удмуртские личные местоимения изменяются по грамматическим падежам, но не могут изменяться по локативным падежам. Они используются только для обозначения людей, за исключением третьего лица единственного числа, которое может обозначать "оно".</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Число</th>
+                                <th>Лицо</th>
+                                <th>Удмуртский</th>
+                                <th>Транскрипция</th>
+                                <th>Русский</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Единственное</td>
+                                <td>1 лицо</td>
+                                <td>мон</td>
+                                <td>/mon/</td>
+                                <td>я</td>
+                            </tr>
+                            <tr>
+                                <td>Единственное</td>
+                                <td>2 лицо</td>
+                                <td>тон</td>
+                                <td>/ton/</td>
+                                <td>ты</td>
+                            </tr>
+                            <tr>
+                                <td>Единственное</td>
+                                <td>3 лицо</td>
+                                <td>со</td>
+                                <td>/so/</td>
+                                <td>он, она, оно</td>
+                            </tr>
+                            <tr>
+                                <td>Множественное</td>
+                                <td>1 лицо</td>
+                                <td>ми</td>
+                                <td>/mi/</td>
+                                <td>мы</td>
+                            </tr>
+                            <tr>
+                                <td>Множественное</td>
+                                <td>2 лицо</td>
+                                <td>тӥ</td>
+                                <td>/ti/</td>
+                                <td>вы</td>
+                            </tr>
+                            <tr>
+                                <td>Множественное</td>
+                                <td>3 лицо</td>
+                                <td>соос</td>
+                                <td>/soːs/</td>
+                                <td>они</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 id="reflexive-pronouns">Возвратные местоимения</h2>
+                    <p>Возвратные местоимения в удмуртском языке также изменяются по грамматическим падежам и аллативу.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Число</th>
+                                <th>Лицо</th>
+                                <th>Удмуртский</th>
+                                <th>Транскрипция</th>
+                                <th>Русский</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Единственное</td>
+                                <td>1 лицо</td>
+                                <td>аслам</td>
+                                <td>/ɑsɫɑm/</td>
+                                <td>я сам</td>
+                            </tr>
+                            <tr>
+                                <td>Единственное</td>
+                                <td>2 лицо</td>
+                                <td>аслад</td>
+                                <td>/ɑsɫɑd/</td>
+                                <td>ты сам</td>
+                            </tr>
+                            <tr>
+                                <td>Единственное</td>
+                                <td>3 лицо</td>
+                                <td>аслаз</td>
+                                <td>/ɑsɫɑz/</td>
+                                <td>он сам, она сама, оно само</td>
+                            </tr>
+                            <tr>
+                                <td>Множественное</td>
+                                <td>1 лицо</td>
+                                <td>асьмеос</td>
+                                <td>/ɑɕmeos/</td>
+                                <td>мы сами</td>
+                            </tr>
+                            <tr>
+                                <td>Множественное</td>
+                                <td>2 лицо</td>
+                                <td>астьэос</td>
+                                <td>/ɑɕteos/</td>
+                                <td>вы сами</td>
+                            </tr>
+                            <tr>
+                                <td>Множественное</td>
+                                <td>3 лицо</td>
+                                <td>ассьэос</td>
+                                <td>/ɑɕseos/</td>
+                                <td>они сами</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 id="interrogative-pronouns">Вопросительные местоимения</h2>
+                    <p>Вопросительные местоимения в удмуртском языке изменяются по всем падежам. В локативных падежах для неодушевленных существительных используется основа кыт-.</p>
+                    <table>
+                        <caption>Вопросительные местоимения (именительный падеж)</caption>
+                        <thead>
+                            <tr>
+                                <th>Число</th>
+                                <th>Удмуртский</th>
+                                <th>Транскрипция</th>
+                                <th>Русский</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Единственное</td>
+                                <td>ма</td>
+                                <td>/mɑ/</td>
+                                <td>что</td>
+                            </tr>
+                            <tr>
+                                <td>Множественное</td>
+                                <td>маос</td>
+                                <td>/mɑos/</td>
+                                <td>что (мн.ч.)</td>
+                            </tr>
+                            <tr>
+                                <td>Единственное</td>
+                                <td>кин</td>
+                                <td>/kin/</td>
+                                <td>кто</td>
+                            </tr>
+                            <tr>
+                                <td>Множественное</td>
+                                <td>кинъëс</td>
+                                <td>/kinjos/</td>
+                                <td>кто (мн.ч.)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table>
+                        <caption>Вопросительные местоимения (все падежи)</caption>
+                        <thead>
+                            <tr>
+                                <th>Падеж</th>
+                                <th>кин- /kin/</th>
+                                <th>Русский</th>
+                                <th>ма-/кыт- /mɑ/kɨt/</th>
+                                <th>Русский</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Именительный</td>
+                                <td>кин</td>
+                                <td>кто</td>
+                                <td>ма</td>
+                                <td>что</td>
+                            </tr>
+                            <tr>
+                                <td>Винительный</td>
+                                <td>кинэ</td>
+                                <td>кого</td>
+                                <td>мае</td>
+                                <td>что (винит.)</td>
+                            </tr>
+                            <tr>
+                                <td>Родительный</td>
+                                <td>кинлэн</td>
+                                <td>чей</td>
+                                <td>малэн</td>
+                                <td>чего</td>
+                            </tr>
+                            <tr>
+                                <td>Аблатив</td>
+                                <td>кинлэсь</td>
+                                <td>от кого</td>
+                                <td>малэсь</td>
+                                <td>от чего</td>
+                            </tr>
+                            <tr>
+                                <td>Дательный</td>
+                                <td>кинлы</td>
+                                <td>кому</td>
+                                <td>малы</td>
+                                <td>чему</td>
+                            </tr>
+                            <tr>
+                                <td>Инструментальный</td>
+                                <td>кинэн</td>
+                                <td>с кем</td>
+                                <td>манэн</td>
+                                <td>с чем</td>
+                            </tr>
+                            <tr>
+                                <td>Абессив</td>
+                                <td>кинтэк</td>
+                                <td>без кого</td>
+                                <td>матэк</td>
+                                <td>без чего</td>
+                            </tr>
+                            <tr>
+                                <td>Наречный</td>
+                                <td>кинъя</td>
+                                <td>про кого</td>
+                                <td>мая</td>
+                                <td>про что</td>
+                            </tr>
+                            <tr>
+                                <td>Локатив</td>
+                                <td>кыт</td>
+                                <td>где</td>
+                                <td>кыд</td>
+                                <td>где</td>
+                            </tr>
+                            <tr>
+                                <td>Илатив</td>
+                                <td>кыттэ</td>
+                                <td>куда</td>
+                                <td>кыдтэ</td>
+                                <td>куда</td>
+                            </tr>
+                            <tr>
+                                <td>Элатив</td>
+                                <td>кыттэлэсь</td>
+                                <td>откуда</td>
+                                <td>кыдтэлэсь</td>
+                                <td>откуда</td>
+                            </tr>
+                            <tr>
+                                <td>Аппроксиматив</td>
+                                <td>кыттэк</td>
+                                <td>до куда</td>
+                                <td>кыдтэк</td>
+                                <td>до чего</td>
+                            </tr>
+                            <tr>
+                                <td>Комитатив</td>
+                                <td>кытты</td>
+                                <td>с кем</td>
+                                <td>кыдты</td>
+                                <td>с чем</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 id="nouns">Склонение существительных</h2>
+                    <p>В удмуртском языке существительные могут изменяться по множеству падежей. Таблица ниже показывает склонение существительного в разных падежах.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Падеж</th>
+                                <th>Единственное число</th>
+                                <th>Множественное число</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Именительный</td>
+                                <td>но (дорога)</td>
+                                <td>ноос (дороги)</td>
+                            </tr>
+                            <tr>
+                                <td>Винительный</td>
+                                <td>ноэ</td>
+                                <td>ноосэ</td>
+                            </tr>
+                            <tr>
+                                <td>Родительный</td>
+                                <td>нолэн</td>
+                                <td>ноослэн</td>
+                            </tr>
+                            <tr>
+                                <td>Аблатив</td>
+                                <td>нолэсь</td>
+                                <td>ноослэсь</td>
+                            </tr>
+                            <tr>
+                                <td>Дательный</td>
+                                <td>нолы</td>
+                                <td>ноослы</td>
+                            </tr>
+                            <tr>
+                                <td>Инструментальный</td>
+                                <td>нонэн</td>
+                                <td>ноосэн</td>
+                            </tr>
+                            <tr>
+                                <td>Абессив</td>
+                                <td>нонтэк</td>
+                                <td>ноостэк</td>
+                            </tr>
+                            <tr>
+                                <td>Наречный</td>
+                                <td>ноъя</td>
+                                <td>ноосъя</td>
+                            </tr>
+                            <tr>
+                                <td>Локатив</td>
+                                <td>нок</td>
+                                <td>ноок</td>
+                            </tr>
+                            <tr>
+                                <td>Илатив</td>
+                                <td>ноттэ</td>
+                                <td>нооттэ</td>
+                            </tr>
+                            <tr>
+                                <td>Элатив</td>
+                                <td>ноттэлэсь</td>
+                                <td>нооттэлэсь</td>
+                            </tr>
+                            <tr>
+                                <td>Аппроксиматив</td>
+                                <td>ноттэк</td>
+                                <td>нооттэк</td>
+                            </tr>
+                            <tr>
+                                <td>Комитатив</td>
+                                <td>нотты</td>
+                                <td>ноотты</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 id="noun-forms">Формы существительных</h2>
+                        <p>В удмуртском языке не различают гендер в существительных или даже в личных местоимениях: 'со' может означать 'он' или 'она', в зависимости от контекста.</p>
+                        <h3>Падежи</h3>
+                        <p>В удмуртском языке есть пятнадцать падежей для существительных: восемь грамматических падежей и семь локативных падежей. Следует отметить, что слово в данном локативном падеже изменяет глагол, а не существительное. Локативные падежи могут использоваться только с неодушевленными объектами, за исключением аллативного падежа. Альтернативные формы, содержащие -ы-, могут использоваться только после множественного суффикса (например, илатив единственного числа гуртэ, но множественного числа гуртъёсы). Менее распространенный вариант винительного падежа -ты используется после множественного суффикса, в дополнение к более распространенному -ыз.</p>
+                        <h3>Падежи в удмуртском языке</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Падеж</th>
+                                    <th>Суффикс</th>
+                                    <th>Английский предлог</th>
+                                    <th>Пример</th>
+                                    <th>Перевод</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Именительный</td>
+                                    <td>–</td>
+                                    <td>–</td>
+                                    <td>гурт</td>
+                                    <td>деревня</td>
+                                </tr>
+                                <tr>
+                                    <td>Родительный</td>
+                                    <td>-лэн</td>
+                                    <td>of / 's</td>
+                                    <td>гуртлэн</td>
+                                    <td>деревни / деревни</td>
+                                </tr>
+                                <tr>
+                                    <td>Винительный</td>
+                                    <td>-эз/-ез/-ты/-ыз</td>
+                                    <td>–</td>
+                                    <td>гуртэз</td>
+                                    <td>деревню / деревни</td>
+                                </tr>
+                                <tr>
+                                    <td>Аблативный</td>
+                                    <td>-лэсь</td>
+                                    <td>from</td>
+                                    <td>гуртлэсь</td>
+                                    <td>из деревни</td>
+                                </tr>
+                                <tr>
+                                    <td>Дательный</td>
+                                    <td>-лы</td>
+                                    <td>to / for</td>
+                                    <td>гуртлы</td>
+                                    <td>к деревне</td>
+                                </tr>
+                                <tr>
+                                    <td>Инструментальный</td>
+                                    <td>-эн/-ен/-ын</td>
+                                    <td>with / by means of</td>
+                                    <td>гуртэн</td>
+                                    <td>с помощью деревни</td>
+                                </tr>
+                                <tr>
+                                    <td>Абессивный</td>
+                                    <td>-тэк</td>
+                                    <td>without</td>
+                                    <td>гурттэк</td>
+                                    <td>без деревни</td>
+                                </tr>
+                                <tr>
+                                    <td>Наречный</td>
+                                    <td>-я</td>
+                                    <td>in a way</td>
+                                    <td>гуртъя</td>
+                                    <td>деревней</td>
+                                </tr>
+                                <tr>
+                                    <td>Инессивный</td>
+                                    <td>-ын</td>
+                                    <td>in</td>
+                                    <td>гуртын</td>
+                                    <td>в деревне</td>
+                                </tr>
+                                <tr>
+                                    <td>Илативный</td>
+                                    <td>-э/-е/-ы</td>
+                                    <td>into</td>
+                                    <td>гуртэ</td>
+                                    <td>в деревню (или дом)</td>
+                                </tr>
+                                <tr>
+                                    <td>Элативный</td>
+                                    <td>-ысь</td>
+                                    <td>from</td>
+                                    <td>гуртысь</td>
+                                    <td>из деревни</td>
+                                </tr>
+                                <tr>
+                                    <td>Эгрессивный</td>
+                                    <td>-ысен</td>
+                                    <td>starting from</td>
+                                    <td>гуртысен</td>
+                                    <td>начиная с деревни</td>
+                                </tr>
+                                <tr>
+                                    <td>Терминативный</td>
+                                    <td>-озь</td>
+                                    <td>end up</td>
+                                    <td>гуртозь</td>
+                                    <td>окончить в деревне</td>
+                                </tr>
+                                <tr>
+                                    <td>Пролативный</td>
+                                    <td>-этӥ/-етӥ/-ытӥ/-тӥ</td>
+                                    <td>along</td>
+                                    <td>гуртэтӥ</td>
+                                    <td>вдоль деревни</td>
+                                </tr>
+                                <tr>
+                                    <td>Аллативный*</td>
+                                    <td>-лань</td>
+                                    <td>towards</td>
+                                    <td>гуртлань</td>
+                                    <td>к деревне</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>* Аллативный падеж часто называют "аппроксимативным" при обсуждении удмуртского и коми языков.</p>
+                        <h3>Исключения в удмуртских существительных</h3>
+                        <p>Окончания падежей удмуртских существительных обычно добавляются напрямую к основе, за исключением некоторых лексем уральского происхождения. Эти лексемы изменяют свою основу при спряжении в локативных падежах, начинающихся с гласной:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Лексема</th>
+                                    <th>Основа</th>
+                                    <th>Инессивный</th>
+                                    <th>Английский</th>
+                                    <th>Исходная основа</th>
+                                    <th>Аналогичный пример</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>син</td>
+                                    <td>син-</td>
+                                    <td>синмын</td>
+                                    <td>(в) глазу</td>
+                                    <td>*-lm- → *-nm-</td>
+                                    <td>Финский: silmä 'глаз'</td>
+                                </tr>
+                                <tr>
+                                    <td>ин</td>
+                                    <td>ин-</td>
+                                    <td>инмын</td>
+                                    <td>(на) небе</td>
+                                    <td></td>
+                                    <td>Финский: ilma 'воздух'</td>
+                                </tr>
+                                <tr>
+                                    <td>кус</td>
+                                    <td>куск-</td>
+                                    <td>кускын</td>
+                                    <td>(в) бедрах</td>
+                                    <td>*-sk-</td>
+                                    <td>Эрзянский: каске 'ягодицы'</td>
+                                </tr>
+                                <tr>
+                                    <td>нюлэс</td>
+                                    <td>нюлэск-</td>
+                                    <td>нюлэскын</td>
+                                    <td>(в) лесу</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>кык</td>
+                                    <td>кыкт-</td>
+                                    <td>кыктэтӥ</td>
+                                    <td>два; второй</td>
+                                    <td>*-kt-</td>
+                                    <td>Северносаамский: guokte 'два'</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3>Склонение личных местоимений в удмуртском языке</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Падеж</th>
+                                    <th>1-е л. ед. ч.</th>
+                                    <th>2-е л. ед. ч.</th>
+                                    <th>3-е л. ед. ч.</th>
+                                    <th>1-е л. мн. ч.</th>
+                                    <th>2-е л. мн. ч.</th>
+                                    <th>3-е л. мн. ч.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Именительный</td>
+                                    <td>мон /mon/</td>
+                                    <td>тон /ton/</td>
+                                    <td>со /so/</td>
+                                    <td>ми /mi/</td>
+                                    <td>тӥ /ti/</td>
+                                    <td>соос /soːs/</td>
+                                </tr>
+                                <tr>
+                                    <td>Родительный</td>
+                                    <td>мынам /mɨnɑm/</td>
+                                    <td>тынад /tɨnɑd/</td>
+                                    <td>солэн /soɫen/</td>
+                                    <td>милям /miʎɑm/</td>
+                                    <td>тӥляд /tiʎɑd/</td>
+                                    <td>соослэн /soːsɫen/</td>
+                                </tr>
+                                <tr>
+                                    <td>Винительный</td>
+                                    <td>монэ /mone/</td>
+                                    <td>тонэ /tone/</td>
+                                    <td>сое /soje/</td>
+                                    <td>милемыз ~ милемды /miʎemɨz/ ~ /miʎemdɨ/</td>
+                                    <td>тӥледыз ~ тӥледды /tiʎedɨz/ ~ /tiʎeddɨ/</td>
+                                    <td>соосыз ~ соосты /soːsɨz/ ~ /soːstɨ/</td>
+                                </tr>
+                                <tr>
+                                    <td>Аблативный</td>
+                                    <td>мынэсьтым /mɨneɕtɨm/</td>
+                                    <td>тынэсьтыд /tɨneɕtɨd/</td>
+                                    <td>солэсь /soɫeɕ/</td>
+                                    <td>милесьтым /miʎeɕtɨm/</td>
+                                    <td>тӥлесьтыд /tiʎeɕtɨd/</td>
+                                    <td>соослэсь /soːsɫeɕ/</td>
+                                </tr>
+                                <tr>
+                                    <td>Дательный</td>
+                                    <td>мыным /mɨnɨm/</td>
+                                    <td>тыныд /tɨnɨd/</td>
+                                    <td>солы /soɫɨ/</td>
+                                    <td>милем(лы) /miʎem(ɫɨ)/</td>
+                                    <td>тӥлед(лы) /tiʎed(ɫɨ)/</td>
+                                    <td>соослы /soːsɫɨ/</td>
+                                </tr>
+                                <tr>
+                                    <td>Инструментальный</td>
+                                    <td>монэн ~ монэным /monen/ ~ /monenɨm/</td>
+                                    <td>тонэн ~ тонэныд /tonen/ ~ /tonenɨd/</td>
+                                    <td>соин /soin/</td>
+                                    <td>милемын ~ миленымы /miʎemɨn/ ~ /miʎenɨmɨ/</td>
+                                    <td>тӥледын ~ тӥленыды /tiʎedɨn/ ~ /tiʎenɨdɨ/</td>
+                                    <td>соосын /soːsɨn/</td>
+                                </tr>
+                                <tr>
+                                    <td>Абессивный</td>
+                                    <td>монтэк /montek/</td>
+                                    <td>тонтэк /tontek/</td>
+                                    <td>сотэк /sotek/</td>
+                                    <td>митэк /mitek/</td>
+                                    <td>тӥтэк /titek/</td>
+                                    <td>соостэк /soːstek/</td>
+                                </tr>
+                                <tr>
+                                    <td>Наречный</td>
+                                    <td>монъя /monjɑ/</td>
+                                    <td>тонъя /tonjɑ/</td>
+                                    <td>соя /sojɑ/</td>
+                                    <td>мия /mijɑ/</td>
+                                    <td>тӥя /tijɑ/</td>
+                                    <td>соосъя /soːsjɑ/</td>
+                                </tr>
+                                <tr>
+                                    <td>Аллативный</td>
+                                    <td>монлань /monɫɑɲ/</td>
+                                    <td>тонлань /tonlɑɲ/</td>
+                                    <td>солань /soɫɑɲ/</td>
+                                    <td>милань /miɫɑɲ/</td>
+                                    <td>тӥлань /tiɫɑɲ/</td>
+                                    <td>соослань /soːsɫɑɲ/</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    <h2 id="pronouns-declension">Склонение местоимений</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Падеж</th>
+                                <th>Я</th>
+                                <th>Ты</th>
+                                <th>Он/она/оно</th>
+                                <th>Мы</th>
+                                <th>Вы</th>
+                                <th>Они</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Именительный</td>
+                                <td>мон</td>
+                                <td>тон</td>
+                                <td>со</td>
+                                <td>ми</td>
+                                <td>тӥ</td>
+                                <td>соос</td>
+                            </tr>
+                            <tr>
+                                <td>Винительный</td>
+                                <td>муны</td>
+                                <td>туны</td>
+                                <td>суны</td>
+                                <td>милэн</td>
+                                <td>тилэн</td>
+                                <td>соослэн</td>
+                            </tr>
+                            <tr>
+                                <td>Родительный</td>
+                                <td>мылэн</td>
+                                <td>тылэн</td>
+                                <td>сылэн</td>
+                                <td>милямся</td>
+                                <td>тӥлямся</td>
+                                <td>соослэсь</td>
+                            </tr>
+                            <tr>
+                                <td>Аблатив</td>
+                                <td>мунэмся</td>
+                                <td>тÿнамся</td>
+                                <td>солэмся</td>
+                                <td>милямся</td>
+                                <td>тӥлямся</td>
+                                <td>соослэсь</td>
+                            </tr>
+                            <tr>
+                                <td>Дательный</td>
+                                <td>мана</td>
+                                <td>тына</td>
+                                <td>солы</td>
+                                <td>милямы</td>
+                                <td>тӥлямы</td>
+                                <td>соослы</td>
+                            </tr>
+                            <tr>
+                                <td>Инструментальный</td>
+                                <td>мэнэн</td>
+                                <td>тонэн</td>
+                                <td>сонэн</td>
+                                <td>милямэн</td>
+                                <td>тӥлямэн</td>
+                                <td>соосэн</td>
+                            </tr>
+                            <tr>
+                                <td>Абессив</td>
+                                <td>мÿнтэк</td>
+                                <td>тÿнтэк</td>
+                                <td>сотэк</td>
+                                <td>милямтэк</td>
+                                <td>тӥлямтэк</td>
+                                <td>соостэк</td>
+                            </tr>
+                            <tr>
+                                <td>Наречный</td>
+                                <td>мунъя</td>
+                                <td>тонъя</td>
+                                <td>соя</td>
+                                <td>милямъя</td>
+                                <td>тӥлямъя</td>
+                                <td>соосъя</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 id="possessive-suffixes">Притяжательные суффиксы</h2>
+                    <p>Притяжательные суффиксы удмуртского языка используются для обозначения принадлежности.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Лицо/Число</th>
+                                <th>Суффикс</th>
+                                <th>Пример</th>
+                                <th>Перевод</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 л. ед.ч.</td>
+                                <td>-е/-э</td>
+                                <td>эше</td>
+                                <td>мой друг</td>
+                            </tr>
+                            <tr>
+                                <td>2 л. ед.ч.</td>
+                                <td>-ед/-эд</td>
+                                <td>эшед</td>
+                                <td>твой друг</td>
+                            </tr>
+                            <tr>
+                                <td>3 л. ед.ч.</td>
+                                <td>-ез/-эз</td>
+                                <td>эшез</td>
+                                <td>его/её друг</td>
+                            </tr>
+                            <tr>
+                                <td>1 л. мн.ч.</td>
+                                <td>-ня</td>
+                                <td>эшеня</td>
+                                <td>наш друг</td>
+                            </tr>
+                            <tr>
+                                <td>2 л. мн.ч.</td>
+                                <td>-зы</td>
+                                <td>эшеӵы</td>
+                                <td>ваш друг</td>
+                            </tr>
+                            <tr>
+                                <td>3 л. мн.ч.</td>
+                                <td>-оз/-оз</td>
+                                <td>эшооз</td>
+                                <td>их друг</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 id="plural">Множественное число</h2>
+                        <p>В удмуртском языке существуют два типа множественного числа для существительных. Одно — это множественное число для существительных (-ос после гласных/-ëс после согласных/-ъёс после определённых согласных, чтобы избежать палатализации), а другое — множественное число для прилагательных (-эсь/-есь).</p>
+                        <h3 id="nominal-plural">Множественное число для существительных</h3>
+                        <p>Существительное всегда употребляется во множественном числе. В атрибутивных фразах прилагательное не обязательно должно быть во множественном числе:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Удмуртский</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>чебер(есь) нылъëс</td>
+                                    <td>(the) beautiful girls</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Маркер множественного числа всегда ставится перед другими окончаниями (т.е. падежами и притяжательными суффиксами) в морфологической структуре множественных существительных.</p>
+                        <h3 id="morphological-order">Морфологический порядок</h3>
+                        <p>Если субъект является множественным, то прилагательное всегда находится во множественном числе, когда оно функционирует как предикатив предложения:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Атрибутивное множественное число</th>
+                                    <th>Удмуртский</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>нылъëс чебересь</td>
+                                    <td>the girls are beautiful</td>
+                                </tr>
+                                <tr>
+                                    <td>толъёс кузесь</td>
+                                    <td>the winters are cold</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 id="following-numerals">После числительных</h3>
+                        <p>Существительные обычно употребляются в единственном числе после количественных числительных. Однако, если субъект является живым существом, то существительное может быть во множественном числе. В этом случае глагол-сказуемое должен согласовываться с подлежащим.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Удмуртский</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Та гуртын витьтон куать корка</td>
+                                    <td>There are fifty-six houses in this village</td>
+                                </tr>
+                                <tr>
+                                    <td>Аудиториын дас студент пуке ~ Аудиториын дас студентъëс пуко</td>
+                                    <td>There are ten students sitting in the lecture hall</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 id="possessive-suffixes">Притяжательные суффиксы</h2>
+                        <h3 id="nominal-possessive-suffixes">Суффиксы притяжательных местоимений</h3>
+                        <p>Притяжательные суффиксы в удмуртском языке добавляются в конец существительных перед или после падежных окончаний. Притяжательные суффиксы варьируются в зависимости от падежа и гласных окончаний. Согласные в суффиксах второго и третьего лица множественного числа зависят от того, произносится ли в конце слова согласный или нет.</p>
+                        <h3 id="nominative-possessive-suffixes">Номинативные притяжательные суффиксы</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Окончание суффикса</th>
+                                    <th>Удмуртский</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>-е/-э</td>
+                                    <td>эше</td>
+                                    <td>my friend</td>
+                                </tr>
+                                <tr>
+                                    <td>-ед/-эд</td>
+                                    <td>эшед</td>
+                                    <td>your friend</td>
+                                </tr>
+                                <tr>
+                                    <td>-ез/-эз</td>
+                                    <td>эшез</td>
+                                    <td>his/her friend</td>
+                                </tr>
+                                <tr>
+                                    <td>-мы</td>
+                                    <td>эшмы</td>
+                                    <td>our friend</td>
+                                </tr>
+                                <tr>
+                                    <td>-ды/-ты</td>
+                                    <td>эшты</td>
+                                    <td>your (pl) friend</td>
+                                </tr>
+                                <tr>
+                                    <td>-зы/-сы</td>
+                                    <td>эшсы</td>
+                                    <td>their friend</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Некоторые лексемы финно-угорского происхождения (особенно те, которые оканчиваются на гласную или обозначают неотчуждаемый объект) содержат гласный -ы- в первом, втором и третьем лице единственного числа номинативных притяжательных суффиксов:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Окончание суффикса</th>
+                                    <th>Удмуртский</th>
+                                    <th>Финский эквивалент</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>-ы</td>
+                                    <td>киы</td>
+                                    <td>käteni</td>
+                                    <td>my hand</td>
+                                </tr>
+                                <tr>
+                                    <td>-ыд</td>
+                                    <td>киыд</td>
+                                    <td>kätesi</td>
+                                    <td>your hand</td>
+                                </tr>
+                                <tr>
+                                    <td>-ыз</td>
+                                    <td>киыз</td>
+                                    <td>kätensä</td>
+                                    <td>his/her hand</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 id="accusative-possessive-suffixes">Аккузативные притяжательные суффиксы</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Окончание суффикса</th>
+                                    <th>Удмуртский</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>-ме</td>
+                                    <td>эшме</td>
+                                    <td>my friend</td>
+                                </tr>
+                                <tr>
+                                    <td>-тэ/-дэ</td>
+                                    <td>эштэ</td>
+                                    <td>your friend</td>
+                                </tr>
+                                <tr>
+                                    <td>-сэ/-зэ</td>
+                                    <td>эшсэ</td>
+                                    <td>his/her friend</td>
+                                </tr>
+                                <tr>
+                                    <td>-мес</td>
+                                    <td>эшмес</td>
+                                    <td>our friend</td>
+                                </tr>
+                                <tr>
+                                    <td>-дэс/-тэс</td>
+                                    <td>эштэс</td>
+                                    <td>your (pl) friend</td>
+                                </tr>
+                                <tr>
+                                    <td>-зэс/-сэс</td>
+                                    <td>эшсэс</td>
+                                    <td>their friend</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 id="possessive-suffixes-with-case-endings">Притяжательные суффиксы с падежными окончаниями, единственное число</h3>
+                        <p>Морфологическое размещение притяжательных суффиксов с другими окончаниями зависит от падежа. Притяжательные суффиксы в номинативном падеже такие же, как в номинативе, после чего агглютинация в родительном, аблативном, дательном, абессивном, наречном и алативном падежах.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Падеж</th>
+                                    <th>Удмуртский (1-е лицо единственного числа)</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>номинатив</td>
+                                    <td>гуртэ</td>
+                                    <td>my village</td>
+                                </tr>
+                                <tr>
+                                    <td>генитив</td>
+                                    <td>гуртэлэн</td>
+                                    <td>my village's / of my village</td>
+                                </tr>
+                                <tr>
+                                    <td>аблатив</td>
+                                    <td>гуртэлэсь</td>
+                                    <td>from my village</td>
+                                </tr>
+                                <tr>
+                                    <td>дательный</td>
+                                    <td>гуртэлы</td>
+                                    <td>for my village</td>
+                                </tr>
+                                <tr>
+                                    <td>абессив</td>
+                                    <td>гуртэтэк</td>
+                                    <td>without my village</td>
+                                </tr>
+                                <tr>
+                                    <td>наречный</td>
+                                    <td>гуртэя</td>
+                                    <td>across my village</td>
+                                </tr>
+                                <tr>
+                                    <td>аллатив</td>
+                                    <td>гуртэлань</td>
+                                    <td>towards my village</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 id="possessive-suffixes-with-case-endings-plural">Притяжательные суффиксы с падежными окончаниями, множественное число</h3>
+                        <p>Как и в единственном числе, притяжательные суффиксы предшествуют генитиву, аблативу, дательному, абессивному, наречному и алативному падежам во множественном числе. Однако гласная в суффиксах единственного числа сокращается до ы:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Падеж</th>
+                                    <th>Удмуртский (1-е лицо единственного числа)</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>номинатив</td>
+                                    <td>гуртъëсы</td>
+                                    <td>my villages</td>
+                                </tr>
+                                <tr>
+                                    <td>генитив</td>
+                                    <td>гуртъëсылэн</td>
+                                    <td>my villages'/of my villages</td>
+                                </tr>
+                                <tr>
+                                    <td>аблатив</td>
+                                    <td>гуртъëсылэсь</td>
+                                    <td>from my villages</td>
+                                </tr>
+                                <tr>
+                                    <td>дательный</td>
+                                    <td>гуртъëсылы</td>
+                                    <td>for my villages</td>
+                                </tr>
+                                <tr>
+                                    <td>абессив</td>
+                                    <td>гуртъëсытэк</td>
+                                    <td>without my villages</td>
+                                </tr>
+                                <tr>
+                                    <td>наречный</td>
+                                    <td>гуртъëсыя</td>
+                                    <td>across my villages</td>
+                                </tr>
+                                <tr>
+                                    <td>аллатив</td>
+                                    <td>гуртъëсылань</td>
+                                    <td>towards my villages</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Как и в единственном числе, притяжательные суффиксы следуют за инструментальным, инессивным, иллативным, элативным, эгрессивным, терминативным и пролативным падежами. Формы суффиксов соответствуют тому же структурному порядку, что и в единственном числе. Те же исключения присутствуют во множественном числе, как и в единственном, с дополнительным исключением для инструментального э/е, которое сокращается до ы, и пролативного э/е, которое не используется.</p>
+                        <h2 id="lexical-flexibility">Лексическая гибкость</h2>
+                        <p>Некоторые слова могут использоваться как существительные, так и прилагательные и наречия без изменения формы. Например, чылкыт /t͡ʃɨɫkɨt/ означает "чистота", "чистый" и "ясно".</p>
+                        <p>Притяжательный суффикс третьего лица единственного числа также выступает в роли определённого артикля: удмурт кыл(ыз) чебер /udmurt kɨɫ(ɨz) t͡ʃeber/ ("удмуртский язык приятен" — буквально "удмуртский язык приятный").</p>
+                </div>
+            </div>
+                <div id="udmurt-verbs" class="info-block">
+                    <h3 id="udmurt-verbs" class="info-block">Глаголы</h3>
+                        Удмуртские глаголы делятся на две группы или два спряжения, оба имеют инфинитивный маркер -ны. Глаголы I спряжения имеют структуру с "ы", как в "мыныны" (идти). Глаголы II спряжения имеют -а- в инфинитиве, как в "ужаны" (работать). Глаголы I спряжения также могут иметь две основы: полную, как в "мыны-", и краткую, как в "мын-".
+
+                        Существует три наклонения глаголов в удмуртском языке: изъявительное, условное и повелительное. Также в некоторых диалектах используется желательное наклонение. Изъявительное наклонение имеет четыре времени: настоящее, будущее и два прошедших времени. Кроме того, существуют четыре структуры прошедшего времени, которые включают вспомогательные глаголы. Глаголы отрицаются с помощью вспомогательного отрицательного глагола, который спрягается с личными окончаниями. Отдельные личные местоимения в глагольных фразах не требуются.
+
+                        Основные личные маркеры глаголов в удмуртском языке (с некоторыми исключениями):
+
+                        <h4>Личные окончания глаголов</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Лицо</th>
+                                    <th>Окончание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Единственное число</td>
+                                </tr>
+                                <tr>
+                                    <td>1-е</td>
+                                    <td>-Ø</td>
+                                </tr>
+                                <tr>
+                                    <td>2-е</td>
+                                    <td>-д</td>
+                                </tr>
+                                <tr>
+                                    <td>3-е</td>
+                                    <td>-з</td>
+                                </tr>
+                                <tr>
+                                    <td>Множественное число</td>
+                                </tr>
+                                <tr>
+                                    <td>1-е</td>
+                                    <td>-мы</td>
+                                </tr>
+                                <tr>
+                                    <td>2-е</td>
+                                    <td>-ды</td>
+                                </tr>
+                                <tr>
+                                    <td>3-е</td>
+                                    <td>-зы</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h4>Настоящее время</h4>
+                        Настоящее время в удмуртском языке, за исключением третьего лица, маркируется с помощью -(ӥ)сько-/-(и)сько-. Третье лицо единственного числа маркируется с помощью -э/-е (I спряжение) или не маркируется (II спряжение), а третье лицо множественного числа маркируется с помощью -о (I спряжение) или -ло (II спряжение).
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Лицо</th>
+                                    <th>тодыны (I спряжение)</th>
+                                    <th>Английский</th>
+                                    <th>кырӟаны (II спряжение)</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Единственное число</td>
+                                </tr>
+                                <tr>
+                                    <td>1-е</td>
+                                    <td>тодӥсько</td>
+                                    <td>I know</td>
+                                    <td>кырӟасько</td>
+                                    <td>I sing/I am singing</td>
+                                </tr>
+                                <tr>
+                                    <td>2-е</td>
+                                    <td>тодӥськод</td>
+                                    <td>you know</td>
+                                    <td>кырӟаськод</td>
+                                    <td>you sing/you are singing</td>
+                                </tr>
+                                <tr>
+                                    <td>3-е</td>
+                                    <td>тодэ</td>
+                                    <td>he/she knows</td>
+                                    <td>кырӟа</td>
+                                    <td>he/she sings / he/she is singing</td>
+                                </tr>
+                                <tr>
+                                    <td>Множественное число</td>
+                                </tr>
+                                <tr>
+                                    <td>1-е</td>
+                                    <td>тодӥськомы</td>
+                                    <td>we know</td>
+                                    <td>кырӟаськомы</td>
+                                    <td>we sing/we are singing</td>
+                                </tr>
+                                <tr>
+                                    <td>2-е</td>
+                                    <td>тодӥськоды</td>
+                                    <td>you know</td>
+                                    <td>кырӟаськоды</td>
+                                    <td>you sing/you are singing</td>
+                                </tr>
+                                <tr>
+                                    <td>3-е</td>
+                                    <td>тодо</td>
+                                    <td>they know</td>
+                                    <td>кырӟало</td>
+                                    <td>they sing/they are singing</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        Отрицательное изъявительное настоящее время образуется с помощью вспомогательного отрицательного глагола "у-" и маркера -(ӥ)ськы/-(и)ськы в первом и втором лице единственного числа или -(ӥ)ське/-(и)ське в первом и втором лице множественного числа основного глагола. Третье лицо единственного числа основного глагола либо маркируется полной основой (I спряжение), либо не маркируется (II спряжение). Третье лицо множественного числа маркируется с помощью -о (I спряжение) или -ло (II спряжение).
+
+                        Отрицательный глагол спрягается с окончанием -г в первом и третьем лице единственного числа и третьем лице множественного числа. Второе лицо единственного и множественного числа спрягается с окончанием -д, а первое лицо множественного числа с окончанием -м.
+
+                        <h4>Настоящее время (отрицательное)</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Лицо</th>
+                                    <th>тодыны (I спряжение)</th>
+                                    <th>Английский</th>
+                                    <th>кырӟаны (II спряжение)</th>
+                                    <th>Английский</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Единственное число</td>
+                                </tr>
+                                <tr>
+                                    <td>1-е</td>
+                                    <td>уг тодӥськы</td>
+                                    <td>I do not know</td>
+                                    <td>уг кырӟаськы</td>
+                                    <td>I do not sing/I am not singing</td>
+                                </tr>
+                                <tr>
+                                    <td>2-е</td>
+                                    <td>уд тодӥськы</td>
+                                    <td>you do not know</td>
+                                    <td>уд кырӟаськы</td>
+                                    <td>you do not sing/you are not singing</td>
+                                </tr>
+                                <tr>
+                                    <td>3-е</td>
+                                    <td>уг тоды</td>
+                                    <td>he/she does not know</td>
+                                    <td>уг кырӟа</td>
+                                    <td>he/she does not sing / he/she is not singing</td>
+                                </tr>
+                                <tr>
+                                    <td>Множественное число</td>
+                                </tr>
+                                <tr>
+                                    <td>1-е</td>
+                                    <td>ум тодӥське</td>
+                                    <td>we do not know</td>
+                                    <td>ум кырӟаське</td>
+                                    <td>we do not sing/we are not singing</td>
+                                </tr>
+                                <tr>
+                                    <td>2-е</td>
+                                    <td>уд тодӥське</td>
+                                    <td>you do not know</td>
+                                    <td>уд кырӟаське</td>
+                                    <td>you do not sing/you are not singing</td>
+                                </tr>
+                                <tr>
+                                    <td>3-е</td>
+                                    <td>уг тодо</td>
+                                    <td>they do not know</td>
+                                    <td>уг кырӟало</td>
+                                    <td>they do not sing/they are not singing</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+                <div id="udmurt-alphabet" class="info-block">
+                    <div class="alphabet-container">
+                        <div class="alphabet-item">А а<span>[ɑ/ɑ]</span></div>
+                        <div class="alphabet-item">Б б<span>[b]</span></div>
+                        <div class="alphabet-item">В в<span>[v]</span></div>
+                        <div class="alphabet-item">Г г<span>[ɡ]</span></div>
+                        <div class="alphabet-item">Д д<span>[d]</span></div>
+                        <div class="alphabet-item">Е е<span>[e]</span></div>
+                        <div class="alphabet-item">Ё ё<span>[jo/jo]</span></div>
+                        <div class="alphabet-item">Ж ж<span>[ʒ]</span></div>
+                        <div class="alphabet-item">Ӝ ӝ<span>[ʤ]</span></div>
+                        <div class="alphabet-item">З з<span>[z]</span></div>
+                        <div class="alphabet-item">Ӟ ӟ<span>[ʤ]</span></div>
+                        <div class="alphabet-item">И и<span>[i]</span></div>
+                        <div class="alphabet-item">Ӥ ӥ<span>[ɨ]</span></div>
+                        <div class="alphabet-item">Й й<span>[j]</span></div>
+                        <div class="alphabet-item">К к<span>[k]</span></div>
+                        <div class="alphabet-item">Л л<span>[l]</span></div>
+                        <div class="alphabet-item">М м<span>[m]</span></div>
+                        <div class="alphabet-item">Н н<span>[n]</span></div>
+                        <div class="alphabet-item">О о<span>[o]</span></div>
+                        <div class="alphabet-item">Ӧ ӧ<span>[ɵ]</span></div>
+                        <div class="alphabet-item">П п<span>[p]</span></div>
+                        <div class="alphabet-item">Р р<span>[r]</span></div>
+                        <div class="alphabet-item">С с<span>[s]</span></div>
+                        <div class="alphabet-item">Т т<span>[t]</span></div>
+                        <div class="alphabet-item">У у<span>[u]</span></div>
+                        <div class="alphabet-item">Ү ү<span>[y]</span></div>
+                        <div class="alphabet-item">Ф ф<span>[f]</span></div>
+                        <div class="alphabet-item">Х х<span>[x]</span></div>
+                        <div class="alphabet-item">Һ һ<span>[h]</span></div>
+                        <div class="alphabet-item">Ц ц<span>[ts]</span></div>
+                        <div class="alphabet-item">Ч ч<span>[ʧ]</span></div>
+                        <div class="alphabet-item">Ӵ ӵ<span>[ʨʲ]</span></div>
+                        <div class="alphabet-item">Ш ш<span>[ʃ]</span></div>
+                        <div class="alphabet-item">Щ щ<span>[ɕː]</span></div>
+                        <div class="alphabet-item">Ъ ъ</div>
+                        <div class="alphabet-item">Ы ы<span>[ɨ]</span></div>
+                        <div class="alphabet-item">Ь ь</div>
+                        <div class="alphabet-item">Э э<span>[ɛ]</span></div>
+                        <div class="alphabet-item">Ю ю<span>[ju/ju]</span></div>
+                        <div class="alphabet-item">Я я<span>[ja/ja]</span></div>
+                    </div>
+                </div>
+            </div>
+            </div> 
+        </div>
+            
+            <div id="chuvash" class="language-content">
+                <div id="chuvash-phonetics" class="info-block">chuvash1</div>
+                <div id="chuvash-grammar" class="info-block">chuvash2</div>
+                <div id="chuvash-verbs" class="info-block">chuvash3</div>
+                <div id="chuvash-alphabet" class="info-block">chuvash4</div>
+            </div>
+        </div>
+    
 
 
 
+
+<!--<audio id="audio-player" src=""></audio>-->
+
+<script>
+       /* const phonemeMap = {
+            'm': 'phonetics/m_audio.mp3',
+            'm2': 'phonetics/m2_audio.mp3',
+            'p': 'phonetics/p_audio.mp3',
+            'b': 'phonetics/b_audio.mp3',
+            'p2': 'phonetics/p2_audio.mp3',
+            'p3': 'phonetics/p3_audio.mp3',
+            'b2': 'phonetics/b2_audio.mp3',
+            'p4': 'phonetics/p4_audio.mp3',
+            'f': 'phonetics/f_audio.mp3',
+            'v': 'phonetics/v_audio.mp3',
+            'w': 'phonetics/w_audio.mp3',
+            'v2': 'phonetics/v2_audio.mp3',
+            'w2': 'phonetics/w2_audio.mp3',
+            'n': 'phonetics/n_audio.mp3',
+            'n2': 'phonetics/n2_audio.mp3',
+            't': 'phonetics/t_audio.mp3',
+            'd': 'phonetics/d_audio.mp3',
+            't2': 'phonetics/t2_audio.mp3',
+            't3': 'phonetics/t3_audio.mp3',
+            'd2': 'phonetics/d2_audio.mp3',
+            't4': 'phonetics/t4_audio.mp3',
+            'ts': 'phonetics/ts_audio.mp3',
+            'dz': 'phonetics/dz_audio.mp3',
+            'ts2': 'phonetics/ts2_audio.mp3',
+            'ts3': 'phonetics/ts3_audio.mp3',
+            'ts4': 'phonetics/ts4_audio.mp3',
+            'dz2': 'phonetics/dz2_audio.mp3',
+            'ts5': 'phonetics/ts5_audio.mp3',
+            's': 'phonetics/s_audio.mp3',
+            'z': 'phonetics/z_audio.mp3',
+            's2': 'phonetics/s2_audio.mp3',
+            'z2': 'phonetics/z2_audio.mp3',
+            'r': 'phonetics/r_audio.mp3',
+            'r2': 'phonetics/r2_audio.mp3',
+            'r3': 'phonetics/r3_audio.mp3',
+            'l': 'phonetics/l_audio.mp3',
+            'l2': 'phonetics/l2_audio.mp3',
+            't5': 'phonetics/t5_audio.mp3',
+            'd3': 'phonetics/d3_audio.mp3',
+            't6': 'phonetics/t6_audio.mp3',
+            'dz3': 'phonetics/dz3_audio.mp3',
+            't7': 'phonetics/t7_audio.mp3',
+            'd4': 'phonetics/d4_audio.mp3',
+            't8': 'phonetics/t8_audio.mp3',
+            't9': 'phonetics/t9_audio.mp3',
+            'd5': 'phonetics/d5_audio.mp3',
+            't10': 'phonetics/t10_audio.mp3',
+            'sh': 'phonetics/sh_audio.mp3',
+            'zh': 'phonetics/zh_audio.mp3',
+            'sh2': 'phonetics/sh2_audio.mp3',
+            'zh2': 'phonetics/zh2_audio.mp3',
+            'j': 'phonetics/j_audio.mp3',
+            'k': 'phonetics/k_audio.mp3',
+            'g': 'phonetics/g_audio.mp3',
+            'k2': 'phonetics/k2_audio.mp3',
+            'k3': 'phonetics/k3_audio.mp3',
+            'x': 'phonetics/x_audio.mp3',
+            'gamma': 'phonetics/gamma_audio.mp3',
+            'q': 'phonetics/q_audio.mp3',
+            'q2': 'phonetics/q2_audio.mp3',
+            'q3': 'phonetics/q3_audio.mp3',
+            'h': 'phonetics/h_audio.mp3',
+            'glottal': 'phonetics/glottal_audio.mp3',
+            'h2': 'phonetics/h2_audio.mp3',
+        };
+
+
+        document.querySelectorAll('span[data-phoneme]').forEach(span => {
+            span.addEventListener('click', () => {
+                const phonemeId = span.getAttribute('data-phoneme');
+                const audioSrc = phonemeMap[phonemeId];
+                if (audioSrc) {
+                    const audioPlayer = document.getElementById('audio-player');
+                    audioPlayer.src = audioSrc;
+                    audioPlayer.play();
+                }
+            });
+        });*/
+
+function toggleNavigation(id) {
+    const navigationBlock = document.getElementById(id);
+    const ul = navigationBlock.querySelector('ul');
+    const button = navigationBlock.querySelector('.toggle-btn');
+    
+    if (ul.style.display === 'none') {
+        ul.style.display = 'block';
+        button.textContent = 'Скрыть';
+    } else {
+        ul.style.display = 'none';
+        button.textContent = 'Показать';
+    }
+}
+
+</script>
 <script src="scripts/library.js"></script>
 </body>
 </html>

@@ -242,3 +242,38 @@ hr {
     height: 30px;
     fill: rgb(21, 230, 112);
 }
+
+.hint-block {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.answer-options-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.answer-block {
+    padding: 10px;
+    margin: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    text-align: center;
+}
+
+.answer-block:hover {
+    background-color: #e0e0e0;
+}
+
+.answer-block.correct {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.answer-block.incorrect {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
