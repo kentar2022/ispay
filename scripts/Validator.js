@@ -96,7 +96,7 @@ function displayWindow(index) {
 
     console.log('Current Answer:', currentAnswer);
 
-    $('#hintBlock').hide(); // Скрываем подсказку изначально
+    $('#hintBlock').hide();
 
     if (currentQuestion.task_type === "multiple_choice" && data.answers[index].possible_answers) {
         // Получаем список возможных ответов
@@ -133,18 +133,71 @@ function displayWindow(index) {
         // Скрываем текстовое поле ввода и кнопку "Далее" для заданий типа multiple_choice
         $('#textInput').hide();
         $('#nextBtn').hide();
-        $('#hintBlock').show(); // Показываем подсказку сразу для multiple_choice заданий
     } else {
         // Показываем текстовое поле ввода и кнопку "Далее" для обычных заданий
         $('#textInput').show();
         $('#nextBtn').show();
-
-        $('#windowsContainer').on('click', '.window', function () {
-            $('#hintBlock').text(currentAnswer).show();
-        });
     }
+
+    $('#windowsContainer').on('click', '.window', function () {
+        $('#hintBlock').text(currentAnswer).show();
+    });
 }
 
+// Функция обработки нажатия на кнопку "Далее"
+$('#nextBtn').on('click', function () {
+    if (!data || !data.questions || !data.questions[currentIndex]) {
+        console.error('No data or invalid index:', data, currentIndex);
+        return;
+    }
+
+    var currentQuestion = data.questions[currentIndex];
+    $('#hintBlock').text('').hide(); // Скрываем и очищаем подсказку при нажатии на кнопку "Далее"
+
+    // Если текущий вопрос не multiple_choice, обрабатываем как обычно
+    if (currentQuestion.task_type !== "multiple_choice") {
+        var userInput = $('#textInput').val().trim();
+
+        // Увеличиваем счетчик ответов
+        answersCount++;
+
+        var currentAnswerColumn = "word_" + currentLanguage.toLowerCase();
+        var currentAnswer = data.answers[currentIndex][currentAnswerColumn];
+
+        if (checkAnswer(userInput, currentAnswer)) {
+            var price = parseInt(currentQuestion.price) || 0; // Преобразуем значение к числу
+            console.log('Price:', price);
+            score += price;
+            console.log('Updated score:', score);
+
+            // Увеличиваем общее количество правильных ответов
+            correctAnswersTotal++;
+        }
+
+        if (answersCount === requiredCorrectAnswers) {
+            $('.main-block').addClass('hidden');
+            $('.success-message').addClass('flex');
+            $('.success-message').removeClass('hidden');
+            $('#correctAnswersCount').text(correctAnswersTotal); // Обновляем количество правильных ответов
+            $('#scoreCount').text(score); // Обновляем количество очков
+            getUserId(lessonId, language);
+            return;
+        }
+
+        currentIndex++;
+        if (currentIndex >= data.questions.length) {
+            currentIndex = 0;
+        }
+        displayWindow(currentIndex);
+        $('#textInput').val('');
+    } else {
+        currentIndex++;
+        if (currentIndex >= data.questions.length) {
+            currentIndex = 0;
+        }
+        displayWindow(currentIndex);
+    }
+});
 
 
 
