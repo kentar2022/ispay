@@ -1,4 +1,4 @@
 function updateProgressBar(index, total) {
-    var progressWidth = ((index + 1) / total) * 100;
-    $('.progress').css('width', progressWidth + '%');
+    var progressHeight = (index / total) * 100;
+    $('#progress').css('height', progressHeight + '%');
 }
