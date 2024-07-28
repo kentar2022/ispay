@@ -1,10 +1,15 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
     $('.lesson-block').click(function () {
         var lessonId = $(this).attr('id');
         localStorage.setItem('lessonId', lessonId); 
         window.location.href = 'Validator.js'; 
     });
-});
+});*/
+
+function toggleContent(element) {
+    var content = element.parentElement.querySelector('.lesson-content');
+    content.classList.toggle('show');
+}
 
 
 

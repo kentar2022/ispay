@@ -7,6 +7,7 @@ $(document).ready(function () {
     var correctAnswersTotal = 0; // Количество правильных ответов
     var answersCount = 0; // Количество ответов
     let selectedBlock = null;
+    window.courseData = {};
 
 
 
@@ -72,85 +73,102 @@ function loadPhrases(language, lessonId, currentLanguage) {
 
 
 
-
 function displayWindow(index) {
-  /*  console.log('Display window index:', index);
-    console.log('Data:', data);*/
-
-    if (index === -1) {
-        if (!data || !data.answers || !data.answers[0] || !data.answers[0].summary) {
-            console.error('No summary data or invalid structure:', data);
-            return;
-        }
-
-        var summaryContent = data.answers[0].summary;
-        var summaryElement = $('<div>').html(summaryContent);
-
-        summaryElement.css({
-            'border': `10px solid ${linkColor} !important`
-        });
-
-        var windowContainer = $('#windowsContainer');
-        windowContainer.empty();
-        windowContainer.append(summaryElement);
-
-        var iconLink = $('<a>').attr('href', '../library.html');
-        var svgIcon = `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L2 7l10 5 10-5L12 2z" fill="#fff"/>
-                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        `;
-
-        answerOptionsContainer.hide();
-        progressBar.hide();
-
-        iconLink.html(svgIcon);
-        summaryElement.prepend(iconLink);
-        setTimeout(function() {
-                    var linkColor = localStorage.getItem('linkColor');
-                    var profilePageTextColor = localStorage.getItem('profilePageTextColor');
-
-                    summaryElement.css({
-                        'border': `2px solid ${linkColor}`, // Рамка цвета темы
-                        'padding': '10px', // Отступы внутри блока
-                        'margin': '20px auto', // Автоматические отступы по бокам для центрирования
-                        'width': '600px', // Ширина блока (можете изменить по необходимости)
-                        'box-sizing': 'border-box', // Учитывать отступы и границу в ширине блока
-                        'color': profilePageTextColor, // Цвет текста
-                    });
-
-
-                    // Проверка стилей summaryElement
-                    console.log('Applied styles to summaryElement:', summaryElement.attr('style'));
-
-                    // Проверка видимости элемента
-                    if (summaryElement.is(':visible')) {
-                        console.log('Summary element is visible');
-                    } else {
-                        console.error('Summary element is not visible');
-                    }
-
-                    // Проверка количества элементов с классом 'summary'
-                    console.log('Number of .summary elements:', $('.summary').length);
-                }, 100); // Задержка в 100 миллисекунд, чтобы убедиться, что элемент уже в DOM
-
-        $('#nextBtn').show().text('Начать урок').off('click').on('click', function () {
-            currentIndex++;
-            displayWindow(currentIndex);
-           /* console.log('Initial display window after start:', currentIndex);*/
-        });
+if (index === -1) {
+    if (!data || !data.answers || !data.answers[0] || !data.answers[0].summary) {
+        console.error('No summary data or invalid structure:', data);
         return;
     }
+    $('#textInput').hide();       
+    $('#progressBar').hide(); 
+
+    var summaryContent = data.answers[0].summary;
+
+    // Применяем содержимое ко всем блокам с классом summaryBlock
+    $('.summaryBlock').each(function(index) {
+        // Добавляем иконку и текст в каждый блок
+        $(this).html(`
+            <a href="#">
+                <svg width="24" height="24" class="library-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5L12 2z" fill="#fff"/>
+                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+            <span class="closeSummaryPopup">&times;</span>
+            <div>${summaryContent}</div>
+        `).css({
+            'border': `10px solid ${linkColor} !important`,
+            'color': profilePageTextColor
+        });
+
+        // Если это первый блок, то делаем его видимым сразу
+        if (index === 0) {
+            $(this).addClass('visible').css({
+                'border': `2px solid ${linkColor}`,
+                'display': 'flex',
+                'flex-wrap': 'wrap',
+                'justify-content': 'space-evenly',
+                'flex-direction': 'row'
+            });
+        }
+    });
+
+    $(document).on('click', 'svg.library-svg', function() {
+        // Показываем только скрытые блоки при нажатии на иконку
+        $('.summaryBlock:not(.visible)').each(function() {
+            $(this).addClass('visible').css({
+                'border': `2px solid ${linkColor}`, // Рамка цвета темы
+                'display': 'flex' // Показать блок
+            });
+        });
+        $('#popupWindow').show();
+    });
+
+    // Закрываем всплывающее окно при нажатии на "X"
+    $('.close').on('click', function() {
+        $('#popupWindow').hide();
+    });
+
+    // Закрываем всплывающее окно при нажатии на "Нет"
+    $('#cancelBtn').on('click', function() {
+        $('#popupWindow').hide();
+    });
+
+    // Переходим на страницу библиотеки при нажатии на "Да"
+    $('#confirmBtn').on('click', function() {
+        window.location.href = '../library.html';
+    });
+
+    // Скрываем ненужные элементы
+    $('#answerOptionsContainer').hide();
+    $('#progressBar').hide();
+
+    // Обработка клика на кнопку "Начать урок"
+    $('#nextBtn').show().text('Начать урок').off('click').on('click', function () {
+        // Найти видимый блок и скрыть его
+        var visibleBlock = $('.summaryBlock.visible');
+        if (visibleBlock.length) {
+            visibleBlock.removeClass('visible').css('display', 'none');
+        }
+
+        $('#answerOptionsContainer').css('display', 'flex');
+            
+        // Переходим к следующему блоку
+        currentIndex++;
+        displayWindow(currentIndex);
+    });
+
+    return;
+}
+
+
 
     if (index >= data.questions.length) {
-       /* console.log('All questions completed.');*/
         showFinalResults();
         return;
     }
 
     if (!data || !data.questions || !data.answers || !data.questions[index] || !data.answers[index]) {
-       /* console.error('No data or invalid index:', data, index);*/
         return;
     }
 
@@ -159,24 +177,10 @@ function displayWindow(index) {
     windowContainer.empty();
     answerOptionsContainer.empty();
 
-    if (index === -1) {
-    var summaryContent = data.answers[0].summary; // Получаем summary из первой строки answers
-    var summaryElement = $('<div>').addClass('summary').html(summaryContent);
-    windowContainer.append(summaryElement);
-    $('#nextBtn').show().text('Начать урок').off('click').on('click', function () {
-        currentIndex++;
-        displayWindow(currentIndex);
-    });
-    return;
-}
-
     var currentQuestion = data.questions[index];
     var currentAnswerColumn = "word_" + currentLanguage.toLowerCase();
     var currentAnswer = data.answers[index][currentAnswerColumn];
-    var questionPrice = parseInt(currentQuestion.price) || 0; // Убедитесь, что цена задания корректно парсится
-
-  /*  console.log('Current Question:', currentQuestion);
-    console.log('Current Answer:', currentAnswer);*/
+    var questionPrice = parseInt(currentQuestion.price) || 0;
 
     $('#windowsContainer').on('click', '.window', function () { $('#hintBlock').text(currentAnswer).show(); });
 
@@ -205,7 +209,7 @@ function displayWindow(index) {
             var isCorrect = $(this).attr('data-correct') === 'true';
             if (isCorrect) {
                 $(this).addClass('correct');
-                score += questionPrice; // Добавляем цену задания к общему счету
+                score += questionPrice;
                 currentIndex++;
                 if (currentIndex < data.questions.length) {
                     displayWindow(currentIndex);
@@ -284,7 +288,7 @@ function displayWindow(index) {
                         selectedBlock = null;
 
                         if (correctMatches === questions.length) {
-                            score += questionPrice; // Добавляем цену задания к общему счету
+                            score += questionPrice;
                             currentIndex++;
                             if (currentIndex < data.questions.length) {
                                 displayWindow(currentIndex);
@@ -315,14 +319,13 @@ function displayWindow(index) {
             if (checkAnswer(userAnswer, correctAnswer)) {
                 correctAnswersCount++;
                 correctAnswersTotal++;
-                score += questionPrice; // Добавляем цену задания к общему счету
+                score += questionPrice;
             }
 
             currentIndex++;
             if (currentIndex < data.questions.length) {
                 updateProgressBar(currentIndex, data.questions.length);
                 displayWindow(currentIndex);
-                /*console.log('Next index after text input:', currentIndex);*/
             } else {
                 showFinalResults();
             }
@@ -335,7 +338,10 @@ function displayWindow(index) {
 
 
 
+
 $('#nextBtn').on('click', function () {
+    console.log('Next button clicked');
+
     if (!data || !data.questions || !data.answers || !data.questions[currentIndex] || !data.answers[currentIndex]) {
         console.error('No data or invalid index:', data, currentIndex);
         return;
@@ -379,7 +385,18 @@ $('#nextBtn').on('click', function () {
         $('#textInput').val('');
         $('#hintBlock').hide();
     }
+
+    // Проверка наличия элемента #summaryPopup
+    var summaryPopup = $('#summaryPopup');
+    if (summaryPopup.length) {
+        console.log('Summary popup found, hiding it');
+        summaryPopup.css('display', 'none');
+    } else {
+        console.log('Summary popup not found');
+    }
 });
+
+
 
 
 function showFinalResults() {
