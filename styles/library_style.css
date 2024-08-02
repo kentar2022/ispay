@@ -7,7 +7,6 @@ body {
 }
 .nav {
     width: 200px;
-    background-color: #293133;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
@@ -20,7 +19,6 @@ body {
 }
 .nav ul li a {
     text-decoration: none;
-    color: #FFF;
 }
 .content {
     flex: 1;
@@ -35,7 +33,6 @@ body {
     margin-bottom: 20px;
 }
 .tab {
-    background-color: #293133;
     border: 2px solid rgb(21, 230, 112);
     border-radius: 50%;
     width: 50px;
@@ -51,10 +48,8 @@ body {
     fill: rgb(21, 230, 112);
 }
 .info-block {
-    background-color: #293133;
     border: gray solid 1px;
     padding: 20px;
-    color: white;
     margin-bottom: 20px;
     border-radius: 10px;
     display: none;
@@ -95,24 +90,18 @@ body {
         cursor: pointer;
     }
 }
-/* New styles for the phonetic table and alphabet */
+
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #293133;
-    color: #FFFFFF;
 }
+
 th, td {
-    border: 2px solid #15E670;
+    border: 2px solid;
     padding: 10px;
     text-align: center;
 }
-th {
-    background-color: #293133;
-}
-td {
-    background-color: #293133;
-}
+
 .alphabet-container {
     width: 100%;
     max-width: 500px;
@@ -161,7 +150,7 @@ td {
 }
 
 .navigation-block {
-    border: 2px solid #15E670;
+    border: 2px solid;
     padding: 20px;
     margin-bottom: 20px;
     width: 300px;
@@ -172,7 +161,6 @@ td {
 .toggle-btn {
     display: block;
     padding: 5px 10px;
-    background-color: #15E670;
     color: black;
     border: none;
     cursor: pointer;
@@ -195,7 +183,6 @@ ul li {
     margin-bottom: 10px;
 }
 ul li a {
-    color: white;
     text-decoration: none;
 }
 ul li a:hover {

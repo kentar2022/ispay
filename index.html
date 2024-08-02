@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/lessons_menu_style.css">
     <link rel="stylesheet" href="styles/course_style.css">
-    <link rel="stylesheet" href="styles/settings.css">
     <link rel="stylesheet" href="styles/profile.css">
     <link rel="stylesheet" href="styles/coursesPage.css">
     <link rel="stylesheet" href="styles/shop_style.css">
@@ -34,6 +33,7 @@
             </div>
             <div class="aside-item" id="languageSelectContainer">
                 <select id="languageSelect" class="a" onchange="showLanguage(this.value); selectLanguage(this.value)">
+                    <option value="none" class="a"></option>
                     <option value="chechen" id="courseChechenTranslation" class="a">Чеченский язык</option>
                     <option value="ingush" id="courseIngushTranslation" class="a">Ингушский язык</option>
                     <option value="adyge" id="courseAdygeTranslation" class="a">Черкесский язык</option>
@@ -112,32 +112,34 @@
             <h2 class="section-title">Грамматика</h2>
             <div class="lessons-container">
                 <!-- Lesson Block 1 -->
-                <div class="lesson-block">
+                <div class="lesson-block" data-lesson-id="1">
                     <div class="lesson-header" onclick="toggleContent(this)">
                         <span class="lesson-toggle-icon">&#9660;</span>
                         <h2 class="lesson-title">Название темы 1</h2>
                         <span class="lesson-index">1/5</span>
                     </div>
                     <div class="lesson-content">
-                        <p>Название тематики уроков 1</p>
+                        <p>
+                            Тематика 1<span class="lesson-completed"></span>
+                        </p>
                         <p>Название тематики уроков 1</p>
                         <p>Название тематики уроков 1</p>
                         <p>Название тематики уроков 1</p>
                         <p>Название тематики уроков 1</p>
                     </div>
                     <div class="lesson-progress">
-                        <span>27%</span>
+                        <span></span>
                     </div>
                 </div>
                 <!-- Lesson Block 2 -->
-                <div class="lesson-block">
+                <div class="lesson-block" data-lesson-id="2">
                     <div class="lesson-header" onclick="toggleContent(this)">
                         <span class="lesson-toggle-icon">&#9660;</span>
                         <h2 class="lesson-title">Название темы 2</h2>
                         <span class="lesson-index">2/5</span>
                     </div>
                     <div class="lesson-content">
-                        <p>Название тематики уроков 2</p>
+                        <p>Название тематики уроков 2 <span class="lesson-completed"></span></p>
                         <p>Название тематики уроков 2</p>
                         <p>Название тематики уроков 1</p>
                         <p>Название тематики уроков 1</p>
@@ -148,14 +150,14 @@
                     </div>
                 </div>
                 <!-- Lesson Block 3 -->
-                <div class="lesson-block">
+                <div class="lesson-block" data-lesson-id="3">
                     <div class="lesson-header" onclick="toggleContent(this)">
                         <span class="lesson-toggle-icon">&#9660;</span>
                         <h2 class="lesson-title">Название темы 3</h2>
                         <span class="lesson-index">3/5</span>
                     </div>
                     <div class="lesson-content">
-                        <p>Название тематики уроков 2</p>
+                        <p>Название тематики уроков 2 <span class="lesson-completed"></span></p>
                         <p>Название тематики уроков 2</p>
                         <p>Название тематики уроков 1</p>
                         <p>Название тематики уроков 1</p>
@@ -208,9 +210,7 @@
                     </div>
                 </div>
             </div>
-         </div>
-
-
+        </div>
     </div>
 
 
@@ -630,14 +630,13 @@
             <label for="langFrenchSettings"><span id="settingsLangFrenchTranslation">Французский</span></label><br>
         </div>
 
+
         <div>
             <h3><span id="settingsThemeSelectionTranslation">Выбор темы страницы:</span></h3>
             <input type="radio" id="themeLight" name="theme" value="light" onchange="setTheme()">
             <label for="themeLight"><span id="settingsThemeLightTranslation">Светлая тема</span></label><br>
             <input type="radio" id="themeDark" name="theme" value="dark" onchange="setTheme()">
             <label for="themeDark"><span id="settingsThemeDarkTranslation">Темная тема</span></label><br>
-            <input type="radio" id="themeDark2" name="theme" value="dark2" onchange="setTheme()">
-            <label for="themeDark2"><span id="settingsThemeDark2Translation">Темная тема 2</span></label><br>
         </div>
     </div>
 </div>
@@ -840,7 +839,7 @@ document.addEventListener('DOMContentLoaded', function() {
     xhr.open('GET', 'login/profile.php', true);
     xhr.onload = function() {
         if (xhr.status == 200) {
-            console.log('Сессия активна');
+            /*console.log('Сессия активна');*/
             var user = JSON.parse(xhr.responseText);
             updateUserInfo(user);
             updateModalInfo(user);
@@ -932,7 +931,7 @@ function updateModalInfo(user) {
 
 
 function selectLanguage(language) {
-    console.log('Selected language:', language); // Отладка: вывод выбранного языка
+    /*console.log('Selected language:', language); */
     localStorage.setItem('language', language); // Сохраняем выбранный язык в localStorage
 }
 

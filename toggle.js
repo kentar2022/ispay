@@ -24,7 +24,7 @@ function toggleHiddenBlock(language) {
 
 
 function togglePages(pageId) {
-    console.log(pageId);
+   /* console.log(pageId);*/
     var settingsPage = document.getElementById("settingsPage");
     var profilePage = document.getElementById("profilePage");
     var coursesPage = document.getElementById("coursesPage");
@@ -52,12 +52,12 @@ function togglePages(pageId) {
 
 
 function showLanguage(languageId) {
-    console.log("languageId:" + languageId);
+   /* console.log("languageId:" + languageId);*/
     var languageBlockToShow = document.getElementById('lessonsPage' + languageId);
     var languagesContainer = document.getElementById("languagesContainer");
 
     languagesContainer.classList.remove("hidden");
-    console.log(languageBlockToShow);
+   /* console.log(languageBlockToShow);*/
     // Показываем выбранный блок языка
     if (languageBlockToShow) {
         languageBlockToShow.classList.remove("hidden");

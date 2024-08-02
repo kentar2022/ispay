@@ -97,76 +97,80 @@
 </div>
 <script>
 
-    function applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor, lineColor) {
-        document.body.style.backgroundColor = bodyColor;
-        document.querySelector('.card').style.backgroundColor = cardColor;
-        document.querySelector('.card').style.borderColor = borderColor;
-        document.querySelector('.btn-primary').style.backgroundColor = buttonColor;
-        document.querySelector('.line').style.backgroundColor = lineColor;
+// Функция для применения стилей в соответствии с текущей темой
+function applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor, lineColor) {
+    document.body.style.backgroundColor = bodyColor;
+    document.querySelector('.card').style.backgroundColor = cardColor;
+    document.querySelector('.card').style.borderColor = borderColor;
+    document.querySelector('.btn-primary').style.backgroundColor = buttonColor;
 
-        var textElements = document.querySelectorAll('.card-title, .form-label');
-        textElements.forEach(function(element) {
-            element.style.color = textColor;
-        });
+    // Устанавливаем цвет линии, если элемент существует
+    var lineElement = document.querySelector('.line');
+    if (lineElement) {
+        lineElement.style.backgroundColor = lineColor;
     }
 
-       function setThemeLight() {
-        console.log('Setting theme to Light');
-        var bodyColor = '#ffffff';
-        var cardColor = '#f9f9f9';
-        var textColor = '#000000';
-        var borderColor = '#15E670';
-        var buttonColor = '#15E670';
+    // Применяем цвет текста к заголовкам и меткам форм
+    var textElements = document.querySelectorAll('.card-title, .form-label');
+    textElements.forEach(function(element) {
+        element.style.color = textColor;
+    });
 
-        applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor);
-        localStorage.setItem('currentTheme', 'light');
-        console.log('Theme set to Light');
-    }
+    // Сохраняем выбранные цвета в локальном хранилище
+    localStorage.setItem('bodyColor', bodyColor);
+    localStorage.setItem('cardColor', cardColor);
+    localStorage.setItem('textColor', textColor);
+    localStorage.setItem('borderColor', borderColor);
+    localStorage.setItem('buttonColor', buttonColor);
+    if (lineColor) localStorage.setItem('lineColor', lineColor);
+}
 
-    function setThemeDark() {
-        console.log('Setting theme to Dark');
-        var bodyColor = '#293133';
-        var cardColor = '#434B4D';
-        var textColor = '#ffffff';
-        var borderColor = '#15E670';
-        var buttonColor = '#15E670';
-        
-        applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor);
-        localStorage.setItem('currentTheme', 'dark');
-        console.log('Theme set to Dark');
-    }
+// Функция для установки светлой темы
+function setThemeLight() {
+    var bodyColor = '#ffffff';
+    var cardColor = '#f9f9f9';
+    var textColor = '#000000';
+    var borderColor = '#f3166b';
+    var buttonColor = '#f3166b';
+    var lineColor = '#f3166b';
 
-    function setThemeDark2() {
-        console.log('Setting theme to Dark2');
-        var bodyColor = '#293133';
-        var cardColor = '#434B4D';
-        var textColor = '#ffffff';
-        var borderColor = '#f3166b';
-        var buttonColor = '#f3166b';
-        var lineColor = '#f3166b';
+    applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor, lineColor);
+    localStorage.setItem('currentTheme', 'light');
+}
 
-        applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor, lineColor);
-        localStorage.setItem('currentTheme', 'dark2');
-        console.log('Theme set to Dark2');
-    }
+// Функция для установки темной темы
+function setThemeDark() {
+    var bodyColor = '#293133';
+    var cardColor = '#434B4D';
+    var textColor = '#ffffff';
+    var borderColor = '#15E670';
+    var buttonColor = '#15E670';
+    var lineColor = '#15E670';
 
-    function loadTheme() {
-        var savedTheme = localStorage.getItem('currentTheme');
-        console.log('Saved theme from localStorage:', savedTheme);
-        
-        if (savedTheme) {
-            if (savedTheme === 'dark') {
-                setThemeDark();
-            } else if (savedTheme === 'dark2') {
-                setThemeDark2();
-            } else {
-                setThemeLight();
-            }
+    applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor, lineColor);
+    localStorage.setItem('currentTheme', 'dark');
+}
+
+// Функция для загрузки сохраненной темы
+function loadTheme() {
+    var savedTheme = localStorage.getItem('currentTheme');
+
+    if (savedTheme) {
+        if (savedTheme === 'dark') {
+            setThemeDark();
         } else {
-            setThemeLight(); // Default theme if none is saved
-            console.log('No saved theme, setting to default Light theme');
+            setThemeLight();
         }
+    } else {
+        setThemeLight(); // Тема по умолчанию
     }
+}
+
+// Загружаем тему при загрузке страницы
+window.onload = function() {
+    loadTheme();
+};
+
 
         var texts = {
         russian: {

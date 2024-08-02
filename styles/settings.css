@@ -1,28 +1,34 @@
-.custom-container {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Определение переменных для тем */
+.theme-light {
+    --background-color: #ffffff;
+    --text-color: #000000;
 }
 
-
-label {
-    font-size: 20px;
+.theme-dark {
+    --background-color: #293133;
+    --text-color: #ffffff;
 }
 
-input[type="radio"] {
-    margin-right: 10px;
+.theme-dark2 {
+    --background-color: #293133;
+    --text-color: #f3166b;
 }
 
-.settingsPage {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
-    position: fixed;
-    right: 40%;
+/* Применение переменных стилей */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
+a, .a, .settingsPage *, .courses a, .profilePage * {
+    color: var(--text-color);
+}
 
-.settingsPage h3,.settingsPage h2 {
-    border-bottom: 2px solid #333;
-    padding-bottom: 5px;
+svg {
+    fill: var(--text-color);
+}
+
+/* Цвет фона для select и других элементов */
+select > option, #languageSelect, #languageSelectContainer {
+    background-color: var(--background-color);
 }

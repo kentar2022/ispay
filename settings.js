@@ -1,19 +1,19 @@
 // Переменные для элементов управления темой
 var themeLight = document.getElementById('themeLight');
 var themeDark = document.getElementById('themeDark');
-var themeDark2 = document.getElementById('themeDark2');
 
-// Переменные для ссылок, иконок SVG и текстовых элементов
+// Переменные для ссылок, иконок SVG, текстовых элементов и кнопок
 var links = document.querySelectorAll('a, .a');
 var svgIcons = document.querySelectorAll('svg');
 var settingsPageText = document.querySelectorAll('.settingsPage *');
 var coursesPageLinks = document.querySelectorAll('.courses a');
 var profilePageElements = document.querySelectorAll('.profilePage *');
 var selectLanguages = document.querySelectorAll('select > option, #languageSelect');
-
+var buttons = document.querySelectorAll('.button, .btn');
+var mainBlocks = document.querySelectorAll('.main-block'); // Добавлен класс для main-block
 
 // Функция для применения стилей в соответствии с текущей темой
-function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor) {
+function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor, buttonColor, buttonTextColor, mainBlockColor, scrollbarColor) {
     document.body.style.backgroundColor = bodyColor;
     links.forEach(function(link) {
         link.style.color = linkColor;
@@ -33,8 +33,19 @@ function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, cou
     selectLanguages.forEach(function(element) {
         element.style.backgroundColor = bodyColor;
     });
-    
+    buttons.forEach(function(button) {
+        button.style.backgroundColor = buttonColor;
+        button.style.color = buttonTextColor;
+    });
+    mainBlocks.forEach(function(block) {
+        block.style.backgroundColor = mainBlockColor;
+        block.style.color = '#ffffff'; // Предположим, что текст белый
+    });
     document.getElementById('languageSelectContainer').style.backgroundColor = bodyColor;
+
+    // Установка стилей скроллбара
+    document.documentElement.style.setProperty('--scrollbar-thumb-color', scrollbarColor);
+    document.documentElement.style.setProperty('--scrollbar-track-color', bodyColor);
 
     // Сохраняем выбранные цвета в локальном хранилище
     localStorage.setItem('bodyColor', bodyColor);
@@ -43,18 +54,26 @@ function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, cou
     localStorage.setItem('settingsPageTextColor', settingsPageTextColor);
     localStorage.setItem('coursesPageColor', coursesPageColor);
     localStorage.setItem('profilePageTextColor', profilePageTextColor);
+    localStorage.setItem('buttonColor', buttonColor);
+    localStorage.setItem('buttonTextColor', buttonTextColor);
+    localStorage.setItem('mainBlockColor', mainBlockColor);
+    localStorage.setItem('scrollbarColor', scrollbarColor);
 }
 
 // Функция для установки темы "Светлая тема"
 function setThemeLight() {
     var bodyColor = '#ffffff';
-    var linkColor = '#000000';
-    var fillColor = '#000000';
-    var settingsPageTextColor = '#000000'; 
+    var linkColor = '#f3166b';
+    var fillColor = '#f3166b';
+    var settingsPageTextColor = '#000000';
     var coursesPageColor = '#000000';
     var profilePageTextColor = '#000000';
+    var buttonColor = '#f3166b';
+    var buttonTextColor = '#ffffff';
+    var mainBlockColor = '#f3166b';
+    var scrollbarColor = '#f3166b'; // Цвет скроллбара
 
-    applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor);
+    applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor, buttonColor, buttonTextColor, mainBlockColor, scrollbarColor);
 }
 
 // Функция для установки темы "Темная тема"
@@ -62,24 +81,17 @@ function setThemeDark() {
     var bodyColor = '#293133';
     var linkColor = '#15E670';
     var fillColor = '#15E670';
-    var settingsPageTextColor = '#ffffff'; 
+    var settingsPageTextColor = '#ffffff';
     var coursesPageColor = '#ffffff';
     var profilePageTextColor = '#ffffff';
+    var buttonColor = '#15E670';
+    var buttonTextColor = '#293133';
+    var mainBlockColor = '#15E670';
+    var scrollbarColor = '#15E670'; // Цвет скроллбара
 
-    applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor);
+    applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor, buttonColor, buttonTextColor, mainBlockColor, scrollbarColor);
 }
 
-// Функция для установки темы "Темная тема 2"
-function setThemeDark2() {
-    var bodyColor = '#293133';
-    var linkColor = '#f3166b';
-    var fillColor = '#f3166b';
-    var settingsPageTextColor = '#ffffff'; 
-    var coursesPageColor = '#ffffff';
-    var profilePageTextColor = '#ffffff';
-
-    applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor);
-}
 
 // Функция для установки темы
 function setTheme() {
@@ -89,9 +101,6 @@ function setTheme() {
     } else if (themeDark.checked) {
         setThemeDark();
         localStorage.setItem('currentTheme', 'dark');
-    } else if (themeDark2.checked) {
-        setThemeDark2();
-        localStorage.setItem('currentTheme', 'dark2');
     }
 }
 
@@ -104,9 +113,6 @@ function loadTheme() {
         if (savedTheme === 'dark') {
             setThemeDark();
             themeDark.checked = true;
-        } else if (savedTheme === 'dark2') {
-            setThemeDark2();
-            themeDark2.checked = true;
         } else {
             setThemeLight();
             themeLight.checked = true;
@@ -122,7 +128,6 @@ window.onload = function() {
 // Добавляем слушатели событий для элементов выбора темы
 themeLight.addEventListener('change', setTheme);
 themeDark.addEventListener('change', setTheme);
-themeDark2.addEventListener('change', setTheme);
 
 
 var texts = {
@@ -287,7 +292,6 @@ function changeLanguage(language) {
     document.getElementById("settingsLangSelectionTranslation").innerText = texts[language].settingsLangSelection;
     document.getElementById("settingsThemeLightTranslation").innerText = texts[language].settingsThemeLight;
     document.getElementById("settingsThemeDarkTranslation").innerText = texts[language].settingsThemeDark;
-    document.getElementById("settingsThemeDark2Translation").innerText = texts[language].settingsThemeDark2;
 
     document.getElementById("courseChechenTranslation").innerText = texts[language].courseChechen;
     document.getElementById("courseIngushTranslation").innerText = texts[language].courseIngush;

@@ -66,7 +66,7 @@ body {
 .hidden-block {
     width: 614px; 
     height: 0;
-    background-color: #333333; 
+    background-color: #808080; 
     overflow: hidden;
     transition: height 0.3s ease;
     z-index: 1;
