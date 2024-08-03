@@ -14,19 +14,23 @@ $(document).ready(function() {
                 $(".lesson-block").each(function(index) {
                     if (index < lessonData.length) {
                         const lesson = lessonData[index];
-                        
-                        // Обновляем индекс уроков в формате "lessons_completed/total_lessons"
-                        $(this).find('.lesson-completed').text(`${lesson.completed_lessons_per_topic}/${lesson.lessons_per_topic}`);
 
-                         $(this).find('.lesson-index').text(`${lesson.lessons_completed}/${lesson.total_lessons}`);
-                        
-
-                        // Обновляем процент выполнения
+                        // Обновляем количество пройденных уроков и общее количество уроков
+                        $(this).find('.lesson-index').text(`${lesson.lessons_completed}/${lesson.total_lessons}`);
                         $(this).find('.lesson-progress span').text(`${lesson.completion_percentage}%`);
-                        
-                        // Обновляем количество уроков в теме и количество пройденных уроков в теме
-                        $(this).find('.lesson-per-topic').text(lesson.lessons_per_topic);
-                        $(this).find('.completed-lessons-per-topic').text(lesson.completed_lessons_per_topic);
+
+                        // Обновляем информацию о тематиках
+                        const topics = lesson.topics;
+                        $(this).find('.lesson-content').each(function() {
+                            $(this).find('p').each(function(i) {
+                                if (i < topics.length) {
+                                    const topic = topics[i];
+                                    $(this).html(`${topic.topic_name} ${topic.completed_lessons_per_topic}/${topic.lessons_per_topic}`);
+                                } else {
+                                    $(this).remove(); // Удалить лишние параграфы, если данных меньше
+                                }
+                            });
+                        });
                     }
                 });
             },
