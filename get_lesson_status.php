@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
 
-$language = $_POST['language'] ?? null; // Получаем значение языка из POST-запроса
+$language = $_POST['language'] ?? null;
 if (!$language) {
     echo json_encode(['error' => 'Language not specified']);
     exit;
