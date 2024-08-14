@@ -8,27 +8,33 @@ $servername = "localhost";
 $username = "kentar";
 $password = "password";
 
-// Проверяем наличие данных в массиве $_POST
-if (!isset($_POST['user_id']) || !isset($_POST['new_score']) || !isset($_POST['language'])) {
+// Проверяем наличие необходимых данных в $_POST
+if (!isset($_POST['user_id']) || !isset($_POST['topic_id']) || !isset($_POST['new_score']) || !isset($_POST['language'])) {
     echo json_encode(array("error" => "Отсутствуют необходимые данные для обновления прогресса пользователя.",
                             "post_data" => $_POST));
     exit();
 }
 
 $userId = $_POST['user_id'];
+$topicId = $_POST['topic_id'];
 $newScore = $_POST['new_score'];
 $language = $_POST['language'];
 
-// Подключаемся к базе данных
+// Подключение к базе данных
 $conn = new mysqli($servername, $username, $password, $language);
 
 if ($conn->connect_error) {
     die(json_encode(array("error" => "Ошибка подключения к базе данных: " . $conn->connect_error)));
 }
 
-// Подготовленный запрос для обновления значения total_score
-$stmt = $conn->prepare("UPDATE progress SET total_score = total_score + ? WHERE id = ?");
-$stmt->bind_param("ii", $newScore, $userId);
+// Подготовка запроса для обновления total_score и completed_lessons
+$stmt = $conn->prepare("
+    UPDATE topic_progress 
+    SET total_score = total_score + ?, 
+        completed_lessons = completed_lessons + 1 
+    WHERE user_id = ? AND topic_id = ?
+");
+$stmt->bind_param("iii", $newScore, $userId, $topicId);
 
 // Выполнение запроса
 if ($stmt->execute()) {

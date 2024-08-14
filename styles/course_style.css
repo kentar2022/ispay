@@ -453,8 +453,6 @@ hr {
     margin: 20px auto;
     width: 600px;
     box-sizing: border-box;
-    color: rgb(255, 255, 255);
-    background: rgb(41, 49, 51);
 }
 
 .summaryBlock.visible {

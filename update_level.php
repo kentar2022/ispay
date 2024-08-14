@@ -12,7 +12,7 @@ if (!isset($_POST['language'])) {
     die(json_encode(array("error" => "Language parameter is missing.")));
 }
 
-$language = $_POST['language']; // Перемещено ниже проверки наличия параметра "language"
+$language = $_POST['language']; 
 
 $conn = new mysqli($servername, $username, $password, $language);
 

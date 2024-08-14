@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     var data;
     var currentIndex = -1;
     var correctAnswersCount = 0;
@@ -9,9 +8,11 @@ $(document).ready(function () {
     var answersCount = 0; // Количество ответов
     let selectedBlock = null;
     window.courseData = {};
+
     // Извлечение параметров из URL
     var urlParams = new URLSearchParams(window.location.search);
     var language = urlParams.get('language');
+    var completedLessons = urlParams.get('completedLessons');
 
     // Проверяем, что language присутствует в URL
     if (language) {
@@ -21,14 +22,22 @@ $(document).ready(function () {
         return;
     }
 
+    // Проверяем, что completedLessons присутствует в URL
+    if (completedLessons) {
+        console.log('Completed Lessons from URL:', completedLessons);
+    } else {
+        console.error('No completedLessons found in URL.');
+        return;
+    }
+
     // Получаем данные о текущей теме из localStorage
     var currentTopicData = JSON.parse(localStorage.getItem('currentTopicData'));
 
     if (currentTopicData) {
         console.log('Current Topic Data:', currentTopicData);
 
-        // Получаем lessonId из completed_lessons_per_topic (вместо lessonId из URL)
-        var lessonId = currentTopicData.completed_lessons_per_topic;
+        // Получаем lessonId из completed_lessons
+        var lessonId = parseInt(completedLessons, 10);
         console.log('Lesson ID:', lessonId);
 
         // Обновляем completed_lessons_per_topic
@@ -55,15 +64,16 @@ $(document).ready(function () {
     var coursesPageColor = localStorage.getItem('coursesPageColor');
     var currentLanguage = localStorage.getItem('currentLanguage');
 
-
     $('body').css('background-color', bodyColor);
-    $('#windowsContainer').css('color', profilePageTextColor); 
+    $('#windowsContainer').css('color', profilePageTextColor);
     $('#nextBtn')
         .css('background-color', linkColor)
         .css('box-shadow', `0 2px 25px ${linkColor}`);
     
     $('.progress').css('background-color', linkColor);
     $('.success-message div, correct-answers').css('color', settingsPageTextColor);
+    $('#hintBlock').css('color', linkColor);
+    $('.summaryBlock').css('background-color', bodyColor);
     $('#hintBlock').css('color', linkColor);
 
     function loadPhrases(language, lessonId, currentLanguage) {
@@ -93,17 +103,17 @@ $(document).ready(function () {
                 console.error('No summary data or invalid structure:', data);
                 return;
             }
-            $('#textInput').hide();       
-            $('#progressBar').hide(); 
+            $('#textInput').hide();
+            $('#progressBar').hide();
 
             var summaryContent = data.answers[0].summary;
 
             $('.summaryBlock').each(function(index) {
                 $(this).html(`
                     <a href="#">
-                        <svg width="24" height="24" class="library-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2L2 7l10 5 10-5L12 2z" fill="#fff"/>
-                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg width="24" height="24" class="library-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7l10 5 10-5L12 2z"/>
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                     <span class="closeSummaryPopup">&times;</span>
@@ -406,9 +416,11 @@ $(document).ready(function () {
             url: "../getUserId.php",
             data: {},
             success: function (response) {
-                console.log("User ID:", response);
-                updateProgress(response.user_id, language);
-                updateLevel(lessonId, response.user_id, language);
+                console.log("User ID:", response.user_id);
+
+                // Здесь вызываем объединенную функцию, чтобы обновить прогресс и уровень
+                const topicId = currentTopicData.topic_id; // Извлекаем topicId из currentTopicData
+                updateTopicProgress(response.user_id, topicId, lessonId, score, language);
             },
             error: function (xhr, status, error) {
                 console.error("Ошибка при получении ID пользователя:", error);
@@ -416,35 +428,29 @@ $(document).ready(function () {
         });
     }
 
-    function updateProgress(userId, language) {
+    function updateTopicProgress(userId, topicId, lessonId, newScore, language) {
+        console.log("Отправка данных в updateTopicProgress:", {
+            user_id: userId,
+            topic_id: topicId,
+            lesson_id: lessonId,
+            new_score: newScore,
+            language: language
+        });
+
         $.ajax({
             type: "POST",
-            url: "../update_progress.php",
+            url: "../update_topic_progress.php",
             data: {
                 user_id: userId,
-                new_score: score,
+                topic_id: topicId,
+                new_score: newScore,
                 language: language
             },
-            success: function (response) {
-                console.log("Прогресс обновлен:", response);
+            success: function(response) {
+                console.log("Прогресс успешно обновлен:", response);
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.error("Ошибка при обновлении прогресса:", error);
-            }
-        });
-    }
-
-    function updateLevel(lessonId, userId, language) {
-        console.log("Отправка данных в updateLevel:", { lesson_id: lessonId, user_id: userId, language: language });
-        $.ajax({
-            type: "POST",
-            url: "../update_level.php",
-            data: { lesson_id: lessonId, user_id: userId, language: language },
-            success: function (response) {
-                console.log("Уровень пользователя успешно обновлен:", response);
-            },
-            error: function (xhr, status, error) {
-                console.error("Ошибка при обновлении уровня пользователя:", error);
             }
         });
     }
