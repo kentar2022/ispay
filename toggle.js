@@ -24,28 +24,49 @@ function toggleHiddenBlock(language) {
 
 
 function togglePages(pageId) {
-   /* console.log(pageId);*/
+    console.log(pageId);
     var settingsPage = document.getElementById("settingsPage");
     var profilePage = document.getElementById("profilePage");
     var coursesPage = document.getElementById("coursesPage");
+    var coursesPage = document.getElementById("shopPage");
+    var friendsPage = document.getElementById("friendsPage");
     var languagesContainer = document.getElementById("languagesContainer");
 
     if (pageId === "coursesPage") {
         languagesContainer.classList.add("hidden");
         settingsPage.classList.add("hidden");
+        shopPage.classList.add("hidden");
+        friendsPage.classList.add("hidden");
         profilePage.classList.add("hidden");
     } else if (pageId === "settingsPage") {
         languagesContainer.classList.add("hidden");
         settingsPage.classList.remove("hidden");
+        shopPage.classList.add("hidden");
+        friendsPage.classList.add("hidden");
         profilePage.classList.add("hidden");
     } else if (pageId === "profilePage") {
         languagesContainer.classList.add("hidden");
         settingsPage.classList.add("hidden");
+        shopPage.classList.add("hidden");
+        friendsPage.classList.add("hidden");
         profilePage.classList.remove("hidden");
     } else if (pageId === "languagesContainer") {
         settingsPage.classList.add("hidden");
         profilePage.classList.add("hidden");
+        shopPage.classList.add("hidden");
+        friendsPage.classList.add("hidden");
         languagesContainer.classList.remove("hidden");
+    } else if (pageId === "shopPage"){
+        settingsPage.classList.add("hidden");
+        profilePage.classList.add("hidden");
+        friendsPage.classList.add("hidden");
+        languagesContainer.classList.add("hidden");
+        shopPage.classList.remove("hidden");
+    } else if (pageId === "friendsPage"){
+        settingsPage.classList.add("hidden");
+        profilePage.classList.add("hidden");
+        languagesContainer.classList.add("hidden");
+        friendsPage.classList.remove("hidden");
     }
 }
 

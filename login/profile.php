@@ -21,8 +21,8 @@ $stmt_auth = $pdo_user_auth->prepare("SELECT csrf_token FROM users WHERE id = ?"
 $stmt_auth->execute([$user_id]);
 $user_auth = $stmt_auth->fetch(PDO::FETCH_ASSOC);
 
-// Получение email, nickname и country из таблицы ispay
-$stmt_ispay = $pdo_ispay->prepare("SELECT email, nickname, country FROM users WHERE user_id = ?");
+// Получение email, nickname, country и avatar из таблицы ispay
+$stmt_ispay = $pdo_ispay->prepare("SELECT email, nickname, country, avatar FROM users WHERE user_id = ?");
 $stmt_ispay->execute([$user_id]);
 $user_ispay = $stmt_ispay->fetch(PDO::FETCH_ASSOC);
 

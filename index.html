@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/coursesPage.css">
     <link rel="stylesheet" href="styles/shop_style.css">
     <link rel="stylesheet" href="styles/scrollbar.css">
+    <link rel="stylesheet" href="styles/friends.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Your Website</title>
@@ -77,10 +78,13 @@
                     <span id="ratingsPageTextTranslation">Рейтинги</span>
                 </a>
             </div>
+            <div class="aside-item" id="friendsPageBtn" onclick="togglePages('friendsPage')"><a href="#"><span id="friendsTextTranslation">Друзья</span></a></div>
             <div class="aside-item" id="lessonsPageBtn" onclick="togglePages('lessonsPage')"><a href="library.html"><span id="lessonsPageTextTranslation">Библиотека</span></a></div>
             <div class="aside-item" id="settingsPageBtn" onclick="togglePages('settingsPage')"><a href="#"><span id="settingsPageTextTranslation">Настройки</span></a></div>
             <div class="aside-item" id="shopPageBtn" onclick="togglePages('shopPage')"><a href="#"><span id="shopTextTranslation">Магазин</span></a></div>
             <div class="aside-item"><a id="logoutButton" href="login/logout.php">Выход</a></div>
+
+
         </aside>
     </main>
 </div>
@@ -664,35 +668,93 @@
 </div>
 
 
+<div id="friendsPage" class="friendsPage page hidden">
+    <div class="friend-list-container">
+        <div class="friend-content">
+            <h2 class="friend-list-title">Мои друзья</h2>
+            <hr class="friend-list-divider">
+            <div id="friendsList" class="friend-list">
+                <!-- Список друзей будет загружен сюда через JS -->
+                <!-- Пример того, как будет выглядеть каждый друг -->
+                <!-- 
+                <div class="friend-item-container">
+                    <span class="friend-name">friend_name</span>
+                    <button class="delete-friend-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="red">
+                            <path d="M19 13H5V11H19V13Z"/>
+                        </svg>
+                    </button>
+                    <span class="friend-id">id1</span>
+                </div>
+                -->
+            </div>
+            <button id="addFriendButton" class="add-new-friend-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="white">
+                    <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
+                </svg>
+            </button>
+            <div id="addFriendModal" class="modal hidden">
+                <div class="friends-modal-content modal-content">
+                    <span class="close-button">&times;</span>
+                    <h2>Добавить друга</h2>
+                    <label for="friendIdInput">Введите ID пользователя:</label>
+                    <input type="text" id="friendIdInput" placeholder="Введите ID">
+                    <button id="confirmAddFriendButton" class="confirm-button">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <div id="shopPage" class="shopPage page hidden">
     <div class="container">
         <div class="shop_header">
             <button id="crystals-button" class="header-button">
-                <img src="images/freeze.png" alt="Кристаллы"> 59 кристаллов
+                <img src="images/freeze.png" alt="Кристаллы"><span class="crystals"></span>
             </button>
             <button id="gold-button" class="header-button">
-                <img src="images/coins.png" alt="Золото"> 2981 золота
+                <img src="images/coins.png" alt="Золото"><span class="coins"></span>
             </button>
         </div>
         <section class="boosters-section">
             <div class="booster" id="booster1">
                 <img src="images/flask.png" alt="Бустер">
-                <p>Бустер опыта 50%</p>
+                <div>
+                    <p>Бустер опыта 150%</p>
+                    <p class="price">799<img src="images/freeze.png" class="price-image" alt="Кристаллы">
+                    </p> 
+                </div>
             </div>
             <div class="booster" id="booster2">
                 <img src="images/flask.png" alt="Бустер">
-                <p>Бустер опыта 100%</p>
+                <div>
+                    <p>Бустер опыта 100%</p>
+                    <p class="price">559<img src="images/freeze.png" class="price-image" alt="Кристаллы">
+                    </p> 
+                </div>
             </div>
             <div class="booster" id="booster3">
                 <img src="images/flask.png" alt="Бустер">
-                <p>Бустер опыта 150%</p>
+                <div>
+                    <p>Бустер опыта 35%</p>
+                    <p class="price">229<img src="images/freeze.png" class="price-image" alt="Кристаллы">
+                    </p> 
+                </div>
             </div>
             <div class="booster" id="booster4">
                 <img src="images/flask.png" alt="Бустер">
-                <p>Бустер опыта 200%</p>
+                <div>
+                    <p>Бустер опыта 50%</p>
+                    <p class="price">5<img src="images/freeze.png" class="price-image" alt="Кристаллы">
+                    </p> 
+                </div>
             </div>
         </section>
-        <section class="subscription-banner" id="subscription-banner">
+
+        <!--<section class="subscription-banner" id="subscription-banner">
             <div class="subscription">
                 <h3>Месячная подписка</h3>
                 <p>Цена: 9.99 USD</p>
@@ -723,7 +785,7 @@
                 <p>Цена: 14.99 USD</p>
                 <button>Купить</button>
             </div>
-        </section>
+        </section>-->
     </div>
 </div>
 
@@ -732,16 +794,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <div class="profile-info">
-                    <img src="profile-pic/user-avatar.jpg" alt="User Avatar">
-                    <div id="userInfoContainer">
-                        <h2 id="userInfoHeaderTranslation">Информация о пользователе</h2>
-                        <p class="userNameTranslation" id="userNameTranslation">Имя: <span class="mainNickname" id="mainNickname"></span></p>
-                        <p class="userEmailTranslation" id="userEmailTranslation">Email: <span class="mainEmail" id="mainEmail"></span></p>
-                        <p class="userCountryTranslation" id="userCountryTranslation">Страна: <span class="mainCountry" id="mainCountry"></span></p>
-                        <button id="editProfileBtn" class="btn btn-primary">Редактировать профиль</button>
-                    </div>  
-                </div>
+            <div class="profile-info">
+                <img src="" alt="User Avatar" id="userAvatar">
+                <div id="userInfoContainer">
+                    <h2 id="userInfoHeaderTranslation">Информация о пользователе</h2>
+                    <p class="userNameTranslation" id="userNameTranslation">Имя: <span class="mainNickname" id="mainNickname"></span></p>
+                    <p class="userEmailTranslation" id="userEmailTranslation">Email: <span class="mainEmail" id="mainEmail"></span></p>
+                    <p class="userCountryTranslation" id="userCountryTranslation">Страна: <span class="mainCountry" id="mainCountry"></span></p>
+                    <button id="editProfileBtn" class="btn btn-primary">Редактировать профиль</button>
+                </div>  
+            </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <hr>
@@ -863,7 +926,6 @@ document.addEventListener('DOMContentLoaded', function() {
     xhr.open('GET', 'login/profile.php', true);
     xhr.onload = function() {
         if (xhr.status == 200) {
-            /*console.log('Сессия активна');*/
             var user = JSON.parse(xhr.responseText);
             updateUserInfo(user);
             updateModalInfo(user);
@@ -878,8 +940,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     xhr.send();
 });
-
-
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -926,20 +986,33 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function updateUserInfo(user) {
-
+    // Обновляем текстовые данные на странице
     document.querySelector('.mainNickname').textContent = user.nickname;
     document.querySelector('.mainEmail').textContent = user.email;
     document.querySelector('.mainCountry').textContent = user.country;
 
+    // Сохраняем данные в localStorage
     localStorage.setItem('nickname', user.nickname);
     localStorage.setItem('email', user.email);
     localStorage.setItem('country', user.country);
 
-   /* console.log('Saved to localStorage:');
+    // Обновляем путь к аватарке
+    var userAvatar = document.querySelector('#userAvatar');
+    if (user.avatar && user.avatar !== '') {
+        userAvatar.src = user.avatar;
+    } else {
+        userAvatar.src = 'path/to/default/avatar.jpg';  // Путь к изображению по умолчанию, если аватарка не указана
+    }
+
+    // Для отладки, если нужно
+    /* 
+    console.log('Saved to localStorage:');
     console.log('Nickname: ' + localStorage.getItem('nickname'));
     console.log('Email: ' + localStorage.getItem('email'));
-    console.log('Country: ' + localStorage.getItem('country'));*/
+    console.log('Country: ' + localStorage.getItem('country'));
+    */
 }
+
 
 // Функция для обновления информации о пользователе в модальном окне
 function updateModalInfo(user) {
@@ -1009,6 +1082,7 @@ function checkSession() {
 <script src="settings.js"></script>
 <script src="scripts/navigation.js"></script>
 <script src="statsHandler.js"></script>
+<script src="getFriends.js"></script>
 </body>
 </html>
 
