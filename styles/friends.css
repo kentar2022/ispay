@@ -9,7 +9,7 @@
 .friend-content {
     position: relative;
     width: 300px; /* Уменьшенная ширина контейнера */
-    background-color: white;
+    border: 1px solid;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -23,7 +23,6 @@
     margin: 0;
     font-size: 20px;
     font-weight: bold;
-    color: #333;
 }
 
 /* Горизонтальная линия под заголовком */
@@ -45,7 +44,6 @@
     align-items: center;
     border-bottom: 1px solid black;
     padding: 10px;
-    background-color: white;
 }
 
 .friend-item-container:last-child {
@@ -55,6 +53,7 @@
 .friend-name {
     flex: 1;
     text-align: left;
+    font-size: 25px;
 }
 
 .friend-id {
@@ -76,6 +75,7 @@
 /* Круглая кнопка добавления друга */
 .add-new-friend-button {
     position: absolute;
+    border: 1px solid;
     top: 50%;
     transform: translateY(-50%);
     left: 100%;
@@ -83,17 +83,12 @@
     width: 50px;
     height: 50px;
     background-color: #4CAF50;
-    border: none;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.add-new-friend-button svg {
-    fill: white;
 }
 
 /* Стили модального окна */
@@ -119,6 +114,7 @@
     border-radius: 8px;
     position: relative;
     text-align: center;
+    border: 1px solid !important;
 }
 
 /* Кнопка закрытия модального окна */
@@ -152,3 +148,15 @@
     background-color: #45a049;
 }
 
+.friend-avatar {
+    border-radius: 50%; /* Делаем аватарку круглой */
+    margin-right: 8px;  /* Добавляем расстояние в 8 пикселей между аватаркой и ником */
+    width: 44px;        /* Ширина аватарки */
+    height: 44px;       /* Высота аватарки */
+    vertical-align: middle; /* Выравниваем аватарку по середине с текстом */
+}
+
+.friend-item-container {
+    display: flex;
+    align-items: center;
+}

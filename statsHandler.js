@@ -26,6 +26,11 @@ $(document).ready(function() {
                 success: function(data) {
                     console.log('Ответ от getProfileStats.php получен:', data);
 
+                    if (data.error) {
+                        console.error('Ошибка: ' + data.error);
+                        return;
+                    }
+
                     // Обновляем значения статистики
                     $('#score').text(data.score);
                     $('#lessonsCompleted').text(data.lessonsCompleted);
@@ -34,7 +39,7 @@ $(document).ready(function() {
                     // Обновляем значения кристаллов и монет
                     $('.crystals').text(data.crystals);
                     $('.coins').text(data.coins);
-                    
+
                     console.log('Данные успешно обновлены на странице.');
                 },
                 error: function(xhr, status, error) {

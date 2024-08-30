@@ -33,13 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $topics = $topics_stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Вставка данных в таблицу theme_progress для нового пользователя
-        $theme_progress_stmt = $pdo_chechen->prepare("INSERT INTO theme_progress (user_id, theme_id, completed_lessons, completed_topics, progress_percentage, total_score) VALUES (?, ?, 0, 0, 0, 0)");
+        $theme_progress_stmt = $pdo_chechen->prepare("INSERT INTO theme_progress (user_id, theme_id, completed_lessons, completed_topics, progress_percentage, total_score) VALUES (?, ?, 1, 0, 0, 0)");
         foreach ($themes as $theme) {
             $theme_progress_stmt->execute([$user_id, $theme['id']]);
         }
 
         // Вставка данных в таблицу topic_progress для нового пользователя
-        $topic_progress_stmt = $pdo_chechen->prepare("INSERT INTO topic_progress (user_id, theme_id, topic_id, completed_lessons, completed_topics, total_score) VALUES (?, ?, ?, 0, 0, 0)");
+        $topic_progress_stmt = $pdo_chechen->prepare("INSERT INTO topic_progress (user_id, theme_id, topic_id, completed_lessons, completed_topics, total_score) VALUES (?, ?, ?, 1, 2, 3)");
         foreach ($topics as $topic) {
             $topic_progress_stmt->execute([$user_id, $topic['theme_id'], $topic['id']]);
         }

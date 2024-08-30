@@ -5,12 +5,13 @@ var themeDark = document.getElementById('themeDark');
 // Переменные для ссылок, иконок SVG, текстовых элементов и кнопок
 var links = document.querySelectorAll('a, .a');
 var svgIcons = document.querySelectorAll('svg');
+var friendsPageElements = document.querySelectorAll('.friendsPage *');
 var settingsPageText = document.querySelectorAll('.settingsPage *');
 var coursesPageLinks = document.querySelectorAll('.courses a');
 var profilePageElements = document.querySelectorAll('.profilePage *');
 var selectLanguages = document.querySelectorAll('select > option, #languageSelect');
 var buttons = document.querySelectorAll('.button, .btn');
-var mainBlocks = document.querySelectorAll('.main-block'); // Добавлен класс для main-block
+var mainBlocks = document.querySelectorAll('.main-block'); 
 
 // Функция для применения стилей в соответствии с текущей темой
 function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor, buttonColor, buttonTextColor, mainBlockColor, scrollbarColor) {
@@ -20,6 +21,10 @@ function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, cou
     });
     svgIcons.forEach(function(svgIcon) {
         svgIcon.setAttribute('fill', fillColor);
+    });
+    friendsPageElements.forEach(function(element) {
+        element.style.color = settingsPageTextColor;
+        element.style.backgroundColor = bodyColor;
     });
     settingsPageText.forEach(function(element) {
         element.style.color = settingsPageTextColor;
@@ -39,7 +44,7 @@ function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, cou
     });
     mainBlocks.forEach(function(block) {
         block.style.backgroundColor = mainBlockColor;
-        block.style.color = '#ffffff'; // Предположим, что текст белый
+        block.style.color = '#ffffff'; 
     });
     document.getElementById('languageSelectContainer').style.backgroundColor = bodyColor;
 
@@ -130,149 +135,8 @@ themeLight.addEventListener('change', setTheme);
 themeDark.addEventListener('change', setTheme);
 
 
-var texts = {
-    russian: {
-        menu: "Профиль",
-        coursesPage: "Список курсов",
-        ratingsPage: "Рейтинги",
-        lessonsPage: "Библиотека",
-        settingsPage: "Настройки",
-        shop: "Магазин",
-        settingsHeaderText: "Настройки",
-        settingsLangRussian: "Русский",
-        settingsLangEnglish: "Английский",
-        settingsLangFrench: "Французский",
-        settingsThemeSelection: "Выбор темы страницы:",
-        settingsLangSelection: "Выбор языка страницы:",
-        settingsThemeLight: "Светлая тема",
-        settingsThemeDark: "Темная тема",
-        settingsThemeDark2: "Темная тема 2",
-        courseChechen: "Чеченский язык",
-        courseIngush: "Ингушский язык",
-        courseAdyge: "Черкесский язык",
-        courseUdmurt: "Удмуртский язык",
-        courseTatar: "Татарский язык",
-        courseChuvash: "Чувашский язык",
-        userInfoHeader: "Информация о пользователе",
-        userName: "Имя:",
-        userEmail: "Email:",
-        userCountry: "Страна:",
-        coursesHeader: "Курсы",
-        aboutHeader: "О себе",
-        aboutDescription: "Краткое описание пользователя. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet purus diam.",
-        statsHeader: "Статистика",
-        score: "Количество очков: 1000",
-        completedLessons: "Количество пройденных уроков: 50",
-        globalRank: "Место в общей статистике: 10 из 1000",
-        dailyGiftsHeader: "Ежедневные подарки",
-        premiumOffer: "Получите доступ к дополнительным возможностям с премиум подпиской!",
-        subscribeBtn: "Подписаться на премиум",
-        giftElement: "День",
-        profileModalHeader: "Информация о пользователе",
-        profileModalName: "Имя",
-        profileModalEmail: "Email",
-        profileModalCountry: "Страна",
-        profileModalSaveButton: "Сохранить",
-        editProfileBtn: "Редактировать профиль",
-        logoutBtn: "Выход",
-        LanguageInformation: "Полезная информация"
 
 
-    },
-    english: {
-        menu: "Profile",
-        coursesPage: "Course List",
-        ratingsPage: "Ratings",
-        lessonsPage: "Library",
-        settingsPage: "Settings",
-        shop: "Shop",
-        settingsHeaderText: "Settings",
-        settingsLangRussian: "Russian",
-        settingsLangEnglish: "English",
-        settingsLangFrench: "French",
-        settingsThemeSelection: "Choose page theme:",
-        settingsLangSelection: "Choose page language:",
-        settingsThemeLight: "Light Theme",
-        settingsThemeDark: "Dark Theme",
-        settingsThemeDark2: "Dark Theme 2",
-        courseChechen: "Chechen Language",
-        courseIngush: "Ingush Language",
-        courseAdyge: "Adyghe Language",
-        courseUdmurt: "Udmurt Language",
-        courseTatar: "Tatar Language",
-        courseChuvash: "Chuvash Language",
-        userInfoHeader: "User Information",
-        userName: "Name:",
-        userEmail: "Email:",
-        userCountry: "Country:",
-        coursesHeader: "Courses",
-        aboutHeader: "About Me",
-        aboutDescription: "Brief user description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet purus diam.",
-        statsHeader: "Statistics",
-        score: "Score: 1000",
-        completedLessons: "Completed Lessons: 50",
-        globalRank: "Global Rank: 10 out of 1000",
-        dailyGiftsHeader: "Daily Gifts",
-        premiumOffer: "Unlock additional features with a premium subscription!",
-        subscribeBtn: "Subscribe to Premium",
-        giftElement: "Day",
-        profileModalHeader: "User Information",
-        profileModalName: "Name",
-        profileModalEmail: "Email",
-        profileModalCountry: "Country",
-        profileModalSaveButton: "Save",
-        editProfileBtn: "Edit Profile",
-        logoutBtn: "Logout",
-        LanguageInformation: "Helpful information"
-    },
-    french: {
-        menu: "Profile",
-        coursesPage: "Liste des cours",
-        ratingsPage: "Classements",
-        lessonsPage: "Bibliothèque",
-        settingsPage: "Paramètres",
-        shop: "Magasin",
-        settingsHeaderText: "Paramètres",
-        settingsLangRussian: "Russe",
-        settingsLangEnglish: "Anglais",
-        settingsLangFrench: "Français",
-        settingsThemeSelection: "Choix du thème de la page :",
-        settingsLangSelection: "Choix de la langue de la page :",
-        settingsThemeLight: "Thème clair",
-        settingsThemeDark: "Thème sombre",
-        settingsThemeDark2: "Thème sombre 2",
-        courseChechen: "Langue tchétchène",
-        courseIngush: "Langue ingouche",
-        courseAdyge: "Langue adyghéenne",
-        courseUdmurt: "Langue oudmourte",
-        courseTatar: "Langue tatare",
-        courseChuvash: "Langue tchouvache",
-        userInfoHeader: "Informations sur l'utilisateur",
-        userName: "Nom:",
-        userEmail: "Email:",
-        userCountry: "Pays:",
-        coursesHeader: "Cours",
-        aboutHeader: "À propos de moi",
-        aboutDescription: "Description succincte de l'utilisateur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet purus diam.",
-        statsHeader: "Statistiques",
-        score: "Score: 1000",
-        completedLessons: "Leçons terminées: 50",
-        globalRank: "Classement mondial: 10 sur 1000",
-        dailyGiftsHeader: "Cadeaux quotidiens",
-        premiumOffer: "Débloquez des fonctionnalités supplémentaires avec un abonnement premium !",
-        subscribeBtn: "Souscrire à Premium",
-        giftElement: "Jour",
-        profileModalHeader: "Informations de l'utilisateur",
-        profileModalName: "Nom",
-        profileModalEmail: "Email",
-        profileModalCountry: "Pays",
-        profileModalSaveButton: "Sauvegarder",
-        editProfileBtn: "Modifier le profil",
-        logoutBtn: "Déconnexion",
-        LanguageInformation: "Information utile"
-
-    }
-};
 
 function changeLanguage(language) {
     document.getElementById("menuTextTranslation").innerText = texts[language].menu;
@@ -281,6 +145,11 @@ function changeLanguage(language) {
     document.getElementById("lessonsPageTextTranslation").innerText = texts[language].lessonsPage;
     document.getElementById("settingsPageTextTranslation").innerText = texts[language].settingsPage;
     document.getElementById("shopTextTranslation").innerText = texts[language].shop;
+    document.getElementById("friendsTextTranslation").innerText = texts[language].friendsTextTranslation;
+    document.getElementById("friend-list-title").innerText = texts[language].friendListTitle;
+    document.getElementById("addFriendText").innerText = texts[language].addFriendText;
+    document.getElementById("friendIdInput").innerText = texts[language].friendIdInput;
+    document.getElementById("confirmAddFriendButton").innerText = texts[language].confirmAddFriendButton;
     
     document.getElementById("logoutButton").innerText = texts[language].logoutBtn;
 
@@ -335,6 +204,11 @@ function changeLanguage(language) {
     document.getElementById('giftItemTranslation6').innerText = texts[language].giftElement;
     document.getElementById('giftItemTranslation7').innerText = texts[language].giftElement;
 
+    document.getElementById('boosterElement1').innerText = texts[language].boosterElement;
+    document.getElementById('boosterElement2').innerText = texts[language].boosterElement;
+    document.getElementById('boosterElement3').innerText = texts[language].boosterElement;
+    document.getElementById('boosterElement4').innerText = texts[language].boosterElement;
+
     document.getElementById("profileModalHeaderTranslation").innerText = texts[language].profileModalHeader;
     document.getElementById("profileModalNameTranslation").innerHTML = texts[language].profileModalName + ": <span id='nickname' class='nickname'></span>";
     document.getElementById("profileModalEmailTranslation").innerHTML = texts[language].profileModalEmail + ": <span id='email' class='email'></span>";
@@ -380,6 +254,182 @@ function changeLanguage(language) {
     }
     localStorage.setItem('currentLanguage', language);
 }
+
+
+
+var texts = {
+    russian: {
+        menu: "Профиль",
+        coursesPage: "Список курсов",
+        ratingsPage: "Рейтинги",
+        lessonsPage: "Библиотека",
+        settingsPage: "Настройки",
+        shop: "Магазин",
+        settingsHeaderText: "Настройки",
+        settingsLangRussian: "Русский",
+        settingsLangEnglish: "Английский",
+        settingsLangFrench: "Французский",
+        settingsThemeSelection: "Выбор темы страницы:",
+        settingsLangSelection: "Выбор языка страницы:",
+        settingsThemeLight: "Светлая тема",
+        settingsThemeDark: "Темная тема",
+        settingsThemeDark2: "Темная тема 2",
+        courseChechen: "Чеченский язык",
+        courseIngush: "Ингушский язык",
+        courseAdyge: "Черкесский язык",
+        courseUdmurt: "Удмуртский язык",
+        courseTatar: "Татарский язык",
+        courseChuvash: "Чувашский язык",
+        userInfoHeader: "Информация о пользователе",
+        userName: "Имя:",
+        userEmail: "Email:",
+        userCountry: "Страна:",
+        coursesHeader: "Курсы",
+        aboutHeader: "О себе",
+        aboutDescription: "Краткое описание пользователя. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet purus diam.",
+        statsHeader: "Статистика",
+        score: "Количество очков: 1000",
+        completedLessons: "Количество пройденных уроков:",
+        globalRank: "Место в общей статистике:",
+        dailyGiftsHeader: "Ежедневные подарки",
+        premiumOffer: "Получите доступ к дополнительным возможностям с премиум подпиской!",
+        subscribeBtn: "Подписаться на премиум",
+        giftElement: "День",
+        profileModalHeader: "Информация о пользователе",
+        profileModalName: "Имя",
+        profileModalEmail: "Email",
+        profileModalCountry: "Страна",
+        profileModalSaveButton: "Сохранить",
+        editProfileBtn: "Редактировать профиль",
+        logoutBtn: "Выход",
+        LanguageInformation: "Полезная информация",
+        friendsTextTranslation: "Друзья",
+        friendListTitle: "Мои друзья",
+        addFriendText: "Добавить в друзья",
+        confirmAddFriendButton: "Добавить",
+        friendIdInput: "Введите ID пользователя:",
+        boosterElement:"Бустер опыта"
+
+
+/*
+    document.getElementById("friendsTextTranslation").innerText = texts[language].friendsTextTranslation;
+    document.getElementById("friend-list-title").innerText = texts[language].friendListTitle;
+    document.getElementById("addFriendButton").innerText = texts[language].addFriendButton;
+    document.getElementById("friendIdInput").innerText = texts[language].friendIdInput;
+    document.getElementById("confirmAddFriendButton").innerText = texts[language].confirmAddFriendButton;
+    */
+
+
+
+    },
+    english: {
+        menu: "Profile",
+        coursesPage: "Course List",
+        ratingsPage: "Ratings",
+        lessonsPage: "Library",
+        settingsPage: "Settings",
+        shop: "Shop",
+        settingsHeaderText: "Settings",
+        settingsLangRussian: "Russian",
+        settingsLangEnglish: "English",
+        settingsLangFrench: "French",
+        settingsThemeSelection: "Choose page theme:",
+        settingsLangSelection: "Choose page language:",
+        settingsThemeLight: "Light Theme",
+        settingsThemeDark: "Dark Theme",
+        settingsThemeDark2: "Dark Theme 2",
+        courseChechen: "Chechen Language",
+        courseIngush: "Ingush Language",
+        courseAdyge: "Adyghe Language",
+        courseUdmurt: "Udmurt Language",
+        courseTatar: "Tatar Language",
+        courseChuvash: "Chuvash Language",
+        userInfoHeader: "User Information",
+        userName: "Name:",
+        userEmail: "Email:",
+        userCountry: "Country:",
+        coursesHeader: "Courses",
+        aboutHeader: "About Me",
+        aboutDescription: "Brief user description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet purus diam.",
+        statsHeader: "Statistics",
+        score: "Score:",
+        completedLessons: "Completed Lessons:",
+        globalRank: "Global Rank:",
+        dailyGiftsHeader: "Daily Gifts",
+        premiumOffer: "Unlock additional features with a premium subscription!",
+        subscribeBtn: "Subscribe to Premium",
+        giftElement: "Day",
+        profileModalHeader: "User Information",
+        profileModalName: "Name",
+        profileModalEmail: "Email",
+        profileModalCountry: "Country",
+        profileModalSaveButton: "Save",
+        editProfileBtn: "Edit Profile",
+        logoutBtn: "Logout",
+        LanguageInformation: "Helpful information",
+        friendsTextTranslation: "Friends",
+        friendListTitle: "My friends",
+        addFriendText: "Add friend",
+        confirmAddFriendButton: "Add",
+        friendIdInput: "Enter user ID:",
+        boosterElement:"Experience Booster"
+
+    },
+    french: {
+        menu: "Profile",
+        coursesPage: "Liste des cours",
+        ratingsPage: "Classements",
+        lessonsPage: "Bibliothèque",
+        settingsPage: "Paramètres",
+        shop: "Magasin",
+        settingsHeaderText: "Paramètres",
+        settingsLangRussian: "Russe",
+        settingsLangEnglish: "Anglais",
+        settingsLangFrench: "Français",
+        settingsThemeSelection: "Choix du thème de la page :",
+        settingsLangSelection: "Choix de la langue de la page :",
+        settingsThemeLight: "Thème clair",
+        settingsThemeDark: "Thème sombre",
+        settingsThemeDark2: "Thème sombre 2",
+        courseChechen: "Langue tchétchène",
+        courseIngush: "Langue ingouche",
+        courseAdyge: "Langue adyghéenne",
+        courseUdmurt: "Langue oudmourte",
+        courseTatar: "Langue tatare",
+        courseChuvash: "Langue tchouvache",
+        userInfoHeader: "Informations sur l'utilisateur",
+        userName: "Nom:",
+        userEmail: "Email:",
+        userCountry: "Pays:",
+        coursesHeader: "Cours",
+        aboutHeader: "À propos de moi",
+        aboutDescription: "Description succincte de l'utilisateur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet purus diam.",
+        statsHeader: "Statistiques",
+        score: "Score:",
+        completedLessons: "Leçons terminées:",
+        globalRank: "Classement mondial:",
+        dailyGiftsHeader: "Cadeaux quotidiens",
+        premiumOffer: "Débloquez des fonctionnalités supplémentaires avec un abonnement premium !",
+        subscribeBtn: "Souscrire à Premium",
+        giftElement: "Jour",
+        profileModalHeader: "Informations de l'utilisateur",
+        profileModalName: "Nom",
+        profileModalEmail: "Email",
+        profileModalCountry: "Pays",
+        profileModalSaveButton: "Sauvegarder",
+        editProfileBtn: "Modifier le profil",
+        logoutBtn: "Déconnexion",
+        LanguageInformation: "Information utile",
+        friendsTextTranslation: "Amis",
+        friendListTitle: "Mes amis",
+        addFriendText: "Ajouter un ami",
+        confirmAddFriendButton: "Ajouter",
+        friendIdInput: "Entrez l'ID de l'utilisateur:",
+        boosterElement:"Booster d'expérience"
+
+    }
+};
+
 
 
 

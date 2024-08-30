@@ -83,8 +83,6 @@
             <div class="aside-item" id="settingsPageBtn" onclick="togglePages('settingsPage')"><a href="#"><span id="settingsPageTextTranslation">Настройки</span></a></div>
             <div class="aside-item" id="shopPageBtn" onclick="togglePages('shopPage')"><a href="#"><span id="shopTextTranslation">Магазин</span></a></div>
             <div class="aside-item"><a id="logoutButton" href="login/logout.php">Выход</a></div>
-
-
         </aside>
     </main>
 </div>
@@ -671,10 +669,9 @@
 <div id="friendsPage" class="friendsPage page hidden">
     <div class="friend-list-container">
         <div class="friend-content">
-            <h2 class="friend-list-title">Мои друзья</h2>
+            <h2 class="friend-list-title a" id="friend-list-title">Мои друзья</h2>
             <hr class="friend-list-divider">
             <div id="friendsList" class="friend-list">
-                <!-- Список друзей будет загружен сюда через JS -->
                 <!-- Пример того, как будет выглядеть каждый друг -->
                 <!-- 
                 <div class="friend-item-container">
@@ -689,16 +686,16 @@
                 -->
             </div>
             <button id="addFriendButton" class="add-new-friend-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="white">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="white" class="addFriendSvg">
                     <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
                 </svg>
             </button>
             <div id="addFriendModal" class="modal hidden">
                 <div class="friends-modal-content modal-content">
                     <span class="close-button">&times;</span>
-                    <h2>Добавить друга</h2>
-                    <label for="friendIdInput">Введите ID пользователя:</label>
-                    <input type="text" id="friendIdInput" placeholder="Введите ID">
+                    <h2 id="addFriendText">Добавить друга</h2>
+                    <label id="friendIdInput" for="friendIdInput">Введите ID пользователя:</label>
+                    <input type="text">
                     <button id="confirmAddFriendButton" class="confirm-button">Добавить</button>
                 </div>
             </div>
@@ -723,7 +720,7 @@
             <div class="booster" id="booster1">
                 <img src="images/flask.png" alt="Бустер">
                 <div>
-                    <p>Бустер опыта 150%</p>
+                    <p id="boosterElement1">Бустер опыта 150%</p>
                     <p class="price">799<img src="images/freeze.png" class="price-image" alt="Кристаллы">
                     </p> 
                 </div>
@@ -731,7 +728,7 @@
             <div class="booster" id="booster2">
                 <img src="images/flask.png" alt="Бустер">
                 <div>
-                    <p>Бустер опыта 100%</p>
+                    <p id="boosterElement2">Бустер опыта 100%</p>
                     <p class="price">559<img src="images/freeze.png" class="price-image" alt="Кристаллы">
                     </p> 
                 </div>
@@ -739,7 +736,7 @@
             <div class="booster" id="booster3">
                 <img src="images/flask.png" alt="Бустер">
                 <div>
-                    <p>Бустер опыта 35%</p>
+                    <p id="boosterElement3">Бустер опыта 35%</p>
                     <p class="price">229<img src="images/freeze.png" class="price-image" alt="Кристаллы">
                     </p> 
                 </div>
@@ -747,7 +744,7 @@
             <div class="booster" id="booster4">
                 <img src="images/flask.png" alt="Бустер">
                 <div>
-                    <p>Бустер опыта 50%</p>
+                    <p id="boosterElement4">Бустер опыта 50%</p>
                     <p class="price">5<img src="images/freeze.png" class="price-image" alt="Кристаллы">
                     </p> 
                 </div>
@@ -790,7 +787,7 @@
 </div>
 
 
-<div id="profilePage" class="profilePage page hidden">
+<div id="profilePage" class="profilePage page ">
     <div class="container">
         <div class="row">
             <div class="col-md-9">
@@ -811,19 +808,19 @@
                         <div class="profile-courses-block">
                             <h2 id="coursesHeaderTranslation">Курсы</h2>
                             <div class="profile-courses">
-                                <a href="chechen_lessons_menu.html" class="profile-course">
+                                <a href="chechen_lessons_menu.html" class="profile-course" data-language="chechen">
                                     <img src="courses_flags/chechen.png" alt="Flag">
                                     <h6 id="profileChechenTranslation">Чеченский язык</h6>
                                 </a>
-                                <a href="ingush_language.html" class="profile-course">
+                                <a href="ingush_language.html" class="profile-course" data-language="ingush">
                                     <img src="courses_flags/ingush.png" alt="Flag">
                                     <h6 id="profileIngushTranslation">Ингушский язык</h6>
                                 </a>
-                                <a href="adyge_language.html" class="profile-course">
+                                <a href="adyge_language.html" class="profile-course" data-language="adyghe">
                                     <img src="courses_flags/adyge.png" alt="Flag">
                                     <h6 id="profileAdygeTranslation">Черкесский язык</h6>
                                 </a>
-                                <a href="udmurt_language.html" class="profile-course">
+                                <a href="udmurt_language.html" class="profile-course" data-language="udmurt">
                                     <img src="courses_flags/udmurt.png" alt="Flag">
                                     <h6 id="profileUdmurtTranslation">Удмуртский язык</h6>
                                 </a>
@@ -842,9 +839,18 @@
             <div class="col-md-3">
                 <div class="profile-stats">
                     <h2 id="statsHeaderTranslation">Статистика</h2>
-                    <p id="scoreTranslation">Количество очков: <span id="score"></span></p>
-                    <p id="completedLessonsTranslation">Количество пройденных уроков: <span id="lessonsCompleted"></span></p>
-                    <p id="globalRankTranslation">Место в общей статистике: <span id="overallRank"></span></p>
+                    
+                    <div class="stat-item">
+                        <p id="scoreTranslation">Количество очков:</p> <span id="score"></span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <p id="completedLessonsTranslation">Количество пройденных уроков:</p> <span id="lessonsCompleted"></span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <p id="globalRankTranslation">Место в общей статистике:</p> <span id="overallRank"></span>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -887,7 +893,7 @@
             </div>
         </div>
         <!--<div class="premium-offer">
-            <p id="premiumOfferTranslation">Получите доступ к дополнительным возможностям с премиум подпиской!</p>
+            <p id="premiumOfferTranslation">Получите доступ к дополнительным воздржностям с премиум подпиской!</p>
             <a href="#" class="btn btn-primary" id="subscribeBtnTranslation">Подписаться на премиум</a>
         </div>-->
     </div>
@@ -896,11 +902,22 @@
 <div id="profileModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2 id="profileModalHeaderTranslation">Информация о пользователе</h2>
-        <p class="profileModalNameTranslation editable" id="profileModalNameTranslation">Имя: <span id="nickname" class="nickname"></span></p>
-        <p class="profileModalEmailTranslation editable" id="profileModalEmailTranslation">Email: <span id="email" class="email"></span></p>
-        <p class="profileModalCountryTranslation editable" id="profileModalCountryTranslation">Страна: <span id="country" class="country"></span></p>
-        <form id="updateForm" action="login/update_profile.php" method="POST" style="display:none;">
+        <h2 id="profileModalHeaderTranslation" class="modal-header">Информация о пользователе</h2>
+        
+        <div class="profile-content">
+            <!-- Аватарка пользователя -->
+            <div class="profile-avatar-container">
+                <img id="profileAvatar" alt="User Avatar" class="profile-avatar">
+            </div>
+            
+            <div class="profile-info modal-profile-info">
+                <p class="profileModalNameTranslation editable" id="profileModalNameTranslation">Имя: <span id="nickname" class="nickname"></span></p>
+                <p class="profileModalEmailTranslation editable" id="profileModalEmailTranslation">Email: <span id="email" class="email"></span></p>
+                <p class="profileModalCountryTranslation editable" id="profileModalCountryTranslation">Страна: <span id="country" class="country"></span></p>
+            </div>
+        </div>
+
+        <form id="updateForm" action="login/update_profile.php" method="POST" enctype="multipart/form-data" style="display:none;">
             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
             <input type="hidden" name="field" id="field">
             <input type="text" name="value" id="value">
@@ -908,6 +925,8 @@
         </form>
     </div>
 </div>
+
+
 
 
 <script>
@@ -920,111 +939,6 @@ document.getElementById('field').addEventListener('change', function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Проверка сессии при загрузке страницы
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'login/profile.php', true);
-    xhr.onload = function() {
-        if (xhr.status == 200) {
-            var user = JSON.parse(xhr.responseText);
-            updateUserInfo(user);
-            updateModalInfo(user);
-        } else {
-            console.error('Сессия не активна');
-            window.location.href = 'login/login.html';
-        }
-    };
-    xhr.onerror = function() {
-        console.error('Ошибка проверки сессии');
-        window.location.href = 'login/login.html';
-    };
-    xhr.send();
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Элементы модального окна и кнопки
-    var modal = document.getElementById("profileModal");
-    var btn = document.getElementById("editProfileBtn");
-    var span = document.getElementsByClassName("close")[0];
-
-    // Открытие модального окна и загрузка информации о пользователе
-    btn.onclick = function() {
-        modal.style.display = "block";
-        getUserInfo(updateModalInfo);
-    }
-
-    // Закрытие модального окна при нажатии на крестик
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Закрытие модального окна при клике вне его
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    // Проверка сессии при загрузке страницы
-    checkSession();
-
-
-    // Обработка двойного клика для редактирования полей
-    document.querySelectorAll('.editable').forEach(item => {
-        item.addEventListener('dblclick', function() {
-            const span = this.querySelector('span');
-            const field = span.id;
-            const value = span.textContent;
-            const input = document.getElementById('value');
-            input.value = value;
-            document.getElementById('field').value = field;
-            document.getElementById('updateForm').style.display = 'block';
-            input.focus();
-        });
-    });
-});
-
-function updateUserInfo(user) {
-    // Обновляем текстовые данные на странице
-    document.querySelector('.mainNickname').textContent = user.nickname;
-    document.querySelector('.mainEmail').textContent = user.email;
-    document.querySelector('.mainCountry').textContent = user.country;
-
-    // Сохраняем данные в localStorage
-    localStorage.setItem('nickname', user.nickname);
-    localStorage.setItem('email', user.email);
-    localStorage.setItem('country', user.country);
-
-    // Обновляем путь к аватарке
-    var userAvatar = document.querySelector('#userAvatar');
-    if (user.avatar && user.avatar !== '') {
-        userAvatar.src = user.avatar;
-    } else {
-        userAvatar.src = 'path/to/default/avatar.jpg';  // Путь к изображению по умолчанию, если аватарка не указана
-    }
-
-    // Для отладки, если нужно
-    /* 
-    console.log('Saved to localStorage:');
-    console.log('Nickname: ' + localStorage.getItem('nickname'));
-    console.log('Email: ' + localStorage.getItem('email'));
-    console.log('Country: ' + localStorage.getItem('country'));
-    */
-}
-
-
-// Функция для обновления информации о пользователе в модальном окне
-function updateModalInfo(user) {
-   /* console.log('Updating modal info...');
-    console.log('Name: ' + user.nickname);
-    console.log('Email: ' + user.email);
-    console.log('Country: ' + user.country);*/
-
-    document.querySelector('.nickname').textContent = user.nickname;
-    document.querySelector('.email').textContent = user.email;
-    document.querySelector('.country').textContent = user.country;
-}
 
 
 function selectLanguage(language) {
@@ -1033,24 +947,6 @@ function selectLanguage(language) {
 }
 
 
-// Функция для получения информации о пользователе
-function getUserInfo(callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'login/profile.php', true);
-    xhr.onload = function() {
-        if (xhr.status == 200) {
-            var user = JSON.parse(xhr.responseText);
-            console.log("User ID: " + user.user_id);  // Выводим ID пользователя в консоль
-            callback(user);
-        } else {
-            console.error('Ошибка получения информации о пользователе: ' + xhr.statusText);
-        }
-    };
-    xhr.onerror = function() {
-        console.error('Ошибка отправки запроса');
-    };
-    xhr.send();
-}
 
 
 
@@ -1078,6 +974,7 @@ function checkSession() {
 
 <script src="block_status.regulator.js"></script>
 <script src="toggle.js"></script>
+<script src="profile.js"></script>
 <!--<script src="send_id.js"></script>-->
 <script src="settings.js"></script>
 <script src="scripts/navigation.js"></script>

@@ -14,17 +14,18 @@ $(document).ready(function() {
 
             if (friends.length > 0) {
                 friends.forEach(function(friend) {
-                    $friendsList.append(
-                        '<div class="friend-item-container" data-friend-id="' + friend.id + '">' +
-                        '<span class="friend-name">' + friend.nickname + '</span>' +
-                        '<button class="delete-friend-button">' +
-                        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="red">' +
-                        '<path d="M19 13H5V11H19V13Z"/>' +
-                        '</svg>' +
-                        '</button>' +
-                        '<span class="friend-id">id' + friend.id + '</span>' +
-                        '</div>'
-                    );
+                $friendsList.append(
+                    '<div class="friend-item-container" data-friend-id="' + friend.id + '">' +
+                    '<img src="' + friend.avatar + '" alt="Avatar" class="friend-avatar">' +
+                    '<span class="friend-name text">' + friend.nickname + '</span>' +
+                    '<button class="delete-friend-button">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="red">' +
+                    '<path d="M19 13H5V11H19V13Z"/>' +
+                    '</svg>' +
+                    '</button>' +
+                    '<span class="friend-id">id' + friend.id + '</span>' +
+                    '</div>'
+                );
                 });
             } else {
                 $friendsList.append('<p>У вас пока нет друзей</p>');

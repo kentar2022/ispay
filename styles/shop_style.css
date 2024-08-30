@@ -26,14 +26,12 @@
 #crystals-button {
    /* border-color: #00f;*/
     color: #00f;
-    background-color: #293133;
     font-size: 130%;
 }
 
 #gold-button {
     /*border-color: #ff0;*/
     color: #ff0;
-    background-color: #293133;
     font-size: 130%;
 }
 
@@ -64,7 +62,6 @@
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0 0;
-    color: white;
 }
 
 .subscription-banner {
@@ -105,7 +102,6 @@
 }
 .booster .price {
     font-size: 16px;
-    color: #ffffff; 
     margin-top: 5px;
 }
 

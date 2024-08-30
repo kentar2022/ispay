@@ -16,7 +16,7 @@ if ($mysqli->connect_error) {
 $userId = $_GET['userId']; // Получаем идентификатор пользователя из AJAX-запроса
 
 $sql = "
-    SELECT score, lessonsCompleted, overallRank, crystals, coins 
+    SELECT score, lessonsCompleted, overallRank, crystals, coins, languages_list 
     FROM profileStats
     WHERE userId = ?
 ";
@@ -28,7 +28,7 @@ $stmt->store_result();
 // Проверка наличия данных
 if ($stmt->num_rows > 0) {
     // Получение данных
-    $stmt->bind_result($score, $lessonsCompleted, $overallRank, $crystals, $coins);
+    $stmt->bind_result($score, $lessonsCompleted, $overallRank, $crystals, $coins, $languages_list);
     $stmt->fetch();
     // Формирование ответа
     $response = array(
@@ -36,7 +36,8 @@ if ($stmt->num_rows > 0) {
         'lessonsCompleted' => $lessonsCompleted,
         'overallRank' => $overallRank,
         'crystals' => $crystals,
-        'coins' => $coins
+        'coins' => $coins,
+        'languages' => explode(',', $languages_list) // Преобразуем строку языков в массив
     );
     echo json_encode($response);
 } else {
