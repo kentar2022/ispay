@@ -3,103 +3,122 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
+ob_start();
 
-$servername = "localhost";
-$username = "kentar";
-$password = "password";
 
-if (!isset($_POST['lesson_id']) || !isset($_POST['language']) || !isset($_POST['interfaceLanguage'])) {
-    echo json_encode(['error' => 'lesson_id, language, or interfaceLanguage parameter is missing.']);
+
+// Проверка метода запроса
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    echo json_encode(['error' => 'Неверный метод запроса. Ожидается GET.']);
     exit;
 }
 
-$lessonId = $_POST['lesson_id'];
-$language = $_POST['language'];
-$interfaceLanguage = $_POST['interfaceLanguage'];
+// Получение параметров из запроса
+$language = $_GET['language'] ?? null;
+$lesson_id = $_GET['lesson_id'] ?? null;
 
-$tableName = $language . "_words";
-
-$conn = new mysqli($servername, $username, $password, $language);
-
-if ($conn->connect_error) {
-    echo json_encode(['error' => "Connection failed: " . $conn->connect_error]);
+if (!$language || !$lesson_id) {
+    echo json_encode(['error' => 'Язык или идентификатор урока не указан.']);
     exit;
 }
 
-// Получение вопросов
-$sql_select_questions = "SELECT * FROM {$tableName} WHERE lesson_level = ?";
-$stmt_select_questions = $conn->prepare($sql_select_questions);
-$stmt_select_questions->bind_param("i", $lessonId);
-$stmt_select_questions->execute();
-$result_select_questions = $stmt_select_questions->get_result();
 
-$questions_data = array();
-$question_ids = array();
-$matches_data = array();
-
-if ($result_select_questions->num_rows > 0) {
-    while ($row = $result_select_questions->fetch_assoc()) {
-        $questions_data[] = $row;
-        $question_ids[] = $row['id'];
-
-        if ($row['task_type'] === 'matches') {
-            $match = array(
-                'question_id' => $row['id'],
-                'questions' => $row['text'],
-                'answers' => '' // Заполним позже
-            );
-            $matches_data[] = $match;
-        }
-    }
+if (isset($_GET['language']) && isset($_GET['lesson_id'])) {
+    echo "Language: " . htmlspecialchars($_GET['language']) . "<br>";
+    echo "Lesson ID: " . htmlspecialchars($_GET['lesson_id']) . "<br>";
 } else {
-    echo json_encode(["error" => "No data found in table: {$tableName} (questions)"]);
+    echo "Language or lesson ID not specified.";
+}
+
+
+
+// Определение базы данных на основе выбранного языка
+$databaseName = match (strtolower($language)) {
+    'chechen' => 'chechen',
+    'ingush' => 'ingush',
+    'adyge' => 'adyge',
+    'udmurt' => 'udmurt',
+    'tatar' => 'tatar',
+    'chuvash' => 'chuvash',
+    'bashkort' => 'bashkort',
+    default => null,
+};
+
+if (!$databaseName) {
+    echo json_encode(['error' => 'Ошибка: неверный выбор базы данных.']);
     exit;
 }
 
-// Получение ответов
-$answersTableName = 'russian_words';
+// Подключение к базе данных
+$mysqli = new mysqli("localhost", "kentar", "password", $databaseName);
 
-$sql_select_answers = "SELECT * FROM {$answersTableName} WHERE id IN (" . implode(',', array_fill(0, count($question_ids), '?')) . ")";
-$stmt_select_answers = $conn->prepare($sql_select_answers);
-$stmt_select_answers->bind_param(str_repeat('i', count($question_ids)), ...$question_ids);
-$stmt_select_answers->execute();
-$result_select_answers = $stmt_select_answers->get_result();
+if ($mysqli->connect_error) {
+    echo json_encode(['error' => 'Ошибка подключения к базе данных: ' . $mysqli->connect_error]);
+    exit;
+}
 
-$answers_data = array();
-$summary = "";
+// Извлечение данных для указанного урока
+$sql = "SELECT data, summary FROM lessons WHERE lesson_level = ?";
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("i", $lesson_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-if ($result_select_answers->num_rows > 0) {
-    while ($row = $result_select_answers->fetch_assoc()) {
-        $answers_data[] = $row;
+if ($result->num_rows === 0) {
+    echo json_encode(['error' => 'Данные для указанного урока не найдены.']);
+    exit;
+}
 
-        // Check if summary is not yet set and current row has a non-empty summary
-        if (empty($summary) && !empty($row['summary'])) {
-            $summary = $row['summary'];
-        }
+$lessonData = $result->fetch_assoc();
+$dataJson = json_decode($lessonData['data'], true);
 
-        foreach ($matches_data as &$match) {
-            if ($match['question_id'] == $row['id']) {
-                $match['answers'] = $row['word_russian'];
-            }
-        }
-    }
+// Проверка на корректность JSON
+if (json_last_error() !== JSON_ERROR_NONE) {
+    echo json_encode(['error' => 'Ошибка декодирования JSON: ' . json_last_error_msg()]);
+    exit;
 } else {
-    echo json_encode(["error" => "No data found in table: {$answersTableName} (answers)"]);
+    echo json_encode(['message' => 'Декодирование прошло успешно']);
+}
+
+// Формирование массива вопросов и ответов
+$questions = [];
+$answers = [];
+
+foreach ($dataJson as $item) {
+    if (isset($item['data']['text']) && isset($item['data']['word_russian'])) {
+        $questions[] = [
+            'id' => $item['ID'],
+            'text' => $item['data']['text'],
+            'price' => $item['data']['price'],  // Добавляем поле 'price'
+            'chance' => $item['data']['chance'],  // Добавляем поле 'chance'
+            'rating' => $item['data']['rating'],  // Добавляем поле 'rating'
+            'translation' => $item['data']['word_russian']
+        ];
+        $answers[] = [
+            'id' => $item['ID'],
+            'word_russian' => $item['data']['word_russian']
+        ];
+    }
+}
+
+
+// Подготовка данных для отправки в клиент
+$response = [
+    'questions' => $questions,
+    'answers' => $answers,
+    'summary' => $lessonData['summary']
+];
+
+$phpErrors = ob_get_clean();
+
+if ($phpErrors) {
+    // Если есть ошибки, добавляем их в JSON-ответ
+    echo json_encode(['error' => 'PHP Error: ' . $phpErrors]);
     exit;
 }
 
-// Добавление summary в ответ
-foreach ($answers_data as &$answer) {
-    $answer['summary'] = $summary;
-}
+echo json_encode($response);
 
-$data = array(
-    'questions' => $questions_data,
-    'answers' => $answers_data,
-    'matches' => $matches_data
-);
-
-echo json_encode($data);
-
-$conn->close();
+// Закрытие соединения
+$mysqli->close();
 ?>

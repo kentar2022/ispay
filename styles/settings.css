@@ -1,4 +1,4 @@
-/* Определение переменных для тем */
+/*
 .theme-light {
     --background-color: #ffffff;
     --text-color: #000000;
@@ -14,7 +14,6 @@
     --text-color: #f3166b;
 }
 
-/* Применение переменных стилей */
 body {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -28,7 +27,55 @@ svg {
     fill: var(--text-color);
 }
 
-/* Цвет фона для select и других элементов */
+
 select > option, #languageSelect, #languageSelectContainer {
     background-color: var(--background-color);
+}*/
+
+
+.settingsPage {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    position: fixed;
+    right: 40%;
+}
+
+
+.custom-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Для экранов меньше 1080px */
+@media (max-width: 1080px) {
+    .settingsPage {
+        width: 80% !important;
+        right: 10% !important;
+        font-size: 18px !important; /* Увеличиваем размер шрифта для больших экранов */
+    }
+}
+
+/* Для экранов меньше 768px */
+@media (max-width: 768px) {
+    .settingsPage {
+        width: 90% !important;
+        right: 5% !important;
+        font-size: 18px !important; 
+        border: none;
+    }
+}
+
+/* Для экранов меньше 480px */
+@media (max-width: 480px) {
+    .settingsPage {
+        width: 100% !important;
+        right: 0 !important;
+        padding: 15px !important;
+        font-size: 20px !important; /* Еще больше увеличиваем размер шрифта */
+    }
 }

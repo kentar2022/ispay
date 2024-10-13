@@ -1,43 +1,55 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Элементы модального окна и кнопки
-    var modal = document.getElementById("profileModal");
-    var btn = document.getElementById("editProfileBtn");
-    var span = document.getElementsByClassName("close")[0];
+    // Находим кнопки для открытия модальных окон
+    const openModalButtons = document.querySelectorAll('.btn-primary');
+    const closeModalButtons = document.querySelectorAll('.close');
+    const modals = document.querySelectorAll('.modal');
 
-    // Открытие модального окна и загрузка информации о пользователе
-    btn.onclick = function() {
-        modal.style.display = "block";
-        getUserInfo(updateModalInfo);
-    }
+    // Открытие модального окна
+    openModalButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modalType = this.closest('.small-screen-profile-info') ? '.small-screen-modal' : '.large-screen-modal';
+            const modal = document.querySelector(modalType);
+            modal.style.display = 'block';
+            getUserInfo(updateModalInfo);  // Загрузка данных пользователя в модальное окно
+        });
+    });
 
-    // Закрытие модального окна при нажатии на крестик
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
+    // Закрытие модальных окон при нажатии на крестик
+    closeModalButtons.forEach(closeButton => {
+        closeButton.addEventListener('click', function() {
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+            });
+        });
+    });
 
     // Закрытие модального окна при клике вне его
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    // Проверка сессии при загрузке страницы
-    checkSession();
+    window.addEventListener('click', function(event) {
+        modals.forEach(modal => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
 
     // Обработка двойного клика для редактирования полей
     document.querySelectorAll('.editable').forEach(item => {
         item.addEventListener('dblclick', function() {
             const span = this.querySelector('span');
-            const field = span.id;
+            const field = span.classList[0];
             const value = span.textContent;
-            const input = document.getElementById('value');
-            input.value = value;
-            document.getElementById('field').value = field;
-            document.getElementById('updateForm').style.display = 'block';
-            input.focus();
+            const form = this.closest('.modal-content').querySelector('.updateForm');
+            const inputField = form.querySelector('.field');
+            const inputValue = form.querySelector('.value');
+            
+            inputValue.value = value;
+            inputField.value = field;
+            form.style.display = 'block';
+            inputValue.focus();
         });
     });
+
+
 
 
     // Функция для обновления видимости блоков курсов
@@ -65,39 +77,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function updateUserInfo(user) {
-    // Обновляем текстовые данные на основной странице
-    document.querySelector('.mainNickname').textContent = user.nickname;
-    document.querySelector('.mainEmail').textContent = user.email;
-    document.querySelector('.mainCountry').textContent = user.country;
+    // Обновляем текстовые данные на странице для всех экранов
+    document.querySelectorAll('.mainNickname').forEach(element => {
+        element.textContent = user.nickname;
+    });
+    document.querySelectorAll('.mainEmail').forEach(element => {
+        element.textContent = user.email;
+    });
+    document.querySelectorAll('.mainCountry').forEach(element => {
+        element.textContent = user.country;
+    });
 
-    // Сохраняем данные в localStorage
-    localStorage.setItem('nickname', user.nickname);
-    localStorage.setItem('email', user.email);
-    localStorage.setItem('country', user.country);
-
-    // Обновляем путь к аватарке на основной странице
-    var userAvatar = document.querySelector('#userAvatar');
-    if (user.avatar && user.avatar !== '') {
-        userAvatar.src = user.avatar;
-    } else {
-        userAvatar.src = 'images/avatar.png';  // Путь к дефолтной аватарке
-    }
+    // Обновляем аватар для всех экранов
+    document.querySelectorAll('img[id^="userAvatar"]').forEach(element => {
+        if (user.avatar && user.avatar !== '') {
+            element.src = user.avatar;
+        } else {
+            element.src = 'images/avatar.png';  // Путь к дефолтной аватарке
+        }
+    });
 }
 
 
-function updateModalInfo(user) {
-    // Обновляем текстовые данные в модальном окне
-    document.querySelector('.nickname').textContent = user.nickname;
-    document.querySelector('.email').textContent = user.email;
-    document.querySelector('.country').textContent = user.country;
 
-    // Обновляем путь к аватарке в модальном окне
-    var profileAvatar = document.querySelector('#profileAvatar');
-    if (user.avatar && user.avatar !== '') {
-        profileAvatar.src = user.avatar;
-    } else {
-        profileAvatar.src = 'images/avatar.png';  // Путь к дефолтной аватарке
-    }
+
+function updateModalInfo(user) {
+    document.querySelectorAll('.nickname').forEach(element => {
+        element.textContent = user.nickname;
+    });
+    document.querySelectorAll('.email').forEach(element => {
+        element.textContent = user.email;
+    });
+    document.querySelectorAll('.country').forEach(element => {
+        element.textContent = user.country;
+    });
+
+    document.querySelectorAll('.profile-avatar').forEach(avatar => {
+        avatar.src = user.avatar || 'images/avatar.png';
+    });
 }
 
 
@@ -131,7 +148,7 @@ $(document).ready(function() {
 // Функция для получения информации о пользователе
 function getUserInfo(callback) {
     var xhr = new XMLHttpRequest();
-    var userId = 1; // Замените на актуальный userId
+    var userId = 1;  // Замените на актуальный userId
     xhr.open('GET', 'login/profile.php?userId=' + userId, true);
     xhr.onload = function() {
         if (xhr.status == 200) {

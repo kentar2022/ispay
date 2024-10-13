@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 $host = 'localhost';
 $db = 'ispay';
 $user = 'kentar';
-$pass = 'password'; // замените на ваш пароль
+$pass = 'password'; 
 
 $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 $options = [

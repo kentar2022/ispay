@@ -12,3 +12,21 @@
     z-index: 1000;
 }
 */
+
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+    .summaryBlock {
+        width: 90%; /* Reduce width for medium-sized screens */
+        max-width: 500px;
+    }
+}
+
+/* For screens smaller than 480px */
+@media (max-width: 480px) {
+    .summaryBlock {
+        width: 95%;
+        max-width: 300px;
+        padding: 15px; 
+    }
+}

@@ -17,7 +17,7 @@ $(document).ready(function() {
             var userId = userData.user_id;
             console.log('Полученный userId:', userId);
 
-            // После получения userId, делаем запрос к getProfileStats.php
+        
             $.ajax({
                 url: 'getProfileStats.php',
                 type: 'GET',
@@ -31,12 +31,17 @@ $(document).ready(function() {
                         return;
                     }
 
-                    // Обновляем значения статистики
+                    // Обновляем значения статистики для больших экранов
                     $('#score').text(data.score);
                     $('#lessonsCompleted').text(data.lessonsCompleted);
                     $('#overallRank').text(data.overallRank);
 
-                    // Обновляем значения кристаллов и монет
+                    // Обновляем значения статистики для маленьких экранов
+                    $('#scoreSmall').text(data.score);
+                    $('#lessonsCompletedSmall').text(data.lessonsCompleted);
+                    $('#overallRankSmall').text(data.overallRank);
+
+                    // Обновляем значения кристаллов и монет для всех экранов
                     $('.crystals').text(data.crystals);
                     $('.coins').text(data.coins);
 

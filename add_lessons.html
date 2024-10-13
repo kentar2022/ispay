@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вставка JSON в MySQL</title>
+</head>
+<body>
+    <h1>Вставка JSON данных в таблицу MySQL</h1>
+    <form action="insert_json.php" method="POST">
+        <label for="language">Выберите язык (база данных):</label>
+        <select id="language" name="language" required>
+            <!-- Заполните список языков здесь или сгенерируйте на сервере -->
+            <option value="bashkort">Башкирский</option>
+            <option value="chechen">Чеченский</option>
+            <option value="ingush">Ингушский</option>
+            <option value="adyge">Адыгейский</option>
+            <option value="udmurt">Удмуртский</option>
+            <option value="tatar">Татарский</option>
+            <option value="chuvash">Чувашский</option>
+        </select><br><br>
+
+        <label for="lesson_level">Введите номер урока (lesson_level):</label>
+        <input type="number" id="lesson_level" name="lesson_level" min="1" required><br><br>
+
+        <label for="jsonData">Введите JSON:</label><br>
+        <textarea id="jsonData" name="jsonData" rows="20" cols="100"></textarea><br><br>
+
+        <input type="submit" value="Добавить в базу данных">
+    </form>
+</body>
+</html>

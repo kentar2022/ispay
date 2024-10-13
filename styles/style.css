@@ -51,7 +51,7 @@ main {
     justify-content: space-around;
 }
 
-aside {
+.aside {
     position: fixed;
     top: 0;
     left: 30px;
@@ -60,11 +60,14 @@ aside {
     padding: 20px;
     z-index: 2; 
     border-right: 0.1px solid #D3D3D3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 
 
-aside .aside-item {
+.aside .aside-item {
     margin-bottom: 15px; 
     padding: 15px; 
     border-radius: 5px; 
@@ -73,7 +76,7 @@ aside .aside-item {
 }
 
 
-aside .aside-item:hover {
+.aside .aside-item:hover {
     transform: translateY(-3px); 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
@@ -155,15 +158,6 @@ input[type="radio"] {
     margin-right: 10px;
 }
 
-.settingsPage {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
-    position: fixed;
-    right: 40%;
-}
 
 
 .settingsPage h3,.settingsPage h2 {
@@ -171,3 +165,105 @@ input[type="radio"] {
     padding-bottom: 5px;
 }
 
+
+@media screen and (max-width: 1750px) {
+    #languageSelect {
+        width: 40px; 
+    }
+}
+
+@media screen and (max-width: 1750px) {
+    #languageSelect {
+        width: 40px; 
+    }
+}
+
+.gift-item {
+    position: relative;
+    transition: opacity 0.5s ease;
+}
+
+.reward-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Скрыто по умолчанию */
+    z-index: 2;
+}
+
+.gift-item.collected {
+    opacity: 0.5; /* Затемнение блока */
+}
+
+.gift-item.collected .reward-animation {
+    display: none; /* Скрываем анимацию, когда подарок получен */
+}
+
+.gift-item.collected::after {
+    content: '✔';
+    color: green;
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+}
+
+
+#center-animation {
+    display: none; /* По умолчанию скрыт */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border: 5px solid #15E670; /* Можно заменить на цвет в зависимости от темы */
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+}
+
+
+#center-animation img {
+    width: 100px;
+    height: 100px;
+}
+
+#center-animation p {
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.flex {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.gift-item.blocked {
+    opacity: 0.5; /* Пониженная прозрачность для заблокированного подарка */
+    pointer-events: none; /* Отключаем возможность взаимодействия */
+}
+
+.small-screen-gift-item.blocked {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

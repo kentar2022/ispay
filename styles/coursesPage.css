@@ -20,15 +20,6 @@
     border: 1px solid gray;
 }
 
-@media (max-width: 800px) {
-    .courses {
-        width: 100%;
-    }
-
-    .course {
-        width: calc(50% - 20px);
-    }
-}
 
 .course h2 {
     margin: 10px 0;
@@ -48,4 +39,90 @@
 
 .courses h3{
     font-size: 20px;
+}
+
+
+@media screen and (max-width: 1775px) {
+    .lessonsPage{
+        max-width: 100%;
+        margin-left:  0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .LanguageInformation{
+        margin: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+
+
+
+/*Показываем копию для маленьких экранов и скрываем оригинал на экранах до 1350px*/
+ @media (max-width: 1350px) {
+  /*#lessonsPagechechen,
+    #lessonsPagebashkort,
+    #lessonsPageingush,
+    #lessonsPageadyge, 
+    #lessonsPageudmurt,
+    #lessonsPagetatar,
+    #lessonsPagechuvash
+     {
+        display: none;
+    }
+    */
+    .small-screen-container .main-block{
+        font-size: 25px;
+    }
+
+    #languagesContainer{
+        margin-left: 0;
+    }
+
+   
+    .small-screen-container .main-block,
+    .small-screen-container .section,
+    .small-screen-container .lesson-block {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .small-screen-container .section-title {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    .small-screen-container .lesson-header h2 {
+        font-size: 1.4rem;
+    }
+}
+
+
+/* Дополнительные стили для совсем маленьких экранов 
+@media (max-width: 768px) {
+    #smallScreenLessonsPagechechen {
+        padding: 0 5px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-block{
+        padding: 0px !important;
+    }
+    .small-screen-container .main-block {
+        font-size: 18px;
+    }
+}
+
+*/
+
+.small-screen-container {
+    display: none;
 }

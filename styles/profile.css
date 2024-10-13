@@ -1,7 +1,4 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #fff;
-}
+
 .profile-info {
     border-radius: 10px;
     padding: 20px;
@@ -84,10 +81,7 @@ body {
     margin: 5px 0;
     text-align: center;
 }
-.gift-section {
-    width: 799px;
-    height: 500px;
-}
+
 
 .gift-section div{
     display: flex;
@@ -157,6 +151,71 @@ body {
 .editable {
     cursor: pointer;
 }
+
+
+.profile-avatar-container {
+    margin-right: 20px;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+.modal-profile-info{
+    flex-direction: column;
+}
+
+.profile-stats {
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.stat-item p {
+    margin: 0;
+    font-weight: bold;
+    flex: 1;
+}
+
+.stat-item span {
+    flex: 1;
+    text-align: right;
+    font-size: 24px;
+}
+
+
+
+
+
+
 /*
 .profile-info {
     border-radius: 10px;
@@ -283,61 +342,3 @@ body {
     }
 }
 */
-
-.profile-avatar-container {
-    margin-right: 20px;
-}
-
-.profile-avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 2px solid white;
-}
-
-
-.modal-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.profile-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.profile-info {
-    flex-grow: 1;
-}
-
-.modal-profile-info{
-    flex-direction: column;
-}
-
-.profile-stats {
-    padding: 10px;
-    border-radius: 10px;
-    color: white;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.stat-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.stat-item p {
-    margin: 0;
-    font-weight: bold;
-    flex: 1;
-}
-
-.stat-item span {
-    flex: 1;
-    text-align: right;
-    font-size: 24px;
-}

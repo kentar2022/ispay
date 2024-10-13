@@ -62,3 +62,4 @@ function showSettingsPopup() {
 function hideSettingsPopup() {
     document.getElementById('settings-popup').style.display = 'none';
 }
+

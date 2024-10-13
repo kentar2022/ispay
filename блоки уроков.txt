@@ -1,0 +1,1763 @@
+<div id="languagesContainer" class="">
+
+
+
+    <!--МАЛЕНЬКИЙ ЭКРАН ЧЕЧЕНСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН ЧЕЧЕНСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН ЧЕЧЕНСКИЙ ЯЗЫК-->
+    <div id="smallScreenLessonsPagechechen" class="page hidden lessonsPage small-screen-container">
+        <img src="courses_flags/chechen.png" alt="Флаг Чечни">
+        <div class="container">
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+    
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--БОЛЬШОЙ ЭКРАН ЧЕЧЕНСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН ЧЕЧЕНСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН ЧЕЧЕНСКИЙ ЯЗЫК-->
+    <div id="lessonsPagechechen" class="page hidden lessonsPage">
+        <img src="courses_flags/chechen.png" alt="">
+        <div class="container">
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">Полезная информация</div>
+            <div class="hidden-block">
+                <div class="tabs">
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path></svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670"><path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path></svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')"> 
+                        <svg viewBox="0 0 24 24" fill="#15E670"><path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path></svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670"><path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div>
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Алфавит</h2>
+                        <span class="lesson-index">1 / 25</span>
+                    </div>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+
+
+                <!-- Lesson Block 2 -->
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+                <!-- Lesson Block 3 -->
+                <div class="lesson-block" data-lesson-id="4">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Culture</h2>
+                        <span class="lesson-index">0 / 6</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="7" class="topic-link" style="cursor: pointer;">
+                                    Modern Chechen Writers 0 / 5
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+                <div class="lesson-block" data-lesson-id="6">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Прошедшее время</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="9" class="topic-link" style="cursor: pointer;">
+                                    Возвратные местоимения 0 / 40
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--МАЛЕНЬКИЙ ЭКРАН БАШКИРСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН БАШКИРСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН БАШКИРСКИЙ ЯЗЫК-->
+    <div id="smallScreenLessonsPagebashkort" class="page hidden lessonsPage small-screen-container">
+        <img src="courses_flags/bashkort.png" alt="Флаг Башкортостана">
+        <div class="container">
+            <!-- Полезная информация -->
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+                    <!-- Вкладки навигации -->
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Алфавит -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Грамматика -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <!-- Пример других блоков уроков -->
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Спряжение глаголов -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--БОЛЬШОЙ ЭКРАН БАШКИРСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН БАШКИРСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН БАШКИРСКИЙ ЯЗЫК-->
+    <div id="lessonsPagebashkort" class="page hidden lessonsPage">
+        <img src="courses_flags/bashkort.png" alt="">
+        <div class="container">
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">Полезная информация</div>
+            <div class="hidden-block">
+                <div class="tabs">
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path></svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670"><path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path></svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')"> 
+                        <svg viewBox="0 0 24 24" fill="#15E670"><path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path></svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670"><path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div>
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Алфавит</h2>
+                        <span class="lesson-index">1 / 25</span>
+                    </div>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+
+
+                <!-- Lesson Block 2 -->
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+                <!-- Lesson Block 3 -->
+                <div class="lesson-block" data-lesson-id="4">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Culture</h2>
+                        <span class="lesson-index">0 / 6</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="7" class="topic-link" style="cursor: pointer;">
+                                    Modern Chechen Writers 0 / 5
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+                <div class="lesson-block" data-lesson-id="6">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Прошедшее время</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="9" class="topic-link" style="cursor: pointer;">
+                                    Возвратные местоимения 0 / 40
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--МАЛЕНЬКИЙ ЭКРАН ИНГУШСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН ИНГУШСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН ИНГУШСКИЙ ЯЗЫК-->         
+    <div id="smallScreenLessonsPageingush" class="page lessonsPage small-screen-container hidden">
+        <img src="courses_flags/ingush.png" alt="Флаг Башкортостана">
+        <div class="container">
+            <!-- Полезная информация -->
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+                    <!-- Вкладки навигации -->
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Алфавит -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Грамматика -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <!-- Пример других блоков уроков -->
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--БОЛЬШОЙ ЭКРАН ИНГУШСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН ИНГУШСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН ИНГУШСКИЙ ЯЗЫК-->     
+    <div id="lessonsPageingush" class="page hidden lessonsPage">
+        <img src="courses_flags/ingush.png" alt="">
+        <div class="container">
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+    
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--МАЛЕНЬКИЙ ЭКРАН АДЫГСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН АДЫГСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН АДЫГСКИЙ ЯЗЫК-->     
+    <div id="smallScreenLessonsPageadyge" class="page hidden lessonsPage small-screen-container">
+        <img src="courses_flags/adyge.png" alt="Флаг Башкортостана">
+        <div class="container">
+            <!-- Полезная информация -->
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+                    <!-- Вкладки навигации -->
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Алфавит -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Грамматика -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <!-- Пример других блоков уроков -->
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--БОЛЬШОЙ ЭКРАН АДЫГСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН АДЫГСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН АДЫГСКИЙ ЯЗЫК-->   
+    <div id="lessonsPageadyge" class="page hidden lessonsPage">
+        <img src="courses_flags/adyge.png" alt="">
+        <div class="container">
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+    
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--МАЛЕНЬКИЙ ЭКРАН УДМУРТСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН УДМУРТСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН УДМУРТСКИЙ ЯЗЫК-->   
+    <div id="smallScreenLessonsPageudmurt" class="page lessonsPage small-screen-container hidden">
+        <img src="courses_flags/udmurt.png" alt="Флаг Башкортостана">
+        <div class="container">
+            <!-- Полезная информация -->
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+                    <!-- Вкладки навигации -->
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Алфавит -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Грамматика -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <!-- Пример других блоков уроков -->
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--БОЛЬШОЙ ЭКРАН УДМУРТСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН УДМУРТСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН УДМУРТСКИЙ ЯЗЫК-->   
+    <div id="lessonsPageudmurt" class="page hidden lessonsPage">
+        <img src="courses_flags/udmurt.png" alt="">
+        <div class="container">
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+    
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--МАЛЕНЬКИЙ ЭКРАН ТАТАРСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН ТАТАРСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН ТАТАРСКИЙ ЯЗЫК-->   
+    <div id="smallScreenLessonsPagetatar" class="page hidden lessonsPage small-screen-container">
+        <img src="courses_flags/tatar.png" alt="Флаг Башкортостана">
+        <div class="container">
+            <!-- Полезная информация -->
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+                    <!-- Вкладки навигации -->
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Алфавит -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Грамматика -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <!-- Пример других блоков уроков -->
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--БОЛЬШОЙ ЭКРАН ТАТАРСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН ТАТАРСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН ТАТАРСКИЙ ЯЗЫК-->  
+    <div id="lessonsPagetatar" class="page hidden lessonsPage">
+        <img src="courses_flags/tatar.png" alt="">
+        <div class="container">
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+    
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--МАЛЕНЬКИЙ ЭКРАН ЧУВАШСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН ЧУВАШСКИЙ ЯЗЫК-->
+    <!--МАЛЕНЬКИЙ ЭКРАН ЧУВАШСКИЙ ЯЗЫК-->   
+    <div id="smallScreenLessonsPagechuvash" class="page hidden lessonsPage small-screen-container">
+        <img src="courses_flags/chuvash.png" alt="Флаг Чувашии">
+        <div class="container">
+            <!-- Полезная информация -->
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+                    <!-- Вкладки навигации -->
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Алфавит -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Грамматика -->
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <!-- Пример других блоков уроков -->
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--БОЛЬШОЙ ЭКРАН ЧУВАШСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН ЧУВАШСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН ЧУВАШСКИЙ ЯЗЫК-->   
+    <div id="lessonsPagechuvash" class="page hidden lessonsPage">
+        <img src="courses_flags/chuvash.png" alt="">
+        <div class="container">
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()" style="background-color: rgb(21, 230, 112); color: rgb(255, 255, 255);">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+    
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24" fill="#15E670">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Алфавит</h2>
+            <div class="lesson-block" data-lesson-id="1">
+                <div class="lesson-header" onclick="toggleContent(this)">
+                    <span class="lesson-toggle-icon">▼</span>
+                    <h2 class="lesson-title">Алфавит</h2>
+                    <span class="lesson-index">1 / 25</span>
+                </div>
+                <div class="lesson-content">
+                                <p data-topic-id="1" class="topic-link" style="cursor: pointer;">
+                                    Алфавит 1 / 20
+                                </p>
+                                <p data-topic-id="2" class="topic-link" style="cursor: pointer;">
+                                    Фонетика 0 / 15
+                                </p></div>
+                <div class="lesson-progress">
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Грамматика</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Именные классы</h2>
+                        <span class="lesson-index">0 / 4</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="3" class="topic-link" style="cursor: pointer;">
+                                    Grammar Basics 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Chechen Literature</h2>
+                        <span class="lesson-index">0 / 5</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="4" class="topic-link" style="cursor: pointer;">
+                                    Intermediate Vocabulary 0 / 7
+                                </p>
+                                <p data-topic-id="5" class="topic-link" style="cursor: pointer;">
+                                    Advanced Grammar 0 / 3
+                                </p>
+                                <p data-topic-id="6" class="topic-link" style="cursor: pointer;">
+                                    Chechen Folktales 0 / 8
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title courses_titles" style="color: rgb(255, 255, 255);">Спряжение глаголов</h2>
+            <div class="lessons-container">
+                <div class="lesson-block" data-lesson-id="5">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">▼</span>
+                        <h2 class="lesson-title">Настоящее время</h2>
+                        <span class="lesson-index">0 / 8</span>
+                    </div>
+                    <div class="lesson-content">
+                                <p data-topic-id="8" class="topic-link" style="cursor: pointer;">
+                                    Местоимения 0 / 6
+                                </p></div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

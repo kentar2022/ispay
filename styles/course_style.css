@@ -8,7 +8,6 @@ body {
 .container {
     margin: 0 auto;
     padding: 20px;
-    margin-left: 350px !important;
 }
 
 header {
@@ -70,6 +69,7 @@ main {
     font-size: 58px;
     border: none;
 }
+
 .active {
     display: block;
 }
@@ -142,6 +142,7 @@ a {
   }
 
 }
+
 .menu-button:hover,
 .profile-icon:hover {
     background-color: #0056b3; 
@@ -177,28 +178,51 @@ hr {
 }
 
 .closeButton {
+    top: 10px; /* перемещаем крестик вверх */
+    right: 10px;
+    font-size: 48px;
     cursor: pointer;
-    font-size: 50px; 
-    color: #FF00FF; 
-    background-color: transparent; 
-    border: none; 
+    color: #FF00FF; /* оставляем цвет */
+    background-color: transparent; /* оставляем стиль */
+    border: none; /* оставляем стиль */
 }
+
 
 .hidden{
-    display: none;
+    display: none !important;
 }
-
 
 .center-container {
     text-align: center;
 }
 
 .success-message {
-    font-size: 24px; 
-    margin-bottom: 20px; 
-    flex-direction: column;
-    align-items: center;
-    margin-top: 30%;
+    position: fixed; /* Fixed для закрепления по центру экрана */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2c2c2c;
+    border: 2px solid #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.results {
+    margin-top: 20px;
+}
+
+.result-item {
+    margin-bottom: 10px;
+    font-size: 22px; /* увеличиваем шрифт */
+    color: #fff;
+}
+
+.result-value {
+    font-weight: bold;
+    font-size: 26px; /* увеличиваем размер шрифта для значений */
 }
 
 .correct-answers {
@@ -206,12 +230,17 @@ hr {
 }
 
 .yellow-text {
-    color: yellow;
+    color: yellow; /* существующий стиль */
 }
 
-.flex{
+
+.flex {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
+
 .phrase-image {
     max-width: 100%; 
     width: 400px;
@@ -219,11 +248,13 @@ hr {
     display: block; 
     margin: 10px auto;
 }
+
 .tabs {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
 }
+
 .tab {
     background-color: #293133;
     border: 2px solid rgb(21, 230, 112);
@@ -235,6 +266,7 @@ hr {
     justify-content: center;
     cursor: pointer;
 }
+
 .tab svg {
     width: 30px;
     height: 30px;
@@ -264,7 +296,6 @@ hr {
     cursor: pointer;
     text-align: center;
     transition: background-color 0.3s;
-
 }
 
 .answer-block.correct {
@@ -377,7 +408,7 @@ hr {
 .settingsPannel{    
     border: 1px solid black;
     position: fixed;
-    top: 20px;
+    top: 50px;
     right: 20px; 
     display: flex;
     width: 300px;
@@ -400,7 +431,7 @@ hr {
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 80vw;
     max-width: 600px;
     text-align: center;
     height: 400px;
@@ -423,13 +454,12 @@ hr {
 }
 
 
-/* Стили для иконок управления */
 .iconButton {
     cursor: pointer;
     margin: 10px;
 }
 
-/* Контейнер для иконок */
+
 .iconContainer {
     display: flex;
     justify-content: center;
@@ -443,7 +473,7 @@ hr {
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    width: 600px;
+    width: 50vw;
     height: 190px;
 }
 
@@ -452,13 +482,99 @@ hr {
     border: 2px solid rgb(243, 22, 107);
     padding: 10px;
     margin: 20px auto;
-    width: 600px;
     box-sizing: border-box;
+    transition: width 0.3s ease;
 }
 
 .summaryBlock.visible {
-    display: flex; /* Показать блок */
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+
+@media (max-width: 768px) {
+    .success-message {
+        width: 90%; 
+        font-size: 20px;
+    }
+    
+
+    .result-item {
+        font-size: 18px;
+    }
+
+    .result-value {
+        font-size: 22px; 
+    }
+    .progress-container{
+        width: 30px;
+        height: 300;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .success-message {
+        width: 50%; 
+        font-size: 18px; 
+    }
+
+    .result-item {
+        font-size: 16px;
+    }
+
+    .result-value {
+        font-size: 20px;
+    }
+}
+
+/* Горизонтальный прогрессбар */
+@media (max-width: 880px) {
+    .progress-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%; /* Прогрессбар на всю ширину экрана */
+        height: 40px; /* Высота прогрессбара */
+        background-color: #DCDCDC;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+    }
+
+    .progress {
+        width: 0%; /* Изначально ширина прогрессбара — 0% */
+        height: 100%; /* Высота остается на 100% */
+        background-color: #ff0081; /* Цвет заполнения прогрессбара */
+        transition: width 0.5s ease; /* Анимация изменения ширины */
+    }
+
+    #summaryPopup{
+        width: 60vw;
+    }
+}
+
+
+@media (max-width: 700px) {
+    #summaryPopup{
+        width: 75vw;
+        height: 30vh;
+    }
+    .settingsPannel{
+        width: 100vw;
+        right: 0;
+    }
+}
+
+
+@media (max-width: 370px) {
+    #textInput{
+        width: 50%;
+        font-size: 13px;
+        padding: 8px;
+    }
 }

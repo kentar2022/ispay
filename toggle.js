@@ -6,10 +6,10 @@
     });
 });*/
 
-function toggleContent(element) {
+/*function toggleContent(element) {
     var content = element.parentElement.querySelector('.lesson-content');
     content.classList.toggle('show');
-}
+}*/
 
 
 
@@ -27,71 +27,81 @@ function togglePages(pageId) {
     console.log(pageId);
     var settingsPage = document.getElementById("settingsPage");
     var profilePage = document.getElementById("profilePage");
+    var profilePageSmall = document.getElementById("profilePageSmall"); // профиль для маленьких экранов
     var coursesPage = document.getElementById("coursesPage");
-    var coursesPage = document.getElementById("shopPage");
+    var shopPage = document.getElementById("shopPage");
     var friendsPage = document.getElementById("friendsPage");
     var languagesContainer = document.getElementById("languagesContainer");
 
-    if (pageId === "coursesPage") {
-        languagesContainer.classList.add("hidden");
-        settingsPage.classList.add("hidden");
-        shopPage.classList.add("hidden");
-        friendsPage.classList.add("hidden");
-        profilePage.classList.add("hidden");
-    } else if (pageId === "settingsPage") {
-        languagesContainer.classList.add("hidden");
-        settingsPage.classList.remove("hidden");
-        shopPage.classList.add("hidden");
-        friendsPage.classList.add("hidden");
-        profilePage.classList.add("hidden");
-    } else if (pageId === "profilePage") {
-        languagesContainer.classList.add("hidden");
-        settingsPage.classList.add("hidden");
-        shopPage.classList.add("hidden");
-        friendsPage.classList.add("hidden");
-        profilePage.classList.remove("hidden");
-    } else if (pageId === "languagesContainer") {
-        settingsPage.classList.add("hidden");
-        profilePage.classList.add("hidden");
-        shopPage.classList.add("hidden");
-        friendsPage.classList.add("hidden");
-        languagesContainer.classList.remove("hidden");
-    } else if (pageId === "shopPage"){
-        settingsPage.classList.add("hidden");
-        profilePage.classList.add("hidden");
-        friendsPage.classList.add("hidden");
-        languagesContainer.classList.add("hidden");
-        shopPage.classList.remove("hidden");
-    } else if (pageId === "friendsPage"){
-        settingsPage.classList.add("hidden");
-        profilePage.classList.add("hidden");
-        languagesContainer.classList.add("hidden");
-        friendsPage.classList.remove("hidden");
+    // Скрываем все страницы
+    languagesContainer.classList.add("hidden");
+    settingsPage.classList.add("hidden");
+    shopPage.classList.add("hidden");
+    friendsPage.classList.add("hidden");
+    profilePage.classList.add("hidden");
+
+    if (pageId === "profilePage") {
+        if (window.innerWidth <= 1350 && profilePageSmall) {
+            // Показать профиль для маленьких экранов
+            showSmallProfile();
+        } else {
+            // Показать профиль для больших экранов
+            profilePage.classList.remove('hidden');
+        }
+    } else {
+        // Показываем выбранную страницу, кроме профиля
+        document.getElementById(pageId).classList.remove('hidden');
     }
 }
 
-
-
 function showLanguage(languageId) {
-   /* console.log("languageId:" + languageId);*/
-    var languageBlockToShow = document.getElementById('lessonsPage' + languageId);
+    var settingsPage = document.getElementById("settingsPage");
+    var profilePage = document.getElementById("profilePage");
+    var profilePageSmall = document.getElementById("profilePageSmall"); // профиль для маленьких экранов
+    var coursesPage = document.getElementById("coursesPage");
+    var shopPage = document.getElementById("shopPage");
+    var friendsPage = document.getElementById("friendsPage");
     var languagesContainer = document.getElementById("languagesContainer");
 
-    languagesContainer.classList.remove("hidden");
-   /* console.log(languageBlockToShow);*/
-    // Показываем выбранный блок языка
-    if (languageBlockToShow) {
-        languageBlockToShow.classList.remove("hidden");
+    // Скрываем все страницы, добавляем проверку, что элемент существует
+    if (settingsPage) settingsPage.classList.add('hidden');
+    if (shopPage) shopPage.classList.add('hidden');
+    if (friendsPage) friendsPage.classList.add('hidden');
+    if (profilePage) profilePage.classList.add('hidden');
+    if (profilePageSmall) profilePageSmall.classList.add('hidden');
+    if (coursesPage) coursesPage.classList.add('hidden');
+
+    // Удаляем класс hidden с блока languagesContainer, чтобы отобразить его
+    if (languagesContainer && languagesContainer.classList.contains('hidden')) {
+        languagesContainer.classList.remove('hidden');
+        console.log('Класс hidden был удалён у блока languagesContainer');
+    } else if (languagesContainer) {
+        console.log('Блок languagesContainer уже видим');
+    } else {
+        console.error("Блок languagesContainer не найден.");
     }
 
-    // Скрываем остальные блоки, кроме languagesContainer
-    var allLanguageBlocks = document.querySelectorAll(".lessonsPage");
-    allLanguageBlocks.forEach(function(block) {
-        if (block !== languageBlockToShow && block !== languagesContainer) {
-            block.classList.add("hidden");
-        }
+    // Скрываем все блоки уроков внутри languagesContainer
+    var allLessonBlocks = document.querySelectorAll('#languagesContainer > div');
+    allLessonBlocks.forEach(function(block) {
+        block.classList.add('hidden'); // Скрываем все блоки
     });
 
-    // Вызываем функцию togglePages() для скрытия других страниц
-    togglePages('languagesContainer');
+    // Определяем, какой блок показать в зависимости от ширины экрана
+    var blockToShow;
+    if (window.innerWidth <= 1330) {
+        // Мобильная версия: выбираем блок для маленьких экранов
+        blockToShow = document.getElementById('smallScreenLessonsPage' + languageId);
+    } else {
+        // Десктопная версия: выбираем блок для больших экранов
+        blockToShow = document.getElementById('lessonsPage' + languageId);
+    }
+
+    // Если найден нужный блок, показываем его
+    if (blockToShow) {
+        blockToShow.classList.remove('hidden');
+        console.log('Показан блок для языка: ' + languageId);
+    } else {
+        console.error("Блок урока для выбранного языка не найден.");
+    }
 }

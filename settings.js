@@ -7,50 +7,81 @@ var links = document.querySelectorAll('a, .a');
 var svgIcons = document.querySelectorAll('svg');
 var friendsPageElements = document.querySelectorAll('.friendsPage *');
 var settingsPageText = document.querySelectorAll('.settingsPage *');
-var coursesPageLinks = document.querySelectorAll('.courses a');
+var coursesPageLinks = document.querySelectorAll('.courses_titles');
 var profilePageElements = document.querySelectorAll('.profilePage *');
 var selectLanguages = document.querySelectorAll('select > option, #languageSelect');
 var buttons = document.querySelectorAll('.button, .btn');
 var mainBlocks = document.querySelectorAll('.main-block'); 
+var statsBlock = document.querySelectorAll('.stat-item-mobile span'); 
+var asides = document.querySelectorAll('.aside');
+var giftItems = document.querySelectorAll('.gift-item'); 
+var centerAnimation = document.getElementById('center-animation');
+
 
 // Функция для применения стилей в соответствии с текущей темой
-function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor, buttonColor, buttonTextColor, mainBlockColor, scrollbarColor) {
+function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor, buttonColor, buttonTextColor, mainBlockColor, scrollbarColor, statBorderColor, giftItemColor, centerAnimationBorderColor, centerAnimationBgColor) {
     document.body.style.backgroundColor = bodyColor;
+
     links.forEach(function(link) {
         link.style.color = linkColor;
     });
+    
     svgIcons.forEach(function(svgIcon) {
         svgIcon.setAttribute('fill', fillColor);
     });
+    
     friendsPageElements.forEach(function(element) {
         element.style.color = settingsPageTextColor;
         element.style.backgroundColor = bodyColor;
     });
+    
     settingsPageText.forEach(function(element) {
         element.style.color = settingsPageTextColor;
     });
+    
     coursesPageLinks.forEach(function(link) {
         link.style.color = coursesPageColor;
     });
+    
     profilePageElements.forEach(function(element) {
         element.style.color = profilePageTextColor;
     });
+    
     selectLanguages.forEach(function(element) {
         element.style.backgroundColor = bodyColor;
     });
+    
     buttons.forEach(function(button) {
         button.style.backgroundColor = buttonColor;
         button.style.color = buttonTextColor;
     });
+    
     mainBlocks.forEach(function(block) {
         block.style.backgroundColor = mainBlockColor;
         block.style.color = '#ffffff'; 
     });
+    
+    statsBlock.forEach(function(element) {
+        element.style.backgroundColor = bodyColor;
+        element.style.border = `2px solid ${statBorderColor}`;  
+    });
+    
+    asides.forEach(function(aside) {
+        aside.style.backgroundColor = bodyColor;
+    });
+    
+    // Обновляем фон блоков с подарками
+    giftItems.forEach(function(giftItem) {
+        giftItem.style.backgroundColor = giftItemColor;
+    });
+
     document.getElementById('languageSelectContainer').style.backgroundColor = bodyColor;
 
     // Установка стилей скроллбара
     document.documentElement.style.setProperty('--scrollbar-thumb-color', scrollbarColor);
     document.documentElement.style.setProperty('--scrollbar-track-color', bodyColor);
+    centerAnimation.style.borderColor = centerAnimationBorderColor;
+    centerAnimation.style.backgroundColor = centerAnimationBgColor;
 
     // Сохраняем выбранные цвета в локальном хранилище
     localStorage.setItem('bodyColor', bodyColor);
@@ -63,6 +94,10 @@ function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, cou
     localStorage.setItem('buttonTextColor', buttonTextColor);
     localStorage.setItem('mainBlockColor', mainBlockColor);
     localStorage.setItem('scrollbarColor', scrollbarColor);
+    localStorage.setItem('statBorderColor', statBorderColor);
+    localStorage.setItem('giftItemColor', giftItemColor); 
+    localStorage.setItem('centerAnimationBorderColor', centerAnimationBorderColor);
+    localStorage.setItem('centerAnimationBgColor', centerAnimationBgColor);
 }
 
 // Функция для установки темы "Светлая тема"
@@ -76,9 +111,13 @@ function setThemeLight() {
     var buttonColor = '#f3166b';
     var buttonTextColor = '#ffffff';
     var mainBlockColor = '#f3166b';
-    var scrollbarColor = '#f3166b'; // Цвет скроллбара
+    var scrollbarColor = '#f3166b';
+    var statBorderColor = '#f3166b';
+    var giftItemColor = '#ffffff'; 
+    var centerAnimationBorderColor = '#f3166b'; // Цвет рамки для светлой темы
+    var centerAnimationBgColor = 'rgba(255, 255, 255, 0.9)'; // Фоновый цвет для светлой темы
 
-    applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor, buttonColor, buttonTextColor, mainBlockColor, scrollbarColor);
+    applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor, buttonColor, buttonTextColor, mainBlockColor, scrollbarColor, statBorderColor, giftItemColor, centerAnimationBorderColor, centerAnimationBgColor);
 }
 
 // Функция для установки темы "Темная тема"
@@ -92,11 +131,14 @@ function setThemeDark() {
     var buttonColor = '#15E670';
     var buttonTextColor = '#293133';
     var mainBlockColor = '#15E670';
-    var scrollbarColor = '#15E670'; // Цвет скроллбара
+    var scrollbarColor = '#15E670';
+    var statBorderColor = '#15E670';
+    var giftItemColor = '#293133';
+    var centerAnimationBorderColor = '#15E670'; // Цвет рамки для темной темы
+    var centerAnimationBgColor = 'rgba(41, 49, 51, 0.9)'; // Фоновый цвет для темной темы
 
-    applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor, buttonColor, buttonTextColor, mainBlockColor, scrollbarColor);
+    applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, coursesPageColor, profilePageTextColor, buttonColor, buttonTextColor, mainBlockColor, scrollbarColor, statBorderColor, giftItemColor, centerAnimationBorderColor, centerAnimationBgColor);
 }
-
 
 // Функция для установки темы
 function setTheme() {
@@ -137,7 +179,6 @@ themeDark.addEventListener('change', setTheme);
 
 
 
-
 function changeLanguage(language) {
     document.getElementById("menuTextTranslation").innerText = texts[language].menu;
     document.getElementById("coursesPageTextTranslation").innerText = texts[language].coursesPage;
@@ -151,7 +192,7 @@ function changeLanguage(language) {
     document.getElementById("friendIdInput").innerText = texts[language].friendIdInput;
     document.getElementById("confirmAddFriendButton").innerText = texts[language].confirmAddFriendButton;
     
-    document.getElementById("logoutButton").innerText = texts[language].logoutBtn;
+    document.getElementById("exitTextTranslation").innerText = texts[language].logoutBtn;
 
     document.getElementById("settingsHeaderTextTranslation").innerText = texts[language].settingsHeaderText;
     document.getElementById("settingsLangRussianTranslation").innerText = texts[language].settingsLangRussian;
