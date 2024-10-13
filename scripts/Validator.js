@@ -8,8 +8,6 @@ $(document).ready(function () {
     var answersCount = 0; // Количество ответов
     let selectedBlock = null;
     window.courseData = {};
-    const originalConsoleLog = console.log;
-
 
 
     // Извлечение параметров из URL
@@ -19,7 +17,7 @@ $(document).ready(function () {
 
     // Проверяем, что language присутствует в URL
     if (language) {
-        console.log('Language from URL: ' + language);
+        console.log('Language from URL:', language);
     } else {
         console.error('No language found in URL.');
         return;
@@ -82,52 +80,45 @@ $(document).ready(function () {
     function loadPhrases(language, lessonId, currentLanguage) {
         $.ajax({
             url: '../load_phrases.php',
-            method: 'GET', 
+            method: 'GET', // Изменено на GET, так как сервер ожидает GET-запрос
             data: { language: language, lesson_id: lessonId, interfaceLanguage: currentLanguage },
             dataType: 'json',
             success: function (response) {
-                // Проверка, если в ответе есть ошибка
-                if (response.error) {
-                    console.error('PHP Error:', response.error);
-                    logToErrorBlock('PHP Error: ' + response.error);
-                    return;
-                }
-
                 console.log('Full response:', JSON.stringify(response, null, 2));
 
                 // Проверка, что данные существуют и являются массивами с нужными элементами
                 if (!response || !Array.isArray(response.questions) || !Array.isArray(response.answers)) {
                     console.error('Invalid data structure:', response);
-                    logToErrorBlock('Invalid data structure: ' + JSON.stringify(response));
                     return;
                 }
 
+
                 if (response.questions.length === 0 || response.answers.length === 0) {
                     console.error('Questions or answers array is empty.');
-                    logToErrorBlock('Questions or answers array is empty.');
                     return;
                 }
 
                 const firstQuestion = response.questions[0];
                 const firstAnswer = response.answers[0];
 
+
                 if (!firstQuestion.text || !firstAnswer.word_russian) {
                     console.error('Missing required fields in questions or answers.');
-                    logToErrorBlock('Missing required fields in questions or answers.');
                     return;
                 }
 
                 // Если всё корректно, назначаем data
                 data = response; 
                 displayWindow(currentIndex);
+
+
             },
             error: function (xhr, status, error) {
                 console.error('Error loading phrases:', error);
-                logToErrorBlock('Error loading phrases: ' + error);
+                console.log('Full response:', JSON.stringify(response, null, 2));
             }
         });
     }
-
 
 
     function displayWindow(index) {
@@ -465,18 +456,6 @@ $(document).ready(function () {
 
     loadPhrases(language, lessonId, currentLanguage);
 });
-
-function logToErrorBlock(message) {
-    const errorLog = $('#errorLog');
-    errorLog.append(`<p>${message}</p>`);
-    errorLog.show();
-}
-
-const originalConsoleLog = console.log;
-console.log = function(...args) {
-    originalConsoleLog.apply(console, args);
-    logToErrorBlock(args.join(' '));
-};
 
 function checkAnswer(userInput, correctAnswer) {
     var correctAnswers = correctAnswer.split(',').map(answer => answer.trim().toLowerCase());

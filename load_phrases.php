@@ -1,11 +1,12 @@
 <?php
+// Включение отображения ошибок для отладки
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
+
+// Начало буферизации вывода для перехвата ошибок
 ob_start();
-
-
 
 // Проверка метода запроса
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -21,16 +22,6 @@ if (!$language || !$lesson_id) {
     echo json_encode(['error' => 'Язык или идентификатор урока не указан.']);
     exit;
 }
-
-
-if (isset($_GET['language']) && isset($_GET['lesson_id'])) {
-    echo "Language: " . htmlspecialchars($_GET['language']) . "<br>";
-    echo "Lesson ID: " . htmlspecialchars($_GET['lesson_id']) . "<br>";
-} else {
-    echo "Language or lesson ID not specified.";
-}
-
-
 
 // Определение базы данных на основе выбранного языка
 $databaseName = match (strtolower($language)) {
@@ -76,8 +67,6 @@ $dataJson = json_decode($lessonData['data'], true);
 if (json_last_error() !== JSON_ERROR_NONE) {
     echo json_encode(['error' => 'Ошибка декодирования JSON: ' . json_last_error_msg()]);
     exit;
-} else {
-    echo json_encode(['message' => 'Декодирование прошло успешно']);
 }
 
 // Формирование массива вопросов и ответов
@@ -89,9 +78,9 @@ foreach ($dataJson as $item) {
         $questions[] = [
             'id' => $item['ID'],
             'text' => $item['data']['text'],
-            'price' => $item['data']['price'],  // Добавляем поле 'price'
-            'chance' => $item['data']['chance'],  // Добавляем поле 'chance'
-            'rating' => $item['data']['rating'],  // Добавляем поле 'rating'
+            'price' => $item['data']['price'] ?? null,  // Поле 'price'
+            'chance' => $item['data']['chance'] ?? null,  // Поле 'chance'
+            'rating' => $item['data']['rating'] ?? null,  // Поле 'rating'
             'translation' => $item['data']['word_russian']
         ];
         $answers[] = [
@@ -101,7 +90,6 @@ foreach ($dataJson as $item) {
     }
 }
 
-
 // Подготовка данных для отправки в клиент
 $response = [
     'questions' => $questions,
@@ -109,14 +97,14 @@ $response = [
     'summary' => $lessonData['summary']
 ];
 
+// Проверка ошибок PHP
 $phpErrors = ob_get_clean();
-
 if ($phpErrors) {
-    // Если есть ошибки, добавляем их в JSON-ответ
     echo json_encode(['error' => 'PHP Error: ' . $phpErrors]);
     exit;
 }
 
+// Успешный ответ
 echo json_encode($response);
 
 // Закрытие соединения
