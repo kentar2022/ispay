@@ -3,12 +3,11 @@ $(document).ready(function () {
     var currentIndex = -1;
     var correctAnswersCount = 0;
     var requiredCorrectAnswers = 15;
-    var score = 0; // Переменная для отслеживания количества очков
-    var correctAnswersTotal = 0; // Количество правильных ответов
-    var answersCount = 0; // Количество ответов
+    var score = 0;
+    var correctAnswersTotal = 0;
+    var answersCount = 0;
     let selectedBlock = null;
     window.courseData = {};
-
 
     // Извлечение параметров из URL
     var urlParams = new URLSearchParams(window.location.search);
@@ -24,36 +23,21 @@ $(document).ready(function () {
     }
 
     // Проверяем, что completedLessons присутствует в URL
+    var lessonId;
     if (completedLessons) {
-        console.log('Completed Lessons from URL:', completedLessons);
+        lessonId = parseInt(completedLessons, 10);
+        console.log('Lesson ID from URL:', lessonId);
     } else {
         console.error('No completedLessons found in URL.');
-        return;
     }
 
-    // Получаем данные о текущей теме из localStorage
-    var currentTopicData = JSON.parse(localStorage.getItem('currentTopicData'));
-
-    if (currentTopicData) {
-        console.log('Current Topic Data:', currentTopicData);
-
-        // Получаем lessonId из completed_lessons
-        var lessonId = parseInt(completedLessons, 10);
-        console.log('Lesson ID:', lessonId);
-
-        // Обновляем completed_lessons_per_topic
-        currentTopicData.completed_lessons_per_topic = lessonId;
-
-        // Сохраняем обновленные данные обратно в localStorage
-        localStorage.setItem('currentTopicData', JSON.stringify(currentTopicData));
-
-        // Отображаем данные на странице
-        $('#completedLessons').text(currentTopicData.completed_lessons_per_topic);
-        $('#lessonsPerTopic').text(currentTopicData.lessons_per_topic);
-
-    } else {
-        console.error('No current topic data found in localStorage.');
+    // Отображаем данные на странице, если это необходимо
+    if (lessonId) {
+        $('#completedLessons').text(lessonId);
     }
+
+    // Функция для загрузки урока
+    loadLesson(language, lessonId);
 
     // Загрузка настроек страницы из localStorage
     var currentTheme = localStorage.getItem('currentTheme');
@@ -77,45 +61,32 @@ $(document).ready(function () {
     $('.summaryBlock').css('background-color', bodyColor);
     $('#hintBlock').css('color', linkColor);
 
-    function loadPhrases(language, lessonId, currentLanguage) {
+    function loadLesson(language, lessonId) {
         $.ajax({
             url: '../load_phrases.php',
-            method: 'GET', // Изменено на GET, так как сервер ожидает GET-запрос
-            data: { language: language, lesson_id: lessonId, interfaceLanguage: currentLanguage },
+            method: 'GET',
+            data: { language: language, lesson_id: lessonId },
             dataType: 'json',
             success: function (response) {
-                console.log('Full response:', JSON.stringify(response, null, 2));
+                console.log('Full response:', response);
 
-                // Проверка, что данные существуют и являются массивами с нужными элементами
+                // Проверяем, что данные существуют и являются массивами с нужными элементами
                 if (!response || !Array.isArray(response.questions) || !Array.isArray(response.answers)) {
                     console.error('Invalid data structure:', response);
                     return;
                 }
-
 
                 if (response.questions.length === 0 || response.answers.length === 0) {
                     console.error('Questions or answers array is empty.');
                     return;
                 }
 
-                const firstQuestion = response.questions[0];
-                const firstAnswer = response.answers[0];
-
-
-                if (!firstQuestion.text || !firstAnswer.word_russian) {
-                    console.error('Missing required fields in questions or answers.');
-                    return;
-                }
-
-                // Если всё корректно, назначаем data
+                // Работаем с данными урока (response)
                 data = response; 
                 displayWindow(currentIndex);
-
-
             },
             error: function (xhr, status, error) {
                 console.error('Error loading phrases:', error);
-                console.log('Full response:', JSON.stringify(response, null, 2));
             }
         });
     }
@@ -149,7 +120,7 @@ $(document).ready(function () {
 
                 $('#nextBtn').show().text('Начать урок').off('click').on('click', function () {
                     // Скрываем блок резюме, возвращая класс 'display-none'
-                    $('.summaryBlock').addClass('display-none').removeClass('visible');
+                    $('.summaryBlock').addClass('hidden').removeClass('visible');
 
                     // Переходим к первому заданию
                     currentIndex = 0;
@@ -392,7 +363,6 @@ $(document).ready(function () {
             $('#textInput').val('');
             $('#hintBlock').hide();
         }
-
         var summaryPopup = $('#summaryPopup');
         if (summaryPopup.length) {
             console.log('Summary popup found, hiding it');
@@ -403,8 +373,8 @@ $(document).ready(function () {
     });
     
     function showFinalResults() {
-        $('.main-block').addClass('hidden'); // Скрыть основное содержимое
-        $('.success-message').removeClass('hidden'); // Показать блок с результатами
+        $('.main-block').addClass('hidden'); 
+        $('.success-message').removeClass('hidden'); 
         $('#correctAnswersCount').text(correctAnswersTotal);
         $('#scoreCount').text(score);
         getUserId(lessonId, language);
@@ -454,8 +424,52 @@ $(document).ready(function () {
         });
     }
 
-    loadPhrases(language, lessonId, currentLanguage);
+    loadLesson(language, lessonId, currentLanguage);
 });
+
+/*
+(function() {
+    // Находим наш блок для вывода сообщений
+    var consoleOutput = document.getElementById('consoleOutput');
+
+    // Сохраняем оригинальные методы console
+    var originalConsoleLog = console.log;
+    var originalConsoleError = console.error;
+
+    // Функция для безопасного отображения объектов
+    function formatOutput(args) {
+        return args.map(arg => {
+            if (typeof arg === 'object') {
+                try {
+                    return JSON.stringify(arg, null, 2); // Форматируем объект как JSON
+                } catch (error) {
+                    return String(arg); // Если объект не может быть преобразован в строку, возвращаем его как есть
+                }
+            } else {
+                return String(arg); // Для обычных строк и чисел
+            }
+        }).join(' ');
+    }
+
+    // Переопределяем console.log для вывода в наш блок
+    console.log = function(...args) {
+        originalConsoleLog.apply(console, args); // Вызываем оригинальный console.log
+        var formattedMessage = formatOutput(args);
+        consoleOutput.innerHTML += '<div>' + formattedMessage + '</div>';
+        consoleOutput.scrollTop = consoleOutput.scrollHeight; // Прокручиваем вниз
+    };
+
+    // Переопределяем console.error для вывода ошибок
+    console.error = function(...args) {
+        originalConsoleError.apply(console, args); // Вызываем оригинальный console.error
+        var formattedMessage = formatOutput(args);
+        consoleOutput.innerHTML += '<div style="color: red;">' + formattedMessage + '</div>';
+        consoleOutput.scrollTop = consoleOutput.scrollHeight;
+    };
+
+})();*/
+
+
 
 function checkAnswer(userInput, correctAnswer) {
     var correctAnswers = correctAnswer.split(',').map(answer => answer.trim().toLowerCase());
