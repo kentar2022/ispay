@@ -9,14 +9,14 @@ $username = "kentar";
 $password = "password";
 
 // Проверяем наличие необходимых данных в $_POST
-if (!isset($_POST['user_id']) || !isset($_POST['topic_id']) || !isset($_POST['new_score']) || !isset($_POST['language'])) {
+if (!isset($_POST['user_id']) || /*!isset($_POST['topic_id']) ||*/ !isset($_POST['new_score']) || !isset($_POST['language'])) {
     echo json_encode(array("error" => "Отсутствуют необходимые данные для обновления прогресса пользователя.",
                             "post_data" => $_POST));
     exit();
 }
 
 $userId = $_POST['user_id'];
-$topicId = $_POST['topic_id'];
+/*$topicId = $_POST['topic_id'];*/
 $newScore = $_POST['new_score'];
 $language = $_POST['language'];
 
@@ -37,9 +37,9 @@ $stmt_language = $conn_language->prepare("
     UPDATE topic_progress 
     SET total_score = total_score + ?, 
         completed_lessons = completed_lessons + 1 
-    WHERE user_id = ? AND topic_id = ?
+    WHERE user_id = ? /*AND topic_id = ?*/
 ");
-$stmt_language->bind_param("iii", $newScore, $userId, $topicId);
+$stmt_language->bind_param("ii", $newScore, $userId, /*$topicId*/);
 
 if ($stmt_language->execute()) {
     // Обновление таблицы статистики пользователя

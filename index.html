@@ -48,16 +48,16 @@
                             </g>
                         </svg>
                     </div>
-                <select id="languageSelect" class="a" style="margin-left: 10px; height: 35px;" onchange="showLanguage(this.value); selectLanguage(this.value)">
-                    <option value="none" class="pickLanguage">Выбрать язык</option>
-                    <option value="chechen" id="courseChechenTranslation" class="a">Чеченский язык</option>
-                    <option value="ingush" id="courseIngushTranslation" class="a">Ингушский язык</option>
-                    <option value="adyge" id="courseAdygeTranslation" class="a">Черкесский язык</option>
-                    <option value="udmurt" id="courseUdmurtTranslation" class="a">Удмуртский язык</option>
-                    <option value="tatar" id="courseTatarTranslation" class="a">Татарский язык</option>
-                    <option value="chuvash" id="courseChuvashTranslation" class="a">Чувашский язык</option>
-                    <option value="bashkort" id="courseBashkortTranslation" class="a">Башкирский язык</option>
-                </select>
+                    <select id="languageSelect" class="a" style="margin-left: 10px; height: 35px;" onchange="showLanguage(this.value); selectLanguage(this.value)">
+                        <option value="none" class="pickLanguage">Выбрать язык</option>
+                        <option value="chechen" id="courseChechenTranslation" class="a">Чеченский язык</option>
+                        <option value="ingush" id="courseIngushTranslation" class="a">Ингушский язык</option>
+                        <option value="adyge" id="courseAdygeTranslation" class="a">Черкесский язык</option>
+                        <option value="udmurt" id="courseUdmurtTranslation" class="a">Удмуртский язык</option>
+                        <option value="tatar" id="courseTatarTranslation" class="a">Татарский язык</option>
+                        <option value="chuvash" id="courseChuvashTranslation" class="a">Чувашский язык</option>
+                        <option value="bashkort" id="courseBashkortTranslation" class="a">Башкирский язык</option>
+                    </select>
                 </div>
                 <div class="aside-item" id="coursesPageBtn" onclick="togglePages('coursesPage')">
                     <a href="#">
@@ -329,15 +329,15 @@
                 <div class="lesson-block" data-lesson-id="2">
                     <div class="lesson-header" onclick="toggleContent(this)">
                         <span class="lesson-toggle-icon">&#9660;</span>
-                        <h2 class="lesson-title">Именные классы и местоимения</h2>
+                        <h2 class="lesson-title"></h2>
                         <span class="lesson-index"></span>
                     </div>
                     <div class="lesson-content">
-                        <p>Тематика 1</p><div class="topic-container"></div>
-                        <p>Тематика 2</p><div class="topic-container"></div>
-                        <p>Тематика 3</p><div class="topic-container"></div>
-                        <p>Тематика 4</p><div class="topic-container"></div>
-                        <p>Тематика 5</p><div class="topic-container"></div>
+                        <p data-topic-id="6"></p><div class="topic-container"></div>
+                        <p data-topic-id="7"></p><div class="topic-container"></div>
+                        <p data-topic-id="8"></p><div class="topic-container"></div>
+                        <p data-topic-id="9"></p><div class="topic-container"></div>
+                        <p data-topic-id="10"></p><div class="topic-container"></div>
                     </div>
                     <div class="lesson-progress">
                         <span></span>
@@ -2271,6 +2271,10 @@
                                 <img src="images/chest.png" alt="Gift 6">
                                 <p><span id="giftItemTranslation6">День </span> 6</p>
                             </div>
+                            <div class="gift-item" data-gift-day="6">
+                                <img src="images/chest.png" alt="Gift 6">
+                                <p><span id="giftItemTranslation6">День </span> 6</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2501,6 +2505,7 @@ function checkSession() {
 <script src="profile.js"></script>
 <!--<script src="send_id.js"></script>-->
 <script src="settings.js"></script>
+<script src="get_user_languages.js"></script>
 <script src="gift.js"></script>
 <script src="scripts/navigation.js"></script>
 <script src="statsHandler.js"></script>

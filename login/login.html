@@ -73,6 +73,16 @@
             background-color: rgb(21, 230, 112);
             z-index: 0;
         }
+        .register-link {
+            margin-top: 10px;
+            font-size: 16px;
+            text-decoration: underline;
+            cursor: pointer;
+            color: #0056b3;
+        }
+        .register-link:hover {
+            color: #003d80;
+        }
     </style>
 </head>
 <body>
@@ -80,18 +90,21 @@
     <div class="line"></div>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title" id="loginTitleTranslation">Entrer</h5>
+            <h5 class="card-title" id="loginTitleTranslation">Войти</h5>
             <form method="post" action="login_handler.php"> 
                 <div class="mb-3">
-                    <label for="email" class="form-label" id="emailLabelTranslation">Adresse e-mail</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <label for="username" class="form-label" id="emailLabelTranslation">Почта или Никнейм</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label" id="passwordLabelTranslation">Mot de passe</label>
+                    <label for="password" class="form-label" id="passwordLabelTranslation">Пароль</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <button type="submit" class="btn btn-primary" id="submitBtnTranslation">Entrer</button>
+                <button type="submit" class="btn btn-primary" id="submitBtnTranslation">Войти</button>
             </form>
+            <div class="register-link">
+                <a href="registration.html" id="registerLinkTranslation">Зарегистрироваться</a>
+            </div>
         </div>
     </div>
 </div>
@@ -172,24 +185,27 @@ window.onload = function() {
 };
 
 
-        var texts = {
+    var texts = {
         russian: {
             loginTitle: "Войти",
-            emailLabel: "Адрес электронной почты",
+            emailLabel: "Почта или Никнейм",
             passwordLabel: "Пароль",
-            submitBtn: "Войти"
+            submitBtn: "Войти",
+            registerLink: "Зарегистрироваться"
         },
         english: {
             loginTitle: "Login",
-            emailLabel: "Email Address",
+            emailLabel: "Email or Username",
             passwordLabel: "Password",
-            submitBtn: "Login"
+            submitBtn: "Login",
+            registerLink: "Register"
         },
         french: {
             loginTitle: "Entrer",
-            emailLabel: "Adresse e-mail",
+            emailLabel: "E-mail ou Nom d'utilisateur",
             passwordLabel: "Mot de passe",
-            submitBtn: "Entrer"
+            submitBtn: "Entrer",
+            registerLink: "S'inscrire"
         }
     };
 
@@ -199,6 +215,7 @@ window.onload = function() {
         document.getElementById("emailLabelTranslation").innerText = texts[language].emailLabel;
         document.getElementById("passwordLabelTranslation").innerText = texts[language].passwordLabel;
         document.getElementById("submitBtnTranslation").innerText = texts[language].submitBtn;
+        document.getElementById("registerLinkTranslation").innerText = texts[language].registerLink;
         console.log('Language changed to:', language);
         localStorage.setItem('currentLanguage', language);
     }
@@ -211,7 +228,6 @@ window.onload = function() {
         }
     }
 
-    
     window.onload = function() {
         console.log('Page loaded');
         loadLanguage();

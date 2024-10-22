@@ -83,6 +83,7 @@ $(document).ready(function () {
 
                 // Работаем с данными урока (response)
                 data = response; 
+                currentIndex = -1;
                 displayWindow(currentIndex);
             },
             error: function (xhr, status, error) {
@@ -95,9 +96,13 @@ $(document).ready(function () {
     function displayWindow(index) {
 
       console.log('displayWindow called with index:', index);
+      console.log('Current question data:', data.questions[index]);
+
+
 
         // Обработка индекса -1 для отображения блока с резюме
         if (index === -1) {
+            console.log('Displaying summary block');
             var summaryContent = data.summary ? data.summary : 'Начните урок';
 
             $('#textInput').hide();
@@ -119,10 +124,7 @@ $(document).ready(function () {
                 }).addClass('visible');
 
                 $('#nextBtn').show().text('Начать урок').off('click').on('click', function () {
-                    // Скрываем блок резюме, возвращая класс 'display-none'
                     $('.summaryBlock').addClass('hidden').removeClass('visible');
-
-                    // Переходим к первому заданию
                     currentIndex = 0;
                     displayWindow(currentIndex);
                 });
@@ -137,8 +139,11 @@ $(document).ready(function () {
             return;
         }
         
-        const currentQuestion = data.questions[index];
-        const currentAnswer = data.answers[index];
+        var currentQuestion = data.questions[index];
+        var currentAnswer = data.answers[index];
+
+        console.log('Current question data:', currentQuestion);
+        console.log('Current answer data:', currentAnswer);
 
         if (!currentQuestion || !currentQuestion.text || !currentAnswer || !currentAnswer.word_russian) {
             console.error('Missing question or answer fields for index:', index);
@@ -165,14 +170,25 @@ $(document).ready(function () {
 
         $('#hintBlock').hide();
 
-        if (currentQuestion.task_type === "multiple_choice" && data.answers[index].possible_answers) {
+       if (currentQuestion.task_type === "multiple_choice" && currentQuestion.possible_answers) {
+
+            console.log('Displaying matches question');
+
             $('#textInput').hide();
             $('#nextBtn').hide();
 
             var currentWindow = $('<div id="' + currentQuestion.id + '" class="window active">' + currentQuestion.text + '</div>');
             windowContainer.append(currentWindow);
 
-            var possibleAnswers = data.answers[index].possible_answers.split(',');
+            var possibleAnswers = [];
+            if (typeof currentQuestion.possible_answers === 'string') {
+                possibleAnswers = currentQuestion.possible_answers.split(',');
+            } else if (Array.isArray(currentQuestion.possible_answers)) {
+                possibleAnswers = currentQuestion.possible_answers;
+            } else {
+                console.error('Invalid format for possible_answers:', currentQuestion.possible_answers);
+                return;
+            }
 
             possibleAnswers.forEach(answer => {
                 var isCorrect = answer.trim() === data.answers[index].word_russian;
@@ -185,23 +201,51 @@ $(document).ready(function () {
             });
 
             $('.answer-block').on('click', function () {
+                var userAnswer = null;
+                userAnswer = $(this).text().trim();
+                var correctAnswer = currentAnswer.word_russian;
                 var isCorrect = $(this).attr('data-correct') === 'true';
+                console.log('User clicked answer:', userAnswer);
+                console.log('Correct answer:', correctAnswer);
+                console.log('Is answer correct:', isCorrect);
+
                 if (isCorrect) {
                     $(this).addClass('correct');
-                    score += questionPrice;
+                    var questionPrice = parseInt(currentQuestion.price) || 0;
+                    
+                    if (checkAnswer(userAnswer, correctAnswer)) {
+                        correctAnswersCount++;
+                        correctAnswersTotal++;
+                        score += questionPrice;
+                        console.log('Answer is correct! Score updated:', score);
+                        console.log('Correct answers count:', correctAnswersCount);
+                    }
+
                     currentIndex++;
                     if (currentIndex < data.questions.length) {
-                        displayWindow(currentIndex);
+                        setTimeout(() => {
+                            displayWindow(currentIndex);
+                        }, 1000); // Задержка в 1 секунду перед переходом к следующему вопросу
                         console.log('Next index after correct multiple choice:', currentIndex);
                     } else {
-                        showFinalResults();
+                        setTimeout(showFinalResults, 1000); // Задержка в 1 секунду перед показом финальных результатов
                     }
                 } else {
                     $(this).addClass('incorrect');
+                    console.log('Answer is incorrect.');
                 }
             });
 
-        } else if (currentQuestion.task_type === "matches" && data.matches) {
+            if (checkAnswer(userAnswer, correctAnswer)) {
+                console.log('Checking answer:', userAnswer, 'against:', correctAnswer);
+                var correctAnswers = correctAnswer.split(',').map(answer => answer.trim().toLowerCase());
+                var isCorrect = correctAnswers.includes(userAnswer.toLowerCase()) || userAnswer === ".";
+                console.log('Is answer correct:', isCorrect);
+                return isCorrect;
+            }
+
+        } else if (currentQuestion.task_type === "matches" && currentQuestion.matches) {
+            console.log('Displaying matches question');
             $('#textInput').hide();
             $('#nextBtn').hide();
 
@@ -288,6 +332,7 @@ $(document).ready(function () {
             }
 
         } else {
+            console.log('Displaying default question type');
             var currentWindow = $('<div id="' + currentQuestion.id + '" class="window active">' + currentQuestion.text + '</div>');
             windowContainer.append(currentWindow);
 
@@ -314,6 +359,12 @@ $(document).ready(function () {
                 $('#textInput').val('');
                 $('#hintBlock').hide();
             });
+        }
+
+        if (index >= data.questions.length) {
+            console.log('Reached end of questions, showing final results');
+            showFinalResults();
+            return;
         }
     }
 
@@ -388,8 +439,8 @@ $(document).ready(function () {
             data: {},
             success: function (response) {
                 console.log("User ID:", response.user_id);
-                const topicId = currentTopicData.topic_id;
-                updateTopicProgress(response.user_id, topicId, lessonId, score, language);
+                //const topicId = currentTopicData.topic_id;
+                updateTopicProgress(response.user_id,/* topicId,*/ lessonId, score, language);
             },
             error: function (xhr, status, error) {
                 console.error("Ошибка при получении ID пользователя:", error);
@@ -397,10 +448,10 @@ $(document).ready(function () {
         });
     }
 
-    function updateTopicProgress(userId, topicId, lessonId, newScore, language) {
+    function updateTopicProgress(userId, /*topicId,*/ lessonId, newScore, language) {
         console.log("Отправка данных в updateTopicProgress:", {
             user_id: userId,
-            topic_id: topicId,
+            /*topic_id: topicId,*/
             lesson_id: lessonId,
             new_score: newScore,
             language: language
@@ -411,7 +462,7 @@ $(document).ready(function () {
             url: "../update_topic_progress.php",
             data: {
                 user_id: userId,
-                topic_id: topicId,
+               /* topic_id: topicId,*/
                 new_score: newScore,
                 language: language
             },

@@ -78,10 +78,13 @@ foreach ($dataJson as $item) {
         $questions[] = [
             'id' => $item['ID'],
             'text' => $item['data']['text'],
-            'price' => $item['data']['price'] ?? null,  // Поле 'price'
-            'chance' => $item['data']['chance'] ?? null,  // Поле 'chance'
-            'rating' => $item['data']['rating'] ?? null,  // Поле 'rating'
-            'translation' => $item['data']['word_russian']
+            'price' => $item['data']['price'] ?? null,
+            'chance' => $item['data']['chance'] ?? null,
+            'rating' => $item['data']['rating'] ?? null,
+            'task_type' => $item['data']['task_type'] ?? null,  // Добавлено поле task_type
+            'translation' => $item['data']['word_russian'],
+            'possible_answers' => $item['data']['possible_answers'] ?? null,  // Возможные ответы для типа multiple_choice
+            'matches' => $item['data']['matches'] ?? null  // Сопоставления для типа matches
         ];
         $answers[] = [
             'id' => $item['ID'],
@@ -109,4 +112,3 @@ echo json_encode($response);
 
 // Закрытие соединения
 $mysqli->close();
-?>
