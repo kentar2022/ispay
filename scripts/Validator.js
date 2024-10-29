@@ -7,6 +7,8 @@ $(document).ready(function () {
     var correctAnswersTotal = 0;
     var answersCount = 0;
     let selectedBlock = null;
+    let failedQuestions = new Set();
+    let originalQuestionsOrder = [];
     window.courseData = {};
 
     // Извлечение параметров из URL
@@ -263,10 +265,49 @@ $(document).ready(function () {
                     }
                 }, 1000);
             } else {
+                handleWrongAnswer(currentIndex);
                 $this.addClass('incorrect');
                 $('#hintBlock').text(correctAnswer).show();
             }
         });
+    }
+
+
+    // Функция для управления порядком вопросов
+    function handleWrongAnswer(currentIndex) {
+        failedQuestions.add(currentIndex);
+        
+        // Если это первая ошибка, сохраняем оригинальный порядок
+        if (originalQuestionsOrder.length === 0) {
+            originalQuestionsOrder = [...data.questions];
+        }
+    }
+
+    function calculateStringSimilarity(str1, str2) {
+        // Приводим строки к нижнему регистру и убираем пробелы по краям
+        str1 = str1.toLowerCase().trim();
+        str2 = str2.toLowerCase().trim();
+        
+        if (str1 === str2) return 1.0; // Полное совпадение
+        if (str1.length < 2 || str2.length < 2) return 0.0;
+
+        // Создаем массивы биграмм (пар символов)
+        let bigrams1 = new Set();
+        let bigrams2 = new Set();
+        
+        for (let i = 0; i < str1.length - 1; i++) {
+            bigrams1.add(str1.slice(i, i + 2));
+        }
+        
+        for (let i = 0; i < str2.length - 1; i++) {
+            bigrams2.add(str2.slice(i, i + 2));
+        }
+
+        // Находим пересечение биграмм
+        let intersection = new Set([...bigrams1].filter(x => bigrams2.has(x)));
+        
+        // Вычисляем коэффициент схожести
+        return (2.0 * intersection.size) / (bigrams1.size + bigrams2.size);
     }
 
     // Обработчик matches заданий
@@ -407,7 +448,6 @@ $(document).ready(function () {
 
     // Обработчик обычных заданий
     function handleDefaultQuestion(currentQuestion, currentAnswer, windowContainer) {
-        console.log('Displaying default question type');
         $('#textInput').show().val('');
         $('#nextBtn').show().text('Далее').off('click').on('click', function() {
             const userAnswer = $('#textInput').val().trim();
@@ -419,6 +459,7 @@ $(document).ready(function () {
                 updateProgressBar(currentIndex, data.questions.length);
                 displayWindow(currentIndex);
             } else {
+                handleWrongAnswer(currentIndex);
                 $('#hintBlock').text(currentAnswer.answer).show();
             }
             $('#textInput').val('');
@@ -427,9 +468,8 @@ $(document).ready(function () {
 
 
     function displayWindow(index) {
+
         console.log('displayWindow called with index:', index);
-
-
 
 
         if (!isLessonLoaded()) {
@@ -479,10 +519,21 @@ $(document).ready(function () {
             return;
         }
 
-        // Проверка на конец урока
-        if (index >= data.questions.length) {
-            showFinalResults();
-            return;
+        // Если дошли до конца обычных вопросов, показываем вопросы с ошибками
+        if (index >= data.questions.length && failedQuestions.size > 0) {
+            const failedQuestionsArray = [...failedQuestions];
+            // Очищаем Set, чтобы можно было снова добавлять новые ошибки
+            failedQuestions.clear();
+            
+            // Добавляем вопросы с ошибками в конец
+            data.questions = [
+                ...originalQuestionsOrder.filter((_, i) => !failedQuestionsArray.includes(i)),
+                ...failedQuestionsArray.map(i => originalQuestionsOrder[i])
+            ];
+            
+            // Обновляем индекс, чтобы показать первый из перенесенных вопросов
+            currentIndex = data.questions.length - failedQuestionsArray.length;
+            return displayWindow(currentIndex);
         }
 
         // Подготовка данных текущего вопроса
@@ -605,60 +656,74 @@ $(document).ready(function () {
         }
     });
     
-function showFinalResults() {
-    $('.main-block').addClass('hidden'); 
-    $('.success-message').removeClass('hidden'); 
-    $('#correctAnswersCount').text(correctAnswersTotal);
-    $('#scoreCount').text(score);
-    getUserId(lessonId, language);
-}
+    function showFinalResults() {
+        $('.main-block').addClass('hidden'); 
+        $('.success-message').removeClass('hidden'); 
+        $('#correctAnswersCount').text(correctAnswersTotal);
+        $('#scoreCount').text(score);
+        getUserId(lessonId, language);
+    }
 
 
+    function getUserId(lessonId, language) {
+        $.ajax({
+            type: "POST",
+            url: "../getUserId.php",
+            data: {},
+            success: function (response) {
+                console.log("User ID:", response.user_id);
+                // Используем topicId из URL параметров
+                const urlTopicId = urlParams.get('topicId');
+                updateTopicProgress(response.user_id, urlTopicId, score, language);
+            },
+            error: function (xhr, status, error) {
+                console.error("Ошибка при получении ID пользователя:", error);
+            }
+        });
+    }
 
-function getUserId(lessonId, language) {
-    $.ajax({
-        type: "POST",
-        url: "../getUserId.php",
-        data: {},
-        success: function (response) {
-            console.log("User ID:", response.user_id);
-            // Используем topicId из URL параметров
-            const urlTopicId = urlParams.get('topicId');
-            updateTopicProgress(response.user_id, urlTopicId, score, language);
-        },
-        error: function (xhr, status, error) {
-            console.error("Ошибка при получении ID пользователя:", error);
-        }
-    });
-}
-
-function updateTopicProgress(userId, topicId, newScore, language) {
-    console.log("Отправка данных в updateTopicProgress:", {
-        user_id: userId,
-        topic_id: topicId,
-        new_score: newScore,
-        language: language
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "../update_topic_progress.php",
-        data: {
+    function updateTopicProgress(userId, topicId, newScore, language) {
+        console.log("Отправка данных в updateTopicProgress:", {
             user_id: userId,
             topic_id: topicId,
             new_score: newScore,
             language: language
-        },
-        success: function (response) {
-            console.log("Прогресс успешно обновлен:", response);
-        },
-        error: function (xhr, status, error) {
-            console.error("Ошибка при обновлении прогресса:", error);
-        }
-    });
-}
+        });
 
-});
+        $.ajax({
+            type: "POST",
+            url: "../update_topic_progress.php",
+            data: {
+                user_id: userId,
+                topic_id: topicId,
+                new_score: newScore,
+                language: language
+            },
+            success: function (response) {
+                console.log("Прогресс успешно обновлен:", response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Ошибка при обновлении прогресса:", error);
+            }
+        });
+    }
+
+    function checkAnswer(userInput, correctAnswer) {
+        // Если это точка (пропуск), сразу возвращаем true
+        if (userInput === ".") return true;
+
+        // Разбиваем правильный ответ на варианты
+        const correctAnswers = correctAnswer.split(',').map(answer => answer.trim());
+        
+        // Проверяем каждый вариант ответа
+        return correctAnswers.some(answer => {
+            const similarity = calculateStringSimilarity(userInput, answer);
+            console.log(`Similarity between "${userInput}" and "${answer}": ${similarity}`);
+            return similarity >= 0.7; // 80% схожесть
+        });
+    }
+
+    });
 
 /*
 (function() {
@@ -704,7 +769,3 @@ function updateTopicProgress(userId, topicId, newScore, language) {
 
 
 
-function checkAnswer(userInput, correctAnswer) {
-    var correctAnswers = correctAnswer.split(',').map(answer => answer.trim().toLowerCase());
-    return correctAnswers.includes(userInput.toLowerCase()) || userInput === ".";
-}
