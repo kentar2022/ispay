@@ -1,5 +1,4 @@
 <?php
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -21,16 +20,30 @@ $databases = [
     'chuvash' => 'Чувашский'
 ];
 
-// Проверка, отправлены ли данные через форму
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Получаем данные из формы
     $selectedDatabase = $_POST['language'];
     $lessonLevel = intval($_POST['lesson_level']);
+    $topicId = intval($_POST['topic_id']);
     $jsonData = $_POST['jsonData'];
+    $summary = $_POST['summary'] ?? null;
+
+    // Проверяем обязательные поля
+    if (!$selectedDatabase || !$lessonLevel || !$topicId || !$jsonData) {
+        die(json_encode([
+            'error' => 'Не все обязательные поля заполнены',
+            'fields' => [
+                'language' => !$selectedDatabase,
+                'lesson_level' => !$lessonLevel,
+                'topic_id' => !$topicId,
+                'jsonData' => !$jsonData
+            ]
+        ]));
+    }
 
     // Проверяем, выбрана ли корректная база данных
     if (!array_key_exists($selectedDatabase, $databases)) {
-        die("Ошибка: неверный выбор базы данных.");
+        die(json_encode(['error' => 'Ошибка: неверный выбор базы данных.']));
     }
 
     // Создание соединения с выбранной базой данных
@@ -38,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Проверка соединения
     if ($conn->connect_error) {
-        die("Ошибка подключения: " . $conn->connect_error);
+        die(json_encode(['error' => "Ошибка подключения: " . $conn->connect_error]));
     }
 
     // Декодируем JSON из формы в массив
@@ -46,12 +59,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Проверка правильности декодирования
     if (json_last_error() !== JSON_ERROR_NONE) {
-        die("Ошибка в JSON формате: " . json_last_error_msg());
+        die(json_encode(['error' => "Ошибка в JSON формате: " . json_last_error_msg()]));
     }
 
-    // Проверяем, есть ли уже запись с таким lesson_level
-    $stmt = $conn->prepare("SELECT data FROM lessons WHERE lesson_level = ?");
-    $stmt->bind_param("i", $lessonLevel);
+    // Проверяем, есть ли уже запись с таким lesson_level и topic_id
+    $stmt = $conn->prepare("SELECT data FROM lessons WHERE lesson_level = ? AND topic_id = ?");
+    $stmt->bind_param("ii", $lessonLevel, $topicId);
     $stmt->execute();
     $result = $stmt->get_result();
     $existingData = $result->fetch_assoc();
@@ -60,9 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Если запись существует, объединяем новые данные с существующими
         $existingDataArray = json_decode($existingData['data'], true);
 
-        // Проверка правильности декодирования существующих данных
         if (json_last_error() !== JSON_ERROR_NONE) {
-            die("Ошибка в JSON формате существующих данных: " . json_last_error_msg());
+            die(json_encode(['error' => "Ошибка в JSON формате существующих данных: " . json_last_error_msg()]));
         }
 
         // Объединяем старые и новые данные
@@ -70,13 +82,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mergedDataJson = json_encode($mergedDataArray, JSON_UNESCAPED_UNICODE);
 
         // Обновляем существующую запись
-        $updateStmt = $conn->prepare("UPDATE lessons SET data = ? WHERE lesson_level = ?");
-        $updateStmt->bind_param("si", $mergedDataJson, $lessonLevel);
+        $updateStmt = $conn->prepare("UPDATE lessons SET data = ?, summary = ? WHERE lesson_level = ? AND topic_id = ?");
+        $updateStmt->bind_param("ssii", $mergedDataJson, $summary, $lessonLevel, $topicId);
 
         if ($updateStmt->execute()) {
-            echo "Данные успешно обновлены для урока $lessonLevel.<br>";
+            echo json_encode(['success' => "Данные успешно обновлены для урока $lessonLevel темы $topicId"]);
         } else {
-            echo "Ошибка при обновлении данных: " . $updateStmt->error . "<br>";
+            echo json_encode(['error' => "Ошибка при обновлении данных: " . $updateStmt->error]);
         }
 
         $updateStmt->close();
@@ -84,23 +96,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Если запись не существует, создаем новую строку
         $newDataJson = json_encode($newDataArray, JSON_UNESCAPED_UNICODE);
 
-        $insertStmt = $conn->prepare("INSERT INTO lessons (lesson_level, data) VALUES (?, ?)");
-        $insertStmt->bind_param("is", $lessonLevel, $newDataJson);
+        $insertStmt = $conn->prepare("INSERT INTO lessons (lesson_level, topic_id, data, summary) VALUES (?, ?, ?, ?)");
+        $insertStmt->bind_param("iiss", $lessonLevel, $topicId, $newDataJson, $summary);
 
-        // Выполнение запроса на вставку новых данных
         if ($insertStmt->execute()) {
-            echo "Новые данные успешно добавлены для урока $lessonLevel.<br>";
+            echo json_encode(['success' => "Новые данные успешно добавлены для урока $lessonLevel темы $topicId"]);
         } else {
-            echo "Ошибка при добавлении новых данных: " . $insertStmt->error . "<br>";
+            echo json_encode(['error' => "Ошибка при добавлении новых данных: " . $insertStmt->error]);
         }
 
-        // Закрытие подготовленного запроса
         $insertStmt->close();
     }
 
-    // Закрытие соединения с базой данных
     $stmt->close();
     $conn->close();
 }
 ?>
-

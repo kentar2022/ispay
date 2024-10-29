@@ -1997,41 +1997,44 @@
     </div>
 </div>
 
-<div>
-<!--
 <div id="coursesPage" class="page hidden coursesPage">
-    <div class="container"> 
+    <div class="container">
         <main>
             <div class="courses">
-                <a href="#" class="course" onclick="showLanguage('Chechen')">
+                <div class="course">
                     <img src="courses_flags/chechen.png" alt="Flag">
-                    <h3 id="courseChechenTranslation">Чеченский язык</h3>
-                </a>
-               <a href="#" class="course" onclick="showLanguage('Ingush')">
+                    <h3 id="courseChechenTranslation" class="courses_titles">Чеченский язык</h3>
+                    <button class="add-language-button a" onclick="addLanguage('chechen')">+</button>
+                </div>
+                <div class="course">
                     <img src="courses_flags/ingush.png" alt="Flag">
-                    <h3 id="courseIngushTranslation">Ингушский язык</h3>
-                </a>
-                <a href="#" class="course" onclick="showLanguage('Adyge')">
+                    <h3 id="courseIngushTranslation" class="courses_titles">Ингушский язык</h3>
+                    <button class="add-language-button a" onclick="addLanguage('ingush')">+</button>
+                </div>
+                <div class="course">
                     <img src="courses_flags/adyge.png" alt="Flag">
-                    <h3 id="courseAdygeTranslation">Черкесский язык</h3>
-                </a>
-                <a href="#" class="course" onclick="showLanguage('Udmurt')">
+                    <h3 id="courseAdygeTranslation" class="courses_titles">Черкесский язык</h3>
+                    <button class="add-language-button a" onclick="addLanguage('adyge')">+</button>
+                </div>
+                <div class="course">
                     <img src="courses_flags/udmurt.png" alt="Flag">
-                    <h3 id="courseUdmurtTranslation">Удмуртский язык</h3>
-                </a>
-                <a href="#" class="course" onclick="showLanguage('Tatar')">
+                    <h3 id="courseUdmurtTranslation" class="courses_titles">Удмуртский язык</h3>
+                    <button class="add-language-button a" onclick="addLanguage('udmurt')">+</button>
+                </div>
+                <div class="course">
                     <img src="courses_flags/tatar.png" alt="Flag">
-                    <h3 id="courseTatarTranslation">Татарский язык</h3>
-                </a>
-                <a href="#" class="course" onclick="showLanguage('Chuvash')">
+                    <h3 id="courseTatarTranslation" class="courses_titles">Татарский язык</h3>
+                    <button class="add-language-button a" onclick="addLanguage('tatar')">+</button>
+                </div>
+                <div class="course">
                     <img src="courses_flags/chuvash.png" alt="Flag">
-                    <h3 id="courseChuvashTranslation">Чувашский язык</h3>
-                </a>
+                    <h3 id="courseChuvashTranslation" class="courses_titles">Чувашский язык</h3>
+                    <button class="add-language-button a"  onclick="addLanguage('chuvash')">+</button>
+                </div>
             </div>
         </main>
     </div>
 </div>
---></div>
 
 
 
@@ -2212,14 +2215,26 @@
                                     <img src="courses_flags/ingush.png" alt="Flag">
                                     <h6 id="profileIngushTranslation">Ингушский язык</h6>
                                 </a>
-                                <a href="adyge_language.html" class="profile-course" data-language="adyghe">
+                                <a href="adyge_language.html" class="profile-course" data-language="adyge">
                                     <img src="courses_flags/adyge.png" alt="Flag">
                                     <h6 id="profileAdygeTranslation">Черкесский язык</h6>
                                 </a>
+                                <a href="chuvash_language.html" class="profile-course" data-language="chuvash">
+                                    <img src="courses_flags/chuvash.png" alt="Flag">
+                                    <h6 id="profileChuvashTranslation">Чувашский язык</h6>
+                                </a>
+                                <a href="tatar_language.html" class="profile-course" data-language="tatar">
+                                    <img src="courses_flags/tatar.png" alt="Flag">
+                                    <h6 id="profileTatarTranslation">Татарский язык</h6>
+                                </a>
+                                <a href="bashkort_language.html" class="profile-course" data-language="bashkort">
+                                    <img src="courses_flags/bashkort.png" alt="Flag">
+                                    <h6 id="profileBashkortTranslation">Башкирский язык</h6>
+                                </a>                                
                                 <a href="udmurt_language.html" class="profile-course" data-language="udmurt">
                                     <img src="courses_flags/udmurt.png" alt="Flag">
                                     <h6 id="profileUdmurtTranslation">Удмуртский язык</h6>
-                                </a>
+                                </a>                                                                
                             </div>
                         </div>
                     </div>
@@ -2299,22 +2314,34 @@
 
             <div class="col-12 small-screen-courses">
                 <h2>Курсы</h2>
-                <div class="small-screen-course-item">
+                <div class="small-screen-course-item" data-language="chechen">
                     <img src="courses_flags/chechen.png" alt="Flag">
                     <h6>Чеченский язык</h6>
                 </div>
-                <div class="small-screen-course-item">
+                <div class="small-screen-course-item" data-language="ingush">
                     <img src="courses_flags/ingush.png" alt="Flag">
                     <h6>Ингушский язык</h6>
                 </div>
-                <div class="small-screen-course-item">
+                <div class="small-screen-course-item" data-language="adyge">
                     <img src="courses_flags/adyge.png" alt="Flag">
                     <h6>Черкесский язык</h6>
                 </div>
-                <div class="small-screen-course-item">
+                <div class="small-screen-course-item" data-language="udmurt">
                     <img src="courses_flags/udmurt.png" alt="Flag">
                     <h6>Удмуртский язык</h6>
                 </div>
+                <div class="small-screen-course-item" data-language="bashkort">
+                    <img src="courses_flags/bashkort.png" alt="Flag">
+                    <h6>Башкирский язык</h6>
+                </div>
+                <div class="small-screen-course-item" data-language="chuvash">
+                    <img src="courses_flags/chuvash.png" alt="Flag">
+                    <h6>Чувашский язык</h6>
+                </div>   
+                <div class="small-screen-course-item" data-language="tatar">
+                    <img src="courses_flags/tatar.png" alt="Flag">
+                    <h6>Татарский язык</h6>
+                </div>                             
             </div>
 
             <div class="col-12 small-screen-stats-container">

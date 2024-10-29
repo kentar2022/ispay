@@ -13,6 +13,10 @@ $(document).ready(function () {
     var urlParams = new URLSearchParams(window.location.search);
     var language = urlParams.get('language');
     var completedLessons = urlParams.get('completedLessons');
+    var topicId = urlParams.get('topicId');
+
+    console.log('URL parameters:', { language, topicId, completedLessons });
+
 
     // Проверяем, что language присутствует в URL
     if (language) {
@@ -20,6 +24,13 @@ $(document).ready(function () {
     } else {
         console.error('No language found in URL.');
         return;
+    }
+
+    if (topicId) {
+        console.log('Topic ID from URL:', topicId);
+    } else {
+        console.error('No topicId found in URL.');
+        return;  // Прекращаем выполнение, если topicId отсутствует
     }
 
     // Проверяем, что completedLessons присутствует в URL
@@ -36,8 +47,12 @@ $(document).ready(function () {
         $('#completedLessons').text(lessonId);
     }
 
+    if (lessonId) {
+        $('#completedLessons').text(lessonId);
+    }
+
     // Функция для загрузки урока
-    loadLesson(language, lessonId);
+    loadLesson(language, lessonId, topicId);
 
     // Загрузка настроек страницы из localStorage
     var currentTheme = localStorage.getItem('currentTheme');
@@ -61,55 +76,381 @@ $(document).ready(function () {
     $('.summaryBlock').css('background-color', bodyColor);
     $('#hintBlock').css('color', linkColor);
 
-    function loadLesson(language, lessonId) {
+    function loadLesson(language, lessonId, topicId) {
+        // Показываем индикатор загрузки
+        $('.main-block').append('<div id="loadingIndicator">Загрузка урока...</div>');
+        $('#loadingIndicator').css({
+            'position': 'fixed',
+            'top': '50%',
+            'left': '50%',
+            'transform': 'translate(-50%, -50%)',
+            'background-color': '#fff',
+            'padding': '20px',
+            'border-radius': '5px',
+            'box-shadow': '0 0 10px rgba(0,0,0,0.2)',
+            'z-index': 1000
+        });
+
+        // Очищаем предыдущие данные
+        data = null;
+        currentIndex = -1;
+
         $.ajax({
             url: '../load_phrases.php',
             method: 'GET',
-            data: { language: language, lesson_id: lessonId },
+            data: { language: language, lesson_id: lessonId, topic_id: topicId },
             dataType: 'json',
             success: function (response) {
                 console.log('Full response:', response);
+                $('#loadingIndicator').remove();
 
-                // Проверяем, что данные существуют и являются массивами с нужными элементами
-                if (!response || !Array.isArray(response.questions) || !Array.isArray(response.answers)) {
-                    console.error('Invalid data structure:', response);
+                // Проверяем, есть ли сообщение об ошибке от сервера
+                if (response.error) {
+                    console.error('Server error:', response.error);
+                    showError(`Ошибка: ${response.error}`);
                     return;
                 }
 
-                if (response.questions.length === 0 || response.answers.length === 0) {
-                    console.error('Questions or answers array is empty.');
+                // Проверяем структуру данных
+                if (!response.questions || !Array.isArray(response.questions)) {
+                    console.error('Invalid questions data:', response);
+                    showError('Ошибка в структуре данных урока');
                     return;
                 }
 
-                // Работаем с данными урока (response)
-                data = response; 
+                if (!response.answers || !Array.isArray(response.answers)) {
+                    console.error('Invalid answers data:', response);
+                    showError('Ошибка в структуре ответов');
+                    return;
+                }
+
+                if (response.questions.length === 0) {
+                    console.error('No questions in lesson');
+                    showError('В уроке нет заданий');
+                    return;
+                }
+
+                // Проверяем каждый вопрос на валидность
+                const validQuestions = response.questions.filter(q => {
+                    if (!q || !q.text || !q.task_type) {
+                        console.warn('Invalid question format:', q);
+                        return false;
+                    }
+                    return true;
+                });
+
+                if (validQuestions.length === 0) {
+                    console.error('No valid questions found');
+                    showError('Не найдено корректных заданий');
+                    return;
+                }
+
+                // Сохраняем только валидные данные
+                data = {
+                    ...response,
+                    questions: validQuestions
+                };
+
+                // Начинаем урок
                 currentIndex = -1;
                 displayWindow(currentIndex);
+                console.log('Lesson loaded successfully with', validQuestions.length, 'questions');
             },
             error: function (xhr, status, error) {
-                console.error('Error loading phrases:', error);
+                console.error('AJAX error:', { xhr, status, error });
+                $('#loadingIndicator').remove();
+                showError('Ошибка при загрузке урока. Пожалуйста, попробуйте позже.');
             }
+        });
+    }
+
+    function showError(message) {
+        // Убираем предыдущие сообщения об ошибках, если они есть
+        $('#errorMessage, #loadingIndicator').remove();
+        
+        const errorDiv = $('<div>')
+            .attr('id', 'errorMessage')
+            .css({
+                'position': 'fixed',
+                'top': '50%',
+                'left': '50%',
+                'transform': 'translate(-50%, -50%)',
+                'background-color': '#ffebee',
+                'color': '#c62828',
+                'padding': '20px',
+                'border-radius': '5px',
+                'box-shadow': '0 0 10px rgba(0,0,0,0.2)',
+                'z-index': 1000,
+                'text-align': 'center'
+            })
+            .html(`
+                <div style="margin-bottom: 15px">${message}</div>
+                <button onclick="location.reload()" style="margin-right: 10px">Повторить</button>
+                <button onclick="window.history.back()" style="background-color: #666">Назад</button>
+            `);
+
+        $('.main-block').append(errorDiv);
+
+        // Стилизуем кнопки
+        $('#errorMessage button').css({
+            'padding': '8px 15px',
+            'border': 'none',
+            'border-radius': '3px',
+            'background-color': '#c62828',
+            'color': 'white',
+            'cursor': 'pointer',
+            'margin': '0 5px'
+        });
+    }
+
+    // Также добавим функцию для проверки состояния загрузки
+    function isLessonLoaded() {
+        return data !== null && Array.isArray(data.questions) && data.questions.length > 0;
+    }
+
+
+    // Обработчик multiple choice заданий
+    function handleMultipleChoice(currentQuestion, windowContainer, answerOptionsContainer) {
+        console.log('Displaying multiple choice question');
+        $('#textInput, #nextBtn').hide();
+
+        const possibleAnswers = typeof currentQuestion.possible_answers === 'string' 
+            ? currentQuestion.possible_answers.split(',') 
+            : currentQuestion.possible_answers;
+
+        const correctAnswer = currentQuestion.answer;
+        console.log('Question:', currentQuestion.text);
+        console.log('Possible answers:', possibleAnswers);
+        console.log('Correct answer:', correctAnswer);
+
+        possibleAnswers.forEach(answer => {
+            const isCorrect = answer.trim() === correctAnswer;
+            const answerBlock = $('<div>')
+                .addClass('answer-block')
+                .text(answer.trim())
+                .attr('data-correct', isCorrect);
+
+            answerOptionsContainer.append(answerBlock);
+        });
+
+        $('.answer-block').on('click', function() {
+            const $this = $(this);
+            const isCorrect = $this.attr('data-correct') === 'true';
+
+            if (isCorrect) {
+                $this.addClass('correct');
+                correctAnswersCount++;
+                correctAnswersTotal++;
+                score += parseInt(currentQuestion.price) || 0;
+
+                setTimeout(() => {
+                    currentIndex++;
+                    // Добавляем обновление прогресс-бара
+                    updateProgressBar(currentIndex, data.questions.length);
+                    
+                    // Проверяем, нужно ли показывать финальные результаты
+                    if (currentIndex >= data.questions.length) {
+                        showFinalResults();
+                    } else {
+                        // Проверяем следующий вопрос перед его отображением
+                        const nextQuestion = data.questions[currentIndex];
+                        if (!nextQuestion) {
+                            console.error('Next question not found:', currentIndex);
+                            showFinalResults();
+                            return;
+                        }
+                        displayWindow(currentIndex);
+                    }
+                }, 1000);
+            } else {
+                $this.addClass('incorrect');
+                $('#hintBlock').text(correctAnswer).show();
+            }
+        });
+    }
+
+    // Обработчик matches заданий
+    function handleMatches(currentQuestion, windowContainer, answerOptionsContainer) {
+        console.log('Processing matches question:', currentQuestion);
+        $('#textInput, #nextBtn').hide();
+
+        const state = {
+            selectedBlock: null,
+            matchedPairs: new Set(),
+            totalPairs: currentQuestion.matches.questions.length,
+            isAnimating: false
+        };
+
+        // Создание структуры для matches
+        const matchesContainer = $('<div>').addClass('matches-container');
+        const questionsCol = $('<div>').addClass('matches-questions');
+        const answersCol = $('<div>').addClass('matches-answers');
+
+        // Создание вопросов
+        currentQuestion.matches.questions.forEach((question, idx) => {
+            $('<div>')
+                .addClass('answer-block')
+                .attr({
+                    'data-type': 'question',
+                    'data-id': idx,
+                    'data-status': 'unmatched'
+                })
+                .text(question)
+                .appendTo(questionsCol);
+        });
+
+        // Создание и перемешивание ответов
+        const shuffledAnswers = [...currentQuestion.matches.answers];
+        for (let i = shuffledAnswers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledAnswers[i], shuffledAnswers[j]] = [shuffledAnswers[j], shuffledAnswers[i]];
+        }
+
+        shuffledAnswers.forEach((answer, idx) => {
+            $('<div>')
+                .addClass('answer-block')
+                .attr({
+                    'data-type': 'answer',
+                    'data-id': currentQuestion.matches.answers.indexOf(answer),
+                    'data-status': 'unmatched'
+                })
+                .text(answer)
+                .appendTo(answersCol);
+        });
+
+        matchesContainer.append(questionsCol, answersCol);
+        answerOptionsContainer.append(matchesContainer);
+
+        // Вспомогательные функции
+        const helpers = {
+            canInteract: (block) => {
+                return !state.isAnimating && 
+                       block.attr('data-status') !== 'matched' &&
+                       (!state.selectedBlock || !state.selectedBlock.is(block));
+            },
+
+            animateIncorrect: (block) => {
+                state.isAnimating = true;
+                block.removeClass('selected').addClass('incorrect');
+                setTimeout(() => {
+                    block.removeClass('incorrect');
+                    state.isAnimating = false;
+                }, 1000);
+            },
+
+            handleMatch: (block1, block2) => {
+                const pairId = block1.attr('data-id');
+                state.matchedPairs.add(pairId);
+                
+                block1.removeClass('selected');
+                block2.removeClass('selected');
+                
+                setTimeout(() => {
+                    block1.attr('data-status', 'matched').addClass('correct');
+                    block2.attr('data-status', 'matched').addClass('correct');
+
+                    if (state.matchedPairs.size === state.totalPairs) {
+                        score += parseInt(currentQuestion.price) || 0;
+                        correctAnswersTotal++;
+                        setTimeout(() => {
+                            currentIndex++;
+                            displayWindow(currentIndex);
+                        }, 1000);
+                    }
+                }, 50);
+            }
+        };
+
+        // Обработчики событий
+        $('.answer-block').on('click', function() {
+            const $this = $(this);
+            
+            if (!helpers.canInteract($this)) return;
+
+            if (!state.selectedBlock) {
+                state.selectedBlock = $this;
+                $this.addClass('selected');
+                return;
+            }
+
+            if ($this.attr('data-type') === state.selectedBlock.attr('data-type')) {
+                state.selectedBlock.removeClass('selected');
+                state.selectedBlock = $this;
+                $this.addClass('selected');
+                return;
+            }
+
+            const firstId = parseInt(state.selectedBlock.attr('data-id'));
+            const secondId = parseInt($this.attr('data-id'));
+
+            if (firstId === secondId) {
+                helpers.handleMatch(state.selectedBlock, $this);
+            } else {
+                helpers.animateIncorrect(state.selectedBlock);
+                helpers.animateIncorrect($this);
+            }
+            
+            state.selectedBlock = null;
+        });
+
+        // Эффекты при наведении
+        $('.answer-block')
+            .on('mouseenter', function() {
+                if ($(this).attr('data-status') !== 'matched') {
+                    $(this).addClass('hover');
+                }
+            })
+            .on('mouseleave', function() {
+                $(this).removeClass('hover');
+            });
+    }
+
+    // Обработчик обычных заданий
+    function handleDefaultQuestion(currentQuestion, currentAnswer, windowContainer) {
+        console.log('Displaying default question type');
+        $('#textInput').show().val('');
+        $('#nextBtn').show().text('Далее').off('click').on('click', function() {
+            const userAnswer = $('#textInput').val().trim();
+            if (checkAnswer(userAnswer, currentAnswer.answer)) {
+                correctAnswersCount++;
+                correctAnswersTotal++;
+                score += parseInt(currentQuestion.price) || 0;
+                currentIndex++;
+                updateProgressBar(currentIndex, data.questions.length);
+                displayWindow(currentIndex);
+            } else {
+                $('#hintBlock').text(currentAnswer.answer).show();
+            }
+            $('#textInput').val('');
         });
     }
 
 
     function displayWindow(index) {
-
-      console.log('displayWindow called with index:', index);
-      console.log('Current question data:', data.questions[index]);
+        console.log('displayWindow called with index:', index);
 
 
 
-        // Обработка индекса -1 для отображения блока с резюме
+
+        if (!isLessonLoaded()) {
+            console.error('No lesson data available');
+            return;
+        }
+
+        // Проверка наличия данных
+        if (!data || !data.questions) {
+            console.error('No lesson data available');
+            return;
+        }
+        
+        // Обработка начального экрана (index === -1)
         if (index === -1) {
-            console.log('Displaying summary block');
-            var summaryContent = data.summary ? data.summary : 'Начните урок';
+            const summaryContent = data.summary ? data.summary : 'Начните урок';
+            $('#textInput, #progressBar').hide();
 
-            $('#textInput').hide();
-            $('#progressBar').hide();
-
-            $('.summaryBlock').css('display', 'flex').each(function () {
-                $(this).html(`
+            $('.summaryBlock')
+                .css('display', 'flex')
+                .html(`
                     <a href="#">
                         <svg width="24" height="24" class="library-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2L2 7l10 5 10-5L12 2z"/>
@@ -118,254 +459,95 @@ $(document).ready(function () {
                     </a>
                     <span class="closeSummaryPopup">&times;</span>
                     <div>${summaryContent}</div>
-                `).css({
+                `)
+                .css({
                     'border': `10px solid ${linkColor} !important`,
                     'color': profilePageTextColor
-                }).addClass('visible');
+                })
+                .addClass('visible');
 
-                $('#nextBtn').show().text('Начать урок').off('click').on('click', function () {
+            $('#nextBtn')
+                .show()
+                .text('Начать урок')
+                .off('click')
+                .on('click', function() {
                     $('.summaryBlock').addClass('hidden').removeClass('visible');
                     currentIndex = 0;
                     displayWindow(currentIndex);
                 });
-            });
 
             return;
         }
 
-        // Далее идет основная логика обработки заданий
+        // Проверка на конец урока
         if (index >= data.questions.length) {
             showFinalResults();
             return;
         }
-        
-        var currentQuestion = data.questions[index];
-        var currentAnswer = data.answers[index];
 
-        console.log('Current question data:', currentQuestion);
-        console.log('Current answer data:', currentAnswer);
-
-        if (!currentQuestion || !currentQuestion.text || !currentAnswer || !currentAnswer.word_russian) {
-            console.error('Missing question or answer fields for index:', index);
+        // Подготовка данных текущего вопроса
+        const currentQuestion = data.questions[index];
+        if (!currentQuestion) {
+            console.error('Question not found for index:', index);
+            showFinalResults();
             return;
         }
 
+        // Для не-matches заданий нужен ответ
+        const currentAnswer = currentQuestion.task_type !== 'matches' 
+            ? data.answers.find(a => a.id === currentQuestion.id)
+            : null;
 
+        // Проверки валидности данных
+        if (!currentQuestion.text) {
+            console.error('Question has no text, index:', index);
+            showFinalResults();
+            return;
+        }
 
-        var windowContainer = $('#windowsContainer');
-        var answerOptionsContainer = $('#answerOptionsContainer');
-        windowContainer.empty();
+        if (currentQuestion.task_type !== 'matches' && (!currentAnswer || !currentAnswer.answer)) {
+            console.error('Answer not found for question:', currentQuestion.id);
+            showFinalResults();
+            return;
+        }
+
+        // Подготовка контейнеров
+        const windowContainer = $('#windowsContainer');
+        const answerOptionsContainer = $('#answerOptionsContainer');
+        windowContainer.empty().off('click', '.window');
         answerOptionsContainer.empty();
-
-        // Теперь данные из PHP включают price, chance и rating
-        console.log('Price:', currentQuestion.price);  // Выводим цену вопроса
-        console.log('Chance:', currentQuestion.chance);  // Выводим шанс
-        console.log('Rating:', currentQuestion.rating);  // Выводим рейтинг
-
-
-       $('#windowsContainer').on('click', '.window', function () {
-            // Вместо объекта вставляем конкретное значение поля, например, word_russian
-            $('#hintBlock').text(currentAnswer.word_russian).show();
-        });
-
         $('#hintBlock').hide();
 
-       if (currentQuestion.task_type === "multiple_choice" && currentQuestion.possible_answers) {
+        // Добавление текста вопроса
+        const currentWindow = $('<div>')
+            .attr('id', currentQuestion.id)
+            .addClass('window active')
+            .text(currentQuestion.text);
+        
+        windowContainer.append(currentWindow);
 
-            console.log('Displaying matches question');
-
-            $('#textInput').hide();
-            $('#nextBtn').hide();
-
-            var currentWindow = $('<div id="' + currentQuestion.id + '" class="window active">' + currentQuestion.text + '</div>');
-            windowContainer.append(currentWindow);
-
-            var possibleAnswers = [];
-            if (typeof currentQuestion.possible_answers === 'string') {
-                possibleAnswers = currentQuestion.possible_answers.split(',');
-            } else if (Array.isArray(currentQuestion.possible_answers)) {
-                possibleAnswers = currentQuestion.possible_answers;
-            } else {
-                console.error('Invalid format for possible_answers:', currentQuestion.possible_answers);
-                return;
-            }
-
-            possibleAnswers.forEach(answer => {
-                var isCorrect = answer.trim() === data.answers[index].word_russian;
-                var answerBlock = $('<div>')
-                    .addClass('answer-block')
-                    .text(answer.trim())
-                    .attr('data-correct', isCorrect);
-
-                answerOptionsContainer.append(answerBlock);
-            });
-
-            $('.answer-block').on('click', function () {
-                var userAnswer = null;
-                userAnswer = $(this).text().trim();
-                var correctAnswer = currentAnswer.word_russian;
-                var isCorrect = $(this).attr('data-correct') === 'true';
-                console.log('User clicked answer:', userAnswer);
-                console.log('Correct answer:', correctAnswer);
-                console.log('Is answer correct:', isCorrect);
-
-                if (isCorrect) {
-                    $(this).addClass('correct');
-                    var questionPrice = parseInt(currentQuestion.price) || 0;
-                    
-                    if (checkAnswer(userAnswer, correctAnswer)) {
-                        correctAnswersCount++;
-                        correctAnswersTotal++;
-                        score += questionPrice;
-                        console.log('Answer is correct! Score updated:', score);
-                        console.log('Correct answers count:', correctAnswersCount);
-                    }
-
-                    currentIndex++;
-                    if (currentIndex < data.questions.length) {
-                        setTimeout(() => {
-                            displayWindow(currentIndex);
-                        }, 1000); // Задержка в 1 секунду перед переходом к следующему вопросу
-                        console.log('Next index after correct multiple choice:', currentIndex);
-                    } else {
-                        setTimeout(showFinalResults, 1000); // Задержка в 1 секунду перед показом финальных результатов
-                    }
-                } else {
-                    $(this).addClass('incorrect');
-                    console.log('Answer is incorrect.');
+        // Настройка подсказок для не-matches заданий
+        if (currentQuestion.task_type !== 'matches') {
+            windowContainer.on('click', '.window', function() {
+                if (currentAnswer && currentAnswer.answer) {
+                    $('#hintBlock').text(currentAnswer.answer).show();
                 }
-            });
-
-            if (checkAnswer(userAnswer, correctAnswer)) {
-                console.log('Checking answer:', userAnswer, 'against:', correctAnswer);
-                var correctAnswers = correctAnswer.split(',').map(answer => answer.trim().toLowerCase());
-                var isCorrect = correctAnswers.includes(userAnswer.toLowerCase()) || userAnswer === ".";
-                console.log('Is answer correct:', isCorrect);
-                return isCorrect;
-            }
-
-        } else if (currentQuestion.task_type === "matches" && currentQuestion.matches) {
-            console.log('Displaying matches question');
-            $('#textInput').hide();
-            $('#nextBtn').hide();
-
-            var matchesData = data.matches.find(match => match.question_id === currentQuestion.id);
-            if (matchesData) {
-                var questions = matchesData.questions.split(',').map(q => q.trim());
-                var answers = matchesData.answers.split(',').map(a => a.trim());
-
-                var questionsContainer = $('<div>').addClass('matches-questions');
-                var answersContainer = $('<div>').addClass('matches-answers');
-
-                questions.forEach((question, idx) => {
-                    var questionBlock = $('<div>')
-                        .addClass('answer-block question-block')
-                        .text(question)
-                        .attr('data-type', 'question')
-                        .attr('data-id', idx);
-
-                    questionsContainer.append(questionBlock);
-                });
-
-                answers.forEach((answer, idx) => {
-                    var answerBlock = $('<div>')
-                        .addClass('answer-block')
-                        .text(answer)
-                        .attr('data-type', 'answer')
-                        .attr('data-id', idx);
-
-                    answersContainer.append(answerBlock);
-                });
-
-                var matchesContainer = $('<div>').addClass('matches-container');
-                matchesContainer.append(questionsContainer);
-                matchesContainer.append(answersContainer);
-                answerOptionsContainer.append(matchesContainer);
-
-                let correctMatches = 0;
-
-                $('.answer-block').on('click', function () {
-                    if (selectedBlock === null) {
-                        selectedBlock = $(this);
-                        $(this).addClass('selected');
-                    } else {
-                        if ($(this).attr('data-type') !== selectedBlock.attr('data-type')) {
-                            var questionBlock = selectedBlock.attr('data-type') === 'question' ? selectedBlock : $(this);
-                            var answerBlock = selectedBlock.attr('data-type') === 'answer' ? selectedBlock : $(this);
-
-
-                            var questionId = questionBlock.attr('data-id');
-                            var answerId = answerBlock.attr('data-id');
-
-                            var isCorrect = questionId === answerId;
-
-                            if (isCorrect) {
-                                questionBlock.css('background-color', 'rgb(21, 230, 112)');
-                                answerBlock.css('background-color', 'rgb(21, 230, 112)');
-                                correctMatches++;
-                            } else {
-                                questionBlock.css('background-color', '#ff0081');
-                                answerBlock.css('background-color', '#ff0081');
-                            }
-
-                            questionBlock.add(answerBlock).removeClass('selected');
-                            selectedBlock = null;
-
-                            if (correctMatches === questions.length) {
-                                score += questionPrice;
-                                currentIndex++;
-                                if (currentIndex < data.questions.length) {
-                                    displayWindow(currentIndex);
-                                    console.log('Next index after correct matches:', currentIndex);
-                                } else {
-                                    showFinalResults();
-                                }
-                            }
-                        } else {
-                            selectedBlock.removeClass('selected');
-                            selectedBlock = $(this).addClass('selected');
-                        }
-                    }
-                });
-
-                return;
-            }
-
-        } else {
-            console.log('Displaying default question type');
-            var currentWindow = $('<div id="' + currentQuestion.id + '" class="window active">' + currentQuestion.text + '</div>');
-            windowContainer.append(currentWindow);
-
-            $('#textInput').show().val('');
-            $('#nextBtn').show().text('Далее').off('click').on('click', function () {
-                var userAnswer = $('#textInput').val().trim();
-                var correctAnswer = data.answers[index].word_russian;
-                var questionPrice = parseInt(currentQuestion.price) || 0; 
-
-
-                if (checkAnswer(userAnswer, correctAnswer)) {
-                    correctAnswersCount++;
-                    correctAnswersTotal++;
-                    score += questionPrice;
-                }
-
-                currentIndex++;
-                if (currentIndex < data.questions.length) {
-                    updateProgressBar(currentIndex, data.questions.length);
-                    displayWindow(currentIndex);
-                } else {
-                    showFinalResults();
-                }
-                $('#textInput').val('');
-                $('#hintBlock').hide();
             });
         }
 
-        if (index >= data.questions.length) {
-            console.log('Reached end of questions, showing final results');
-            showFinalResults();
-            return;
+        // Обработка разных типов заданий
+        if (currentQuestion.task_type === "multiple_choice" && currentQuestion.possible_answers) {
+            handleMultipleChoice(currentQuestion, windowContainer, answerOptionsContainer);
         }
+        else if (currentQuestion.task_type === "matches" && currentQuestion.matches) {
+            handleMatches(currentQuestion, windowContainer, answerOptionsContainer);
+        }
+        else {
+            handleDefaultQuestion(currentQuestion, currentAnswer, windowContainer);
+        }
+
+        // Обновляем прогресс-бар
+        updateProgressBar(index, data.questions.length);
     }
 
     $('#nextBtn').on('click', function () {
@@ -423,59 +605,59 @@ $(document).ready(function () {
         }
     });
     
-    function showFinalResults() {
-        $('.main-block').addClass('hidden'); 
-        $('.success-message').removeClass('hidden'); 
-        $('#correctAnswersCount').text(correctAnswersTotal);
-        $('#scoreCount').text(score);
-        getUserId(lessonId, language);
-    }
+function showFinalResults() {
+    $('.main-block').addClass('hidden'); 
+    $('.success-message').removeClass('hidden'); 
+    $('#correctAnswersCount').text(correctAnswersTotal);
+    $('#scoreCount').text(score);
+    getUserId(lessonId, language);
+}
 
 
-    function getUserId(lessonId, language) {
-        $.ajax({
-            type: "POST",
-            url: "../getUserId.php",
-            data: {},
-            success: function (response) {
-                console.log("User ID:", response.user_id);
-                //const topicId = currentTopicData.topic_id;
-                updateTopicProgress(response.user_id,/* topicId,*/ lessonId, score, language);
-            },
-            error: function (xhr, status, error) {
-                console.error("Ошибка при получении ID пользователя:", error);
-            }
-        });
-    }
 
-    function updateTopicProgress(userId, /*topicId,*/ lessonId, newScore, language) {
-        console.log("Отправка данных в updateTopicProgress:", {
+function getUserId(lessonId, language) {
+    $.ajax({
+        type: "POST",
+        url: "../getUserId.php",
+        data: {},
+        success: function (response) {
+            console.log("User ID:", response.user_id);
+            // Используем topicId из URL параметров
+            const urlTopicId = urlParams.get('topicId');
+            updateTopicProgress(response.user_id, urlTopicId, score, language);
+        },
+        error: function (xhr, status, error) {
+            console.error("Ошибка при получении ID пользователя:", error);
+        }
+    });
+}
+
+function updateTopicProgress(userId, topicId, newScore, language) {
+    console.log("Отправка данных в updateTopicProgress:", {
+        user_id: userId,
+        topic_id: topicId,
+        new_score: newScore,
+        language: language
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "../update_topic_progress.php",
+        data: {
             user_id: userId,
-            /*topic_id: topicId,*/
-            lesson_id: lessonId,
+            topic_id: topicId,
             new_score: newScore,
             language: language
-        });
+        },
+        success: function (response) {
+            console.log("Прогресс успешно обновлен:", response);
+        },
+        error: function (xhr, status, error) {
+            console.error("Ошибка при обновлении прогресса:", error);
+        }
+    });
+}
 
-        $.ajax({
-            type: "POST",
-            url: "../update_topic_progress.php",
-            data: {
-                user_id: userId,
-               /* topic_id: topicId,*/
-                new_score: newScore,
-                language: language
-            },
-            success: function (response) {
-                console.log("Прогресс успешно обновлен:", response);
-            },
-            error: function (xhr, status, error) {
-                console.error("Ошибка при обновлении прогресса:", error);
-            }
-        });
-    }
-
-    loadLesson(language, lessonId, currentLanguage);
 });
 
 /*

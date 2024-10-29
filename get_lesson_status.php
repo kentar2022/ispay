@@ -1,6 +1,5 @@
 <?php
-session_start(); // Запуск сессии
-
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -22,10 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
 // Получаем параметр language из запроса
 $language = $_POST['language'] ?? null;
-
-// Логирование для проверки входных данных
-error_log("Получен язык: " . print_r($language, true));
-
 if (!$language) {
     echo json_encode(['error' => 'Язык не указан']);
     exit;
@@ -50,7 +45,6 @@ if (!$databaseName) {
 
 // Подключение к базе данных
 $mysqli = new mysqli("localhost", "kentar", "password", $databaseName);
-
 if ($mysqli->connect_error) {
     die(json_encode(['error' => 'Ошибка подключения к базе данных: ' . $mysqli->connect_error]));
 }
@@ -58,7 +52,6 @@ if ($mysqli->connect_error) {
 // Получение данных из таблицы themes
 $themesSql = "SELECT * FROM themes";
 $themesResult = $mysqli->query($themesSql);
-
 if (!$themesResult) {
     die(json_encode(['error' => 'Ошибка выполнения запроса к таблице themes: ' . $mysqli->error]));
 }
@@ -87,50 +80,43 @@ while ($themeRow = $themesResult->fetch_assoc()) {
     }
     $topicsStmt->close();
 
-    // Получение данных из таблицы theme_progress для текущего пользователя и theme_id
-    $progressSql = "SELECT * FROM theme_progress WHERE theme_id = ? AND user_id = ?";
+    // Получение прогресса пользователя из таблицы user_progress
+    $progressSql = "SELECT * FROM user_progress WHERE theme_id = ? AND user_id = ?";
     $progressStmt = $mysqli->prepare($progressSql);
     if (!$progressStmt) {
-        echo json_encode(['error' => 'Ошибка подготовки запроса к таблице theme_progress: ' . $mysqli->error]);
+        echo json_encode(['error' => 'Ошибка подготовки запроса к таблице user_progress: ' . $mysqli->error]);
         exit;
     }
     $progressStmt->bind_param("ii", $themeId, $user_id);
     $progressStmt->execute();
     $progressResult = $progressStmt->get_result();
-    $progress = $progressResult->fetch_assoc() ?: [
-        'completed_lessons' => 0,
-        'completed_topics' => 0,
-        'progress_percentage' => 0,
-        'total_score' => 0
-    ];
+    
+    $themeProgress = [];
+    $topicProgress = [];
+    
+    while ($progressRow = $progressResult->fetch_assoc()) {
+        if ($progressRow['topic_id'] === null) {
+            $themeProgress = [
+                'completed_topics' => $progressRow['completed_topics'] ?? 0,
+                'progress_percentage' => $progressRow['progress_percentage'] ?? 0,
+                'total_score' => $progressRow['total_score'] ?? 0
+            ];
+        } else {
+            $topicProgress[$progressRow['topic_id']] = [
+                'completed_lessons' => $progressRow['completed_lessons'] ?? 0,
+                'total_score' => $progressRow['total_score'] ?? 0
+            ];
+        }
+    }
     $progressStmt->close();
 
-    // Получение данных из таблицы topic_progress для текущего пользователя и theme_id
-    $topicProgressSql = "SELECT * FROM topic_progress WHERE theme_id = ? AND user_id = ?";
-    $topicProgressStmt = $mysqli->prepare($topicProgressSql);
-    if (!$topicProgressStmt) {
-        echo json_encode(['error' => 'Ошибка подготовки запроса к таблице topic_progress: ' . $mysqli->error]);
-        exit;
-    }
-    $topicProgressStmt->bind_param("ii", $themeId, $user_id);
-    $topicProgressStmt->execute();
-    $topicProgressResult = $topicProgressStmt->get_result();
-    $topicProgress = [];
-    while ($topicProgressRow = $topicProgressResult->fetch_assoc()) {
-        $topicProgress[$topicProgressRow['topic_id']] = [
-            'completed_lessons' => $topicProgressRow['completed_lessons'] ?? 0,
-            'total_lessons' => $topicProgressRow['total_lessons'] ?? 0
-        ];
-    }
-    $topicProgressStmt->close();
-
-    // Формирование данных темы
+    // Формирование данных темы для ответа
     $themeData[] = [
         'theme_id' => $themeRow['id'],
         'theme_name' => $themeRow['themes_name'],
         'total_topics' => $themeRow['total_topics'],
         'topics' => $topics,
-        'progress' => $progress,
+        'theme_progress' => $themeProgress,
         'topic_progress' => $topicProgress
     ];
 }

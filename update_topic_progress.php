@@ -8,62 +8,85 @@ $servername = "localhost";
 $username = "kentar";
 $password = "password";
 
+$debug_info = array(
+    'timestamp' => date('Y-m-d H:i:s'),
+    'post_data' => $_POST,
+    'execution_log' => array()
+);
+
 // Проверяем наличие необходимых данных в $_POST
-if (!isset($_POST['user_id']) || /*!isset($_POST['topic_id']) ||*/ !isset($_POST['new_score']) || !isset($_POST['language'])) {
-    echo json_encode(array("error" => "Отсутствуют необходимые данные для обновления прогресса пользователя.",
-                            "post_data" => $_POST));
+if (!isset($_POST['user_id']) || !isset($_POST['topic_id'])) {
+    $debug_info['execution_log'][] = "Ошибка: отсутствуют необходимые данные";
+    echo json_encode(array(
+        "error" => "Отсутствуют необходимые данные",
+        "debug" => $debug_info
+    ));
     exit();
 }
 
-$userId = $_POST['user_id'];
-/*$topicId = $_POST['topic_id'];*/
-$newScore = $_POST['new_score'];
-$language = $_POST['language'];
+$userId = intval($_POST['user_id']);
+$topicId = intval($_POST['topic_id']);
 
-// Подключение к базе данных языка
-$conn_language = new mysqli($servername, $username, $password, $language);
-if ($conn_language->connect_error) {
-    die(json_encode(array("error" => "Ошибка подключения к базе данных языка: " . $conn_language->connect_error)));
+$debug_info['parsed_data'] = array(
+    'user_id' => $userId,
+    'topic_id' => $topicId
+);
+
+// Подключаемся к базе данных
+$conn = new mysqli($servername, $username, $password, "chechen");
+if ($conn->connect_error) {
+    $debug_info['execution_log'][] = "Ошибка подключения к БД: " . $conn->connect_error;
+    echo json_encode(array(
+        "error" => "Connection failed: " . $conn->connect_error,
+        "debug" => $debug_info
+    ));
+    exit();
 }
 
-// Подключение к базе данных пользователя
-$conn_user = new mysqli($servername, $username, $password, "ispay");
-if ($conn_user->connect_error) {
-    die(json_encode(array("error" => "Ошибка подключения к базе данных пользователя: " . $conn_user->connect_error)));
+// Сначала проверим текущее значение
+$check_sql = "SELECT completed_lessons FROM user_progress WHERE user_id = 1 AND topic_id = 1 AND theme_id = 1";
+$debug_info['check_sql'] = $check_sql;
+
+$result = $conn->query($check_sql);
+if ($result) {
+    $current_data = $result->fetch_assoc();
+    $debug_info['current_data'] = $current_data;
 }
 
-// Обновление таблицы прогресса в базе данных языка
-$stmt_language = $conn_language->prepare("
-    UPDATE topic_progress 
-    SET total_score = total_score + ?, 
-        completed_lessons = completed_lessons + 1 
-    WHERE user_id = ? /*AND topic_id = ?*/
-");
-$stmt_language->bind_param("ii", $newScore, $userId, /*$topicId*/);
+// Выполняем UPDATE запрос
+$sql = "UPDATE user_progress SET completed_lessons = completed_lessons + 1 WHERE user_id = 1 AND topic_id = 1 AND theme_id = 1";
+$debug_info['update_sql'] = $sql;
 
-if ($stmt_language->execute()) {
-    // Обновление таблицы статистики пользователя
-    $stmt_user = $conn_user->prepare("
-        UPDATE profileStats 
-        SET score = score + ?, 
-            lessonsCompleted = lessonsCompleted + 1 
-        WHERE userId = ?
-    ");
-    $stmt_user->bind_param("ii", $newScore, $userId);
-
-    if ($stmt_user->execute()) {
-        echo json_encode(array("success" => "Прогресс пользователя и статистика успешно обновлены."));
+if ($conn->query($sql) === TRUE) {
+    $affected_rows = $conn->affected_rows;
+    $debug_info['affected_rows'] = $affected_rows;
+    
+    if ($affected_rows > 0) {
+        // Проверяем новое значение
+        $result = $conn->query($check_sql);
+        if ($result) {
+            $new_data = $result->fetch_assoc();
+            $debug_info['new_data'] = $new_data;
+        }
+        
+        $response = array(
+            "success" => "Прогресс обновлен",
+            "affected_rows" => $affected_rows,
+            "debug" => $debug_info
+        );
     } else {
-        echo json_encode(array("error" => "Ошибка при обновлении статистики пользователя: " . $stmt_user->error));
+        $response = array(
+            "warning" => "Запрос выполнен, но строки не обновлены",
+            "debug" => $debug_info
+        );
     }
-
-    $stmt_user->close();
 } else {
-    echo json_encode(array("error" => "Ошибка при обновлении прогресса пользователя: " . $stmt_language->error));
+    $response = array(
+        "error" => "Ошибка при обновлении: " . $conn->error,
+        "debug" => $debug_info
+    );
 }
 
-// Закрытие запросов и соединений
-$stmt_language->close();
-$conn_language->close();
-$conn_user->close();
+echo json_encode($response);
+$conn->close();
 ?>
