@@ -1,55 +1,77 @@
 <?php
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
 
-session_start();
-require 'config.php';  // Подключение к базе данных user_auth
-require 'config_ispay.php';  // Подключение к базе данных ispay
-require 'config_chechen.php';  // Подключение к базе данных chechen
+function logWithTime($message) {
+    error_log(date('Y-m-d H:i:s') . " - " . $message);
+}
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
+logWithTime("Starting registration process");
+
+session_start();
+require 'config_ispay.php';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(['error' => 'Invalid request method']);
+    exit();
+}
+
+// Изменено с login на username для консистентности
+if (!isset($_POST['username']) || !isset($_POST['password'])) {
+    echo json_encode(['error' => 'Username or password not provided']);
+    exit();
+}
+
+try {
+    $pdo_ispay->beginTransaction();
+
+    $username = trim($_POST['username']); // Изменено с login на username
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $csrf_token = bin2hex(random_bytes(32));
 
-    // Вставка данных в таблицу users (база данных user_auth)
-    $stmt = $pdo_user_auth->prepare("INSERT INTO users (email, password, csrf_token) VALUES (?, ?, ?)");
-    if ($stmt->execute([$email, $password, $csrf_token])) {
-        $user_id = $pdo_user_auth->lastInsertId();
-        
-        // Вставка в другую базу данных (например, ispay)
-        $stmt_ispay = $pdo_ispay->prepare("INSERT INTO users (user_id, email) VALUES (?, ?)");
-        $stmt_ispay->execute([$user_id, $email]);
-
-        // Получение всех тем из таблицы themes (база данных chechen)
-        $themes_stmt = $pdo_chechen->query("SELECT id FROM themes");
-        $themes = $themes_stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Получение всех уроков из таблицы topics (база данных chechen)
-        $topics_stmt = $pdo_chechen->query("SELECT id, theme_id FROM topics");
-        $topics = $topics_stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Вставка данных в таблицу theme_progress для нового пользователя
-        $theme_progress_stmt = $pdo_chechen->prepare("INSERT INTO theme_progress (user_id, theme_id, completed_lessons, completed_topics, progress_percentage, total_score) VALUES (?, ?, 1, 0, 0, 0)");
-        foreach ($themes as $theme) {
-            $theme_progress_stmt->execute([$user_id, $theme['id']]);
-        }
-
-        // Вставка данных в таблицу topic_progress для нового пользователя
-        $topic_progress_stmt = $pdo_chechen->prepare("INSERT INTO topic_progress (user_id, theme_id, topic_id, completed_lessons, completed_topics, total_score) VALUES (?, ?, ?, 1, 2, 3)");
-        foreach ($topics as $topic) {
-            $topic_progress_stmt->execute([$user_id, $topic['theme_id'], $topic['id']]);
-        }
-
-        // Сохранение данных в сессии
-        $_SESSION['csrf_token'] = $csrf_token;
-        $_SESSION['user_id'] = $user_id; 
-        header("Location: login.html");
-    } else {
-        echo "Registration failed.";
+    // Проверка существующего логина
+    $check_stmt = $pdo_ispay->prepare("SELECT user_id FROM users WHERE nickname = ?");
+    $check_stmt->execute([$username]);
+    if ($check_stmt->fetch()) {
+        echo json_encode(['error' => 'Username already exists']);
+        exit();
     }
+
+    // Вставка пользователя
+    $stmt = $pdo_ispay->prepare("INSERT INTO users (nickname, password, csrf_token) VALUES (?, ?, ?)");
+    $stmt->execute([$username, $password, $csrf_token]);
+    $user_id = $pdo_ispay->lastInsertId();
+
+    // Создаем запись в profileStats
+    $stats_stmt = $pdo_ispay->prepare(
+        "INSERT INTO profileStats (userId, score, lessonsCompleted, overallRank, crystals, coins, languages_list) 
+         VALUES (?, 0, 0, 0, 0, 0, '')"
+    );
+    $stats_stmt->execute([$user_id]);
+
+    // Создаем запись в gifts
+    $gifts_stmt = $pdo_ispay->prepare(
+        "INSERT INTO gifts (user_id, gift_day, timestamp) 
+         VALUES (?, 0, NULL)"
+    );
+    $gifts_stmt->execute([$user_id]);
+
+    $pdo_ispay->commit();
+
+    $_SESSION['csrf_token'] = $csrf_token;
+    $_SESSION['user_id'] = $user_id;
+
+    logWithTime("User successfully registered with ID: " . $user_id);
+    echo json_encode(['success' => true]);
+
+} catch (Exception $e) {
+    $pdo_ispay->rollBack();
+    
+    logWithTime("Registration error: " . $e->getMessage());
+    echo json_encode(['error' => 'Registration failed: ' . $e->getMessage()]);
 }
+
+logWithTime("Script completed");
 ?>

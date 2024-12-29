@@ -175,6 +175,7 @@ input[type="radio"] {
 @media screen and (max-width: 1750px) {
     #languageSelect {
         width: 40px; 
+        display: none;
     }
 }
 
@@ -266,4 +267,25 @@ input[type="radio"] {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+@media screen and (max-width: 1775px) {
+    .large-screen {
+        display: none !important;
+    }
+    .small-screen {
+        display: flex !important;
+    }
+}
+
+.language-option {
+    color: inherit; /* Наследует цвет текста от родителя */
+}
+
+.language-option:hover {
+    background-color: rgba(21, 230, 112, 0.1);
+}
+
+#mobileLanguageDropdown {
+    background-color: inherit; /* Наследует цвет фона от body */
 }

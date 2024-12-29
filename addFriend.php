@@ -1,4 +1,10 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+header('Content-Type: application/json');
+
+
 session_start();
 
 header('Content-Type: application/json');
@@ -18,7 +24,7 @@ if ($mysqli->connect_error) {
 }
 
 // Проверяем, существует ли пользователь с таким ID
-$sql = "SELECT id FROM users WHERE id = ?";
+$sql = "SELECT user_id FROM users WHERE user_id = ?"; // Было 'id', стало 'user_id'
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("i", $friend_id);
 $stmt->execute();

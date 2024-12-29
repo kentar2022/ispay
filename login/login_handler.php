@@ -1,77 +1,50 @@
 <?php
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+header('Content-Type: application/json');
 
-// Установка времени жизни сессии на 24 часа
+// Устанавливаем параметры сессии
 session_set_cookie_params([
     'path' => '/',
-    'domain' => '', // Оставьте пустым для текущего домена
-    'secure' => false, // Установите в true, если используете HTTPS
-    'httponly' => true, // Сессионные куки доступны только через HTTP(S)
-    'samesite' => 'Strict' // Защита от CSRF
+    'secure' => false,
+    'httponly' => true,
+    'samesite' => 'Strict'
 ]);
-
 session_start();
 
-require 'config.php';  // Подключение к базе данных user_auth
+require 'config_ispay.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($_POST['username']) || !isset($_POST['password'])) {
+        error_log('Ошибка: Логин или пароль не переданы');
         echo json_encode(['error' => 'Username or password not provided']);
         exit();
     }
 
-    $username = $_POST['username'];  // Теперь может быть и почта, и никнейм
+    $username = trim($_POST['username']);
     $password = $_POST['password'];
 
-    // Проверка, является ли введенное значение email или никнеймом
-    if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
-        // Поиск по email
-        $query = "SELECT * FROM users WHERE email = ?";
-    } else {
-        // Поиск по никнейму
-        $query = "SELECT * FROM users WHERE nickname = ?";
-    }
-
     try {
-        // Подключение к базе данных user_auth
-        $pdo_user_auth = new PDO(
-            "mysql:host=localhost;dbname=user_auth;charset=utf8mb4",
-            "kentar",
-            "password",  // Замените на ваш пароль
-            [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
-            ]
-        );
-
-        // Выполняем подготовленный запрос с использованием email или никнейма
-        $stmt = $pdo_user_auth->prepare($query);
-        $stmt->execute([$username]);  // Передаем либо email, либо никнейм
+        $stmt = $pdo_ispay->prepare("SELECT * FROM users WHERE nickname = ?");
+        $stmt->execute([$username]);
         $user = $stmt->fetch();
 
-        // Проверка пароля
         if ($user && password_verify($password, $user['password'])) {
-            // Установка сессии и CSRF-токена
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));  // Генерация нового CSRF токена
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
-            // Возвращаем успешный результат
-            echo json_encode(['success' => true]);
-            header("Location: ../index.html");  // Перенаправление на главную страницу
-            exit();
+            error_log('Успешный вход для пользователя: ' . $username);
+            echo json_encode(['success' => true, 'redirect' => '../index.html']);
         } else {
-            // Неверный пароль или пользователь
+            error_log('Ошибка: Неверный логин или пароль');
             echo json_encode(['error' => 'Invalid username or password']);
         }
-
     } catch (PDOException $e) {
-        echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+        error_log('Ошибка базы данных: ' . $e->getMessage());
+        echo json_encode(['error' => 'Database error']);
     }
 } else {
+    error_log('Ошибка: Неправильный метод запроса');
     echo json_encode(['error' => 'Invalid request method']);
 }
-?>

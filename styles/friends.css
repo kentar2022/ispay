@@ -1,37 +1,84 @@
+/* Основные стили контейнера */
+.friend-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    height: auto;
+    background-color: #f5f7fa;
+}
 
+/* Контент друзей */
+.friend-content {
+    width: 100%;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
 
-/* Стили для списка друзей */
+/* Заголовок списка друзей */
+.friend-list-title {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e6ed;
+}
+
+/* Список друзей */
 .friend-list {
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
-/* Адаптация карточек друзей */
+/* Карточка друга */
 .friend-item-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid black;
-    padding: 10px;
-    flex-wrap: wrap; 
+    padding: 15px;
+    background-color: #f8fafc;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    border: 1px solid #e0e6ed;
 }
 
-.friend-item-container:last-child {
-    border-bottom: none;
+.friend-item-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Аватар друга */
+.friend-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    border: 2px solid #e0e6ed;
+}
+
+/* Имя друга */
 .friend-name {
     flex: 1;
-    text-align: left;
-    font-size: 1.2em;
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: 500;
 }
 
+/* ID друга */
 .friend-id {
-    margin-left: 10px;
-    color: gray;
+    color: #94a3b8;
+    font-size: 14px;
+    margin-right: 15px;
 }
 
 /* Кнопка удаления */
@@ -39,9 +86,46 @@
     background: none;
     border: none;
     cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
 }
 
+.delete-friend-button:hover {
+    background-color: #fee2e2;
+}
 
+/* Контейнер для кнопки добавления */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Кнопка добавления друга */
+.add-new-friend-button {
+    width: 56px;
+    height: 56px;
+    background-color: #4f46e5;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.add-new-friend-button:hover {
+    transform: scale(1.05);
+    background-color: #4338ca;
+}
+
+.addFriendSvg {
+    width: 24px;
+    height: 24px;
+}
 
 /* Модальное окно */
 .modal {
@@ -53,157 +137,144 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
+    backdrop-filter: blur(4px);
 }
 
-.friends-modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 90%;
-    max-width: 400px; 
-    border-radius: 8px;
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
-    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Кнопка закрытия модального окна */
 .close-button {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
     position: absolute;
-    top: 10px;
     right: 20px;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: black;
-}
-
-/* Кнопка подтверждения */
-.confirm-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+    top: 20px;
+    font-size: 28px;
+    color: #94a3b8;
     cursor: pointer;
-    margin-top: 20px;
+    transition: color 0.2s ease;
 }
 
-.confirm-button:hover {
-    background-color: #45a049;
+.close-button:hover {
+    color: #475569;
 }
 
-/* Аватар друга */
-.friend-avatar {
-    border-radius: 50%; 
-    margin-right: 8px;  
-    width: 44px;       
-    height: 44px;       
-    vertical-align: middle;
+/* Форма добавления друга */
+.form-group {
+    margin-bottom: 20px;
 }
 
-/* Медиа-запросы для адаптивности */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Кнопка отправки формы */
+.add-friend-submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-friend-submit-btn:hover {
+    background-color: #4338ca;
+}
+
+/* Медиа-запросы */
 @media (max-width: 768px) {
     .friend-content {
-        width: 90%; 
+        padding: 20px;
+        max-width: 600px;
     }
 
     .friend-item-container {
-        flex-direction: column; 
-        align-items: flex-start;
+        padding: 12px;
     }
 
-    .add-new-friend-button {
+    .friend-avatar {
         width: 40px;
         height: 40px;
     }
 
+    .add-new-friend-button {
+        width: 48px;
+        height: 48px;
+    }
+
     .modal-content {
-        width: 90%; 
+        margin: 15% auto;
+        padding: 25px;
     }
 }
 
 @media (max-width: 480px) {
     .friend-content {
-        width: 95%; 
+        padding: 15px;
     }
 
-    .friend-item-container {
-        padding: 8px;
+    .friend-list-title {
+        font-size: 20px;
     }
 
     .friend-name {
-        font-size: 1em;
+        font-size: 14px;
+    }
+
+    .friend-id {
+        font-size: 12px;
     }
 
     .add-new-friend-button {
-        width: 35px;
-        height: 35px; 
+        width: 42px;
+        height: 42px;
     }
 
     .modal-content {
-        width: 95%; 
-    }
-}
-
-/* Контейнер списка друзей с Flexbox */
-.friend-list-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    height: auto; /* Высота зависит от содержимого */
-}
-
-/* Контент друзей */
-.friend-content {
-    width: 100%;
-    max-width: 600px; /* Ограничиваем максимальную ширину */
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* Список друзей */
-.friend-list {
-    margin-bottom: 20px; /* Добавляем отступ внизу для кнопки */
-}
-
-/* Контейнер для кнопки */
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-/* Кнопка добавления друга */
-.add-new-friend-button {
-    width: 50px;
-    height: 50px;
-    background-color: #4CAF50;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Медиазапрос для экранов меньше 765px */
-@media (max-width: 765px) {
-    .add-new-friend-button {
-        width: 45px;
-        height: 45px;
+        margin: 20% auto;
+        padding: 20px;
     }
 }

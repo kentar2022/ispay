@@ -261,6 +261,9 @@ function changeLanguage(language) {
         element.innerText = texts[language].LanguageInformation;
     });
 
+    if (element) {
+        element.innerText = translations[language].someText;
+    }
 
 
        // Получение данных пользователя из localStorage
@@ -496,7 +499,7 @@ function loadLanguage() {
 
 function setLanguage(language) {
     changeLanguage(language);
-    console.log('language is ' + language)
+    /*console.log('language is ' + language)*/
     localStorage.setItem('currentLanguage', language);
 }
 // Вызываем функцию загрузки темы при загрузке страницы

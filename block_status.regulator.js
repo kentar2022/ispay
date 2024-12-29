@@ -43,7 +43,7 @@ $(document).ready(function() {
                     }
                 });
 
-                // Добавляем обработчик клика на каждую тему для перенаправления
+                // Добавляем обработчик клика на каждую тему для перенаправления 
                 $('.topic-link').on('click touchstart', function() {
                     const topicId = $(this).data('topic-id');
                     let completedLessons = 0;

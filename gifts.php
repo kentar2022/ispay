@@ -131,7 +131,7 @@ if ($action === 'collectGift') {
     $stmt->execute();
 
     // Обновляем ресурсы пользователя
-    $query = "UPDATE users SET $itemType = $itemType + :amount WHERE id = :user_id";
+    $query = "UPDATE users SET $itemType = $itemType + :amount WHERE user_id = :user_id";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':amount', $amount);
     $stmt->bindParam(':user_id', $userId);

@@ -24,21 +24,22 @@ function toggleHiddenBlock(language) {
 
 
 function togglePages(pageId) {
-    console.log(pageId);
+    /*console.log(pageId);*/
     var settingsPage = document.getElementById("settingsPage");
     var profilePage = document.getElementById("profilePage");
-    var profilePageSmall = document.getElementById("profilePageSmall"); // профиль для маленьких экранов
+    var profilePageSmall = document.getElementById("profilePageSmall");
     var coursesPage = document.getElementById("coursesPage");
-    var shopPage = document.getElementById("shopPage");
+    /*var shopPage = document.getElementById("shopPage");*/
     var friendsPage = document.getElementById("friendsPage");
     var languagesContainer = document.getElementById("languagesContainer");
 
     // Скрываем все страницы
     languagesContainer.classList.add("hidden");
     settingsPage.classList.add("hidden");
-    shopPage.classList.add("hidden");
+    /*shopPage.classList.add("hidden");*/
     friendsPage.classList.add("hidden");
     profilePage.classList.add("hidden");
+    coursesPage.classList.add("hidden");
 
     if (pageId === "profilePage") {
         if (window.innerWidth <= 1350 && profilePageSmall) {
@@ -57,31 +58,31 @@ function togglePages(pageId) {
 function showLanguage(languageId) {
     var settingsPage = document.getElementById("settingsPage");
     var profilePage = document.getElementById("profilePage");
-    var profilePageSmall = document.getElementById("profilePageSmall"); // профиль для маленьких экранов
+    var profilePageSmall = document.getElementById("profilePageSmall"); 
     var coursesPage = document.getElementById("coursesPage");
-    var shopPage = document.getElementById("shopPage");
+    /*var shopPage = document.getElementById("shopPage");*/
     var friendsPage = document.getElementById("friendsPage");
     var languagesContainer = document.getElementById("languagesContainer");
 
-    // Скрываем все страницы, добавляем проверку, что элемент существует
+    
     if (settingsPage) settingsPage.classList.add('hidden');
-    if (shopPage) shopPage.classList.add('hidden');
+    /*if (shopPage) shopPage.classList.add('hidden');*/
     if (friendsPage) friendsPage.classList.add('hidden');
     if (profilePage) profilePage.classList.add('hidden');
     if (profilePageSmall) profilePageSmall.classList.add('hidden');
     if (coursesPage) coursesPage.classList.add('hidden');
 
-    // Удаляем класс hidden с блока languagesContainer, чтобы отобразить его
+    
     if (languagesContainer && languagesContainer.classList.contains('hidden')) {
         languagesContainer.classList.remove('hidden');
-        console.log('Класс hidden был удалён у блока languagesContainer');
+        /*console.log('Класс hidden был удалён у блока languagesContainer');*/
     } else if (languagesContainer) {
-        console.log('Блок languagesContainer уже видим');
+        /*console.log('Блок languagesContainer уже видим');*/
     } else {
         console.error("Блок languagesContainer не найден.");
     }
 
-    // Скрываем все блоки уроков внутри languagesContainer
+    
     var allLessonBlocks = document.querySelectorAll('#languagesContainer > div');
     allLessonBlocks.forEach(function(block) {
         block.classList.add('hidden'); // Скрываем все блоки
@@ -100,7 +101,7 @@ function showLanguage(languageId) {
     // Если найден нужный блок, показываем его
     if (blockToShow) {
         blockToShow.classList.remove('hidden');
-        console.log('Показан блок для языка: ' + languageId);
+        /*console.log('Показан блок для языка: ' + languageId);*/
     } else {
         console.error("Блок урока для выбранного языка не найден.");
     }

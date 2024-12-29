@@ -101,150 +101,298 @@
                 </div>
             </div>
         </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Генератор новых уроков</h2>
+            
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Исходные уроки (JSON)
+                        </label>
+                        <textarea id="sourceExercises" rows="10"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+                            placeholder='[{"ID": 1, "data": {...}}, ...]'></textarea>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Настройки генерации
+                            </label>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600">Количество заданий в новом уроке</label>
+                                    <input type="number" id="exerciseCount" min="1" value="10"
+                                        class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label class="block text-sm text-gray-600">Типы заданий</label>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="task-type" value="translation" checked
+                                                class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded">
+                                            <span class="ml-2">Перевод</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="task-type" value="multiple_choice" checked
+                                                class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded">
+                                            <span class="ml-2">Множественный выбор</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="task-type" value="matches" checked
+                                                class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded">
+                                            <span class="ml-2">Сопоставление</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="generateNewLesson()" type="button"
+                            class="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                            Сгенерировать урок
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Сгенерированный урок (JSON)
+                    </label>
+                    <textarea id="generatedLesson" rows="10" readonly
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"></textarea>
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <button onclick="copyGeneratedToClipboard()" type="button"
+                        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Копировать в буфер обмена
+                    </button>
+                    <button onclick="copyGeneratedToForm()" type="button"
+                        class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                        Копировать в форму выше
+                    </button>
+                </div>
+            </div>
+        </div>      
     </div>
 
     <script>
-function convertToJson() {
-    try {
-        const textInput = document.getElementById('textInput');
-        const jsonOutput = document.getElementById('jsonOutput');
-        
-        if (!textInput || !jsonOutput) {
-            console.error('Не найдены необходимые элементы формы');
-            return;
-        }
-
-        const inputText = textInput.value;
-        const lines = inputText.split('\n').filter(line => line.trim());
-        const exercises = [];
-        let currentId = 1;
-
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i].trim();
-            
-            
-            if (line.match(/\d+\.\s*\[translation]/)) {
-                const questionLine = lines[i + 1]?.trim();
-                const answerLine = lines[i + 2]?.trim();
+        function convertToJson() {
+            try {
+                const textInput = document.getElementById('textInput');
+                const jsonOutput = document.getElementById('jsonOutput');
                 
-                if (questionLine?.startsWith('Вопрос:') && answerLine?.startsWith('Ответ:')) {
-                    exercises.push({
-                        "ID": currentId++,
-                        "data": {
-                            "text": answerLine.substring(7).trim(),
-                            "price": 10,
-                            "chance": 0.8,
-                            "rating": 5,
-                            "task_type": "translation",
-                            "answer": questionLine.substring(8).trim()
-                        }
-                    });
-                    i += 2;
+                if (!textInput || !jsonOutput) {
+                    console.error('Не найдены необходимые элементы формы');
+                    return;
                 }
-            }
-            
-            else if (line.match(/\d+\.\s*\[multiple choice]/)) {
-                const questionLine = lines[i + 1]?.trim();
-                if (questionLine?.startsWith('Вопрос:')) {
-                    const questionText = questionLine.substring(8).trim();
-                    const answers = [];
-                    let correctAnswer = '';
+
+                const inputText = textInput.value;
+                const lines = inputText.split('\n').filter(line => line.trim());
+                const exercises = [];
+                let currentId = 1;
+
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
                     
-                    i += 2;
                     
-                    while (i + 1 < lines.length && lines[i + 1].trim().startsWith('-')) {
+                    if (line.match(/\d+\.\s*\[translation]/)) {
+                        const questionLine = lines[i + 1]?.trim();
+                        const answerLine = lines[i + 2]?.trim();
+                        
+                        if (questionLine?.startsWith('Вопрос:') && answerLine?.startsWith('Ответ:')) {
+                            exercises.push({
+                                "ID": currentId++,
+                                "data": {
+                                    "text": answerLine.substring(7).trim(),
+                                    "price": 10,
+                                    "chance": 0.8,
+                                    "rating": 5,
+                                    "task_type": "translation",
+                                    "answer": questionLine.substring(8).trim()
+                                }
+                            });
+                            i += 2;
+                        }
+                    }
+                    
+                    else if (line.match(/\d+\.\s*\[multiple choice]/)) {
+                        const questionLine = lines[i + 1]?.trim();
+                        if (questionLine?.startsWith('Вопрос:')) {
+                            const questionText = questionLine.substring(8).trim();
+                            const answers = [];
+                            let correctAnswer = '';
+                            
+                            i += 2;
+                            
+                            while (i + 1 < lines.length && lines[i + 1].trim().startsWith('-')) {
+                                i++;
+                                const answerLine = lines[i].trim().substring(1).trim();
+                                const answerText = answerLine.replace(' ✓', '');
+                                answers.push(answerText);
+                                if (answerLine.includes('✓')) {
+                                    correctAnswer = answerText;
+                                }
+                            }
+
+                            if (answers.length > 0 && correctAnswer) {
+                                exercises.push({
+                                    "ID": currentId++,
+                                    "data": {
+                                        "text": questionText,
+                                        "price": 10,
+                                        "chance": 0.8,
+                                        "rating": 5,
+                                        "task_type": "multiple_choice",
+                                        "answer": correctAnswer,
+                                        "possible_answers": answers.join(', ')
+                                    }
+                                });
+                            }
+                        }
+                    }
+                    
+                    else if (line.match(/\d+\.\s*\[matches]/)) {
+                        const questions = [];
+                        const answers = [];
+                        
                         i++;
-                        const answerLine = lines[i].trim().substring(1).trim();
-                        const answerText = answerLine.replace(' ✓', '');
-                        answers.push(answerText);
-                        if (answerLine.includes('✓')) {
-                            correctAnswer = answerText;
+                        while (i + 1 < lines.length && lines[i + 1].trim().startsWith('-')) {
+                            i++;
+                            const question = lines[i].trim().substring(1).trim();
+                            questions.push(question);
+                        }
+                        
+                        i++;
+                        while (i + 1 < lines.length && lines[i + 1].trim().startsWith('-')) {
+                            i++;
+                            const answer = lines[i].trim().substring(1).trim();
+                            answers.push(answer);
+                        }
+
+                        if (questions.length > 0 && answers.length > 0) {
+                            exercises.push({
+                                "ID": currentId++,
+                                "data": {
+                                    "text": "Сопоставьте слова:",
+                                    "price": 10,
+                                    "chance": 0.8,
+                                    "rating": 5,
+                                    "task_type": "matches",
+                                    "matches": {
+                                        "questions": questions,
+                                        "answers": answers
+                                    }
+                                }
+                            });
                         }
                     }
-
-                    if (answers.length > 0 && correctAnswer) {
-                        exercises.push({
-                            "ID": currentId++,
-                            "data": {
-                                "text": questionText,
-                                "price": 10,
-                                "chance": 0.8,
-                                "rating": 5,
-                                "task_type": "multiple_choice",
-                                "answer": correctAnswer,
-                                "possible_answers": answers.join(', ')
-                            }
-                        });
-                    }
-                }
-            }
-            
-            else if (line.match(/\d+\.\s*\[matches]/)) {
-                const questions = [];
-                const answers = [];
-                
-                i++;
-                while (i + 1 < lines.length && lines[i + 1].trim().startsWith('-')) {
-                    i++;
-                    const question = lines[i].trim().substring(1).trim();
-                    questions.push(question);
-                }
-                
-                i++;
-                while (i + 1 < lines.length && lines[i + 1].trim().startsWith('-')) {
-                    i++;
-                    const answer = lines[i].trim().substring(1).trim();
-                    answers.push(answer);
                 }
 
-                if (questions.length > 0 && answers.length > 0) {
-                    exercises.push({
-                        "ID": currentId++,
-                        "data": {
-                            "text": "Сопоставьте слова:",
-                            "price": 10,
-                            "chance": 0.8,
-                            "rating": 5,
-                            "task_type": "matches",
-                            "matches": {
-                                "questions": questions,
-                                "answers": answers
-                            }
-                        }
-                    });
-                }
+                jsonOutput.value = JSON.stringify(exercises, null, 4);
+            } catch (error) {
+                console.error('Ошибка при конвертации:', error);
             }
         }
 
-        jsonOutput.value = JSON.stringify(exercises, null, 4);
-    } catch (error) {
-        console.error('Ошибка при конвертации:', error);
-    }
-}
-
-function copyToClipboard() {
-    const jsonOutput = document.getElementById('jsonOutput');
-    if (jsonOutput) {
-        jsonOutput.select();
-        document.execCommand('copy');
-        alert('JSON скопирован в буфер обмена!');
-    }
-}
+        function copyToClipboard() {
+            const jsonOutput = document.getElementById('jsonOutput');
+            if (jsonOutput) {
+                jsonOutput.select();
+                document.execCommand('copy');
+                alert('JSON скопирован в буфер обмена!');
+            }
+        }
 
 
+        function copyToJsonData() {
+            const jsonOutput = document.getElementById('jsonOutput');
+            const jsonDataField = document.querySelector('textarea[name="jsonData"]');
+            if (jsonOutput && jsonDataField) {
+                jsonDataField.value = jsonOutput.value;
+            }
+        }
 
-function copyToJsonData() {
-    const jsonOutput = document.getElementById('jsonOutput');
-    const jsonDataField = document.querySelector('textarea[name="jsonData"]');
-    if (jsonOutput && jsonDataField) {
-        jsonDataField.value = jsonOutput.value;
-    }
-}
+        function convertAndCopy() {
+            convertToJson(); 
+            copyToClipboard(); 
+        }
 
-function convertAndCopy() {
-    convertToJson(); 
-    copyToClipboard(); 
-}
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function generateNewLesson() {
+            try {
+                // Получаем исходные упражнения
+                const sourceExercisesText = document.getElementById('sourceExercises').value;
+                const sourceExercises = JSON.parse(sourceExercisesText);
+
+                // Получаем настройки
+                const desiredCount = parseInt(document.getElementById('exerciseCount').value);
+                const selectedTypes = Array.from(document.querySelectorAll('.task-type:checked'))
+                    .map(checkbox => checkbox.value);
+
+                if (selectedTypes.length === 0) {
+                    alert('Выберите хотя бы один тип заданий!');
+                    return;
+                }
+
+                // Фильтруем упражнения по выбранным типам
+                const filteredExercises = sourceExercises.filter(exercise => 
+                    selectedTypes.includes(exercise.data.task_type)
+                );
+
+                if (filteredExercises.length === 0) {
+                    alert('Нет подходящих заданий для генерации!');
+                    return;
+                }
+
+                // Перемешиваем и выбираем нужное количество
+                const shuffledExercises = shuffleArray([...filteredExercises]);
+                const selectedCount = Math.min(desiredCount, shuffledExercises.length);
+                const newExercises = shuffledExercises.slice(0, selectedCount);
+
+                // Обновляем ID для новых заданий
+                const generatedExercises = newExercises.map((exercise, index) => ({
+                    ...exercise,
+                    ID: index + 1
+                }));
+
+                // Выводим результат
+                document.getElementById('generatedLesson').value = 
+                    JSON.stringify(generatedExercises, null, 4);
+
+            } catch (error) {
+                console.error('Ошибка при генерации урока:', error);
+                alert('Произошла ошибка при генерации урока. Проверьте формат исходных данных.');
+            }
+        }
+
+        function copyGeneratedToClipboard() {
+            const generatedLesson = document.getElementById('generatedLesson');
+            if (generatedLesson) {
+                generatedLesson.select();
+                document.execCommand('copy');
+                alert('Сгенерированный урок скопирован в буфер обмена!');
+            }
+        }
+
+        function copyGeneratedToForm() {
+            const generatedLesson = document.getElementById('generatedLesson');
+            const jsonDataField = document.querySelector('textarea[name="jsonData"]');
+            if (generatedLesson && jsonDataField) {
+                jsonDataField.value = generatedLesson.value;
+            }
+        }        
     </script>
 </body>
 </html>

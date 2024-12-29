@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Получаем user_id с помощью запроса к getUserId.php
     fetch('getUserId.php')
         .then(response => response.json())
         .then(data => {
@@ -9,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             const userId = data.user_id;
-            console.log('User ID retrieved:', userId); // Отладочное сообщение
+            console.log('User ID retrieved:', userId); 
 
             // Получаем начатые языки
             fetch(`get_user_languages.php?user_id=${userId}`)
@@ -20,37 +19,47 @@ document.addEventListener('DOMContentLoaded', function() {
                         return;
                     }
 
-                    console.log('Data received from get_user_languages.php:', data); // Отладочное сообщение
+                    /*console.log('Data received from get_user_languages.php:', data);*/
                     
-                    // Фильтрация языковых курсов в выпадающем меню
+                    
                     const options = document.querySelectorAll('#languageSelect option');
                     options.forEach(option => {
                         if (option.value !== 'none' && !data.languages.includes(option.value)) {
-                            option.style.display = 'none';  // Скрываем, если язык не в списке
+                            option.style.display = 'none';  
                         } else {
-                            option.style.display = '';  // Показываем, если язык в списке
+                            option.style.display = '';  
                         }
                     });
 
-                    // Фильтрация курсов для больших экранов
+                    const mobileOptions = document.querySelectorAll('#mobileLanguageDropdown .language-option');
+                    mobileOptions.forEach(option => {
+                        const value = option.getAttribute('data-value');
+                        if (value !== 'none' && !data.languages.includes(value)) {
+                            option.style.display = 'none';  
+                        } else {
+                            option.style.display = '';  
+                        }
+                    });                    
+
+                    
                     const largeCourses = document.querySelectorAll('.profile-course');
                     largeCourses.forEach(course => {
                         const language = course.getAttribute('data-language');
                         if (!data.languages.includes(language)) {
-                            course.style.display = 'none';  // Скрываем курс
+                            course.style.display = 'none';  
                         } else {
-                            course.style.display = '';  // Показываем курс
+                            course.style.display = '';  
                         }
                     });
 
-                    // Фильтрация курсов для маленьких экранов
+                    
                     const smallCourses = document.querySelectorAll('.small-screen-course-item');
                     smallCourses.forEach(course => {
                         const language = course.getAttribute('data-language');
                         if (!data.languages.includes(language)) {
-                            course.style.display = 'none';  // Скрываем курс
+                            course.style.display = 'none';  
                         } else {
-                            course.style.display = '';  // Показываем курс
+                            course.style.display = ''; 
                         }
                     });
                 })
@@ -59,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error fetching user ID:', error));
 });
 
+/*
 function addLanguage(language) {
     fetch('getUserId.php')
         .then(response => response.json())
@@ -93,3 +103,4 @@ function addLanguage(language) {
         })
         .catch(error => console.error('Error fetching user ID:', error));
 }
+*/

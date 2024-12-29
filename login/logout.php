@@ -1,21 +1,23 @@
 <?php
+// logout.php
+require_once 'init.php';
 
-session_start();
-
-// Удаление всех переменных сессии
+// Очистка всех данных сессии
 $_SESSION = array();
 
-// Если требуется уничтожить сессию, также удалите сессионные куки.
-// Заметьте: это уничтожит сессию, а не только данные сессии!
-if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000,
-        $params["path"], $params["domain"],
-        $params["secure"], $params["httponly"]
-    );
+// Удаление куки сессии
+if (isset($_COOKIE[session_name()])) {
+    setcookie(session_name(), '', [
+        'expires' => time() - 42000,
+        'path' => '/',
+        'domain' => '',
+        'secure' => false, // Измените на true если используете HTTPS
+        'httponly' => true,
+        'samesite' => 'Strict'
+    ]);
 }
 
-// Наконец, уничтожить сессию.
+// Уничтожение сессии
 session_destroy();
 
 // Перенаправление на страницу входа

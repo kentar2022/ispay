@@ -53,7 +53,7 @@ body {
     color: #fff; 
     text-align: center;
     cursor: pointer;
-    z-index: 2;
+    z-index: 1;
     position: relative;
     border-radius: 10px; 
     border: 7px solid #f1e4f3; 
@@ -75,7 +75,6 @@ body {
     margin-right: auto;
 }
 
-  
 .main-block.active + .hidden-block {
     height: 200px; 
 }
@@ -147,7 +146,7 @@ body {
 
 .lesson-content p {
     margin: 5px 0;
-    font-size: 25px;
+    font-size: 15px;
 }
 
 .lesson-progress {

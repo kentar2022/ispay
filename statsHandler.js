@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    console.log('Документ загружен, начинаем процесс получения userId.');
+    /*console.log('Документ загружен, начинаем процесс получения userId.');*/
 
     // Сначала получаем userId
     $.ajax({
@@ -7,7 +7,7 @@ $(document).ready(function() {
         type: 'GET',
         dataType: 'json',
         success: function(userData) {
-            console.log('Ответ от getUserId.php получен:', userData);
+            /*console.log('Ответ от getUserId.php получен:', userData);*/
 
             if (userData.error) {
                 console.error('Ошибка: ' + userData.error);
@@ -15,7 +15,7 @@ $(document).ready(function() {
             }
 
             var userId = userData.user_id;
-            console.log('Полученный userId:', userId);
+            /*console.log('Полученный userId:', userId);*/
 
         
             $.ajax({
@@ -24,7 +24,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 data: { userId: userId },
                 success: function(data) {
-                    console.log('Ответ от getProfileStats.php получен:', data);
+                    /*console.log('Ответ от getProfileStats.php получен:', data);*/
 
                     if (data.error) {
                         console.error('Ошибка: ' + data.error);
@@ -45,19 +45,19 @@ $(document).ready(function() {
                     $('.crystals').text(data.crystals);
                     $('.coins').text(data.coins);
 
-                    console.log('Данные успешно обновлены на странице.');
+                    /*console.log('Данные успешно обновлены на странице.');*/
                 },
                 error: function(xhr, status, error) {
-                    console.error('Ошибка при загрузке данных из getProfileStats.php:', error);
+                    /*console.error('Ошибка при загрузке данных из getProfileStats.php:', error);
                     console.log('Статус:', status);
-                    console.log('Ответ сервера:', xhr.responseText);
+                    console.log('Ответ сервера:', xhr.responseText);*/
                 }
             });
         },
         error: function(xhr, status, error) {
-            console.error('Ошибка при получении userId из getUserId.php:', error);
+           /* console.error('Ошибка при получении userId из getUserId.php:', error);
             console.log('Статус:', status);
-            console.log('Ответ сервера:', xhr.responseText);
+            console.log('Ответ сервера:', xhr.responseText);*/
         }
     });
 });
