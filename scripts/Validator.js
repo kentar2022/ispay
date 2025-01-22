@@ -97,6 +97,17 @@ $(document).ready(function () {
         data = null;
         currentIndex = -1;
 
+        console.log('=== Debug loadLesson ===');
+        console.log('Trying to load lesson with params:', {
+            language: language,
+            lessonId: lessonId,
+            topicId: topicId,
+            fullUrl: window.location.href
+        });
+        console.log('Ajax URL will be:', '../load_phrases.php');
+        console.log('Current script location:', document.currentScript?.src);
+        console.log('=== Debug End ===');        
+
         $.ajax({
             url: '../load_phrases.php',
             method: 'GET',
@@ -240,6 +251,11 @@ $(document).ready(function () {
             const isCorrect = $this.attr('data-correct') === 'true';
 
             if (isCorrect) {
+                const wordRussian = currentQuestion.text; 
+                const wordChechen = correctAnswer; 
+                const userId = 1;
+
+                saveLearnedWord(userId, wordRussian, wordChechen);
                 $this.addClass('correct');
                 correctAnswersCount++;
                 correctAnswersTotal++;
@@ -724,6 +740,30 @@ $(document).ready(function () {
     }
 
     });
+
+function saveLearnedWord(userId, wordRussian, wordChechen) {
+    $.ajax({
+        type: "POST",
+        url: "../learned_words/add_word.php", // Серверный скрипт для добавления слова
+        data: {
+            user_id: userId,
+            word_russian: wordRussian,
+            word_chechen: wordChechen,
+            date_learned: new Date().toISOString().split('T')[0], // Текущая дата
+            repetition_count: 1, // Начальное количество повторений
+            last_reviewed: null,
+            progress: 1.0 // Начальный прогресс
+        },
+        success: function(response) {
+            console.log("Слово добавлено:", response);
+        },
+        error: function(xhr, status, error) {
+            console.error("Ошибка при добавлении слова:", error);
+        }
+    });
+}
+
+
 
 /*
 (function() {

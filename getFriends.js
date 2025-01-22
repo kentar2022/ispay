@@ -1,40 +1,34 @@
 $(document).ready(function() {
-    /*console.log('Инициализация загрузки друзей...');*/
-
+    // Обработка отправки заявки в друзья
     $('#addFriendForm').on('submit', function(e) {
         e.preventDefault();
-        /*console.log('Форма отправлена');*/
         
         var friendId = $('#friendIdInput').val().trim();
-        /*console.log('ID друга:', friendId);*/
 
         if (!friendId) {
             alert('Пожалуйста, введите ID друга');
             return;
         }
 
-        // Проверка на числовое значение
         if (!/^\d+$/.test(friendId)) {
             alert('ID друга должен быть числом');
             return;
         }
 
         $.ajax({
-            url: 'addFriend.php',
+            url: 'sendFriendRequest.php', // Меняем URL с addFriend.php на sendFriendRequest.php
             type: 'POST',
             dataType: 'json',
             data: { friend_id: friendId },
             success: function(response) {
-               /* console.log('Ответ сервера:', response);*/
                 if (response.success) {
-                    alert('Друг успешно добавлен!');
-                    loadFriends(); // Перезагружаем список друзей
+                    alert('Заявка в друзья отправлена!');
                     $('#addFriendModal').fadeOut(function() {
                         $(this).addClass('hidden');
-                        $('#friendIdInput').val(''); // Очищаем поле ввода
+                        $('#friendIdInput').val('');
                     });
                 } else {
-                    alert(response.message || 'Ошибка при добавлении друга');
+                    alert(response.message || 'Ошибка при отправке заявки');
                 }
             },
             error: function(xhr, status, error) {
@@ -43,10 +37,64 @@ $(document).ready(function() {
                     error: error,
                     response: xhr.responseText
                 });
-                alert('Ошибка при добавлении друга');
+                alert('Ошибка при отправке заявки');
             }
         });
     });
+
+    $('#addFriendButton').on('click', function() {
+        $('#addFriendModal').removeClass('hidden').fadeIn();
+        $('#friendIdInput').focus();
+    });    
+
+
+    // Загрузка входящих заявок в друзья
+    function loadFriendRequests() {
+        console.log('Загрузка заявок в друзья...');
+        $.ajax({
+            url: 'getFriendRequests.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log('Ответ от сервера:', response);
+                if (response.success) {
+                    var $requestsList = $('#friendRequestsList');
+                    $requestsList.empty();
+
+                    if (response.requests && response.requests.length > 0) {
+                        response.requests.forEach(function(request) {
+                            var requestHtml = `
+                                <div class="friend-request-item" data-request-id="${request.id}">
+                                    <div class="friend-info">
+                                        <img src="${request.sender_avatar}" alt="Avatar" class="friend-avatar" onerror="this.src='images/avatar.png'">
+                                        <span class="friend-name">${request.sender_nickname}</span>
+                                        <span class="friend-id">id${request.sender_id}</span>
+                                    </div>
+                                    <div class="request-actions">
+                                        <button class="accept-request-btn" data-user-id="${request.sender_id}">Принять</button>
+                                        <button class="reject-request-btn" data-user-id="${request.sender_id}">Отклонить</button>
+                                    </div>
+                                </div>
+                            `;
+                            $requestsList.append(requestHtml);
+                        });
+                        
+                        initializeRequestButtons();
+                    } else {
+                        $requestsList.html('<p>Нет входящих заявок в друзья</p>');
+                    }
+                }
+            },
+        error: function(xhr, status, error) {
+            console.error('Ошибка при загрузке заявок:', {
+                status: status,
+                error: error,
+                response: xhr.responseText
+            });
+            $('#friendRequestsList').html('<p>Ошибка при загрузке заявок</p>');
+        }
+        });
+    }
 
     function loadFriends() {
         /*console.log('Загружаем список друзей...');*/
@@ -104,13 +152,76 @@ $(document).ready(function() {
                 $('#friendsList').html('<p>Ошибка загрузки списка друзей</p>');
             }
         });
+    }    
+
+    // Инициализация кнопок принятия/отклонения заявок
+    function initializeRequestButtons() {
+        $('.accept-request-btn').off('click').on('click', function() {
+            var userId = $(this).data('user-id');
+            var $requestItem = $(this).closest('.friend-request-item');
+            
+            $.ajax({
+                url: 'respondToFriendRequest.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    user_id: userId,
+                    action: 'accept'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        $requestItem.fadeOut(400, function() {
+                            $(this).remove();
+                            loadFriends(); // Обновляем список друзей
+                            if ($('#friendRequestsList').children().length === 0) {
+                                $('#friendRequestsList').html('<p>Нет входящих заявок в друзья</p>');
+                            }
+                        });
+                    } else {
+                        alert(response.message || 'Ошибка при принятии заявки');
+                    }
+                },
+                error: function() {
+                    alert('Ошибка при обработке заявки');
+                }
+            });
+        });
+
+        $('.reject-request-btn').off('click').on('click', function() {
+            var userId = $(this).data('user-id');
+            var $requestItem = $(this).closest('.friend-request-item');
+            
+            $.ajax({
+                url: 'respondToFriendRequest.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    user_id: userId,
+                    action: 'reject'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        $requestItem.fadeOut(400, function() {
+                            $(this).remove();
+                            if ($('#friendRequestsList').children().length === 0) {
+                                $('#friendRequestsList').html('<p>Нет входящих заявок в друзья</p>');
+                            }
+                        });
+                    } else {
+                        alert(response.message || 'Ошибка при отклонении заявки');
+                    }
+                },
+                error: function() {
+                    alert('Ошибка при обработке заявки');
+                }
+            });
+        });
     }
 
     function initializeDeleteButtons() {
         $('.delete-friend-button').off('click').on('click', function() {
             var $friendItem = $(this).closest('.friend-item-container');
             var friendId = $friendItem.data('friend-id');
-            /*console.log('Попытка удаления друга:', friendId);*/
 
             if (confirm('Вы уверены, что хотите удалить этого друга?')) {
                 $.ajax({
@@ -119,7 +230,6 @@ $(document).ready(function() {
                     dataType: 'json',
                     data: { friend_id: friendId },
                     success: function(response) {
-                        /*console.log('Ответ на удаление:', response);*/
                         if (response.success) {
                             $friendItem.fadeOut(400, function() {
                                 $(this).remove();
@@ -142,35 +252,10 @@ $(document).ready(function() {
                 });
             }
         });
-    }
+    }    
 
-    // Открытие модального окна
-    $('#addFriendButton').on('click', function() {
-        /*console.log('Открытие модального окна');*/
-        $('#addFriendModal').removeClass('hidden').fadeIn();
-        $('#friendIdInput').focus(); // Фокус на поле ввода
-    });
-
-    // Закрытие модального окна
-    $('.close-button').on('click', function() {
-        /*console.log('Закрытие модального окна');*/
-        $('#addFriendModal').fadeOut(function() {
-            $(this).addClass('hidden');
-            $('#friendIdInput').val(''); // Очищаем поле при закрытии
-        });
-    });
-
-    // Закрытие по клику вне модального окна
-    $(window).on('click', function(event) {
-        if ($(event.target).is('#addFriendModal')) {
-            $('#addFriendModal').fadeOut(function() {
-                $(this).addClass('hidden');
-                $('#friendIdInput').val('');
-            });
-        }
-    });
-
-
-    // Загружаем друзей при загрузке страницы
+    // Загружаем друзей и заявки при загрузке страницы
     loadFriends();
+    loadFriendRequests();
 });
+

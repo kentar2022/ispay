@@ -57,6 +57,7 @@
                         <div class="language-option" data-value="tatar" onclick="selectMobileLanguage('tatar')" style="padding: 10px; cursor: pointer;">Татарский язык</div>
                         <div class="language-option" data-value="chuvash" onclick="selectMobileLanguage('chuvash')" style="padding: 10px; cursor: pointer;">Чувашский язык</div>
                         <div class="language-option" data-value="bashkort" onclick="selectMobileLanguage('bashkort')" style="padding: 10px; cursor: pointer;">Башкирский язык</div>
+                        <div class="language-option" data-value="moksha" onclick="selectMobileLanguage('moksha')" style="padding: 10px; cursor: pointer;">Мокшанский язык</div>
                     </div>
                 </div>                
                 <div class="aside-item large-screen" id="languageSelectContainer" style="display: flex; align-items: center; background-color: rgb(41, 49, 51);">
@@ -82,6 +83,7 @@
                         <option value="tatar" id="courseTatarTranslation" class="a">Татарский язык</option>
                         <option value="chuvash" id="courseChuvashTranslation" class="a">Чувашский язык</option>
                         <option value="bashkort" id="courseBashkortTranslation" class="a">Башкирский язык</option>
+                        <option value="moksha" id="courseMokshaTranslation" class="a">Мокшанский язык</option>
                     </select>
                 </div>
                 <div class="aside-item" id="coursesPageBtn" onclick="togglePages('coursesPage')">
@@ -2559,6 +2561,210 @@
         </div>
     </div>
 
+    <!--БОЛЬШОЙ ЭКРАН МОКШАНСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН МОКШАНСКИЙ ЯЗЫК-->
+    <!--БОЛЬШОЙ ЭКРАН МОКШАНСКИЙ ЯЗЫК-->   
+    <div id="lessonsPagemoksha" class="page hidden lessonsPage">
+        <!--<img src="courses_flags/adyge.png" alt="">
+        <div class="container">
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z" />
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z" />
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z" />
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="section">
+            <h2 class="section-title courses_titles">Базовая грамматика</h2>
+            <div class="lessons-container">
+                <!-- Существительные -->
+                <div class="lesson-block" data-lesson-id="1">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">&#9660;</span>
+                        <h2 class="lesson-title">Example text</h2>
+                        <span class="lesson-index">1/3</span>
+                    </div>
+                    <div class="lesson-content">
+                        <p data-topic-id="1">Example text</p>
+                        <p data-topic-id="2">Example text</p>
+                        <p data-topic-id="3">Example text</p>
+                        <p data-topic-id="4">Example text</p>
+                        <p data-topic-id="5">Example text</p>
+                    </div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <!-- Прилагательные -->
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">&#9660;</span>
+                        <h2 class="lesson-title">Example text</h2>
+                        <span class="lesson-index">2/3</span>
+                    </div>
+                    <div class="lesson-content">
+                        <p data-topic-id="6">Example text</p>
+                        <p data-topic-id="7">Example text</p>
+                        <p data-topic-id="8">Example text</p>
+                        <p data-topic-id="9">Example text</p>
+                        <p data-topic-id="10">Example text</p>
+                    </div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <!-- Местоимения -->
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">&#9660;</span>
+                        <h2 class="lesson-title">Example text</h2>
+                        <span class="lesson-index">3/3</span>
+                    </div>
+                    <div class="lesson-content">
+                        <p data-topic-id="11">Example text</p>
+                        <p data-topic-id="12">Example text</p>
+                        <p data-topic-id="13">Example text</p>
+                        <p data-topic-id="14">Example text</p>
+                        <p data-topic-id="15">Example text</p>
+                    </div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+                <h2 class="section-title courses_titles">Глагольная система</h2>
+                <div class="lessons-container">
+                    <!-- Структура глагола -->
+                    <div class="lesson-block" data-lesson-id="4">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Example text</h2>
+                            <span class="lesson-index">1/3</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="16">Example text</p>
+                            <p data-topic-id="17">Example text</p>
+                            <p data-topic-id="18">Example text</p>
+                            <p data-topic-id="19">Example text</p>
+                            <p data-topic-id="20">Example text</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Времена глагола -->
+                    <div class="lesson-block" data-lesson-id="5">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Example text</h2>
+                            <span class="lesson-index">2/3</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="21">Example text</p>
+                            <p data-topic-id="22">Example text</p>
+                            <p data-topic-id="23">Example text</p>
+                            <p data-topic-id="24">Example text</p>
+                            <p data-topic-id="25">Example text</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Наклонения -->
+                    <div class="lesson-block" data-lesson-id="6">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Example text</h2>
+                            <span class="lesson-index">3/3</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="26">Example text</p>
+                            <p data-topic-id="27">Example text</p>
+                            <p data-topic-id="28">Example text</p>
+                            <p data-topic-id="29">Example text</p>
+                            <p data-topic-id="30">Example text</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title courses_titles">Синтаксис</h2>
+                <div class="lessons-container">
+                    <!-- Простое предложение -->
+                    <div class="lesson-block" data-lesson-id="7">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Example text</h2>
+                            <span class="lesson-index">1/2</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="31">Example text</p>
+                            <p data-topic-id="32">Example text</p>
+                            <p data-topic-id="33">Example text</p>
+                            <p data-topic-id="34">Example text</p>
+                            <p data-topic-id="35">Example text</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Сложное предложение -->
+                    <div class="lesson-block" data-lesson-id="8">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Example text</h2>
+                            <span class="lesson-index">2/2</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="36">Example text</p>
+                            <p data-topic-id="37">Example text</p>
+                            <p data-topic-id="38">Example text</p>
+                            <p data-topic-id="39">Example text</p>
+                            <p data-topic-id="40">Example text</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+
 
 
     <!--МАЛЕНЬКИЙ ЭКРАН ТАТАРСКИЙ ЯЗЫК-->
@@ -3569,6 +3775,11 @@
                     <h3 id="courseTatarTranslation" class="courses_titles">Татарский язык</h3>
                     <button class="add-language-button a" data-language="tatar">+</button>
                 </div>
+                <div class="course">
+                    <img src="courses_flags/moksha.png" alt="Flag">
+                    <h3 id="courseMokshaTranslation" class="courses_titles">Мокшанский язык</h3>
+                    <button class="add-language-button a" data-language="moksha">+</button>
+                </div>                
                 <!--<div class="course">
                     <img src="courses_flags/chuvash.png" alt="Flag">
                     <h3 id="courseChuvashTranslation" class="courses_titles">Чувашский язык</h3>
@@ -3616,15 +3827,11 @@
             <h2 class="friend-list-title a" id="friend-list-title">Мои друзья</h2>
             <hr class="friend-list-divider">
             <div id="friendsList" class="friend-list">
-                <!-- Пример друга -->
-                <div class="friend-item-container">
-                    <span class="friend-name">friend_name</span>
-                    <button class="delete-friend-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="red">
-                            <path d="M19 13H5V11H19V13Z"/>
-                        </svg>
-                    </button>
-                    <span class="friend-id">id1</span>
+            </div>
+            <div class="friend-requests-section">
+                <h2>Входящие заявки в друзья</h2>
+                <div id="friendRequestsList" class="friend-requests-container">
+                    <!-- Заявки будут добавлены через JavaScript -->
                 </div>
             </div>
             <!-- Контейнер для кнопки добавления друга -->
@@ -3635,22 +3842,35 @@
                     </svg>
                 </button>
             </div>
-             <div id="addFriendModal" class="modal hidden">
+            <div id="friendRequestsList" class="friend-requests-container"></div>
+
+            <div id="addFriendModal" class="modal hidden">
                 <div class="modal-content">
-                    <span class="close-button">&times;</span>
-                    <h2>Добавить друга</h2>
+                    <div class="modal-header">
+                        <h2 class="modal-title">Добавить друга</h2>
+                        <button class="close-button">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
                     <form id="addFriendForm" autocomplete="off">
                         <div class="form-group">
-                            <label for="friendIdInput">ID друга:</label>
-                            <input type="text" 
-                                   id="friendIdInput" 
-                                   name="friend_id" 
-                                   required 
-                                   pattern="\d+"
-                                   title="Пожалуйста, введите числовой ID"
-                                   placeholder="Введите ID друга">
+                            <label for="friendIdInput">ID пользователя</label>
+                            <input 
+                                type="text"
+                                id="friendIdInput"
+                                name="friend_id"
+                                required
+                                pattern="\d+"
+                                placeholder="Введите ID пользователя"
+                            />
                         </div>
-                        <button type="submit" class="add-friend-submit-btn">Добавить</button>
+
+                        <button type="submit" class="add-friend-submit-btn">
+                            Отправить заявку в друзья
+                        </button>
                     </form>
                 </div>
             </div>
@@ -4179,5 +4399,6 @@ window.onresize = handleResize;
 <script src="scripts/navigation.js"></script>
 <script src="statsHandler.js"></script>
 <script src="getFriends.js"></script>
+
 </body>
 </html>

@@ -38,6 +38,7 @@ $databaseName = match (strtolower($language)) {
     'tatar' => 'tatar',
     'chuvash' => 'chuvash',
     'bashkort' => 'bashkort',
+    'moksha' => 'moksha',
     default => null,
 };
 

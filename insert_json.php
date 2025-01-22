@@ -23,10 +23,8 @@ $databases = [
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Получаем данные из формы
     $selectedDatabase = $_POST['language'] ?? null;
-    $lessonLevel = isset($_POST['lesson_level']) ? intval($_POST['lesson_level']) : null;
     $topicId = isset($_POST['topic_id']) ? intval($_POST['topic_id']) : null;
-    $jsonData = $_POST['jsonData'] ?? null;
-    $summary = $_POST['summary'] ?? null;
+    $lessonsData = isset($_POST['lessons']) ? json_decode($_POST['lessons'], true) : null;
 
     // Проверяем язык
     if (!$selectedDatabase || !array_key_exists($selectedDatabase, $databases)) {
@@ -34,14 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Проверяем обязательные поля
-    if (!$lessonLevel || !$topicId || !$jsonData) {
+    if (!$topicId || !$lessonsData) {
         die(json_encode(['error' => 'Не все обязательные поля заполнены']));
     }
 
-    // Проверяем и декодируем JSON данные
-    $decodedData = json_decode($jsonData, true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        die(json_encode(['error' => 'Неверный формат JSON данных: ' . json_last_error_msg()]));
+    // Проверяем корректность JSON данных
+    if (!is_array($lessonsData)) {
+        die(json_encode(['error' => 'Неверный формат данных уроков']));
     }
 
     // Создание соединения с выбранной базой данных
@@ -56,44 +53,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Начинаем транзакцию
         $conn->begin_transaction();
 
-        // Проверяем, есть ли уже запись с таким lesson_level и topic_id
-        $stmt = $conn->prepare("SELECT data FROM lessons WHERE lesson_level = ? AND topic_id = ?");
-        $stmt->bind_param("ii", $lessonLevel, $topicId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $existingData = $result->fetch_assoc();
+        $messages = [];
+        foreach ($lessonsData as $lesson) {
+            $lessonLevel = $lesson['lesson_level'];
+            $content = json_encode($lesson['content']); 
 
-        if ($existingData) {
-            // Обновляем существующую запись
-            $updateStmt = $conn->prepare("UPDATE lessons SET data = ?, summary = ? WHERE lesson_level = ? AND topic_id = ?");
-            $updateStmt->bind_param("ssii", $jsonData, $summary, $lessonLevel, $topicId);
-            
-            if ($updateStmt->execute()) {
-                $message = "Данные успешно обновлены для урока $lessonLevel темы $topicId";
+            // Проверяем, есть ли уже запись с таким lesson_level и topic_id
+            $stmt = $conn->prepare("SELECT id FROM lessons WHERE lesson_level = ? AND topic_id = ?");
+            $stmt->bind_param("ii", $lessonLevel, $topicId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $existingData = $result->fetch_assoc();
+
+            if ($existingData) {
+                // Обновляем существующую запись
+                $updateStmt = $conn->prepare("UPDATE lessons SET data = ? WHERE lesson_level = ? AND topic_id = ?");
+                $updateStmt->bind_param("sii", $content, $lessonLevel, $topicId);
+                
+                if ($updateStmt->execute()) {
+                    $messages[] = "Урок $lessonLevel темы $topicId обновлен";
+                } else {
+                    throw new Exception("Ошибка при обновлении урока $lessonLevel: " . $updateStmt->error);
+                }
+                
+                $updateStmt->close();
             } else {
-                throw new Exception("Ошибка при обновлении данных: " . $updateStmt->error);
+                // Получаем максимальный ID
+                $maxIdResult = $conn->query("SELECT MAX(id) as max_id FROM lessons");
+                $maxId = $maxIdResult->fetch_assoc()['max_id'];
+                $newId = $maxId ? $maxId + 1 : 1;
+
+                // Создаем новую запись
+                $insertStmt = $conn->prepare("INSERT INTO lessons (id, lesson_level, topic_id, data) VALUES (?, ?, ?, ?)");
+                $insertStmt->bind_param("iiis", $newId, $lessonLevel, $topicId, $content);
+
+                if ($insertStmt->execute()) {
+                    $messages[] = "Урок $lessonLevel темы $topicId добавлен";
+                } else {
+                    throw new Exception("Ошибка при добавлении урока $lessonLevel: " . $insertStmt->error);
+                }
+
+                $insertStmt->close();
             }
             
-            $updateStmt->close();
-        } else {
-            // Создаем новую запись
-            $insertStmt = $conn->prepare("INSERT INTO lessons (lesson_level, topic_id, data, summary) VALUES (?, ?, ?, ?)");
-            $insertStmt->bind_param("iiss", $lessonLevel, $topicId, $jsonData, $summary);
-
-            if ($insertStmt->execute()) {
-                $message = "Новые данные успешно добавлены для урока $lessonLevel темы $topicId";
-            } else {
-                throw new Exception("Ошибка при добавлении новых данных: " . $insertStmt->error);
-            }
-
-            $insertStmt->close();
+            $stmt->close();
         }
-        
-        $stmt->close();
 
         // Фиксируем транзакцию
         $conn->commit();
-        echo json_encode(['success' => true, 'message' => $message]);
+        echo json_encode([
+            'success' => true, 
+            'message' => implode(", ", $messages)
+        ]);
 
     } catch (Exception $e) {
         $conn->rollback();

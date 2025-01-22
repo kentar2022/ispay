@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Словарь</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Словарь пользователя</h1>
+        
+        
+        <div class="stats-container">
+            <div class="stat-box">
+                <h3>Всего слов</h3>
+                <p id="total-words">0</p>
+            </div>
+            <div class="stat-box">
+                <h3>Средний прогресс</h3>
+                <p id="avg-progress">0%</p>
+            </div>
+            <div class="stat-box">
+                <h3>Изучено за неделю</h3>
+                <p id="weekly-learned">0</p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="sortable" data-sort="word_russian">Word (Russian) ↕</th>
+                    <th class="sortable" data-sort="word_chechen">Word (Chechen) ↕</th>
+                    <th class="sortable" data-sort="date_learned">Date Learned ↕</th>
+                    <th class="sortable" data-sort="repetition_count">Repetition Count ↕</th>
+                    <th class="sortable" data-sort="progress">Progress ↕</th>
+                </tr>
+            </thead>
+            <tbody id="word-table">
+            </tbody>
+        </table>
+    </div>
+    <script src="fetch_words.js"></script>
+</body>
+</html>
