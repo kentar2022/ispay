@@ -1,46 +1,77 @@
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(0);
 header('Content-Type: application/json');
-include 'db.php'; 
+header('Access-Control-Allow-Origin: *');
 
-// Получаем данные из POST-запроса
+include 'db.php';
+
 $user_id = $_POST['user_id'];
 $word_russian = $_POST['word_russian'];
-$word_chechen = $_POST['word_chechen'];
+$word_foreign = $_POST['word_foreign']; 
 $date_learned = $_POST['date_learned'];
 $repetition_count = $_POST['repetition_count'];
-$last_reviewed = $_POST['last_reviewed'] ?? null; // Значение может быть NULL
 $progress = $_POST['progress'];
 
-// Подготавливаем SQL-запрос
-$stmt = $mysqli->prepare('
-    INSERT INTO learned_words (user_id, word_russian, word_chechen, date_learned, repetition_count, last_reviewed, progress)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-');
 
-// Привязываем параметры
-$stmt->bind_param(
-    'isssids', // Типы параметров: i (int), s (string), d (double)
-    $user_id,
-    $word_russian,
-    $word_chechen,
-    $date_learned,
-    $repetition_count,
-    $last_reviewed,
-    $progress
-);
+$check = $mysqli->prepare('SELECT * FROM learned_words WHERE user_id = ? AND word_russian = ? AND word_foreign = ?');
+$check->bind_param('iss', $user_id, $word_russian, $word_foreign);
+$check->execute();
+$result = $check->get_result();
 
-// Выполняем запрос
-if ($stmt->execute()) {
-    echo json_encode(['status' => 'success']);
+if ($result->num_rows > 0) {
+   
+   $row = $result->fetch_assoc();
+   $new_repetition_count = $row['repetition_count'] + 1;
+   
+   
+   $new_progress = min(1.0, $row['progress'] + 0.1);
+   
+   $update = $mysqli->prepare('
+       UPDATE learned_words 
+       SET repetition_count = ?, 
+           progress = ?,
+           last_reviewed = CURRENT_DATE
+       WHERE user_id = ? AND word_russian = ? AND word_foreign = ?
+   ');
+   
+   $update->bind_param('idiss', 
+       $new_repetition_count,
+       $new_progress,
+       $user_id,
+       $word_russian,
+       $word_foreign
+   );
+   
+   if ($update->execute()) {
+       echo json_encode(['status' => 'updated', 'progress' => $new_progress]);
+   } else {
+       echo json_encode(['status' => 'error', 'message' => $update->error]);
+   }
+   $update->close();
 } else {
-    echo json_encode(['status' => 'error', 'message' => $stmt->error]);
+   
+   $insert = $mysqli->prepare('
+       INSERT INTO learned_words (user_id, word_russian, word_foreign, date_learned, repetition_count, progress)
+       VALUES (?, ?, ?, ?, ?, ?)
+   ');
+   
+   $insert->bind_param('isssid',
+       $user_id,
+       $word_russian,
+       $word_foreign,
+       $date_learned,
+       $repetition_count,
+       $progress
+   );
+   
+   if ($insert->execute()) {
+       echo json_encode(['status' => 'inserted']);
+   } else {
+       echo json_encode(['status' => 'error', 'message' => $insert->error]);
+   }
+   $insert->close();
 }
 
-// Закрываем соединение
-$stmt->close();
+$check->close();
 $mysqli->close();
 ?>

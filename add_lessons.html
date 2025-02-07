@@ -23,6 +23,7 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
                             <option value="">Выберите язык...</option>
+                            <option value="lezgin">Лезгинский</option>
                             <option value="bashkort">Башкирский</option>
                             <option value="chechen">Чеченский</option>
                             <option value="ingush">Ингушский</option>
@@ -150,75 +151,89 @@
             hideError();
         }
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            hideError();
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
 
-            const jsons = Array.from(form.querySelectorAll('textarea'))
-                .map(textarea => textarea.value.trim())
-                .filter(value => value !== '');
+        const jsons = Array.from(form.querySelectorAll('textarea'))
+            .map(textarea => textarea.value.trim())
+            .filter(value => value !== '');
 
-            if (jsons.length === 0) {
-                showError('Добавьте хотя бы один JSON');
+        if (jsons.length === 0) {
+            showError('Добавьте хотя бы один JSON');
+            return;
+        }
+
+        // Проверяем валидность каждого JSON
+        for (let i = 0; i < jsons.length; i++) {
+            if (!validateJson(jsons[i])) {
+                showError(`Некорректный JSON в уроке ${i + 1}`);
                 return;
             }
+        }
 
-            // Проверяем валидность каждого JSON
-            for (let i = 0; i < jsons.length; i++) {
-                if (!validateJson(jsons[i])) {
-                    showError(`Некорректный JSON в уроке ${i + 1}`);
-                    return;
-                }
-            }
+        const formData = new FormData();
+        formData.append('language', form.language.value);
+        formData.append('topic_id', form.topic_id.value); // Используем текущее значение topic_id
 
-            const formData = new FormData();
-            formData.append('language', form.language.value);
-            formData.append('topic_id', form.topic_id.value);
-
-            const lessonsData = [];
-            jsons.forEach((json, index) => {
-                lessonsData.push({
-                    lesson_level: index + 1,
-                    content: JSON.parse(json)
-                });
+        const lessonsData = [];
+        jsons.forEach((json, index) => {
+            lessonsData.push({
+                lesson_level: index + 1,
+                content: JSON.parse(json)
             });
-
-            try {
-                // Выводим данные в консоль для проверки
-                console.log('Отправляемые данные:', {
-                    language: form.language.value,
-                    topic_id: form.topic_id.value,
-                    lessons: lessonsData
-                });
-
-                // Отправляем данные
-                formData.append('lessons', JSON.stringify(lessonsData));
-
-                // Делаем запрос к серверу
-                const response = await fetch('insert_json.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    alert('Уроки успешно загружены!');
-                    form.reset();
-                    jsonInputs.innerHTML = '';
-                    inputCount = 0;
-                    addJsonInput(); // Добавляем первое поле
-                } else {
-                    showError(result.error || 'Произошла ошибка при загрузке');
-                }
-            } catch (error) {
-                console.error('Ошибка:', error);
-                showError('Ошибка при отправке данных');
-            }
         });
 
-        // Добавляем первый JSON инпут при загрузке страницы
-        addJsonInput();
+        try {
+            // Выводим данные в консоль для проверки
+            console.log('Отправляемые данные:', {
+                language: form.language.value,
+                topic_id: form.topic_id.value,
+                lessons: lessonsData
+            });
+
+            // Отправляем данные
+            formData.append('lessons', JSON.stringify(lessonsData));
+
+            // Делаем запрос к серверу
+            const response = await fetch('insert_json.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert('Уроки успешно загружены!');
+                
+                // Сохраняем язык и topic_id
+                const languageValue = form.language.value;
+                const topicIdValue = form.topic_id.value;
+
+                // Очищаем только JSON поля
+                jsonInputs.innerHTML = '';
+                inputCount = 0;
+                for (let i = 0; i < 5; i++) {
+                    addJsonInput(); // Добавляем 5 полей JSON
+                }
+
+                // Восстанавливаем язык и topic_id
+                form.language.value = languageValue;
+                form.topic_id.value = parseInt(topicIdValue) + 1; // Увеличиваем topic_id
+
+            } else {
+                showError(result.error || 'Произошла ошибка при загрузке');
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
+            showError('Ошибка при отправке данных');
+        }
+    });
+
+        // Добавляем 5 JSON инпутов при загрузке страницы
+        for (let i = 0; i < 5; i++) {
+            addJsonInput();
+        }
     </script>
 </body>
 </html>

@@ -58,6 +58,7 @@
                         <div class="language-option" data-value="chuvash" onclick="selectMobileLanguage('chuvash')" style="padding: 10px; cursor: pointer;">Чувашский язык</div>
                         <div class="language-option" data-value="bashkort" onclick="selectMobileLanguage('bashkort')" style="padding: 10px; cursor: pointer;">Башкирский язык</div>
                         <div class="language-option" data-value="moksha" onclick="selectMobileLanguage('moksha')" style="padding: 10px; cursor: pointer;">Мокшанский язык</div>
+                        <div class="language-option" data-value="lezgin" onclick="selectMobileLanguage('lezgin')" style="padding: 10px; cursor: pointer;">Лезгинский язык</div>
                     </div>
                 </div>                
                 <div class="aside-item large-screen" id="languageSelectContainer" style="display: flex; align-items: center; background-color: rgb(41, 49, 51);">
@@ -84,6 +85,7 @@
                         <option value="chuvash" id="courseChuvashTranslation" class="a">Чувашский язык</option>
                         <option value="bashkort" id="courseBashkortTranslation" class="a">Башкирский язык</option>
                         <option value="moksha" id="courseMokshaTranslation" class="a">Мокшанский язык</option>
+                        <option value="lezgin" id="courseLezginTranslation" class="a">Лезгинский язык</option>
                     </select>
                 </div>
                 <div class="aside-item" id="coursesPageBtn" onclick="togglePages('coursesPage')">
@@ -3097,6 +3099,243 @@
     </div>
 </div>
 
+    <div id="lessonsPagelezgin" class="page hidden lessonsPage">
+        <!--<img src="courses_flags/lezgin.png" alt="">
+        <div class="container">
+            <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()">
+                Полезная информация
+            </div>
+            <div class="hidden-block">
+                <div class="tabs">
+                    <div class="tab" onclick="showSection('phonetics')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7zm-1 1v12h2V6h-2z" />
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('grammar')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 2H5a2 2 0 0 0-2 2v14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V4a2 2 0 0 0-2-2zm0 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4h14z" />
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('verbs')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v1.585L12.707 11 11 12.707 9.293 11 9 10.707V9H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8zm0 2H8v4h8V4zm-4 6l1 1h1.585L16 14.707 14.707 16 12 13.293 9.293 16 8 14.707 10.293 12H12zM4 19a2 2 0 0 1 2 2h8a2 2 0 0 1 2-2H4z" />
+                        </svg>
+                    </div>
+                    <div class="tab" onclick="showSection('alphabet')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3l2.29 6.71H21l-5.7 4.15L17.5 21 12 16.85 6.5 21l2.2-7.14L3 9.71h6.71L12 3z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="section">
+            <h2 class="section-title courses_titles">Основа языка</h2>
+            <div class="lessons-container">
+                <!-- Существительные -->
+                <div class="lesson-block" data-lesson-id="1">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">&#9660;</span>
+                        <h2 class="lesson-title">Существительные</h2>
+                        <span class="lesson-index">1/3</span>
+                    </div>
+                    <div class="lesson-content">
+                        <p data-topic-id="1">Единственное и множественное число</p>
+                        <p data-topic-id="2">Категория определённости (-р)</p>
+                        <p data-topic-id="3">Падежная система</p>
+                        <p data-topic-id="4">Притяжательные формы</p>
+                        <p data-topic-id="5">Словообразование существительных</p>
+                    </div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <!-- Прилагательные -->
+                <div class="lesson-block" data-lesson-id="2">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">&#9660;</span>
+                        <h2 class="lesson-title">Прилагательные</h2>
+                        <span class="lesson-index">2/3</span>
+                    </div>
+                    <div class="lesson-content">
+                        <p data-topic-id="6">Качественные прилагательные</p>
+                        <p data-topic-id="7">Относительные прилагательные</p>
+                        <p data-topic-id="8">Степени сравнения</p>
+                        <p data-topic-id="9">Особые формы прилагательных</p>
+                        <p data-topic-id="10">Словообразование прилагательных</p>
+                    </div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <!-- Местоимения -->
+                <div class="lesson-block" data-lesson-id="3">
+                    <div class="lesson-header" onclick="toggleContent(this)">
+                        <span class="lesson-toggle-icon">&#9660;</span>
+                        <h2 class="lesson-title">Местоимения</h2>
+                        <span class="lesson-index">3/3</span>
+                    </div>
+                    <div class="lesson-content">
+                        <p data-topic-id="11">Личные местоимения</p>
+                        <p data-topic-id="12">Указательные местоимения</p>
+                        <p data-topic-id="13">Вопросительные местоимения</p>
+                        <p data-topic-id="14">Притяжательные местоимения</p>
+                        <p data-topic-id="15">Относительные местоимения</p>
+                    </div>
+                    <div class="lesson-progress">
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+                <h2 class="section-title courses_titles">Базовая грамматика</h2>
+                <div class="lessons-container">
+                    <!-- Структура глагола -->
+                    <div class="lesson-block" data-lesson-id="4">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Структура глагола</h2>
+                            <span class="lesson-index">1/3</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="16">Личные префиксы</p>
+                            <p data-topic-id="17">Направительные префиксы</p>
+                            <p data-topic-id="18">Временные показатели</p>
+                            <p data-topic-id="19">Каузативные формы</p>
+                            <p data-topic-id="20">Отрицательные формы</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Времена глагола -->
+                    <div class="lesson-block" data-lesson-id="5">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Времена глагола</h2>
+                            <span class="lesson-index">2/3</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="21">Настоящее время</p>
+                            <p data-topic-id="22">Прошедшее время</p>
+                            <p data-topic-id="23">Будущее время</p>
+                            <p data-topic-id="24">Перфект</p>
+                            <p data-topic-id="25">Плюсквамперфект</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Наклонения -->
+                    <div class="lesson-block" data-lesson-id="6">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Наклонения</h2>
+                            <span class="lesson-index">3/3</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="26">Изъявительное наклонение</p>
+                            <p data-topic-id="27">Условное наклонение</p>
+                            <p data-topic-id="28">Повелительное наклонение</p>
+                            <p data-topic-id="29">Желательное наклонение</p>
+                            <p data-topic-id="30">Возможностное наклонение</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+
+                    <div class="lesson-block" data-lesson-id="7">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Структура глагола</h2>
+                            <span class="lesson-index">1/3</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="16">Личные префиксы</p>
+                            <p data-topic-id="17">Направительные префиксы</p>
+                            <p data-topic-id="18">Временные показатели</p>
+                            <p data-topic-id="19">Каузативные формы</p>
+                            <p data-topic-id="20">Отрицательные формы</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+
+                    <div class="lesson-block" data-lesson-id="8">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Структура глагола</h2>
+                            <span class="lesson-index">1/3</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="16">Личные префиксы</p>
+                            <p data-topic-id="17">Направительные префиксы</p>
+                            <p data-topic-id="18">Временные показатели</p>
+                            <p data-topic-id="19">Каузативные формы</p>
+                            <p data-topic-id="20">Отрицательные формы</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>                                        
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title courses_titles">Синтаксис</h2>
+                <div class="lessons-container">
+                    <!-- Простое предложение -->
+                    <div class="lesson-block" data-lesson-id="9">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Простое предложение</h2>
+                            <span class="lesson-index">1/2</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="31">Порядок слов</p>
+                            <p data-topic-id="32">Согласование</p>
+                            <p data-topic-id="33">Типы простых предложений</p>
+                            <p data-topic-id="34">Члены предложения</p>
+                            <p data-topic-id="35">Эргативная конструкция</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Сложное предложение -->
+                    <div class="lesson-block" data-lesson-id="10">
+                        <div class="lesson-header" onclick="toggleContent(this)">
+                            <span class="lesson-toggle-icon">&#9660;</span>
+                            <h2 class="lesson-title">Сложное предложение</h2>
+                            <span class="lesson-index">2/2</span>
+                        </div>
+                        <div class="lesson-content">
+                            <p data-topic-id="36">Сложносочинённые предложения</p>
+                            <p data-topic-id="37">Сложноподчинённые предложения</p>
+                            <p data-topic-id="38">Причастные обороты</p>
+                            <p data-topic-id="39">Деепричастные обороты</p>
+                            <p data-topic-id="40">Масдарные конструкции</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <span>0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+
 
     <!--БОЛЬШОЙ ЭКРАН ТАТАРСКИЙ ЯЗЫК-->
     <!--БОЛЬШОЙ ЭКРАН ТАТАРСКИЙ ЯЗЫК-->
@@ -3493,7 +3732,7 @@
     <!--МАЛЕНЬКИЙ ЭКРАН ЧУВАШСКИЙ ЯЗЫК-->
     <!--МАЛЕНЬКИЙ ЭКРАН ЧУВАШСКИЙ ЯЗЫК-->   
     <div id="smallScreenLessonsPagechuvash" class="page hidden lessonsPage small-screen-container">
-        <!--<img src="courses_flags/chuvash.png" alt="Флаг Чувашии">
+        <img src="courses_flags/chuvash.png" alt="Флаг Чувашии">
         <div class="container">
              Полезная информация 
             <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()">
@@ -3524,7 +3763,7 @@
                     </div>
                 </div>
             </div>
-        </div>-->
+        </div>
 
         <!-- Секция: Алфавит -->
         <div class="section">
@@ -3623,7 +3862,7 @@
     <!--БОЛЬШОЙ ЭКРАН ЧУВАШСКИЙ ЯЗЫК-->
     <!--БОЛЬШОЙ ЭКРАН ЧУВАШСКИЙ ЯЗЫК-->   
     <div id="lessonsPagechuvash" class="page hidden lessonsPage">
-        <!--<img src="courses_flags/chuvash.png" alt="">
+        <<img src="courses_flags/chuvash.png" alt="">
         <div class="container">
             <div class="main-block LanguageInformation" onclick="toggleHiddenBlock()">
                 Полезная информация
@@ -3654,7 +3893,7 @@
                 </div>
             </div>
         </div>
--->   
+  
         <div class="section">
             <h2 class="section-title courses_titles">Алфавит</h2>
             <div class="lesson-block" data-lesson-id="1">
@@ -3755,11 +3994,11 @@
                     <h3 id="courseChechenTranslation" class="courses_titles">Чеченский язык</h3>
                     <button class="add-language-button a" data-language="chechen">+</button>
                 </div>
-                <!--<div class="course">
-                    <img src="courses_flags/ingush.png" alt="Flag">
-                    <h3 id="courseIngushTranslation" class="courses_titles">Ингушский язык</h3>
-                    <button class="add-language-button a" data-language="ingush">+</button>
-                </div>-->
+                <div class="course">
+                    <img src="courses_flags/lezgin.png" alt="Flag">
+                    <h3 id="courseIngushTranslation" class="courses_titles">Лезгинский язык</h3>
+                    <button class="add-language-button a" data-language="lezgin">+</button>
+                </div>
                 <div class="course">
                     <img src="courses_flags/adyge.png" alt="Flag">
                     <h3 id="courseAdygeTranslation" class="courses_titles">Черкесский язык</h3>
@@ -3780,12 +4019,12 @@
                     <h3 id="courseMokshaTranslation" class="courses_titles">Мокшанский язык</h3>
                     <button class="add-language-button a" data-language="moksha">+</button>
                 </div>                
-                <!--<div class="course">
+                <div class="course">
                     <img src="courses_flags/chuvash.png" alt="Flag">
                     <h3 id="courseChuvashTranslation" class="courses_titles">Чувашский язык</h3>
                     <button class="add-language-button a" data-language="chuvash">+</button>
                 </div>
-                <div class="course">
+                <!--<div class="course">
                     <img src="courses_flags/bashkort.png" alt="Flag">
                     <h3 id="courseBashkortTranslation" class="courses_titles">Башкирский язык</h3>
                     <button class="add-language-button a" data-language="bashkort">+</button>
@@ -3801,7 +4040,7 @@
         <h2 id="settingsHeaderTextTranslation">Настройки</h2>
         <div>
             <h3 id="settingsLangSelectionTranslation">Выбор языка страницы:</h3>
-            <input type="radio" id="langRussianSettings" name="language" value="russian" onclick="changeLanguage('russian')">
+            <input type="radio" id="langRussianSettings" name="language" value="russian" onclick="changeLanguage('russian')"> 
             <label for="langRussianSettings"><span id="settingsLangRussianTranslation">Русский</span></label><br>
             <input type="radio" id="langEnglishSettings" name="language" value="english" onclick="changeLanguage('english')">
             <label for="langEnglishSettings"><span id="settingsLangEnglishTranslation">Английский</span></label><br>

@@ -10,8 +10,9 @@ $(document).ready(function () {
     let failedQuestions = new Set();
     let originalQuestionsOrder = [];
     window.courseData = {};
+    let currentUserId = null;
 
-    // Извлечение параметров из URL
+
     var urlParams = new URLSearchParams(window.location.search);
     var language = urlParams.get('language');
     var completedLessons = urlParams.get('completedLessons');
@@ -20,7 +21,7 @@ $(document).ready(function () {
     console.log('URL parameters:', { language, topicId, completedLessons });
 
 
-    // Проверяем, что language присутствует в URL
+    
     if (language) {
         console.log('Language from URL:', language);
     } else {
@@ -32,10 +33,10 @@ $(document).ready(function () {
         console.log('Topic ID from URL:', topicId);
     } else {
         console.error('No topicId found in URL.');
-        return;  // Прекращаем выполнение, если topicId отсутствует
+        return;  
     }
 
-    // Проверяем, что completedLessons присутствует в URL
+
     var lessonId;
     if (completedLessons) {
         lessonId = parseInt(completedLessons, 10);
@@ -44,7 +45,7 @@ $(document).ready(function () {
         console.error('No completedLessons found in URL.');
     }
 
-    // Отображаем данные на странице, если это необходимо
+
     if (lessonId) {
         $('#completedLessons').text(lessonId);
     }
@@ -77,6 +78,25 @@ $(document).ready(function () {
     $('#hintBlock').css('color', linkColor);
     $('.summaryBlock').css('background-color', bodyColor);
     $('#hintBlock').css('color', linkColor);
+
+    function getUserId(lessonId, language) {
+        $.ajax({
+            type: "POST",
+            url: "../getUserId.php",
+            data: {},
+            success: function (response) {
+                currentUserId = response.user_id;
+                console.log("User ID:", response.user_id);
+                // Используем topicId из URL параметров
+                const urlTopicId = urlParams.get('topicId');
+                updateTopicProgress(response.user_id, urlTopicId, score, language);
+            },
+            error: function (xhr, status, error) {
+                console.error("Ошибка при получении ID пользователя:", error);
+            }
+        });
+    }
+
 
     function loadLesson(language, lessonId, topicId) {
         // Показываем индикатор загрузки
@@ -221,7 +241,6 @@ $(document).ready(function () {
         return data !== null && Array.isArray(data.questions) && data.questions.length > 0;
     }
 
-
     // Обработчик multiple choice заданий
     function handleMultipleChoice(currentQuestion, windowContainer, answerOptionsContainer) {
         console.log('Displaying multiple choice question');
@@ -252,10 +271,8 @@ $(document).ready(function () {
 
             if (isCorrect) {
                 const wordRussian = currentQuestion.text; 
-                const wordChechen = correctAnswer; 
-                const userId = 1;
+                const wordForeign = correctAnswer; 
 
-                saveLearnedWord(userId, wordRussian, wordChechen);
                 $this.addClass('correct');
                 correctAnswersCount++;
                 correctAnswersTotal++;
@@ -462,12 +479,51 @@ $(document).ready(function () {
             });
     }
 
+    function saveLearnedWord(wordRussian, wordForeign, language) {
+        console.log('saveLearnedWord вызван с параметрами:', {
+            wordRussian,
+            wordForeign,
+            language,
+            currentUserId
+        });
+       $.ajax({
+           type: "POST",
+           url: "../learned_words/add_word.php",
+           data: {
+               user_id: currentUserId,
+               word_russian: wordRussian, 
+               word_foreign: wordForeign,
+               language: language,
+               date_learned: new Date().toISOString().split('T')[0],
+               repetition_count: 1,
+               progress: 0.2
+           },
+           success: function(response) {
+               console.log("Слово добавлено:", response);
+           },
+           error: function(xhr, status, error) {
+               console.error("Ошибка при добавлении слова:", error);
+               console.log("Сырой ответ сервера:", xhr.responseText);
+           }
+       });
+    }
+
     // Обработчик обычных заданий
     function handleDefaultQuestion(currentQuestion, currentAnswer, windowContainer) {
+        console.log('handleDefaultQuestion запущен:', {currentQuestion, currentAnswer});
         $('#textInput').show().val('');
         $('#nextBtn').show().text('Далее').off('click').on('click', function() {
-            const userAnswer = $('#textInput').val().trim();
-            if (checkAnswer(userAnswer, currentAnswer.answer)) {
+           const userAnswer = $('#textInput').val().trim();
+           if (checkAnswer(userAnswer, currentAnswer.answer)) {
+               const russianWord = currentQuestion.text;
+               const foreignWord = currentAnswer.answer;
+                console.log('Отправка слова в словарь:', {
+                    russianWord,
+                    foreignWord,
+                    language,
+                    currentUserId
+                });
+               saveLearnedWord(russianWord, foreignWord, language);
                 correctAnswersCount++;
                 correctAnswersTotal++;
                 score += parseInt(currentQuestion.price) || 0;
@@ -681,22 +737,6 @@ $(document).ready(function () {
     }
 
 
-    function getUserId(lessonId, language) {
-        $.ajax({
-            type: "POST",
-            url: "../getUserId.php",
-            data: {},
-            success: function (response) {
-                console.log("User ID:", response.user_id);
-                // Используем topicId из URL параметров
-                const urlTopicId = urlParams.get('topicId');
-                updateTopicProgress(response.user_id, urlTopicId, score, language);
-            },
-            error: function (xhr, status, error) {
-                console.error("Ошибка при получении ID пользователя:", error);
-            }
-        });
-    }
 
     function updateTopicProgress(userId, topicId, newScore, language) {
         console.log("Отправка данных в updateTopicProgress:", {
@@ -741,27 +781,7 @@ $(document).ready(function () {
 
     });
 
-function saveLearnedWord(userId, wordRussian, wordChechen) {
-    $.ajax({
-        type: "POST",
-        url: "../learned_words/add_word.php", // Серверный скрипт для добавления слова
-        data: {
-            user_id: userId,
-            word_russian: wordRussian,
-            word_chechen: wordChechen,
-            date_learned: new Date().toISOString().split('T')[0], // Текущая дата
-            repetition_count: 1, // Начальное количество повторений
-            last_reviewed: null,
-            progress: 1.0 // Начальный прогресс
-        },
-        success: function(response) {
-            console.log("Слово добавлено:", response);
-        },
-        error: function(xhr, status, error) {
-            console.error("Ошибка при добавлении слова:", error);
-        }
-    });
-}
+
 
 
 

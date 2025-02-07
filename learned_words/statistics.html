@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика изучения слов</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+       .container {
+           max-width: 1200px;
+           margin: 0 auto;
+           padding: 20px;
+       }
+       .chart-container {
+           width: 100%;
+           height: 400px;
+           margin-bottom: 30px;
+       }
+   </style>
+</head>
+<body>
+   <div class="container">
+       <div class="chart-container">
+           <canvas id="progressChart"></canvas>
+       </div>
+       <div class="chart-container">
+           <canvas id="wordsDistribution"></canvas>
+       </div>
+       <div class="chart-container">
+           <canvas id="repetitionsChart"></canvas>
+       </div>
+   </div>
+
+    <script>
+    function loadStats() {
+        fetch('get_statistics.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: 1 })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.error) {
+                throw new Error(data.error);
+            }
+            if(!data.progress || !data.distribution || !data.repetitions) {
+                throw new Error('Invalid data structure');
+            }
+            createProgressChart(data.progress);
+            createDistributionChart(data.distribution);
+            createRepetitionsChart(data.repetitions);
+        })
+        .catch(error => console.error('Ошибка:', error));
+    }
+
+    function createProgressChart(data) {
+        new Chart('progressChart', {
+            type: 'line',
+            data: {
+                labels: data.dates,
+                datasets: [{
+                    label: 'Средний прогресс',
+                    data: data.values
+                }]
+            },
+            options: {
+                maintainAspectRatio: false
+            }            
+        });
+    }
+
+    function createDistributionChart(data) {
+        new Chart('wordsDistribution', {
+            type: 'pie',
+            data: {
+                labels: Object.keys(data),
+                datasets: [{
+                    data: Object.values(data)
+                }]
+            },
+            options: {
+                maintainAspectRatio: false
+            }            
+        });
+    }
+
+    function createRepetitionsChart(data) {
+        new Chart('repetitionsChart', {
+            type: 'bar',
+            data: {
+                labels: data.words,
+                datasets: [{
+                    label: 'Количество повторений',
+                    data: data.counts
+                }]
+            },
+            options: {
+                maintainAspectRatio: false
+            }            
+        });
+    }    
+
+    loadStats();
+    </script>
+</body>
+</html>
