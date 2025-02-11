@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - Пакетная загрузка уроков</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h1 class="text-2xl font-bold mb-6 text-gray-800">Пакетная загрузка уроков</h1>
+            
+            <form id="uploadForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Выберите язык
+                        </label>
+                        <select 
+                            name="language" 
+                            required 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Выберите язык...</option>
+                            <option value="lezgin">Лезгинский</option>
+                            <option value="bashkort">Башкирский</option>
+                            <option value="chechen">Чеченский</option>
+                            <option value="ingush">Ингушский</option>
+                            <option value="adyge">Адыгейский</option>
+                            <option value="udmurt">Удмуртский</option>
+                            <option value="tatar">Татарский</option>
+                            <option value="chuvash">Чувашский</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            ID темы
+                        </label>
+                        <input 
+                            type="number"
+                            name="topic_id"
+                            required
+                            min="1"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                    </div>
+                </div>
+
+                <div id="jsonInputs" class="space-y-4">
+                    <!-- JSON инпуты будут добавлены через JavaScript -->
+                </div>
+
+                <div class="flex gap-4">
+                    <button
+                        type="button"
+                        onclick="addJsonInput()"
+                        class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                    >
+                        Добавить JSON
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                        Загрузить уроки
+                    </button>
+                </div>
+
+                <div id="errorMessage" class="hidden rounded-md bg-red-50 p-4 text-red-700"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        const jsonInputs = document.getElementById('jsonInputs');
+        const errorMessage = document.getElementById('errorMessage');
+        let inputCount = 0;
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.remove('hidden');
+        }
+
+        function hideError() {
+            errorMessage.classList.add('hidden');
+            errorMessage.textContent = '';
+        }
+
+        function validateJson(json) {
+            try {
+                JSON.parse(json);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        function addJsonInput() {
+            if (inputCount >= 5) {
+                showError('Максимальное количество JSON - 5');
+                return;
+            }
+
+            inputCount++;
+            const inputWrapper = document.createElement('div');
+            inputWrapper.className = 'relative';
+            
+            inputWrapper.innerHTML = `
+                <div class="flex items-start gap-4">
+                    <div class="flex-grow">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            JSON для урока ${inputCount}
+                        </label>
+                        <textarea
+                            name="json_${inputCount}"
+                            rows="4"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
+                            placeholder='Вставьте JSON данные'
+                        ></textarea>
+                    </div>
+                    <button 
+                        type="button"
+                        onclick="removeJsonInput(this)"
+                        class="mt-8 text-red-500 hover:text-red-700"
+                    >
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            `;
+
+            jsonInputs.appendChild(inputWrapper);
+        }
+
+        function removeJsonInput(button) {
+            const wrapper = button.closest('.relative');
+            wrapper.remove();
+            inputCount--;
+            
+            // Перенумеруем оставшиеся инпуты
+            const labels = jsonInputs.querySelectorAll('label');
+            labels.forEach((label, index) => {
+                label.textContent = `JSON для урока ${index + 1}`;
+            });
+
+            hideError();
+        }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
+
+        const jsons = Array.from(form.querySelectorAll('textarea'))
+            .map(textarea => textarea.value.trim())
+            .filter(value => value !== '');
+
+        if (jsons.length === 0) {
+            showError('Добавьте хотя бы один JSON');
+            return;
+        }
+
+        // Проверяем валидность каждого JSON
+        for (let i = 0; i < jsons.length; i++) {
+            if (!validateJson(jsons[i])) {
+                showError(`Некорректный JSON в уроке ${i + 1}`);
+                return;
+            }
+        }
+
+        const formData = new FormData();
+        formData.append('language', form.language.value);
+        formData.append('topic_id', form.topic_id.value); // Используем текущее значение topic_id
+
+        const lessonsData = [];
+        jsons.forEach((json, index) => {
+            lessonsData.push({
+                lesson_level: index + 1,
+                content: JSON.parse(json)
+            });
+        });
+
+        try {
+            // Выводим данные в консоль для проверки
+            console.log('Отправляемые данные:', {
+                language: form.language.value,
+                topic_id: form.topic_id.value,
+                lessons: lessonsData
+            });
+
+            // Отправляем данные
+            formData.append('lessons', JSON.stringify(lessonsData));
+
+            // Делаем запрос к серверу
+            const response = await fetch('insert_json.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert('Уроки успешно загружены!');
+                
+                // Сохраняем язык и topic_id
+                const languageValue = form.language.value;
+                const topicIdValue = form.topic_id.value;
+
+                // Очищаем только JSON поля
+                jsonInputs.innerHTML = '';
+                inputCount = 0;
+                for (let i = 0; i < 5; i++) {
+                    addJsonInput(); // Добавляем 5 полей JSON
+                }
+
+                // Восстанавливаем язык и topic_id
+                form.language.value = languageValue;
+                form.topic_id.value = parseInt(topicIdValue) + 1; // Увеличиваем topic_id
+
+            } else {
+                showError(result.error || 'Произошла ошибка при загрузке');
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
+            showError('Ошибка при отправке данных');
+        }
+    });
+
+        // Добавляем 5 JSON инпутов при загрузке страницы
+        for (let i = 0; i < 5; i++) {
+            addJsonInput();
+        }
+    </script>
+</body>
+</html>

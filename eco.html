@@ -1,0 +1,222 @@
+import React, { useState, useRef } from 'react';
+import { Leaf, Truck, ShoppingBasket, Mail, Phone, User } from 'lucide-react';
+
+const FarmLanding = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  });
+  const [errors, setErrors] = useState({});
+  const formRef = useRef(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = {};
+    
+    // Валидация
+    if (!formData.name.trim()) {
+      newErrors.name = 'Введите имя';
+    }
+    
+    if (!formData.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+      newErrors.email = 'Введите корректный email';
+    }
+    
+    if (!formData.phone.match(/^\+?[0-9]{10,12}$/)) {
+      newErrors.phone = 'Введите корректный номер телефона';
+    }
+
+    setErrors(newErrors);
+    
+    if (Object.keys(newErrors).length === 0) {
+      // Здесь будет отправка формы
+      console.log('Form submitted:', formData);
+      alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
+      setFormData({ name: '', email: '', phone: '' });
+    }
+  };
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <header className="bg-gradient-to-b from-green-50 to-white">
+        <nav className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Leaf className="h-8 w-8 text-green-600" />
+              <span className="text-xl font-bold text-gray-800">ЭкоФерма</span>
+            </div>
+          </div>
+        </nav>
+        
+        <div className="container mx-auto px-6 py-24 text-center">
+          <h1 className="mb-6 text-4xl font-bold text-gray-900 md:text-6xl">
+            Натуральные продукты<br />с доставкой на дом
+          </h1>
+          <p className="mb-8 text-xl text-gray-600">
+            Свежие овощи, фрукты и молочные продукты от местных фермеров
+          </p>
+          <button
+            onClick={scrollToForm}
+            className="rounded-full bg-green-600 px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-green-700"
+          >
+            Заказать
+          </button>
+        </div>
+      </header>
+
+      {/* Преимущества */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-6">
+          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">
+            Наши преимущества
+          </h2>
+          <div className="grid gap-8 md:grid-cols-3">
+            <div className="text-center">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                <Truck className="h-8 w-8 text-green-600" />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold">Быстрая доставка</h3>
+              <p className="text-gray-600">Доставляем в день заказа или на следующий день</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                <Leaf className="h-8 w-8 text-green-600" />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold">Экологичность</h3>
+              <p className="text-gray-600">Продукты выращены без пестицидов и химикатов</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                <ShoppingBasket className="h-8 w-8 text-green-600" />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold">Свежесть</h3>
+              <p className="text-gray-600">От фермера к вашему столу за 24 часа</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* О нас */}
+      <section className="bg-green-50 py-16">
+        <div className="container mx-auto px-6">
+          <div className="grid items-center gap-8 md:grid-cols-2">
+            <div>
+              <h2 className="mb-4 text-3xl font-bold text-gray-900">О нас</h2>
+              <p className="mb-4 text-gray-600">
+                Мы - семья фермеров в третьем поколении. Наша миссия - обеспечить
+                городских жителей свежими, экологически чистыми продуктами прямо с
+                фермы.
+              </p>
+              <p className="text-gray-600">
+                Мы выращиваем овощи и фрукты, производим молочные продукты
+                и заботимся о качестве на каждом этапе производства.
+              </p>
+            </div>
+            <div className="rounded-lg bg-white p-2 shadow-lg">
+              <img
+                src="/api/placeholder/600/400"
+                alt="Наша ферма"
+                className="rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Форма */}
+      <section ref={formRef} className="bg-white py-16">
+        <div className="container mx-auto max-w-md px-6">
+          <h2 className="mb-8 text-center text-3xl font-bold text-gray-900">
+            Оставить заявку
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="mb-2 block text-sm font-medium text-gray-700">
+                Ваше имя
+              </label>
+              <div className="relative">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <User className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  className="block w-full rounded-md border border-gray-300 py-2 pl-10 pr-3 focus:border-green-500 focus:outline-none focus:ring-green-500"
+                  placeholder="Иван Иванов"
+                />
+              </div>
+              {errors.name && (
+                <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <div className="relative">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <Mail className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  className="block w-full rounded-md border border-gray-300 py-2 pl-10 pr-3 focus:border-green-500 focus:outline-none focus:ring-green-500"
+                  placeholder="example@mail.com"
+                />
+              </div>
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-medium text-gray-700">
+                Телефон
+              </label>
+              <div className="relative">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <Phone className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  className="block w-full rounded-md border border-gray-300 py-2 pl-10 pr-3 focus:border-green-500 focus:outline-none focus:ring-green-500"
+                  placeholder="+7 (999) 999-99-99"
+                />
+              </div>
+              {errors.phone && (
+                <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full rounded-md bg-green-600 py-3 text-white transition-colors hover:bg-green-700"
+            >
+              Отправить
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-50 py-8">
+        <div className="container mx-auto px-6 text-center text-gray-600">
+          <p>© 2024 ЭкоФерма. Все права защищены.</p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default FarmLanding;

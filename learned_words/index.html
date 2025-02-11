@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Словарь</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Ваш словарь</h1>
+
+        <div class="language-selector">
+            <select id="dictionaryLanguage" onchange="changeLanguage(this.value)">
+                <!-- Опции будут добавлены динамически -->
+            </select>
+        </div>        
+        
+        <div class="stats-container">
+            <div class="stat-box">
+                <h3>Всего слов</h3>
+                <p id="total-words">0</p>
+            </div>
+            <div class="stat-box">
+                <h3>Средний прогресс</h3>
+                <p id="avg-progress">0%</p>
+            </div>
+            <div class="stat-box">
+                <h3>Изучено за неделю</h3>
+                <p id="weekly-learned">0</p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="sortable" data-sort="word_russian">Word (Russian) ↕</th>
+                    <th class="sortable" data-sort="word_chechen">Word (Chechen) ↕</th>
+                    <th class="sortable" data-sort="date_learned">Date Learned ↕</th>
+                    <th class="sortable" data-sort="repetition_count">Repetition Count ↕</th>
+                    <th class="sortable" data-sort="progress">Progress ↕</th>
+                </tr>
+            </thead>
+            <tbody id="word-table">
+            </tbody>
+        </table>
+    </div>
+
+<div class="charts-block">
+    <h2>Статистика изучения</h2>
+    <div class="charts-section">
+        <div class="chart-container">
+            <canvas id="progressChart"></canvas>
+        </div>
+        <div class="charts-row">
+            <div class="chart-container">
+                <canvas id="wordsDistribution"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="repetitionsChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <script src="fetch_words.js"></script>
+
+
+</body>
+</html>

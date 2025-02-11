@@ -1,0 +1,291 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease;
+    margin: 0;
+    padding: 0;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    padding: 10px 0; 
+    text-align: center; 
+    position: relative; 
+    z-index: 1; 
+    margin-right: 260px; 
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-item {
+    margin: 0 10px;
+    padding: 5px 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.center-block {
+    width: calc(75% - 20px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.aside {
+    position: fixed;
+    top: 0;
+    left: 30px;
+    height: 100vh;
+    width: 300px; 
+    padding: 20px;
+    z-index: 2; 
+    border-right: 0.1px solid #D3D3D3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+
+.aside .aside-item {
+    margin-bottom: 15px; 
+    padding: 15px; 
+    border-radius: 5px; 
+    transition: all 0.3s ease; 
+    width: 260px;
+}
+
+
+.aside .aside-item:hover {
+    transform: translateY(-3px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+
+.menu-button,
+.profile-icon {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #007bff; 
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+
+.menu-button:hover,
+.profile-icon:hover {
+    background-color: #0056b3; 
+}
+
+
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.aside-item a{
+    display: flex;
+    font-size: 24px;
+}
+
+.hidden {
+   display: none;
+}
+
+.page2{
+    width: 80%;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.settingsPage h3{
+    font-size: 20px;
+}
+
+.lessonsPage{
+    margin-left: 300px;
+}
+.lessonsPage img{
+    width: 200px;
+    height: auto;
+    margin-left: 500px;
+}
+#languageSelect, #languageSelect option{
+    font-size: 24px;
+    border: none;
+}
+.custom-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+label {
+    font-size: 20px;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+
+
+.settingsPage h3,.settingsPage h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+
+@media screen and (max-width: 1750px) {
+    #languageSelect {
+        width: 40px; 
+    }
+}
+
+@media screen and (max-width: 1750px) {
+    #languageSelect {
+        width: 40px; 
+        display: none;
+    }
+}
+
+.gift-item {
+    position: relative;
+    transition: opacity 0.5s ease;
+}
+
+.reward-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Скрыто по умолчанию */
+    z-index: 2;
+}
+
+.gift-item.collected {
+    opacity: 0.5; /* Затемнение блока */
+}
+
+.gift-item.collected .reward-animation {
+    display: none; /* Скрываем анимацию, когда подарок получен */
+}
+
+.gift-item.collected::after {
+    content: '✔';
+    color: green;
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+}
+
+
+#center-animation {
+    display: none; /* По умолчанию скрыт */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border: 5px solid #15E670; /* Можно заменить на цвет в зависимости от темы */
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+}
+
+
+#center-animation img {
+    width: 100px;
+    height: 100px;
+}
+
+#center-animation p {
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.flex {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.gift-item.blocked {
+    opacity: 0.5; /* Пониженная прозрачность для заблокированного подарка */
+    pointer-events: none; /* Отключаем возможность взаимодействия */
+}
+
+.small-screen-gift-item.blocked {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 1775px) {
+    .large-screen {
+        display: none !important;
+    }
+    .small-screen {
+        display: flex !important;
+    }
+}
+
+.language-option {
+    color: inherit; /* Наследует цвет текста от родителя */
+}
+
+.language-option:hover {
+    background-color: rgba(21, 230, 112, 0.1);
+}
+
+#mobileLanguageDropdown {
+    background-color: inherit; /* Наследует цвет фона от body */
+}

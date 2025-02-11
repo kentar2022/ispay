@@ -1,0 +1,241 @@
+/* По умолчанию блоки для маленьких экранов скрыты */
+.small-screen-container {
+    display: none;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* По умолчанию блоки для больших экранов показываются */
+.large-screen-block, .large-screen-stats {
+    display: block;
+}
+
+/* Для экранов меньше 1350px скрываем большие блоки и показываем маленькие */
+@media (max-width: 1775px) {
+    .large-screen-block, .large-screen-stats {
+        display: none; /* Скрываем блоки для больших экранов */
+    }
+
+    .small-screen-container {
+        display: block; /* Показываем блоки для маленьких экранов */
+        width: 100%; /* Блоки занимают всю ширину */
+        padding: 0; /* Убираем лишние отступы по бокам */
+    }
+}
+
+/* Специфические стили для маленьких экранов (ширина экрана до 768px) */
+@media (max-width: 1775px) {
+    /* Главные блоки с границами */
+    .small-screen-profile-info,
+    .small-screen-courses,
+    .small-screen-stats-container,
+    .small-screen-gifts {
+        padding: 25px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 25px;
+        width: 100%; /* Блоки занимают всю ширину экрана */
+        box-sizing: border-box; /* Учитываем padding в ширине блока */
+        max-width: auto;
+    }
+
+    /* Картинка профиля для маленьких экранов */
+    .small-screen-profile-info img {
+        width: 150px; /* Увеличиваем размер картинки */
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 25px;
+    }
+
+    /* Ограничение размера изображений: фиксированные размеры для курсов и подарков */
+    .small-screen-courses .small-screen-course-item img,
+    .small-screen-gift-item img {
+        max-width: 80px; /* Увеличиваем размер изображений */
+        max-height: 80px;
+        width: auto;
+        height: auto;
+        margin-right: 25px;
+    }
+
+    /* Центрирование и отступы для заголовков и текста */
+    .small-screen-user-info h2 {
+        font-size: 2.5rem; /* Значительно увеличиваем заголовки */
+        margin-bottom: 20px;
+    }
+
+    .small-screen-user-info p {
+        font-size: 2.5rem; /* Увеличиваем размер текста */
+        margin-bottom: 18px;
+    }
+
+    /* Кнопки */
+    .small-screen-btn {
+        width: 100%;
+        font-size: 2rem; /* Увеличиваем размер кнопок */
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    /* Курсы для маленького экрана */
+    .small-screen-courses .small-screen-course-item {
+        display: flex;
+        align-items: center;
+        padding: 25px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        width: 100%; /* Блоки курсов занимают всю ширину */
+    }
+
+    .small-screen-courses .small-screen-course-item h6 {
+        font-size: 2.5rem; /* Значительно увеличиваем размер шрифта */
+    }
+
+    /* Статистика для маленьких экранов */
+    .small-screen-stats-container .stat-item-mobile {
+        font-size: 2.5rem; /* Значительно увеличиваем размер текста в статистике */
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Подарки на маленьком экране */
+    .small-screen-gift-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .small-screen-gift-item p {
+        font-size: 2.5rem; /* Значительно увеличиваем размер шрифта в подарках */
+        margin: 0;
+    }
+
+    .stat-item-mobile span{
+        display: inline-block;
+        padding: 30px;
+        border-radius: 4px;
+        border: 1px solid ;
+    }
+    .small-screen-stats-container div{
+        display: flex;
+        padding: 20px;
+        justify-content: space-around;
+    }
+}
+
+@media (max-width: 768px) {
+    .stat-item-mobile span{
+        padding: 15px;
+    }
+}
+
+@media (max-width: 425px) {
+    .aside .aside-item svg{
+        width: 30px !important;
+    }
+}
+
+@media (max-width: 500px) {
+    .small-screen-stats-container div{
+        flex-direction: column;
+    }
+        
+    h2, p, h6 {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media screen and (max-width: 1775px) {
+    .aside {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 60px; 
+        width: 100%; 
+        padding: 10px;
+        border-top: 0.1px solid #D3D3D3;
+        border-right: none;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .aside .aside-item {
+        margin-bottom: 0;
+        padding: 0;
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    
+    .aside .aside-item span {
+        display: none;
+    }
+
+    .pickLanguage{
+        display: none;
+    }
+
+    .aside .aside-item svg {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+
+.small-screen-container {
+    height: auto;
+    min-height: auto;
+    overflow-y: visible;
+    padding-bottom: 80px; /* Добавляем отступ снизу для нижней панели навигации */
+}
+
+@media screen and (max-width: 600px) {
+    #languageSelect {
+        width: 40px; 
+    }
+}
+
+@media screen and (max-width: 40px) {
+    .aside .aside-item svg{
+        width: 30px;
+        height: 30px;
+    }
+        #languageSelect {
+        width: 20px; 
+    }
+}
+
+@media screen and (max-width: 1775px) {
+    .profilePage{
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .profilePage .container{
+        margin: 0px;
+        max-width: 1720px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    #languageSelect {
+        width: 20px;
+    }
+}
+
+@media (max-width: 620px) {
+    .small-screen-user-info h2 {
+        display: none;
+    }
+}
+
+@media (max-width: 345px) {
+    .small-screen-user-info p {
+        font-size: 1.3rem !important;
+        margin-bottom: 18px;
+    }
+}

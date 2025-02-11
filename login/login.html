@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background-color, #fff);
+            padding: 40px 0;
+            position: absolute; /* Добавляем это */
+            width: 100%; /* И это */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .line {
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%);
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+
+
+        .card {
+            background: var(--card-background, #fff);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            width: 100%;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text-color, #000);
+        }
+
+        .mb-3 {
+            margin-bottom: 20px;
+        }
+
+        .mb-3 input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        .mb-3 input:focus {
+            outline: none;
+            border-color: #6366F1;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #6366F1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-bottom: 25px;
+        }
+
+        button:hover {
+            background: #4F46E5;
+        }
+
+        .register-link a,
+        .autorisation-link a {
+            color: #6366F1;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+            }
+
+            .card-title {
+                font-size: 20px;
+            }
+
+            .mb-3 input {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            button {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+        .register-link,
+        .autorisation-link {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        /* Медиа-запросы */
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            .container {
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .card {
+                padding: 15px;
+            }
+            
+            .mb-3 {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Для очень маленьких экранов */
+        @media (max-width: 280px) {
+            .container {
+                padding: 5px;
+            }
+
+            .card {
+                padding: 10px;
+            }
+        }
+
+        /* Для больших экранов */
+        @media (min-width: 1200px) {
+            .container {
+                /*max-width: 450px;*/
+            }
+        }        
+
+        @media (min-width: 768px) {
+            .container {
+                /*max-width: 400px;*/
+            }
+            
+            .card {
+                padding: 30px;
+            }
+        } 
+
+        @media (min-width: 768px) {
+            .container {
+                /*max-width: 500px;*/
+                width: 70%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .card {
+                padding: 20px;
+            }
+            
+            .card-title {
+                font-size: 24px;
+            }
+            
+            .form-label,
+            .mb-3 input,
+            button,
+            .register-link,
+            .autorisation-link {
+                font-size: 16px;
+            }
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 id="loginTitleTranslation" class="card-title">Войти</h5>
+                
+                <form id="loginForm" method="post" action="login/login_handler.php">
+                    <div class="mb-3">
+                        <label class="form-label" id="emailLabelTranslation">Логин</label>
+                        <input type="text" class="form-control" name="username" id="username" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label" id="passwordLabelTranslation">Пароль</label>
+                        <input type="password" class="form-control" name="password" id="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary" id="submitBtnTranslation">Войти</button>
+                </form>
+                
+                <div class="register-link">
+                    <a href="registration.html" id="registerLinkTranslation">Зарегистрироваться</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+// Функция для применения стилей в соответствии с текущей темой
+function applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor, lineColor) {
+    document.body.style.backgroundColor = bodyColor;
+    document.querySelector('.card').style.backgroundColor = cardColor;
+    document.querySelector('.card').style.borderColor = borderColor;
+    document.querySelector('.btn-primary').style.backgroundColor = buttonColor;
+
+
+    // Применяем цвет текста к заголовкам и меткам форм
+    var textElements = document.querySelectorAll('.card-title, .form-label');
+    textElements.forEach(function(element) {
+        element.style.color = textColor;
+    });
+
+    // Сохраняем выбранные цвета в локальном хранилище
+    localStorage.setItem('bodyColor', bodyColor);
+    localStorage.setItem('cardColor', cardColor);
+    localStorage.setItem('textColor', textColor);
+    localStorage.setItem('borderColor', borderColor);
+    localStorage.setItem('buttonColor', buttonColor);
+    if (lineColor) localStorage.setItem('lineColor', lineColor);
+}
+
+// Функция для установки светлой темы
+function setThemeLight() {
+    var bodyColor = '#ffffff';
+    var cardColor = '#f9f9f9';
+    var textColor = '#000000';
+    var borderColor = '#f3166b';
+    var buttonColor = '#f3166b';
+    var lineColor = '#f3166b';
+
+    applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor, lineColor);
+    localStorage.setItem('currentTheme', 'light');
+}
+
+// Функция для установки темной темы
+function setThemeDark() {
+    var bodyColor = '#293133';
+    var cardColor = '#434B4D';
+    var textColor = '#ffffff';
+    var borderColor = '#15E670';
+    var buttonColor = '#15E670';
+    var lineColor = '#15E670';
+
+    applyStyles(bodyColor, cardColor, textColor, borderColor, buttonColor, lineColor);
+    localStorage.setItem('currentTheme', 'dark');
+}
+
+// Функция для загрузки сохраненной темы
+function loadTheme() {
+    var savedTheme = localStorage.getItem('currentTheme');
+
+    if (savedTheme) {
+        if (savedTheme === 'dark') {
+            setThemeDark();
+        } else {
+            setThemeLight();
+        }
+    } else {
+        setThemeLight(); // Тема по умолчанию
+    }
+}
+
+// Загружаем тему при загрузке страницы
+window.onload = function() {
+    loadTheme();
+};
+
+    var texts = {
+        russian: {
+            loginTitle: "Войти",
+            emailLabel: "Почта или Никнейм",
+            passwordLabel: "Пароль",
+            submitBtn: "Войти",
+            registerLink: "Зарегистрироваться"
+        },
+        english: {
+            loginTitle: "Login",
+            emailLabel: "Email or Username",
+            passwordLabel: "Password",
+            submitBtn: "Login",
+            registerLink: "Register"
+        },
+        french: {
+            loginTitle: "Entrer",
+            emailLabel: "E-mail ou Nom d'utilisateur",
+            passwordLabel: "Mot de passe",
+            submitBtn: "Entrer",
+            registerLink: "S'inscrire"
+        }
+    };
+
+    function changeLanguage(language) {
+        console.log('Changing language to:', language);
+        document.getElementById("loginTitleTranslation").innerText = texts[language].loginTitle;
+        document.getElementById("emailLabelTranslation").innerText = texts[language].emailLabel;
+        document.getElementById("passwordLabelTranslation").innerText = texts[language].passwordLabel;
+        document.getElementById("submitBtnTranslation").innerText = texts[language].submitBtn;
+        document.getElementById("registerLinkTranslation").innerText = texts[language].registerLink;
+        console.log('Language changed to:', language);
+        localStorage.setItem('currentLanguage', language);
+    }
+
+    function loadLanguage() {
+        var savedLanguage = localStorage.getItem('currentLanguage');
+        console.log('Saved language from localStorage:', savedLanguage);
+        if (savedLanguage) {
+            changeLanguage(savedLanguage);
+        }
+    }
+
+    window.onload = function() {
+        console.log('Page loaded');
+        loadLanguage();
+        loadTheme();
+    };
+
+
+    // Добавляем обработчик отправки формы
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const form = this;
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerText;
+    
+    // Добавляем loader к кнопке
+    submitButton.innerHTML = '<span class="loader" style="display: inline-block;"></span> Загрузка...';
+    submitButton.disabled = true;
+
+    const formData = new FormData(form);
+
+    // Добавляем таймаут к fetch
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000); // 10 секунд таймаут
+
+    fetch('login_handler.php', {
+        method: 'POST',
+        body: formData,
+        signal: controller.signal
+    })
+    .then(response => {
+        clearTimeout(timeout);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            return response.json();
+        } else {
+            console.log('Server response:', response);
+            return response.text().then(text => {
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    console.log('Server returned non-JSON response:', text);
+                    throw new Error('Server did not return JSON');
+                }
+            });
+        }
+    })
+    .then(data => {
+        if (data.success) {
+            window.location.href = '../index.html';
+        } else if (data.error) {
+            alert(data.error);
+        }
+    })
+    .catch(error => {
+        if (error.name === 'AbortError') {
+            alert('Превышено время ожидания ответа от сервера');
+        } else {
+            console.error('Error:', error);
+            alert('Произошла ошибка при входе. Проверьте консоль для деталей.');
+        }
+    })
+    .finally(() => {
+        submitButton.innerHTML = originalButtonText;
+        submitButton.disabled = false;
+    });
+});
+</script>
+</body>
+</html>

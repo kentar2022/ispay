@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Чеченский транслитератор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .direction-switch {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .direction-switch label {
+            margin-right: 15px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .arabic-text {
+            direction: rtl;
+            text-align: right;
+            font-family: "Amiri", "Traditional Arabic", serif;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .success-message {
+            color: #28a745;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Чеченский транслитератор</h1>
+        
+        <div class="direction-switch">
+            <label>
+                <input type="radio" name="direction" value="toLatn" checked> 
+                Кириллица → Латиница
+            </label>
+            <label>
+                <input type="radio" name="direction" value="toCyr"> 
+                Латиница → Кириллица
+            </label>
+            <label>
+                <input type="radio" name="direction" value="toArab"> 
+                Кириллица → Арабица
+            </label>
+            <label>
+                <input type="radio" name="direction" value="cyrlFromArab"> 
+                Арабица → Кириллица
+            </label>
+        </div>
+
+        <p id="inputLabel">Введите текст:</p>
+        <textarea id="inputText" placeholder="Введите текст здесь..."></textarea>
+        
+        <div class="button-group">
+            <button onclick="transliterate()">Транслитерировать</button>
+            <button onclick="copyToClipboard()">Копировать результат</button>
+        </div>
+        
+        <p id="outputLabel">Результат:</p>
+        <textarea id="outputText" class="output-text" readonly></textarea>
+        <div id="copySuccess" class="success-message">Текст скопирован!</div>
+    </div>
+
+    <script>
+        const cyrToLatn = {
+            'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'е',
+            'ё': 'yo', 'ж': 'ž', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k',
+            'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r',
+            'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'x', 'ц': 'c',
+            'ч': 'ç', 'ш': 'ş', 'щ': 'şç', 'ъ': '', 'ы': 'y', 'ь': '',
+            'э': 'е', 'ю': 'yu', 'я': 'ya', 
+            'хь': 'ẋ', 'гӏ': 'ġ', 'къ': 'q̇', 'кх': 'q',
+            'цӏ': 'c', 'чӏ': 'ç', 'хӏ': 'h', 'ӏ': '',
+            'аь': 'ä', 'уь': 'ü', 'оь': 'ö'
+        };
+
+        const cyrToArab = {
+            'а': 'ا', 'б': 'ب', 'в': 'ڤ', 'г': 'گ', 'д': 'د',
+            'е': 'ه', 'ё': 'يو', 'ж': 'ج', 'з': 'ز', 'и': 'ى',
+            'й': 'ی', 'к': 'ک', 'л': 'ل', 'м': 'م', 'н': 'ن',
+            'о': 'او', 'п': 'ف', 'р': 'ر', 'с': 'س', 'т': 'ت',
+            'у': 'ۇ', 'ф': 'ف', 'х': 'خ', 'ц': 'ݗ', 'ч': 'چ',
+            'ш': 'ش', 'щ': 'شچ', 'ъ': 'ع', 'ы': 'ى', 'ь': '',
+            'э': 'ه', 'ю': 'يۇ', 'я': 'يا',
+            'хь': 'ح', 'гӏ': 'غ', 'къ': 'ق', 'кх': 'ڗ',
+            'цӏ': 'ط', 'чӏ': 'ࢰ', 'хӏ': 'ﻫ', 'ӏ': 'ع',
+            'аь': 'اى', 'уь': 'ۇ', 'оь': 'او̃'
+        };
+
+        // Создаем обратные карты
+        const latnToCyr = {};
+        for (let [cyr, latn] of Object.entries(cyrToLatn)) {
+            if (latn) {
+                latnToCyr[latn.toLowerCase()] = cyr.toLowerCase();
+            }
+        }
+
+        const arabToCyr = {};
+        for (let [cyr, arab] of Object.entries(cyrToArab)) {
+            if (arab) {
+                arabToCyr[arab] = cyr;
+            }
+        }
+
+        function updateTextDirection() {
+            const direction = document.querySelector('input[name="direction"]:checked').value;
+            const outputText = document.getElementById('outputText');
+            if (direction === 'toArab') {
+                outputText.classList.add('arabic-text');
+            } else {
+                outputText.classList.remove('arabic-text');
+            }
+        }
+
+        document.querySelectorAll('input[name="direction"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                updateLabels();
+                updateTextDirection();
+            });
+        });
+
+        function updateLabels() {
+            const direction = document.querySelector('input[name="direction"]:checked').value;
+            const inputLabel = document.getElementById('inputLabel');
+            const outputLabel = document.getElementById('outputLabel');
+            
+            switch(direction) {
+                case 'toLatn':
+                    inputLabel.textContent = 'Введите текст на кириллице:';
+                    outputLabel.textContent = 'Результат (латиница):';
+                    break;
+                case 'toCyr':
+                    inputLabel.textContent = 'Введите текст на латинице:';
+                    outputLabel.textContent = 'Результат (кириллица):';
+                    break;
+                case 'toArab':
+                    inputLabel.textContent = 'Введите текст на кириллице:';
+                    outputLabel.textContent = 'Результат (арабица):';
+                    break;
+                case 'cyrlFromArab':
+                    inputLabel.textContent = 'Введите текст на арабице:';
+                    outputLabel.textContent = 'Результат (кириллица):';
+                    break;
+            }
+        }
+
+        function transliterate() {
+            const direction = document.querySelector('input[name="direction"]:checked').value;
+            let input = document.getElementById('inputText').value;
+            let output = '';
+
+            switch(direction) {
+                case 'toLatn':
+                    // Сначала обработаем составные символы
+                    input = input
+                        .replace(/хь/g, 'ẋ')
+                        .replace(/гӏ/g, 'ġ')
+                        .replace(/къ/g, 'q̇')
+                        .replace(/кх/g, 'q')
+                        .replace(/цӏ/g, 'c')
+                        .replace(/чӏ/g, 'ç')
+                        .replace(/хӏ/g, 'h')
+                        .replace(/ӏ/g, '')
+                        .replace(/аь/g, 'ä')
+                        .replace(/уь/g, 'ü')
+                        .replace(/ж/g, 'ž')
+                        .replace(/оь/g, 'ö');
+
+                    // Затем обработаем остальные символы
+                    for (let i = 0; i < input.length; i++) {
+                        const char = input[i];
+                        output += cyrToLatn[char.toLowerCase()] || char;
+                    }
+                    break;
+
+                case 'toCyr':
+                    // Обработка латиницы в кириллицу
+                    for (let [latn, cyr] of Object.entries(latnToCyr)) {
+                        input = input.replace(new RegExp(latn, 'g'), cyr);
+                    }
+                    output = input;
+                    break;
+
+                case 'toArab':
+                    // Сначала обработаем составные символы
+                    input = input.toLowerCase();
+                    for (let [cyr, arab] of Object.entries(cyrToArab)) {
+                        input = input.replace(new RegExp(cyr, 'g'), arab);
+                    }
+                    output = input;
+                    break;
+
+                case 'cyrlFromArab':
+                    // Обработка арабицы в кириллицу
+                    for (let [arab, cyr] of Object.entries(arabToCyr)) {
+                        input = input.replace(new RegExp(arab, 'g'), cyr);
+                    }
+                    output = input;
+                    break;
+            }
+
+            document.getElementById('outputText').value = output;
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText');
+            outputText.select();
+            document.execCommand('copy');
+            
+            const successMessage = document.getElementById('copySuccess');
+            successMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 2000);
+        }
+
+        // Инициализация при загрузке
+        updateLabels();
+        updateTextDirection();
+    </script>
+</body>
+</html>

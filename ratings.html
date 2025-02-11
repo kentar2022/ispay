@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рейтинг учащихся</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            padding: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            transition: background-color 0.3s;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .leaderboard {
+            width: 100%;
+        }
+
+        .user-row {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .user-row:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .rank {
+            width: 40px;
+            font-weight: bold;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .user-info {
+            flex-grow: 1;
+        }
+
+        .nickname {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .stats {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .points {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .rank-1 .rank::after {
+            content: "🥇";
+            margin-left: 5px;
+        }
+
+        .rank-2 .rank::after {
+            content: "🥈";
+            margin-left: 5px;
+        }
+
+        .rank-3 .rank::after {
+            content: "🥉";
+            margin-left: 5px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #d32f2f;
+        }
+
+        /* Скроллбар */
+        :root {
+            --scrollbar-thumb-color: #f3166b;
+            --scrollbar-track-color: #ffffff;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb-color);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container main-block settingsPage">
+        <h1>Рейтинг учащихся</h1>
+        <div id="leaderboard" class="leaderboard">
+            <div class="loading">Загрузка данных...</div>
+        </div>
+    </div>
+
+    <!-- Скрытые радио кнопки для тем -->
+    <input type="radio" id="themeLight" name="theme" value="light" style="display: none;">
+    <input type="radio" id="themeDark" name="theme" value="dark" style="display: none;">
+
+    <script>
+        function createUserRow(user) {
+            return `
+                <div class="user-row rank-${user.rank} settingsPage">
+                    <div class="rank">${user.rank}</div>
+                    <img class="avatar" src="${user.avatar}" alt="${user.nickname}">
+                    <div class="user-info">
+                        <div class="nickname">${user.nickname}</div>
+                        <div class="stats">
+                            Уроков: ${user.lessonsCompleted} | Языков: ${user.languagesCount}
+                        </div>
+                    </div>
+                    <div class="points">${user.score} очков</div>
+                </div>
+            `;
+        }
+
+        async function loadLeaderboard() {
+            const container = document.getElementById('leaderboard');
+            container.innerHTML = '<div class="loading settingsPage">Загрузка данных...</div>';
+
+            try {
+                const response = await fetch('leaderboard.php');
+                const data = await response.json();
+
+                if (data.success) {
+                    container.innerHTML = data.users
+                        .map(user => createUserRow(user))
+                        .join('');
+                } else {
+                    throw new Error(data.message || 'Ошибка загрузки данных');
+                }
+            } catch (error) {
+                container.innerHTML = `
+                    <div class="error settingsPage">
+                        Произошла ошибка при загрузки данных. 
+                        Пожалуйста, попробуйте позже.
+                    </div>
+                `;
+                console.error('Error loading leaderboard:', error);
+            }
+        }
+
+        // Загружаем данные при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLeaderboard();
+            // Проверяем сохраненную тему
+            const savedTheme = localStorage.getItem('currentTheme') || 'light';
+            document.getElementById('theme' + savedTheme.charAt(0).toUpperCase() + savedTheme.slice(1)).checked = true;
+        });
+    </script>
+
+    <!-- Подключение скрипта настроек -->
+    <script src="settings.js"></script>
+</body>
+</html>

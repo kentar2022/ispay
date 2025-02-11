@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .progress-bar {
+            height: 10px;
+            background-color: #4caf50;
+            border-radius: 5px;
+        }
+        .progress-container {
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .search {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .search input {
+            padding: 8px;
+            width: 300px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Word History</h1>
+
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Search for words..." oninput="filterTable()">
+        </div>
+
+        <table id="wordTable">
+            <thead>
+                <tr>
+                    <th>Word (Russian)</th>
+                    <th>Word (Chechen)</th>
+                    <th>Date Learned</th>
+                    <th>Repetition Count</th>
+                    <th>Last Reviewed</th>
+                    <th>Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Здравствуйте</td>
+                    <td>Салам Алейкум</td>
+                    <td>2024-01-15</td>
+                    <td>3</td>
+                    <td>2024-01-18</td>
+                    <td>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 75%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Привет</td>
+                    <td>Маршалла</td>
+                    <td>2024-01-10</td>
+                    <td>5</td>
+                    <td>2024-01-19</td>
+                    <td>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 90%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Мама</td>
+                    <td>Нана</td>
+                    <td>2024-01-12</td>
+                    <td>2</td>
+                    <td>2024-01-16</td>
+                    <td>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 50%;"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function filterTable() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#wordTable tbody tr');
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const matches = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(input));
+
+                row.style.display = matches ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

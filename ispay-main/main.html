@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Learning Site</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        .banner {
+            background-color: #ff1493; /* Розовый цвет */
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .content-block {
+            display: flex;
+            flex-direction: column; /* Размещаем текст и изображения вертикально */
+            align-items: center;
+            justify-content: space-around; /* Начинаем выравнивание контента сверху */
+            width: 100%;
+            min-height: 100vh; /* Высота каждого блока 100% высоты окна */
+            background-color: #ffffff;
+            padding: 80px 40px; /* Увеличенный padding */
+            box-sizing: border-box;
+            text-align: center; /* Центрируем текст */
+        }
+        .content-block img {
+            max-width: 30%; /* Увеличиваем ширину изображений */
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 20px; /* Добавляем отступ сверху для изображений */
+        }
+        .content-block p {
+            font-size: 18px;
+            max-width: 80%; /* Расширяем ширину текста для лучшей читаемости */
+            text-align: justify;
+            margin-bottom: 20px; /* Отступ снизу, чтобы не прилегал к изображению */
+        }
+        .flags-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            max-width: 100%; /* Максимальная ширина контейнера */
+            padding: 0 10px; /* Внутренние отступы для контейнера */
+            box-sizing: border-box; /* Учитываем padding в общей ширине */
+        }
+        .flag-item {
+            text-align: center;
+        }
+        .flag-item img {
+            width: 360px;
+            height: auto;
+            display: flex;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+            align-content: stretch;
+            align-items: center;
+        }
+        .flag-item img:hover {
+            transform: scale(1.1);
+        }
+        .flag-item p {
+            margin-top: 10px;
+            font-size: 24px;
+            color: #333;
+        }
+        @media (max-width: 768px) {
+            .content-block {
+                padding: 60px 20px; /* Уменьшаем padding на маленьких экранах */
+                min-height: auto; /* Отменяем минимальную высоту на маленьких экранах */
+            }
+            .content-block img {
+                max-width: 50%; /* Изображения на мобильных устройствах занимают всю ширину */
+                margin-top: 20px;
+            }
+            .flags-container {
+                flex-direction: column;
+                align-items: flex-start;
+                max-width: 100%; /* Убедимся, что контейнер не выходит за пределы */
+                padding: 0 15px; /* Дополнительные отступы на маленьких экранах */
+            }
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+        footer .contact-info {
+            margin-bottom: 10px;
+        }
+        footer a {
+            color: #ff1493;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="d-flex justify-content-between align-items-center p-3 bg-white shadow-sm">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo" width="100">
+        </div>
+        <div class="d-flex gap-3">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="themeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Выбор темы
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="themeDropdown">
+                    <li><a class="dropdown-item" href="#" id="themeLight">Светлая тема</a></li>
+                    <li><a class="dropdown-item" href="#" id="themeDark">Темная тема</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Выбор языка
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                    <li><a class="dropdown-item" href="#" id="langRussian">Русский</a></li>
+                    <li><a class="dropdown-item" href="#" id="langEnglish">Английский</a></li>
+                    <li><a class="dropdown-item" href="#" id="langFrench">Французский</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Розовый баннер -->
+    <div class="banner" id="headerTitle">
+        Добро пожаловать на платформу для изучения языков!
+    </div>
+
+    <div class="content-block" style="background-color: #f0f0f0;">
+        <p id="contentBlock1">
+            Наша платформа предоставляет уникальную возможность изучать языки, которые находятся под угрозой исчезновения. Мы верим, что каждый язык — это сокровище, несущие в себе богатую культурную и историческую память. Сохранение этих языков важно не только для их носителей, но и для всего мира. Через наши интерактивные задания и уроки вы сможете не только овладеть новым языком, но и погрузиться в культурное наследие народов, которые говорят на этих языках. Присоединяйтесь к нам и помогите сохранить разнообразие мировых языков!
+        </p>
+        <img src="lesson_images/friendship.jpg" alt="Image 1">
+    </div>
+    <div class="content-block reverse" style="background-color: #e0e0e0;">
+        <p id="contentBlock2">
+            Каждый урок на нашей платформе разработан с учетом особенностей и сложности изучаемого языка. Уроки включают интерактивные задания, аудиоматериалы, а также тесты для закрепления знаний. Мы стремимся сделать обучение увлекательным и доступным, поэтому каждый урок разделен на небольшие модули, которые можно проходить в удобном для вас темпе. Наши задания ориентированы на развитие навыков чтения, письма, говорения и понимания на слух. Важно отметить, что уроки создаются на основе авторитетных учебников и надежных источников, что гарантирует точность и аутентичность учебных материалов.
+        </p>
+        <img src="images/books.jpg" alt="Image 2">
+    </div>
+    <div class="content-block" style="background-color: #d0d0d0;">
+        <p id="contentBlock3">
+            На нашей платформе представлено множество языков, доступных для изучения. Вот лишь несколько из них:
+        </p>
+        <div class="flags-container">
+            <div class="flag-item">
+                <img src="courses_flags/chechen.png" alt="Chechen Flag">
+                <p id="chechenFlag">Чеченский</p>
+            </div>
+            <div class="flag-item">
+                <img src="courses_flags/ingush.png" alt="Ingush Flag">
+                <p id="ingushFlag">Ингушский</p>
+            </div>
+            <div class="flag-item">
+                <img src="courses_flags/adyge.png" alt="Adyghe Flag">
+                <p id="adygeFlag">Черкесский</p>
+            </div>
+            <div class="flag-item">
+                <img src="courses_flags/udmurt.png" alt="Udmurt Flag">
+                <p id="udmurtFlag">Удмуртский</p>
+            </div>
+            <div class="flag-item">
+                <img src="courses_flags/tatar.png" alt="Tatar Flag">
+                <p id="tatarFlag">Татарский</p>
+            </div>
+            <div class="flag-item">
+                <img src="courses_flags/chuvash.png" alt="Chuvash Flag">
+                <p id="chuvashFlag">Чувашский</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-block reverse" style="background-color: #c0c0c0;">
+        <p id="contentBlock4">
+            На нашей платформе мы придаем большое значение качеству и достоверности предоставляемых учебных материалов. Весь контент тщательно отбирается из авторитетных учебников и других надежных источников, которые позволяют вам изучать языки максимально эффективно и точно. Мы стремимся к тому, чтобы каждый урок на нашей платформе был не только информативным, но и интересным. В материалах вы найдете упражнения, аудио и видео, которые помогут вам развить все основные языковые навыки: чтение, письмо, говорение и восприятие на слух. Наша цель — предоставить вам инструменты для глубокого понимания изучаемого языка и культуры, стоящей за ним.
+        </p>
+        <img src="image4.png" alt="Image 4">
+    </div>
+    <div class="content-block" style="background-color: #b0b0b0;">
+        <p id="contentBlock5">
+            Чтобы быть в курсе всех новостей и обновлений на платформе, присоединяйтесь к нашему официальному Telegram-каналу. Здесь мы публикуем важные объявления, новые уроки, полезные советы по изучению языков и интересные факты о культурах, связанных с изучаемыми языками. Также у нас есть чат в Telegram, где пользователи могут обсудить свои успехи, задать вопросы и поделиться опытом. Наши каналы в Telegram — это отличный способ оставаться на связи с платформой и другими пользователями, заинтересованными в сохранении языков, находящихся под угрозой исчезновения. Подписывайтесь и общайтесь с единомышленниками!
+        </p>
+        <img src="images/telegram.jpg" alt="Image 5">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="contact-info">
+                <p>Контактная информация: info@languagesite.com</p>
+            </div>
+            <p>&copy; 2024 Language Learning Platform. Все права защищены.</p>
+            <p>Следите за нами: 
+                <a href="#">Facebook</a> | 
+                <a href="#">Twitter</a> | 
+                <a href="#">Instagram</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Подключение Bootstrap JS и Popper.js -->
+   <script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    const themeLight = document.getElementById('themeLight');
+    const themeDark = document.getElementById('themeDark');
+    const langRussian = document.getElementById('langRussian');
+    const langEnglish = document.getElementById('langEnglish');
+    const langFrench = document.getElementById('langFrench');
+    const contentBlocks = document.querySelectorAll('.content-block'); // Выбираем все блоки с классом content-block
+    const banner = document.querySelector('.banner'); // Выбираем баннер
+    const socialLinks = document.querySelectorAll('.container a'); // Выбираем все ссылки в блоке социальных сетей
+
+    // Перевод текстов
+    const translations = {
+        russian: {
+            themeDropdown: "Выбор темы",
+            languageDropdown: "Выбор языка",
+            themeLight: "Светлая тема",
+            themeDark: "Темная тема",
+            langRussian: "Русский",
+            langEnglish: "Английский",
+            langFrench: "Французский",
+            headerTitle: "Добро пожаловать на платформу для изучения языков!",
+            contentBlock1: "Наша платформа предоставляет уникальную возможность изучать языки, которые находятся под угрозой исчезновения. Мы верим, что каждый язык — это сокровище, несущие в себе богатую культурную и историческую память. Сохранение этих языков важно не только для их носителей, но и для всего мира. Через наши интерактивные задания и уроки вы сможете не только овладеть новым языком, но и погрузиться в культурное наследие народов, которые говорят на этих языках. Присоединяйтесь к нам и помогите сохранить разнообразие мировых языков!",
+            contentBlock2: "Каждый урок на нашей платформе разработан с учетом особенностей и сложности изучаемого языка. Уроки включают интерактивные задания, аудиоматериалы, а также тесты для закрепления знаний. Мы стремимся сделать обучение увлекательным и доступным, поэтому каждый урок разделен на небольшие модули, которые можно проходить в удобном для вас темпе. Наши задания ориентированы на развитие навыков чтения, письма, говорения и понимания на слух. Важно отметить, что уроки создаются на основе авторитетных учебников и надежных источников, что гарантирует точность и аутентичность учебных материалов.",
+            contentBlock3: "На нашей платформе представлено множество языков, доступных для изучения. Вот лишь несколько из них:",
+            chechenFlag: "Чеченский",
+            ingushFlag: "Ингушский",
+            adygeFlag: "Черкесский",
+            udmurtFlag: "Удмуртский",
+            tatarFlag: "Татарский",
+            chuvashFlag: "Чувашский",
+            contentBlock4: "На нашей платформе мы придаем большое значение качеству и достоверности предоставляемых учебных материалов. Весь контент тщательно отбирается из авторитетных учебников и других надежных источников, которые позволяют вам изучать языки максимально эффективно и точно. Мы стремимся к тому, чтобы каждый урок на нашей платформе был не только информативным, но и интересным. В материалах вы найдете упражнения, аудио и видео, которые помогут вам развить все основные языковые навыки: чтение, письмо, говорение и восприятие на слух. Наша цель — предоставить вам инструменты для глубокого понимания изучаемого языка и культуры, стоящей за ним.",
+            contentBlock5: "Чтобы быть в курсе всех новостей и обновлений на платформе, присоединяйтесь к нашему официальному Telegram-каналу. Здесь мы публикуем важные объявления, новые уроки, полезные советы по изучению языков и интересные факты о культурах, связанных с изучаемыми языками. Также у нас есть чат в Telegram, где пользователи могут обсудить свои успехи, задать вопросы и поделиться опытом. Наши каналы в Telegram — это отличный способ оставаться на связи с платформой и другими пользователями, заинтересованными в сохранении языков, находящихся под угрозой исчезновения. Подписывайтесь и общайтесь с единомышленниками!",
+            contactInfo: "Контактная информация: info@languagesite.com | +7 800 555 35 35",
+            copyright: "&copy; 2024 Language Learning Platform. Все права защищены.",
+            followUs: "Следите за нами:",
+            facebook: "Facebook",
+            twitter: "Twitter",
+            instagram: "Instagram"
+        },
+        english: {
+            themeDropdown: "Choose Theme",
+            languageDropdown: "Choose Language",
+            themeLight: "Light Theme",
+            themeDark: "Dark Theme",
+            langRussian: "Russian",
+            langEnglish: "English",
+            langFrench: "French",
+            headerTitle: "Welcome to the Language Learning Platform!",
+            contentBlock1: "Our platform offers a unique opportunity to learn languages that are on the verge of extinction. We believe that every language is a treasure, carrying rich cultural and historical memory. Preserving these languages is important not only for their speakers but also for the entire world. Through our interactive tasks and lessons, you will not only master a new language but also immerse yourself in the cultural heritage of the people who speak these languages. Join us and help preserve the diversity of world languages!",
+            contentBlock2: "Each lesson on our platform is designed taking into account the features and complexity of the language being studied. The lessons include interactive tasks, audio materials, and tests to consolidate knowledge. We strive to make learning engaging and accessible, so each lesson is divided into small modules that you can complete at your own pace. Our tasks are aimed at developing reading, writing, speaking, and listening skills. It is important to note that the lessons are based on authoritative textbooks and reliable sources, ensuring the accuracy and authenticity of the educational materials.",
+            contentBlock3: "Our platform offers many languages available for learning. Here are just a few of them:",
+            chechenFlag: "Chechen",
+            ingushFlag: "Ingush",
+            adygeFlag: "Adyghe",
+            udmurtFlag: "Udmurt",
+            tatarFlag: "Tatar",
+            chuvashFlag: "Chuvash",
+            contentBlock4: "On our platform, we place great emphasis on the quality and reliability of the educational materials provided. All content is carefully selected from authoritative textbooks and other reliable sources that allow you to learn languages as effectively and accurately as possible. We strive to make every lesson on our platform not only informative but also interesting. The materials include exercises, audio, and video that will help you develop all the essential language skills: reading, writing, speaking, and listening. Our goal is to provide you with tools for a deep understanding of the language you are learning and the culture behind it.",
+            contentBlock5: "To stay up-to-date with all the news and updates on the platform, join our official Telegram channel. Here we post important announcements, new lessons, useful tips for learning languages, and interesting facts about the cultures associated with the languages being studied. We also have a chat in Telegram where users can discuss their achievements, ask questions, and share experiences. Our Telegram channels are a great way to stay connected with the platform and other users interested in preserving languages at risk of extinction. Subscribe and communicate with like-minded people!",
+            contactInfo: "Contact Information: info@languagesite.com | +7 800 555 35 35",
+            copyright: "&copy; 2024 Language Learning Platform. All rights reserved.",
+            followUs: "Follow Us:",
+            facebook: "Facebook",
+            twitter: "Twitter",
+            instagram: "Instagram"
+        },
+        french: {
+            themeDropdown: "Choisir le thème",
+            languageDropdown: "Choisir la langue",
+            themeLight: "Thème clair",
+            themeDark: "Thème sombre",
+            langRussian: "Russe",
+            langEnglish: "Anglais",
+            langFrench: "Français",
+            headerTitle: "Bienvenue sur la plateforme d'apprentissage des langues!",
+            contentBlock1: "Notre plateforme offre une opportunité unique d'apprendre des langues qui sont sur le point de disparaître. Nous croyons que chaque langue est un trésor, portant une riche mémoire culturelle et historique. Préserver ces langues est important non seulement pour leurs locuteurs, mais aussi pour le monde entier. Grâce à nos tâches interactives et à nos leçons, vous ne maîtriserez pas seulement une nouvelle langue, mais vous vous immergerez également dans le patrimoine culturel des peuples qui parlent ces langues. Rejoignez-nous et aidez à préserver la diversité des langues du monde!",
+            contentBlock2: "Chaque leçon sur notre plateforme est conçue en tenant compte des caractéristiques et de la complexité de la langue étudiée. Les leçons comprennent des tâches interactives, des supports audio et des tests pour consolider les connaissances. Nous nous efforçons de rendre l'apprentissage engageant et accessible, c'est pourquoi chaque leçon est divisée en petits modules que vous pouvez suivre à votre propre rythme. Nos tâches visent à développer les compétences en lecture, écriture, expression orale et compréhension orale. Il est important de noter que les leçons sont basées sur des manuels et des sources fiables, garantissant l'exactitude et l'authenticité des supports pédagogiques.",
+            contentBlock3: "Notre plateforme propose de nombreuses langues disponibles à l'apprentissage. En voici quelques-unes :",
+            chechenFlag: "Tchétchène",
+            ingushFlag: "Ingouche",
+            adygeFlag: "Adyguéen",
+            udmurtFlag: "Oudmourte",
+            tatarFlag: "Tatar",
+            chuvashFlag: "Tchouvache",
+            contentBlock4: "Sur notre plateforme, nous accordons une grande importance à la qualité et à la fiabilité des supports pédagogiques fournis. Tout le contenu est soigneusement sélectionné à partir de manuels et d'autres sources fiables qui vous permettent d'apprendre les langues de manière aussi efficace et précise que possible. Nous nous efforçons de rendre chaque leçon sur notre plateforme non seulement informative mais aussi intéressante. Les supports comprennent des exercices, des audios et des vidéos qui vous aideront à développer toutes les compétences linguistiques essentielles : lecture, écriture, expression orale et compréhension orale. Notre objectif est de vous fournir des outils pour une compréhension approfondie de la langue que vous apprenez et de la culture qui la sous-tend.",
+            contentBlock5: "Pour rester informé de toutes les actualités et mises à jour de la plateforme, rejoignez notre chaîne Telegram officielle. Nous y publions des annonces importantes, de nouvelles leçons, des conseils utiles pour apprendre les langues et des faits intéressants sur les cultures associées aux langues étudiées. Nous avons également un chat sur Telegram où les utilisateurs peuvent discuter de leurs succès, poser des questions et partager leurs expériences. Nos chaînes Telegram sont un excellent moyen de rester en contact avec la plateforme et les autres utilisateurs intéressés par la préservation des langues en voie de disparition. Abonnez-vous et communiquez avec des personnes partageant les mêmes idées !",
+            contactInfo: "Informations de contact : info@languagesite.com | +7 800 555 35 35",
+            copyright: "&copy; 2024 Plateforme d'apprentissage des langues. Tous droits réservés.",
+            followUs: "Suivez-nous :",
+            facebook: "Facebook",
+            twitter: "Twitter",
+            instagram: "Instagram"
+        }
+    };
+
+    // Загружаем сохраненные настройки
+    function loadSettings() {
+        const savedTheme = localStorage.getItem('currentTheme');
+        const savedLanguage = localStorage.getItem('currentLanguage');
+
+        if (savedTheme === 'dark') {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        if (savedLanguage === 'russian') {
+            setLanguage('russian');
+        } else if (savedLanguage === 'french') {
+            setLanguage('french');
+        } else {
+            setLanguage('english');
+        }
+    }
+
+    // Применение темы
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            document.body.style.backgroundColor = '#293133';
+            document.body.style.color = '#ffffff';
+
+            // Меняем фон блоков на тёмные цвета
+            contentBlocks.forEach(block => {
+                block.style.backgroundColor = block.classList.contains('reverse') ? '#293133' : '#4E5754';
+            });
+
+            // Меняем цвет баннера и социальных ссылок
+            if (banner) {
+                banner.style.backgroundColor = '#15E670';
+            }
+            socialLinks.forEach(link => {
+                link.style.color = '#15E670';
+            });
+
+        } else {
+            document.body.style.backgroundColor = '#ffffff';
+            document.body.style.color = '#000000';
+
+            // Возвращаем светлый фон блокам
+            contentBlocks.forEach(block => {
+                block.style.backgroundColor = block.classList.contains('reverse') ? '#e0e0e0' : '#f0f0f0';
+            });
+
+            // Возвращаем оригинальный цвет баннера и социальных ссылок
+            if (banner) {
+                banner.style.backgroundColor = '#ff1493'; // Вернуть розовый цвет баннера
+            }
+            socialLinks.forEach(link => {
+                link.style.color = ''; // Вернуть исходный цвет (должен быть установлен через CSS)
+            });
+        }
+        localStorage.setItem('currentTheme', theme);
+    }
+
+    // Применение языка
+    function setLanguage(language) {
+        document.getElementById('themeDropdown').innerText = translations[language].themeDropdown;
+        document.getElementById('languageDropdown').innerText = translations[language].languageDropdown;
+        document.getElementById('themeLight').innerText = translations[language].themeLight;
+        document.getElementById('themeDark').innerText = translations[language].themeDark;
+        document.getElementById('langRussian').innerText = translations[language].langRussian;
+        document.getElementById('langEnglish').innerText = translations[language].langEnglish;
+        document.getElementById('langFrench').innerText = translations[language].langFrench;
+        document.getElementById('headerTitle').innerText = translations[language].headerTitle;
+        document.getElementById('contentBlock1').innerText = translations[language].contentBlock1;
+        document.getElementById('contentBlock2').innerText = translations[language].contentBlock2;
+        document.getElementById('contentBlock3').innerText = translations[language].contentBlock3;
+        document.getElementById('chechenFlag').innerText = translations[language].chechenFlag;
+        document.getElementById('ingushFlag').innerText = translations[language].ingushFlag;
+        document.getElementById('adygeFlag').innerText = translations[language].adygeFlag;
+        document.getElementById('udmurtFlag').innerText = translations[language].udmurtFlag;
+        document.getElementById('tatarFlag').innerText = translations[language].tatarFlag;
+        document.getElementById('chuvashFlag').innerText = translations[language].chuvashFlag;
+        document.getElementById('contentBlock4').innerText = translations[language].contentBlock4;
+        document.getElementById('contentBlock5').innerText = translations[language].contentBlock5;
+        document.getElementById('contactInfo').innerText = translations[language].contactInfo;
+        document.getElementById('copyright').innerText = translations[language].copyright;
+        document.getElementById('followUs').innerText = translations[language].followUs;
+        document.getElementById('facebook').innerText = translations[language].facebook;
+        document.getElementById('twitter').innerText = translations[language].twitter;
+        document.getElementById('instagram').innerText = translations[language].instagram;
+
+        localStorage.setItem('currentLanguage', language);
+    }
+
+    // События для изменения темы
+    themeLight.addEventListener('click', () => setTheme('light'));
+    themeDark.addEventListener('click', () => setTheme('dark'));
+
+    // События для изменения языка
+    langRussian.addEventListener('click', () => setLanguage('russian'));
+    langEnglish.addEventListener('click', () => setLanguage('english'));
+    langFrench.addEventListener('click', () => setLanguage('french'));
+
+    // Загружаем настройки при загрузке страницы
+    loadSettings();
+});
+   </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
