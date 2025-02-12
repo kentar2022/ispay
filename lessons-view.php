@@ -18,7 +18,7 @@ $themes_result = $mysqli->query($themes_query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Уроки удмуртского языка</title>
     <style>
-      
+        /* Стили остаются те же */
         body {
             font-family: Arial, sans-serif;
             max-width: 1200px;
@@ -120,7 +120,7 @@ $themes_result = $mysqli->query($themes_query);
 
     <?php while ($theme = $themes_result->fetch_assoc()): ?>
         <?php
-        
+        // Получение заданий для темы
         $lessons_query = "SELECT * FROM lessons WHERE topic_id IN 
             (SELECT id FROM topics WHERE theme_id = ?) 
             ORDER BY lesson_level";

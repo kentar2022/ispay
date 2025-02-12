@@ -1,0 +1,272 @@
+* {
+    box-sizing: border-box;
+}
+
+img{
+    max-width: 100%;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(10, 10%); 
+    grid-template-rows: repeat(12, 8%); 
+    gap: 20px 40px; 
+    height: 100%; 
+}
+
+.navbar {
+    grid-column: 2 / 2;
+    grid-row: 1 / span 4;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 120px);
+    position: sticky;
+    top: 60px;
+}
+
+.personal-info {
+    display: flex;
+    grid-column: 3 / 6;
+    grid-row: 1 / span 4;
+    border-bottom: 1px solid lightgray;
+}
+
+.statistics {
+    grid-column: 7 / 9;
+    grid-row: 2 / span 3;
+    border: 1px solid lightgray;
+    padding: 20px;
+}
+
+.profile-courses-block {
+    grid-column: 3 / span 4;
+    grid-row: 5 / span 6;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.gift-section {
+    grid-column: 3 / 9;
+    grid-row: 7 / 11;
+    padding: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(6, 1fr); 
+        grid-template-rows: auto; 
+        gap: 10px 20px; 
+        padding: 20px 0; 
+    }
+
+    .navbar {
+        grid-column: span 6; 
+        height: auto; 
+        position: relative; 
+        top: 0;
+    }
+
+    .navbar ul {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .personal-info, .statistics, .profile-courses-block, .gift-section {
+        grid-column: span 6; 
+        grid-row: auto;
+    }
+}
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        grid-template-columns: repeat(8, 1fr); 
+        grid-template-rows: auto;
+        gap: 15px 30px; 
+        padding: 40px 0; 
+    }
+
+    .navbar {
+        grid-column: span 2; /* Занимает 2 колонки */
+        height: calc(100vh - 80px); /* Высота экрана за вычетом отступов */
+        position: sticky; /* Сохраняем sticky */
+        top: 40px; /* Отступ сверху */
+    }
+
+    .personal-info {
+        grid-column: 3 / span 3; /* занимает 3 колонки начиная с 3-й */
+        grid-row: 1 / span 1; /* занимает 1 ряд */
+    }
+
+    .statistics {
+        grid-column: 6 / span 3; /* занимает 3 колонки начиная с 6-й */
+        grid-row: 1 / span 1; /* занимает 1 ряд */
+    }
+
+    .profile-courses-block, .gift-section {
+        grid-column: span 6; /* Занимает 6 колонок */
+        grid-row: auto; /* Сбрасываем высоту для планшетов */
+    }
+}
+
+
+
+aside {
+    position: fixed;
+    top: 0;
+    left: 30px;
+    height: 100vh;
+    width: 300px; 
+    padding: 20px;
+    z-index: 2; 
+    border-right: 0.1px solid #D3D3D3;
+}
+
+
+
+aside .aside-item {
+    margin-bottom: 15px; 
+    padding: 15px; 
+    border-radius: 5px; 
+    transition: all 0.3s ease; 
+    width: 260px;
+}
+
+
+aside .aside-item:hover {
+    transform: translateY(-3px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.profile-info {
+    border-radius: 10px;
+    padding: 20px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center; 
+}
+.profile-info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.aside-item a{
+    display: flex;
+    font-size: 24px;
+}
+
+.profile-stats {
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-stats {
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    width: 430px;
+    height: 230px;
+    overflow-y: auto;
+}
+
+.stat-item p {
+    margin: 0;
+    font-weight: bold;
+    flex: 1;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.gift-item img {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.gift-section div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.gift-item {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    height: 160px;
+    width: 160px;
+    margin-top: 25px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-course img {
+    width: 50%;
+    height: 50%;
+    border-radius: 30px;
+    object-fit: cover;
+    margin: 5px;
+}
+
+.profile-course {
+    width: 170px;
+    height: 160px;
+    margin: 10px;
+    position: relative;
+    border-radius: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    border: 1px solid gray;
+}
+
+.profile-courses {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+#languageSelect, #languageSelect option {
+    font-size: 24px;
+    border: none;
+}
+#editProfileBtn {
+    border: white 2px solid;
+    height: 2.5em;
+}

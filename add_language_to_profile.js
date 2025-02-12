@@ -18,13 +18,13 @@ document.querySelectorAll('.add-language-button').forEach(button => {
             
             const userId = userData.user_id;
             console.log('Got user ID:', userId);
-            console.log('Sending data:', { user_id: userId, language: language }); 
+            console.log('Sending data:', { user_id: userId, language: language }); // Добавим лог отправляемых данных
             
-           
+            // Отключаем кнопку на время выполнения запроса
             button.disabled = true;
             button.textContent = '...';
 
-           
+            // 1. Добавляем язык в профиль
             const addResponse = await fetch('add_language_to_profile.php', {
                 method: 'POST',
                 headers: {
@@ -40,7 +40,7 @@ document.querySelectorAll('.add-language-button').forEach(button => {
             console.log('Add language result:', addResult);
 
             if (addResult.success) {
-                
+                // 2. Инициализируем таблицы прогресса
                 const initResponse = await fetch('initialize_progress_tables.php', {
                     method: 'POST',
                     headers: {
@@ -52,7 +52,7 @@ document.querySelectorAll('.add-language-button').forEach(button => {
                     })
                 });
 
-               
+                // Добавим проверку ответа
                 if (!initResponse.ok) {
                     throw new Error(`HTTP error! status: ${initResponse.status}`);
                 }

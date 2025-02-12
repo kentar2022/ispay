@@ -1,0 +1,70 @@
+/*
+.theme-light {
+    --background-color: #ffffff;
+    --text-color: #000000;
+}
+
+.theme-dark {
+    --background-color: #293133;
+    --text-color: #ffffff;
+}
+
+.theme-dark2 {
+    --background-color: #293133;
+    --text-color: #f3166b;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+a, .a, .settingsPage *, .courses a, .profilePage * {
+    color: var(--text-color);
+}
+
+svg {
+    fill: var(--text-color);
+}
+
+
+select > option, #languageSelect, #languageSelectContainer {
+    background-color: var(--background-color);
+}*/
+
+
+.settingsPage {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    position: fixed;
+    right: 40%;
+}
+
+
+/* Для экранов меньше 768px */
+@media (max-width: 768px) {
+    .settingsPage {
+        width: 90%; /* Увеличиваем ширину для меньших экранов */
+        right: 5%; /* Уменьшаем отступ справа */
+    }
+}
+
+/* Для экранов меньше 480px */
+@media (max-width: 480px) {
+    .settingsPage {
+        width: 95%; /* Ширина на самых маленьких экранах */
+        right: 2.5%; /* Почти убираем отступ */
+        padding: 15px; /* Уменьшаем padding для мобильных устройств */
+    }
+}
+
+.custom-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+

@@ -19,7 +19,7 @@ $newText = $data['newText'];
 $field = $data['field'];
 $oldText = $data['oldText'];
 
-
+// Получаем текущие данные урока
 $stmt = $mysqli->prepare("SELECT data FROM lessons WHERE id = ?");
 $stmt->bind_param("i", $lesson_id);
 $stmt->execute();
@@ -30,10 +30,10 @@ if (!$row) {
     die(json_encode(['error' => 'Lesson not found', 'id' => $lesson_id]));
 }
 
-
+// Декодируем JSON данные урока
 $lessonData = json_decode($row['data'], true);
 
-
+// Находим и обновляем нужный элемент
 $updated = false;
 foreach ($lessonData as &$item) {
     if ($field === 'answer' && isset($item['data']['answer']) && $item['data']['answer'] === $oldText) {
@@ -59,7 +59,7 @@ if (!$updated) {
     ]));
 }
 
-
+// Обновляем данные в базе
 $updatedJson = json_encode($lessonData);
 $updateStmt = $mysqli->prepare("UPDATE lessons SET data = ? WHERE id = ?");
 $updateStmt->bind_param("si", $updatedJson, $lesson_id);

@@ -40,15 +40,15 @@ $result = $stmt->get_result();
 
 if ($row = $result->fetch_assoc()) {
     $languages_list = $row['languages_list'];
-    $response['debug'][] = 'Languages list received: ' . $languages_list; 
+    $response['debug'][] = 'Languages list received: ' . $languages_list; // Отладочное сообщение
     
-    
+    // Убедимся, что строки обрезаются по пробелам и возвращаются как массив
     $languages_array = array_map('trim', explode(',', $languages_list));
     
-    $response['languages'] = $languages_array;  
+    $response['languages'] = $languages_array;  // Добавляем массив языков в ответ
 } else {
-    $response['debug'][] = 'No data found for user ID: ' . $user_id;  
-    $response['languages'] = []; 
+    $response['debug'][] = 'No data found for user ID: ' . $user_id;  // Если нет данных
+    $response['languages'] = [];  // Если нет данных, возвращаем пустой массив
 }
 
 $stmt->close();

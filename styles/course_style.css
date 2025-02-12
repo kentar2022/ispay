@@ -117,7 +117,7 @@ a {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 0; 
+    height: 0; /* Начальная высота 0% */
     background-color: #ff0081;
     transition: height 0.5s ease;
 }
@@ -336,6 +336,7 @@ hr {
     border: 3px solid yellow;
 }
 
+/* Всплывающее окно */
 .popup {
     display: none;
     position: fixed;
@@ -350,6 +351,7 @@ hr {
     padding-top: 60px;
 }
 
+/* Контент всплывающего окна */
 .popup-content {
     background-color: #fefefe;
     margin: 5% auto;
@@ -360,7 +362,7 @@ hr {
     text-align: center;
 }
 
-
+/* Кнопка закрытия */
 .close, .closeSummaryPopup {
     color: #aaa;
     float: right;
@@ -388,7 +390,7 @@ hr {
     justify-content: space-around;
 }
 
-
+/* Блоки настроек */
 .settings-block {
     margin: 10px 0;
     padding: 20px;
@@ -502,15 +504,15 @@ hr {
     }
 }
 
-
+/* Горизонтальный прогрессбар */
 @media (max-width: 880px) {
     .progress-container {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        width: 100%; 
-        height: 40px; 
+        width: 100%; /* Прогрессбар на всю ширину экрана */
+        height: 40px; /* Высота прогрессбара */
         background-color: #DCDCDC;
         display: flex;
         align-items: center;
@@ -519,10 +521,10 @@ hr {
     }
 
     .progress {
-        width: 0%; 
-        height: 100%; 
-        background-color: #ff0081; 
-        transition: width 0.5s ease; 
+        width: 0%; /* Изначально ширина прогрессбара — 0% */
+        height: 100%; /* Высота остается на 100% */
+        background-color: #ff0081; /* Цвет заполнения прогрессбара */
+        transition: width 0.5s ease; /* Анимация изменения ширины */
     }
 
     #summaryPopup{
