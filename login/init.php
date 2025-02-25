@@ -8,7 +8,6 @@ error_reporting(E_ALL);
 function initSession() {
     if (session_status() === PHP_SESSION_NONE) {
         session_set_cookie_params([
-            'lifetime' => 0, // До закрытия браузера
             'path' => '/',
             'domain' => '',
             'secure' => false, // Измените на true если используете HTTPS

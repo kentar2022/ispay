@@ -1,0 +1,24 @@
+server {
+    listen 80;
+    server_name ispay.online www.ispay.online;
+
+    root /var/www/html;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # Обработка PHP (если нужно)
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    # Запрет доступа к .ht файлам
+    location ~ /\.ht {
+        deny all;
+    }
+}

@@ -51,6 +51,20 @@ if ($mysqli->connect_error) {
     die(json_encode(['error' => 'Ошибка подключения к базе данных: ' . $mysqli->connect_error]));
 }
 
+// Получаем прогресс пользователя из новой таблицы
+$progressSql = "SELECT progress_data FROM user_progress WHERE user_id = ?";
+$progressStmt = $mysqli->prepare($progressSql);
+$progressStmt->bind_param("i", $user_id);
+$progressStmt->execute();
+$progressResult = $progressStmt->get_result();
+$userProgress = null;
+
+if ($progressResult->num_rows > 0) {
+    $row = $progressResult->fetch_assoc();
+    $userProgress = json_decode($row['progress_data'], true);
+}
+$progressStmt->close();
+
 // Получение данных из таблицы themes
 $themesSql = "SELECT * FROM themes";
 $themesResult = $mysqli->query($themesSql);
@@ -65,61 +79,64 @@ while ($themeRow = $themesResult->fetch_assoc()) {
     // Получение данных из таблицы topics для текущего theme_id
     $topicsSql = "SELECT * FROM topics WHERE theme_id = ?";
     $topicsStmt = $mysqli->prepare($topicsSql);
-    if (!$topicsStmt) {
-        echo json_encode(['error' => 'Ошибка подготовки запроса к таблице topics: ' . $mysqli->error]);
-        exit;
-    }
     $topicsStmt->bind_param("i", $themeId);
     $topicsStmt->execute();
     $topicsResult = $topicsStmt->get_result();
+    
     $topics = [];
+    $completedLessonsTotal = 0;
+    $totalLessonsInTheme = 0;
+    $totalScoreInTheme = 0;
+    
     while ($topicRow = $topicsResult->fetch_assoc()) {
+        $topicId = $topicRow['id'];
+        $totalLessons = (int)$topicRow['total_lessons'];
+        $totalLessonsInTheme += $totalLessons;
+        
+        // Получаем прогресс для конкретного топика из JSON
+        $completedLessons = 0;
+        $topicScore = 0;
+        
+        if ($userProgress && 
+            isset($userProgress['languages'][$language]['topics'][$topicId])) {
+            $topicProgress = $userProgress['languages'][$language]['topics'][$topicId];
+            $completedLessons = min((int)$topicProgress['completed_lessons'], $totalLessons);
+            $topicScore = (int)$topicProgress['total_score'];
+        }
+        
+        $completedLessonsTotal += $completedLessons;
+        $totalScoreInTheme += $topicScore;
+        
         $topics[] = [
-            'topic_id' => $topicRow['id'],
+            'id' => $topicId,
             'topic_name' => $topicRow['topic_name'],
-            'total_lessons' => $topicRow['total_lessons']
+            'total_lessons' => $totalLessons,
+            'completed_lessons' => $completedLessons,
+            'total_score' => $topicScore
         ];
     }
     $topicsStmt->close();
-
-    // Получение прогресса пользователя из таблицы user_progress
-    $progressSql = "SELECT * FROM user_progress WHERE theme_id = ? AND user_id = ?";
-    $progressStmt = $mysqli->prepare($progressSql);
-    if (!$progressStmt) {
-        echo json_encode(['error' => 'Ошибка подготовки запроса к таблице user_progress: ' . $mysqli->error]);
-        exit;
-    }
-    $progressStmt->bind_param("ii", $themeId, $user_id);
-    $progressStmt->execute();
-    $progressResult = $progressStmt->get_result();
     
-    $themeProgress = [];
-    $topicProgress = [];
+    // Вычисляем процент прогресса для темы
+    $progressPercentage = $totalLessonsInTheme > 0 
+        ? round(($completedLessonsTotal / $totalLessonsInTheme) * 100) 
+        : 0;
     
-    while ($progressRow = $progressResult->fetch_assoc()) {
-        if ($progressRow['topic_id'] === null) {
-            $themeProgress = [
-                'completed_topics' => $progressRow['completed_topics'] ?? 0,
-                'progress_percentage' => $progressRow['progress_percentage'] ?? 0,
-                'total_score' => $progressRow['total_score'] ?? 0
-            ];
-        } else {
-            $topicProgress[$progressRow['topic_id']] = [
-                'completed_lessons' => $progressRow['completed_lessons'] ?? 0,
-                'total_score' => $progressRow['total_score'] ?? 0
-            ];
-        }
-    }
-    $progressStmt->close();
+    // Считаем завершенные топики
+    $completedTopics = count(array_filter($topics, function($topic) {
+        return $topic['completed_lessons'] >= $topic['total_lessons'];
+    }));
 
-    // Формирование данных темы для ответа
     $themeData[] = [
-        'theme_id' => $themeRow['id'],
+        'id' => $themeId,
         'theme_name' => $themeRow['themes_name'],
-        'total_topics' => $themeRow['total_topics'],
+        'total_topics' => (int)$themeRow['total_topics'],
         'topics' => $topics,
-        'theme_progress' => $themeProgress,
-        'topic_progress' => $topicProgress
+        'theme_progress' => [
+            'completed_topics' => $completedTopics,
+            'progress_percentage' => $progressPercentage,
+            'total_score' => $totalScoreInTheme
+        ]
     ];
 }
 
@@ -130,7 +147,5 @@ $response = [
 ];
 
 echo json_encode($response);
-
-// Закрытие соединения с базой данных
 $mysqli->close();
 ?>

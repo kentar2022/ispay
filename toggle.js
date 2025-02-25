@@ -33,69 +33,50 @@ function togglePages(pageId) {
     }
 }
 
-function showLanguage(language) {
-    // Показываем контейнер языков
-    const languagesContainer = document.getElementById('languagesContainer');
-    if (!languagesContainer) {
-        console.error('Languages container not found');
-        return;
-    }
-
-    // Скрываем все страницы
-    togglePages('languagesContainer');
-
-    // Скрываем все страницы уроков
-    document.querySelectorAll('.lessonsPage').forEach(page => {
-        page.classList.add('hidden');
-    });
-
-    // Определяем нужный контейнер
-    const isSmallScreen = window.innerWidth <= 1330;
-    const pageId = isSmallScreen ? 'smallScreenLessonsPage' : 'lessonsPage';
-    const contentId = isSmallScreen ? 'smallScreenContent' : 'content';
-
-    // Показываем нужный контейнер уроков
-    const pageContainer = document.getElementById(pageId);
-    if (!pageContainer) {
-        console.error(`Lesson page container ${pageId} not found`);
-        return;
-    }
-
-    // Показываем контейнер
-    pageContainer.classList.remove('hidden');
-
-    // Устанавливаем флаг
-    const flagImg = pageContainer.querySelector('img');
-    if (flagImg) {
-        flagImg.src = `courses_flags/${language}.png`;
-    }
-
-    // Очищаем контейнер контента
-    const contentContainer = document.getElementById(contentId);
-    if (!contentContainer) {
-        console.error(`Content container ${contentId} not found`);
-        return;
-    }
-    contentContainer.innerHTML = '';
-
-    // Загружаем данные курса
+function navigateToCourse(language) {
+    // Проверяем, авторизован ли пользователь
     fetch('getUserId.php')
         .then(response => response.json())
-        .then(userData => {
-            if (userData.error) throw new Error(userData.error);
-            return fetch(`get_course_data.php?language=${language}&user_id=${userData.user_id}`);
-        })
-        .then(response => response.json())
-        .then(courseData => {
-            if (courseData.error) throw new Error(courseData.error);
-            displayCourseData(courseData, contentId);
-        })
-        .catch(error => {
-            console.error('Error loading course data:', error);
-            if (contentContainer) {
-                contentContainer.innerHTML = `<div class="error-message">Ошибка загрузки курса: ${error.message}</div>`;
+        .then(data => {
+            if (data.error) {
+                console.error('Error:', data.error);
+                return;
             }
-        });
+            
+            const userId = data.user_id;
+
+            // Проверяем доступ к языку
+            fetch(`get_user_languages.php?user_id=${userId}`)
+                .then(response => response.json())
+                .then(languageData => {
+                    if (languageData.error) {
+                        console.error('Error:', languageData.error);
+                        return;
+                    }
+
+                    // Проверяем, есть ли у пользователя доступ к этому языку
+                    if (languageData.languages.includes(language)) {
+                        // Перенаправляем на страницу курса с параметрами
+                        window.location.href = `course_roadmap.html?language=${language}&user_id=${userId}`;
+                    } else {
+                        console.error('Access denied to this language');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function showLanguage(language) {
+    // Перенаправляем на страницу курса
+    navigateToCourse(language);
+}
+
+function selectMobileLanguage(language) {
+    // Закрываем дропдаун
+    document.getElementById('mobileLanguageDropdown').style.display = 'none';
+    // Перенаправляем на страницу курса
+    navigateToCourse(language);
 }
 
 // Обработчик изменения размера окна

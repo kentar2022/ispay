@@ -28,7 +28,7 @@ $(document).ready(function () {
         console.error('No language found in URL.');
         return;
     }
-
+    
     if (topicId) {
         console.log('Topic ID from URL:', topicId);
     } else {
@@ -89,7 +89,7 @@ $(document).ready(function () {
                 console.log("User ID:", response.user_id);
                 // Используем topicId из URL параметров
                 const urlTopicId = urlParams.get('topicId');
-                updateTopicProgress(response.user_id, urlTopicId, score, language);
+                updateUserProgress(response.user_id, urlTopicId, score, language);
             },
             error: function (xhr, status, error) {
                 console.error("Ошибка при получении ID пользователя:", error);
@@ -99,6 +99,13 @@ $(document).ready(function () {
 
 
     function loadLesson(language, lessonId, topicId) {
+            if (!completedLessons || completedLessons === '0') {
+        lessonId = 1;
+        console.log('completedLessons is 0 or not set, defaulting to lessonId: 1');
+    } else {
+        lessonId = parseInt(completedLessons, 10);
+        console.log('Lesson ID from URL:', lessonId);
+    }
         // Показываем индикатор загрузки
         $('.main-block').append('<div id="loadingIndicator">Загрузка урока...</div>');
         $('#loadingIndicator').css({
@@ -737,26 +744,34 @@ $(document).ready(function () {
     }
 
 
-
-    function updateTopicProgress(userId, topicId, newScore, language) {
-        console.log("Отправка данных в updateTopicProgress:", {
+    function updateUserProgress(userId, topicId, newScore, language) {
+        console.log("Отправка данных в updateUserProgress:", {
             user_id: userId,
             topic_id: topicId,
             new_score: newScore,
             language: language
         });
 
+        // Добавим completedLessons
+        const currentLessonId = parseInt(completedLessons, 10);
+        const nextLessonId = currentLessonId + 1;
+
         $.ajax({
             type: "POST",
-            url: "../update_topic_progress.php",
+            url: "../update_user_progress.php",
             data: {
                 user_id: userId,
                 topic_id: topicId,
                 new_score: newScore,
-                language: language
+                language: language,
+                completed_lessons: nextLessonId  // Добавляем это поле
             },
             success: function (response) {
                 console.log("Прогресс успешно обновлен:", response);
+                // После успешного обновления перенаправляем на страницу курса
+                setTimeout(() => {
+                    window.location.href = `/course_roadmap.html?language=${language}`;
+                }, 2000);
             },
             error: function (xhr, status, error) {
                 console.error("Ошибка при обновлении прогресса:", error);

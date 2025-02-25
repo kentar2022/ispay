@@ -24,9 +24,6 @@ try {
     $user_id = $input['user_id'] ?? null;
     $language = $input['language'] ?? null;
 
-    debug("user_id: " . ($user_id ?? 'null'));
-    debug("language: " . ($language ?? 'null'));
-
     if (!isset($user_id) || !isset($language)) {
         echo json_encode([
             'error' => 'Invalid input',
@@ -41,16 +38,14 @@ try {
     }
     debug("Connected to database: $language");
 
-    // Проверим существуют ли уже записи
-    $checkQuery = "SELECT COUNT(*) as count FROM user_progress WHERE user_id = ?";
+    // Проверяем существование записи в таблице user_progress
+    $checkQuery = "SELECT progress_data FROM user_progress WHERE user_id = ?";
     $checkStmt = $mysqli->prepare($checkQuery);
     $checkStmt->bind_param("i", $user_id);
     $checkStmt->execute();
     $result = $checkStmt->get_result();
-    $row = $result->fetch_assoc();
-    debug("Existing records count: " . $row['count']);
-
-    if ($row['count'] > 0) {
+    
+    if ($result->num_rows > 0) {
         debug("User progress already exists");
         echo json_encode([
             'success' => true,
@@ -60,90 +55,57 @@ try {
         exit();
     }
 
-    $mysqli->begin_transaction();
-
-    $themesQuery = "SELECT t.id as theme_id, t.total_topics, tp.id as topic_id, tp.total_lessons 
+    // Получаем все темы и их топики
+    $themesQuery = "SELECT t.id as theme_id, t.themes_name, t.total_topics, 
+                           tp.id as topic_id, tp.topic_name, tp.total_lessons 
                     FROM themes t 
                     LEFT JOIN topics tp ON t.id = tp.theme_id 
                     ORDER BY t.id, tp.id";
     
     $result = $mysqli->query($themesQuery);
     if (!$result) {
-        debug("Themes query failed: " . $mysqli->error);
         throw new Exception("Error fetching course structure: " . $mysqli->error);
     }
-    
-    $rowCount = $result->num_rows;
-    debug("Found themes/topics: " . $rowCount);
 
-    $userProgressStmt = $mysqli->prepare(
-        "INSERT INTO user_progress 
-        (user_id, theme_id, topic_id, completed_lessons, completed_topics, progress_percentage, total_score) 
-        VALUES (?, ?, ?, 1, 0, 0, 0)"
-    );
-    
-    if (!$userProgressStmt) {
-        debug("Prepare statement failed: " . $mysqli->error);
-        throw new Exception("Error preparing statement: " . $mysqli->error);
-    }
+    // Создаем структуру JSON
+    $progressData = [
+        'languages' => [
+            $language => [
+                'topics' => []
+            ]
+        ]
+    ];
 
-    $processed_themes = [];
-    $insertCount = 0;
-
+    // Заполняем топики
     while ($row = $result->fetch_assoc()) {
-        $theme_id = $row['theme_id'];
-        $topic_id = $row['topic_id'];
-        
-        debug("Processing theme_id: $theme_id, topic_id: " . ($topic_id ?? 'null'));
-        
-        if (!in_array($theme_id, $processed_themes)) {
-            $null_topic_id = null;
-            if (!$userProgressStmt->bind_param("iii", $user_id, $theme_id, $null_topic_id)) {
-                debug("Bind param failed for theme: " . $userProgressStmt->error);
-                throw new Exception("Error binding theme parameters: " . $userProgressStmt->error);
-            }
-            
-            if (!$userProgressStmt->execute()) {
-                debug("Execute failed for theme: " . $userProgressStmt->error);
-                throw new Exception("Error executing theme insert: " . $userProgressStmt->error);
-            }
-            $processed_themes[] = $theme_id;
-            $insertCount++;
-            debug("Theme progress inserted for theme_id: $theme_id");
-        }
-
-        if ($topic_id !== null) {
-            if (!$userProgressStmt->bind_param("iii", $user_id, $theme_id, $topic_id)) {
-                debug("Bind param failed for topic: " . $userProgressStmt->error);
-                throw new Exception("Error binding topic parameters: " . $userProgressStmt->error);
-            }
-            
-            if (!$userProgressStmt->execute()) {
-                debug("Execute failed for topic: " . $userProgressStmt->error);
-                throw new Exception("Error executing topic insert: " . $userProgressStmt->error);
-            }
-            $insertCount++;
-            debug("Topic progress inserted for topic_id: $topic_id");
+        if ($row['topic_id'] !== null) {
+            $progressData['languages'][$language]['topics'][$row['topic_id']] = [
+                'completed_lessons' => 0,
+                'total_score' => 0
+            ];
         }
     }
 
-    debug("Total inserts performed: $insertCount");
+    // Сохраняем JSON в базу данных
+    $jsonData = json_encode($progressData);
+    $insertStmt = $mysqli->prepare("INSERT INTO user_progress (user_id, progress_data) VALUES (?, ?)");
+    $insertStmt->bind_param("is", $user_id, $jsonData);
+    
+    if (!$insertStmt->execute()) {
+        throw new Exception("Error saving progress data: " . $insertStmt->error);
+    }
 
-    $mysqli->commit();
-    debug("Transaction committed successfully");
+    debug("Progress data initialized successfully");
     
     echo json_encode([
         'success' => true,
-        'inserts_performed' => $insertCount,
-        'debug' => $debug_log
+        'message' => 'Progress initialized',
+        'debug' => $debug_log,
+        'progress_data' => $progressData
     ]);
 
 } catch (Exception $e) {
     debug("Error occurred: " . $e->getMessage());
-    if (isset($mysqli)) {
-        $mysqli->rollback();
-        debug("Transaction rolled back");
-    }
     echo json_encode([
         'error' => 'Failed to initialize progress tables',
         'details' => $e->getMessage(),
