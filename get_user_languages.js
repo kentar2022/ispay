@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error fetching user ID:', error));
 });
 
-/*
 function addLanguage(language) {
     fetch('getUserId.php')
         .then(response => response.json())
@@ -87,14 +86,14 @@ function addLanguage(language) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    user_id: userId,  // Передаем user_id
+                    user_id: userId,
                     language: language
                 })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    location.reload(); // Перезагружаем текущую страницу
+                    window.location.href = 'index.html'; // Перенаправляем на index.html
                 } else {
                     console.error('Error adding language:', data.error);
                 }
@@ -103,4 +102,3 @@ function addLanguage(language) {
         })
         .catch(error => console.error('Error fetching user ID:', error));
 }
-*/

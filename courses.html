@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курсы языков - ISPAY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .courses-container {
+            padding: 2rem 0;
+        }
+        
+        .course-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .course-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .course-content {
+            padding: 1.5rem;
+        }
+        
+        .course-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .add-language-btn {
+            background: #15E670;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .add-language-btn:hover {
+            background: #12c55f;
+        }
+        
+        @media (max-width: 768px) {
+            .course-image {
+                height: 150px;
+            }
+            
+            .course-title {
+                font-size: 1.2rem;
+            }
+        }
+        
+        [data-theme="dark"] .courses-title {
+            color: #ffffff;
+        }
+
+        #languageSelectContainer {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-color);
+            border: none !important;
+        }
+
+        [data-theme="dark"] #languageSelectContainer {
+            background-color: #293133;
+        }
+
+        #languageSelect {
+            margin-left: 10px;
+            height: 35px;
+            color: var(--accent-color);
+            background-color: var(--bg-color);
+            border: none;
+            outline: none;
+        }
+
+        [data-theme="dark"] #languageSelect {
+            color: #15E670;
+            background-color: #293133;
+        }
+
+        #languageSelect option {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+        }
+
+        [data-theme="dark"] #languageSelect option {
+            background-color: #293133;
+            color: #15E670;
+        }
+    </style>
+</head>
+<body>
+    <div class="container courses-container">
+        <h1 class="courses-title text-center mb-5">Доступные курсы</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="courses_flags/chechen.png" alt="Чеченский язык" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title" id="courseChechenTranslation">Чеченский язык</h3>
+                        <button class="add-language-btn" data-language="chechen">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="courses_flags/lezgin.png" alt="Лезгинский язык" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title" id="courseLezginTranslation">Лезгинский язык</h3>
+                        <button class="add-language-btn" data-language="lezgin">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="courses_flags/ingush.png" alt="Ингушский язык" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title" id="courseIngushTranslation">Ингушский язык</h3>
+                        <button class="add-language-btn" data-language="ingush">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="courses_flags/adyge.png" alt="Черкесский язык" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title" id="courseAdygeTranslation">Черкесский язык</h3>
+                        <button class="add-language-btn" data-language="adyge">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="courses_flags/udmurt.png" alt="Удмуртский язык" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title" id="courseUdmurtTranslation">Удмуртский язык</h3>
+                        <button class="add-language-btn" data-language="udmurt">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="courses_flags/tatar.png" alt="Татарский язык" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title" id="courseTatarTranslation">Татарский язык</h3>
+                        <button class="add-language-btn" data-language="tatar">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="courses_flags/chuvash.png" alt="Чувашский язык" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title" id="courseChuvashTranslation">Чувашский язык</h3>
+                        <button class="add-language-btn" data-language="chuvash">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="courses_flags/bashkort.png" alt="Башкирский язык" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title" id="courseBashkortTranslation">Башкирский язык</h3>
+                        <button class="add-language-btn" data-language="bashkort">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="courses_flags/moksha.png" alt="Мокшанский язык" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title" id="courseMokshaTranslation">Мокшанский язык</h3>
+                        <button class="add-language-btn" data-language="moksha">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="settings.js"></script>
+    <script src="scripts/add_language_to_profile.js"></script>
+    <script src="scripts/initialize_progress_tables.js"></script>
+    <script>
+        document.querySelectorAll('.add-language-btn').forEach(button => {
+            button.addEventListener('click', async function() {
+                const language = this.getAttribute('data-language');
+                try {
+                    const response = await fetch('scripts/add_language_to_profile.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `language=${encodeURIComponent(language)}`
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        // Инициализируем таблицы прогресса для нового языка
+                        await initializeProgressTables();
+                        // Обновляем интерфейс
+                        this.disabled = true;
+                        this.textContent = '✓';
+                        this.style.background = '#4CAF50';
+                    } else {
+                        console.error('Ошибка при добавлении языка:', data.error);
+                        if (data.debug) {
+                            console.log('Debug info:', data.debug);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

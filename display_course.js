@@ -7,6 +7,30 @@ function displayCourseData(data) {
 
     console.log('Course data received:', data);
 
+    // Считаем общий прогресс курса
+    let totalLessons = 0;
+    let completedLessons = 0;
+    
+    data.forEach(theme => {
+        theme.topics.forEach(topic => {
+            totalLessons += parseInt(topic.total_lessons);
+            completedLessons += parseInt(topic.completed_lessons || 0);
+        });
+    });
+    
+    // Вычисляем процент прогресса
+    const courseProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+    
+    // Обновляем прогресс-бар и текст
+    const progressBar = document.querySelector('.progress-bar');
+    const progressText = document.querySelector('.text-muted');
+    
+    if (progressBar && progressText) {
+        progressBar.style.width = `${courseProgress}%`;
+        progressBar.setAttribute('aria-valuenow', courseProgress);
+        progressText.textContent = `${courseProgress}% завершено`;
+    }
+
     // Очищаем контейнер
     container.innerHTML = '';
 
@@ -86,18 +110,17 @@ function createTimelineItem(theme, themeProgress, index) {
 }
 
 
-function createTopicsList(topics, progressTopics = []) {
+function createTopicsList(topics) {
     if (!topics || !Array.isArray(topics)) return '';
     
-    let previousTopicCompleted = true; // Первая тема всегда доступна
+    let previousTopicCompleted = true;
     
     return topics.map(topic => {
         const completedLessons = topic.completed_lessons || 0;
-        const isLocked = !previousTopicCompleted; // Тема заблокирована если предыдущая не завершена
+        const isLocked = !previousTopicCompleted;
         const isCompleted = completedLessons === topic.total_lessons;
         const progressPercent = Math.round((completedLessons / topic.total_lessons) * 100);
         
-        // Обновляем статус для следующей темы
         previousTopicCompleted = isCompleted;
         
         return `
@@ -105,12 +128,12 @@ function createTopicsList(topics, progressTopics = []) {
                  data-topic-id="${topic.id}"
                  data-completed-lessons="${completedLessons}"
             >
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
+                <div class="d-flex justify-content-between align-items-center flex-wrap w-100">
+                    <div class="topic-title mb-1">
                         <i class="bi ${isLocked ? 'bi-lock-fill' : getTopicIcon(completedLessons, topic.total_lessons)} me-2"></i>
                         ${topic.topic_name}
                     </div>
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center progress-container">
                         <div class="progress me-2" style="width: 100px; height: 6px;">
                             <div class="progress-bar bg-${isCompleted ? 'success' : isLocked ? 'secondary' : 'primary'}" 
                                  style="width: ${progressPercent}%">

@@ -15,6 +15,73 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>ISPAY</title>
+    <style>
+        .language-select {
+            width: 100%;
+            padding: 0.5rem;
+            border: none !important;
+            border-radius: 4px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            box-shadow: none !important;
+        }
+
+        .language-select:focus {
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .language-select option {
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        #languageSelectContainer {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-color);
+            border: none !important;
+        }
+
+        [data-theme="dark"] #languageSelectContainer {
+            background-color: #293133;
+        }
+
+        #languageSelect {
+            margin-left: 10px;
+            height: 35px;
+            color: var(--accent-color);
+            background-color: var(--bg-color);
+            border: none;
+            outline: none;
+        }
+
+        [data-theme="dark"] #languageSelect {
+            color: #15E670;
+            background-color: #293133;
+        }
+
+        #languageSelect option {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+        }
+
+        [data-theme="dark"] #languageSelect option {
+            background-color: #293133;
+            color: #15E670;
+        }
+
+        #translateIcon svg {
+            fill: var(--accent-color);
+        }
+
+        [data-theme="dark"] #translateIcon svg {
+            fill: #15E670;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -87,8 +154,8 @@
                         <option value="lezgin" id="courseLezginTranslation" class="a">Лезгинский язык</option>
                     </select>
                 </div>
-                <div class="aside-item" id="coursesPageBtn" onclick="togglePages('coursesPage')">
-                    <a href="#">
+                <div class="aside-item" id="coursesPageBtn" onclick="window.location.href='courses.html'">
+                    <a href="courses.html">
                         <svg fill="#000000" width="35px" height="35px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <path d="M31.514 11.177l-15.514-7.467-15.514 7.467 2.186 1.318v11.529h1.066v-10.886l3.199 1.929v13.223h18.126v-13.219l6.451-3.894zM16 4.893l13.275 6.39-13.267 8.008-13.282-8.009 13.274-6.39zM23.997 27.224h-15.994v-11.514l8.005 4.827 7.989-4.823v11.51z">
                             </path>
@@ -233,9 +300,6 @@
 
 
 
-
-
-
 <div id="coursesPage" class="page hidden coursesPage">
     <div class="container">
         <main>
@@ -275,11 +339,11 @@
                     <h3 id="courseChuvashTranslation" class="courses_titles">Чувашский язык</h3>
                     <button class="add-language-button a" data-language="chuvash">+</button>
                 </div>
-                <!--<div class="course">
+                <<div class="course">
                     <img src="courses_flags/bashkort.png" alt="Flag">
                     <h3 id="courseBashkortTranslation" class="courses_titles">Башкирский язык</h3>
                     <button class="add-language-button a" data-language="bashkort">+</button>
-                </div> -->               
+                </div>             
             </div>
         </main>
     </div>
@@ -311,60 +375,56 @@
 </div>
 
 
-<div id="friendsPage" class="friendsPage page hidden">
-    <div class="friend-list-container">
-        <div class="friend-content">
-            <h2 class="friend-list-title a" id="friend-list-title">Мои друзья</h2>
-            <hr class="friend-list-divider">
-            <div id="friendsList" class="friend-list">
-            </div>
-            <div class="friend-requests-section">
-                <h2>Входящие заявки в друзья</h2>
-                <div id="friendRequestsList" class="friend-requests-container">
-                    <!-- Заявки будут добавлены через JavaScript -->
-                </div>
-            </div>
-            <!-- Контейнер для кнопки добавления друга -->
-            <div class="button-container">
-                <button id="addFriendButton" class="add-new-friend-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="white" class="addFriendSvg">
-                        <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
+<div id="friendsPage" class="page hidden friendsPage">
+    <div class="friends-container">
+        <div class="friends-header">
+            <h2>Друзья</h2>
+            <div class="friends-search">
+                <input type="text" placeholder="Поиск друзей..." class="search-input">
+                <button class="search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z" fill="currentColor"/>
                     </svg>
                 </button>
             </div>
-            <div id="friendRequestsList" class="friend-requests-container"></div>
-
-            <div id="addFriendModal" class="modal hidden">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title">Добавить друга</h2>
-                        <button class="close-button">
-                            <svg viewBox="0 0 24 24" width="24" height="24">
-                                <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <form id="addFriendForm" autocomplete="off">
-                        <div class="form-group">
-                            <label for="friendIdInput">ID пользователя</label>
-                            <input 
-                                type="text"
-                                id="friendIdInput"
-                                name="friend_id"
-                                required
-                                pattern="\d+"
-                                placeholder="Введите ID пользователя"
-                            />
-                        </div>
-
-                        <button type="submit" class="add-friend-submit-btn">
-                            Отправить заявку в друзья
-                        </button>
-                    </form>
-                </div>
-            </div>
         </div>
+         
+        <div class="friends-tabs">
+            <button class="tab-button active" data-tab="all">Все друзья</button>
+            <button class="tab-button" data-tab="online">Онлайн</button>
+            <button class="tab-button" data-tab="offline">Оффлайн</button>
+        </div>
+
+        <div class="friends-grid">
+            <!-- Список друзей будет добавлен динамически через JavaScript -->
+        </div>
+
+        <div class="friends-pagination">
+            <button class="pagination-button prev">←</button>
+            <div class="pagination-numbers">
+                <span class="active">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>...</span>
+                <span>10</span>
+            </div>
+            <button class="pagination-button next">→</button>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно для добавления друга -->
+<div id="addFriendModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Добавить друга</h2>
+        <form id="addFriendForm">
+            <div class="form-group">
+                <label for="friendId">ID друга</label>
+                <input type="text" id="friendId" name="friendId" required>
+            </div>
+            <button type="submit" class="add-friend-submit-btn">Добавить</button>
+        </form>
     </div>
 </div>
 

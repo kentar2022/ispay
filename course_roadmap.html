@@ -133,7 +133,107 @@
         .locked-topic .bi-lock-fill {
             color: #666;
         }           
-             
+        /* Общие адаптивные стили */
+        @media (max-width: 992px) {
+            .container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            h1.display-5 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Стили для средних экранов (планшеты) */
+        @media (max-width: 768px) {
+            .timeline-content {
+                width: calc(100% - 40px);
+                margin-left: 40px !important;
+            }
+            
+            .timeline-line {
+                left: 10px;
+            }
+            
+            .timeline-point {
+                left: 10px;
+            }
+            
+            .section-card {
+                margin-bottom: 1.5rem;
+            }
+            
+            h1.display-5 {
+                font-size: 1.5rem;
+            }
+            
+            .card-body {
+                padding: 1rem !important;
+            }
+            
+            .topic-item {
+                padding: 8px 10px;
+            }
+        }
+
+        /* Стили для очень маленьких экранов (смартфоны) */
+        @media (max-width: 576px) {
+            .topic-item .d-flex {
+                flex-direction: column;
+                align-items: flex-start !important;
+            }
+            
+            .topic-item .d-flex .progress {
+                margin-top: 8px;
+                width: 100% !important;
+                margin-bottom: 5px;
+            }
+            
+            .topic-item .d-flex .badge {
+                margin-left: auto;
+            }
+            
+            h1.display-5 {
+                font-size: 1.3rem;
+            }
+            
+            .row.align-items-center.mb-5 {
+                margin-bottom: 1rem !important;
+            }
+            
+            .row.align-items-center.mb-5 .col-auto img {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .lessons-count {
+                font-size: 0.9rem;
+            }
+            
+            .timeline-item {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        /* Улучшение адаптивности прогресс-бара */
+        @media (max-width: 480px) {
+            .d-flex.align-items-center .text-muted {
+                display: none;
+            }
+            
+            .progress.flex-grow-1 {
+                max-width: 100%;
+            }
+            
+            .mt-3 {
+                max-width: 100% !important;
+            }
+            
+            .topic-item .d-flex {
+                gap: 10px;
+            }
+        }             
     </style>
 </head>
 <body>

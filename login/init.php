@@ -7,14 +7,19 @@ error_reporting(E_ALL);
 // Настройка сессии
 function initSession() {
     if (session_status() === PHP_SESSION_NONE) {
+        // Устанавливаем время жизни сессии (30 дней)
+        ini_set('session.gc_maxlifetime', 30 * 24 * 60 * 60);
         session_set_cookie_params([
             'path' => '/',
             'domain' => '',
             'secure' => false, // Измените на true если используете HTTPS
             'httponly' => true,
-            'samesite' => 'Strict'
+            'samesite' => 'Strict',
+            'lifetime' => 30 * 24 * 60 * 60 // 30 дней
         ]);
         session_start();
+        // Обновляем время последней активности
+        $_SESSION['last_activity'] = time();
     }
 }
 

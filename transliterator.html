@@ -6,9 +6,27 @@
     <title>Транслитератор</title>
     <style>
         :root {
-            --accent-color: rgb(21, 230, 112);
+            --accent-color: #f3166b; /* Фиолетовый для светлой темы */
+            --accent-color-hover: rgba(243, 22, 107, 0.8);
+            --accent-color-light: rgba(243, 22, 107, 0.1);
+            --text-color: #000000;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #ddd;
+            --input-bg: #ffffff;
+            --icon-color: #000000;
+        }
+
+        [data-theme="dark"] {
+            --accent-color: #15E670; /* Зелёный для тёмной темы */
             --accent-color-hover: rgba(21, 230, 112, 0.8);
             --accent-color-light: rgba(21, 230, 112, 0.1);
+            --text-color: #ffffff;
+            --bg-color: #293133;
+            --card-bg: #293133;
+            --border-color: #404040;
+            --input-bg: #293133;
+            --icon-color: #ffffff;
         }
 
         * {
@@ -20,8 +38,9 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.5;
-            background-color: #f5f5f5;
+            background-color: var(--bg-color);
             padding: 1rem;
+            color: var(--text-color);
         }
 
         .container {
@@ -30,7 +49,7 @@
         }
 
         .card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             padding: 2rem;
@@ -43,9 +62,14 @@
             margin-bottom: 1.5rem;
         }
 
+        .header svg {
+            stroke: var(--text-color);
+        }
+
         .header h1 {
             font-size: 1.5rem;
             font-weight: 600;
+            color: var(--text-color);
         }
 
         .language-buttons {
@@ -57,20 +81,24 @@
 
         .language-button {
             padding: 0.5rem 1rem;
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            background: #f0f0f0;
+            background: transparent !important;
+            color: var(--text-color) !important;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .language-button:hover {
-            background: #e0e0e0;
+            background: var(--accent-color) !important;
+            border-color: var(--accent-color);
+            color: #ffffff !important;
         }
 
         .language-button.active {
-            background: var(--accent-color);
-            color: white;
+            background: var(--accent-color) !important;
+            color: #ffffff !important;
+            border-color: var(--accent-color);
         }
 
         .direction-switch {
@@ -84,6 +112,7 @@
             align-items: center;
             gap: 0.5rem;
             cursor: pointer;
+            color: var(--text-color);
         }
 
         .direction-switch input[type="radio"] {
@@ -98,17 +127,19 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
-            color: #333;
+            color: var(--text-color);
         }
 
         textarea {
             width: 100%;
             height: 150px;
             padding: 0.75rem;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 1rem;
             resize: vertical;
+            background: var(--input-bg);
+            color: var(--text-color);
         }
 
         textarea:focus {
@@ -130,30 +161,41 @@
             padding: 0.5rem 1rem;
             border: none;
             border-radius: 6px;
-            background: var(--accent-color-light);
-            color: var(--accent-color);
+            background: var(--accent-color) !important;
+            color: #ffffff !important;
             cursor: pointer;
             transition: all 0.2s;
         }
 
+        .copy-button svg {
+            stroke: #ffffff !important;
+        }
+
         .copy-button:hover {
-            background: var(--accent-color);
-            color: white;
+            opacity: 0.9;
         }
 
         .arrow-icon {
             display: flex;
             justify-content: center;
             margin: 1rem 0;
-            color: #666;
+        }
+
+        .arrow-icon svg {
+            stroke: var(--text-color);
         }
 
         .rtl {
             direction: rtl;
         }
+
+        [data-theme="dark"] .header svg,
+        [data-theme="dark"] .arrow-icon svg {
+            stroke: #ffffff;
+        }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div class="container">
         <div class="card">
             <div class="header">
@@ -226,8 +268,75 @@
             lezgin: lezginMappings
         };
 
+        const languageNames = {
+            chechen: 'Чеченский',
+            circassian: 'Черкесский',
+            tatar: 'Татарский',
+            lezgin: 'Лезгинский'
+        };
+
         let currentLanguage = 'chechen';
         let currentDirection = 'toLatn';
+
+        // Обновляем отображение выбранного языка
+        function updateSelectedLanguage() {
+            // Убираем активный класс у всех кнопок
+            document.querySelectorAll('.language-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Добавляем активный класс кнопке текущего языка
+            const currentButton = document.querySelector(`[data-language="${currentLanguage}"]`);
+            if (currentButton) {
+                currentButton.classList.add('active');
+            }
+        }
+
+        // Инициализируем отображение языка
+        updateSelectedLanguage();
+
+        // Обработчики событий для кнопок языков
+        document.querySelectorAll('.language-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Убираем активный класс у всех кнопок
+                document.querySelectorAll('.language-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Добавляем активный класс нажатой кнопке
+                this.classList.add('active');
+                
+                // Обновляем текущий язык
+                currentLanguage = this.getAttribute('data-language');
+                updateSelectedLanguage();
+                
+                // Очищаем поля ввода и вывода
+                document.getElementById('inputText').value = '';
+                document.getElementById('outputText').value = '';
+            });
+        });
+
+        document.querySelectorAll('input[name="direction"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                currentDirection = e.target.value;
+                transliterateText();
+            });
+        });
+
+        document.getElementById('inputText').addEventListener('input', transliterateText);
+
+        document.getElementById('copyButton').addEventListener('click', () => {
+            const outputText = document.getElementById('outputText');
+            outputText.select();
+            document.execCommand('copy');
+            
+            const button = document.getElementById('copyButton');
+            const originalText = button.querySelector('span').textContent;
+            button.querySelector('span').textContent = 'Скопировано!';
+            setTimeout(() => {
+                button.querySelector('span').textContent = originalText;
+            }, 2000);
+        });
 
         function transliterate(text, language, direction) {
             if (!text) return '';
@@ -274,55 +383,18 @@
             return result;
         }
 
-        // Event Listeners
-        document.getElementById('inputText').addEventListener('input', (e) => {
-            const result = transliterate(e.target.value, currentLanguage, currentDirection);
-            document.getElementById('outputText').value = result;
-        });
-
-        document.getElementById('languageButtons').addEventListener('click', (e) => {
-            if (e.target.classList.contains('language-button')) {
-                document.querySelectorAll('.language-button').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                e.target.classList.add('active');
-                currentLanguage = e.target.dataset.language;
-                
-                const inputText = document.getElementById('inputText').value;
-                const result = transliterate(inputText, currentLanguage, currentDirection);
-                document.getElementById('outputText').value = result;
-            }
-        });
-
-        document.querySelectorAll('input[name="direction"]').forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                currentDirection = e.target.value;
-                const outputText = document.getElementById('outputText');
-                outputText.classList.toggle('rtl', currentDirection === 'toArab');
-                
-                const inputText = document.getElementById('inputText').value;
-                const result = transliterate(inputText, currentLanguage, currentDirection);
-                outputText.value = result;
-            });
-        });
-
-        document.getElementById('copyButton').addEventListener('click', () => {
+        function transliterateText() {
+            const inputText = document.getElementById('inputText').value;
             const outputText = document.getElementById('outputText');
-            outputText.select();
-            document.execCommand('copy');
-            
-            const button = document.getElementById('copyButton');
-            const originalText = button.innerHTML;
-            button.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <span>Скопировано!</span>
-            `;
-            
-            setTimeout(() => {
-                button.innerHTML = originalText;
-            }, 2000);
+            outputText.value = transliterate(inputText, currentLanguage, currentDirection);
+        }
+    </script>
+    <script src="settings.js"></script>
+    <script>
+        // Обновляем тему при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', theme);
         });
     </script>
 </body>

@@ -31,6 +31,7 @@
                             <option value="udmurt">Удмуртский</option>
                             <option value="tatar">Татарский</option>
                             <option value="chuvash">Чувашский</option>
+                            <option value="moksha">Мокшанский</option>
                         </select>
                     </div>
 
@@ -219,7 +220,7 @@
 
                 // Восстанавливаем язык и topic_id
                 form.language.value = languageValue;
-                form.topic_id.value = parseInt(topicIdValue) + 1; // Увеличиваем topic_id
+                form.topic_id.value = parseInt(topicIdValue) + 1;
 
             } else {
                 showError(result.error || 'Произошла ошибка при загрузке');
@@ -231,7 +232,7 @@
     });
 
         // Добавляем 5 JSON инпутов при загрузке страницы
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 5; i++) {
             addJsonInput();
         }
     </script>

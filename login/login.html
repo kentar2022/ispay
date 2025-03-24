@@ -208,7 +208,8 @@
             <div class="card-body">
                 <h5 id="loginTitleTranslation" class="card-title">Войти</h5>
                 
-                <form id="loginForm" method="post" action="login/login_handler.php">
+                <form id="loginForm" method="POST" action="login_handler.php">
+                    <input type="hidden" name="csrf_token" id="csrf_token">
                     <div class="mb-3">
                         <label class="form-label" id="emailLabelTranslation">Логин</label>
                         <input type="text" class="form-control" name="username" id="username" required>
@@ -350,68 +351,44 @@ window.onload = function() {
         loadTheme();
     };
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Получаем CSRF токен при загрузке страницы
+    fetch('get_csrf_token.php')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('csrf_token').value = data.token;
+        })
+        .catch(error => console.error('Error:', error));
 
-    // Добавляем обработчик отправки формы
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const form = this;
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.innerText;
-    
-    // Добавляем loader к кнопке
-    submitButton.innerHTML = '<span class="loader" style="display: inline-block;"></span> Загрузка...';
-    submitButton.disabled = true;
-
-    const formData = new FormData(form);
-
-    // Добавляем таймаут к fetch
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000); // 10 секунд таймаут
-
-    fetch('login_handler.php', {
-        method: 'POST',
-        body: formData,
-        signal: controller.signal
-    })
-    .then(response => {
-        clearTimeout(timeout);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-            return response.json();
-        } else {
-            console.log('Server response:', response);
-            return response.text().then(text => {
-                try {
-                    return JSON.parse(text);
-                } catch (e) {
-                    console.log('Server returned non-JSON response:', text);
-                    throw new Error('Server did not return JSON');
-                }
-            });
-        }
-    })
-    .then(data => {
-        if (data.success) {
-            window.location.href = '../index.html';
-        } else if (data.error) {
-            alert(data.error);
-        }
-    })
-    .catch(error => {
-        if (error.name === 'AbortError') {
-            alert('Превышено время ожидания ответа от сервера');
-        } else {
+    // Добавляем обработку формы
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        fetch('login_handler.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = data.redirect;
+            } else {
+                // Показываем ошибку пользователю
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.textContent = data.error;
+                document.getElementById('loginForm').prepend(errorDiv);
+                
+                // Удаляем сообщение об ошибке через 5 секунд
+                setTimeout(() => errorDiv.remove(), 5000);
+            }
+        })
+        .catch(error => {
             console.error('Error:', error);
-            alert('Произошла ошибка при входе. Проверьте консоль для деталей.');
-        }
-    })
-    .finally(() => {
-        submitButton.innerHTML = originalButtonText;
-        submitButton.disabled = false;
+            alert('Произошла ошибка при попытке входа. Пожалуйста, попробуйте позже.');
+        });
     });
 });
 </script>
