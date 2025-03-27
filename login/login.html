@@ -354,43 +354,82 @@ window.onload = function() {
 document.addEventListener('DOMContentLoaded', function() {
     // Получаем CSRF токен при загрузке страницы
     fetch('get_csrf_token.php')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('csrf_token').value = data.token;
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const token = response.headers.get('X-CSRF-Token');
+            if (!token) {
+                throw new Error('CSRF token not found in response');
+            }
+            document.getElementById('csrf_token').value = token;
+            return response.json();
         })
-        .catch(error => console.error('Error:', error));
+        .then(data => {
+            if (!data.success) {
+                throw new Error('Failed to initialize CSRF token');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showError('Ошибка при инициализации формы. Пожалуйста, обновите страницу.');
+        });
 
     // Добавляем обработку формы
     document.getElementById('loginForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
         const formData = new FormData(this);
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        
+        // Добавляем индикатор загрузки
+        submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Вход...';
+        submitButton.disabled = true;
         
         fetch('login_handler.php', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.success) {
                 window.location.href = data.redirect;
             } else {
-                // Показываем ошибку пользователю
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'error-message';
-                errorDiv.textContent = data.error;
-                document.getElementById('loginForm').prepend(errorDiv);
-                
-                // Удаляем сообщение об ошибке через 5 секунд
-                setTimeout(() => errorDiv.remove(), 5000);
+                showError(data.error || 'Произошла ошибка при попытке входа');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Произошла ошибка при попытке входа. Пожалуйста, попробуйте позже.');
+            showError('Произошла ошибка при попытке входа. Пожалуйста, попробуйте позже.');
+        })
+        .finally(() => {
+            submitButton.innerHTML = originalButtonText;
+            submitButton.disabled = false;
         });
     });
 });
+
+function showError(message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'alert alert-danger alert-dismissible fade show';
+    errorDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    document.getElementById('loginForm').prepend(errorDiv);
+    
+    // Автоматически скрываем сообщение через 5 секунд
+    setTimeout(() => {
+        errorDiv.classList.remove('show');
+        setTimeout(() => errorDiv.remove(), 150);
+    }, 5000);
+}
 </script>
 </body>
 </html>

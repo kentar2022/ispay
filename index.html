@@ -21,8 +21,6 @@
             padding: 0.5rem;
             border: none !important;
             border-radius: 4px;
-            background: var(--bg-color);
-            color: var(--text-color);
             font-size: 0.9rem;
             cursor: pointer;
             outline: none;
@@ -34,58 +32,24 @@
             box-shadow: none !important;
         }
 
-        .language-select option {
-            background: var(--bg-color);
-            color: var(--text-color);
-        }
-
         #languageSelectContainer {
             display: flex;
             align-items: center;
-            background-color: var(--bg-color);
             border: none !important;
-        }
-
-        [data-theme="dark"] #languageSelectContainer {
-            background-color: #293133;
         }
 
         #languageSelect {
             margin-left: 10px;
             height: 35px;
-            color: var(--accent-color);
-            background-color: var(--bg-color);
             border: none;
             outline: none;
-        }
-
-        [data-theme="dark"] #languageSelect {
-            color: #15E670;
-            background-color: #293133;
-        }
-
-        #languageSelect option {
-            background-color: var(--bg-color);
-            color: var(--accent-color);
-        }
-
-        [data-theme="dark"] #languageSelect option {
-            background-color: #293133;
-            color: #15E670;
-        }
-
-        #translateIcon svg {
-            fill: var(--accent-color);
-        }
-
-        [data-theme="dark"] #translateIcon svg {
-            fill: #15E670;
         }
     </style>
 </head>
 <body>
-    <header>
-    </header>
+    <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
     <div class="container">
         <main>
             <div class="center-block">
@@ -163,57 +127,7 @@
                         <span id="coursesPageTextTranslation">Список курсов</span>
                     </a>
                 </div>
-               <!-- <div class="aside-item" id="ratingsPageBtn">
-                    <a href="ratings.html">
-                        <svg fill="#000000" height="35px" width="35px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 491.813 491.813" xml:space="preserve">
-                            <path d="M491.352,170.948L429.774,49.696c-0.725-1.427-2.19-2.325-3.79-2.325H65.829c-0.047,0-0.093,0.009-0.141,0.01
-                                c-0.082,0.003-0.163,0.01-0.245,0.017c-0.19,0.018-0.377,0.048-0.562,0.09c-0.057,0.014-0.114,0.021-0.17,0.036
-                                c-0.242,0.066-0.475,0.156-0.699,0.263c-0.021,0.01-0.044,0.014-0.065,0.024c-0.034,0.017-0.061,0.042-0.095,0.06
-                                c-0.189,0.1-0.37,0.212-0.542,0.34c-0.042,0.03-0.085,0.057-0.125,0.089c-0.189,0.15-0.365,0.318-0.527,0.501
-                                c-0.043,0.048-0.08,0.1-0.121,0.148c-0.118,0.146-0.227,0.301-0.327,0.463c-0.036,0.059-0.072,0.115-0.105,0.176
-                                c-0.021,0.037-0.046,0.071-0.065,0.109L0.461,170.948c-0.797,1.569-0.544,3.468,0.636,4.773l241.51,267.319
-                                c0.806,0.892,1.951,1.401,3.152,1.401c0,0,0.001,0,0.001,0c1.201,0,2.346-0.508,3.152-1.399l241.803-267.319
-                                C491.896,174.418,492.15,172.519,491.352,170.948z M455.063,202.467H383.62c-2.347,0-4.25,1.902-4.25,4.25
-                                c0,2.348,1.903,4.25,4.25,4.25h63.754l-186.93,206.655l106.913-240.499h110.63L455.063,202.467z M150.62,275.467h-47.954
-                                l-88.849-98.344h109.162l107.859,240.213L110.345,283.967h40.275c2.347,0,4.25-1.902,4.25-4.25
-                                C154.87,277.369,152.967,275.467,150.62,275.467z M16.587,157.967H87.62c2.347,0,4.25-1.902,4.25-4.25c0-2.348-1.903-4.25-4.25-4.25
-                                H20.904L65.776,61.11l53.113,107.514H11.175L16.587,157.967z M412.113,69.467H303.62c-2.347,0-4.25,1.902-4.25,4.25
-                                c0,2.348,1.903,4.25,4.25,4.25h104.195l-44.342,87.708L255.939,55.87h163.048L412.113,69.467z M165.332,138.967h52.288
-                                c2.347,0,4.25-1.902,4.25-4.25c0-2.348-1.903-4.25-4.25-4.25h-43.856l67.889-68.442l-0.04,106.599H135.916L165.332,138.967z
-                                 M301.62,143.967h28.696l24.146,24.656h-104.35l0.04-106.514l71.84,73.357H301.62c-2.347,0-4.25,1.902-4.25,4.25
-                                C297.37,142.065,299.273,143.967,301.62,143.967z M241.609,177.123l-0.092,243.245L132.296,177.123H241.609z M250.109,177.123
-                                h107.946l-108.038,243.03L250.109,177.123z M126.899,165.643L89.019,88.967h63.601c2.347,0,4.25-1.902,4.25-4.25
-                                c0-2.348-1.903-4.25-4.25-4.25h-67.8L72.669,55.87h163.115L126.899,165.643z M371.508,168.623L425.95,60.94l38.865,76.527H401.62
-                                c-2.347,0-4.25,1.902-4.25,4.25c0,2.348,1.903,4.25,4.25,4.25h67.511l11.506,22.656H371.508z"/>
-                        </svg>
-                        <span id="ratingsPageTextTranslation">Рейтинги</span>
-                    </a>
-                </div>-->
-                <div class="aside-item" id="friendsPageBtn" onclick="togglePages('friendsPage')">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="35px" height="35px" viewBox="0 -6 44 44" preserveAspectRatio="xMidYMid">
-                            <path d="M42.001,32.000 L14.010,32.000 C12.908,32.000 12.010,31.104 12.010,30.001 L12.010,28.002 C12.010,27.636 12.211,27.300 12.532,27.124 L22.318,21.787 C19.040,18.242 19.004,13.227 19.004,12.995 L19.010,7.002 C19.010,6.946 19.015,6.891 19.024,6.837 C19.713,2.751 24.224,0.007 28.005,0.007 C28.006,0.007 28.008,0.007 28.009,0.007 C31.788,0.007 36.298,2.749 36.989,6.834 C36.998,6.889 37.003,6.945 37.003,7.000 L37.006,12.994 C37.006,13.225 36.970,18.240 33.693,21.785 L43.479,27.122 C43.800,27.298 44.000,27.634 44.000,28.000 L44.000,30.001 C44.000,31.104 43.103,32.000 42.001,32.000 ZM31.526,22.880 C31.233,22.720 31.039,22.425 31.008,22.093 C30.978,21.761 31.116,21.436 31.374,21.226 C34.971,18.310 35.007,13.048 35.007,12.995 L35.003,7.089 C34.441,4.089 30.883,2.005 28.005,2.005 C25.126,2.006 21.570,4.091 21.010,7.091 L21.004,12.997 C21.004,13.048 21.059,18.327 24.636,21.228 C24.895,21.438 25.033,21.763 25.002,22.095 C24.972,22.427 24.778,22.722 24.485,22.882 L14.010,28.596 L14.010,30.001 L41.999,30.001 L42.000,28.595 L31.526,22.880 ZM18.647,2.520 C17.764,2.177 16.848,1.997 15.995,1.997 C13.116,1.998 9.559,4.083 8.999,7.083 L8.993,12.989 C8.993,13.041 9.047,18.319 12.625,21.220 C12.884,21.430 13.022,21.755 12.992,22.087 C12.961,22.419 12.767,22.714 12.474,22.874 L1.999,28.588 L1.999,29.993 L8.998,29.993 C9.550,29.993 9.997,30.441 9.997,30.993 C9.997,31.545 9.550,31.993 8.998,31.993 L1.999,31.993 C0.897,31.993 -0.000,31.096 -0.000,29.993 L-0.000,27.994 C-0.000,27.629 0.200,27.292 0.521,27.117 L10.307,21.779 C7.030,18.234 6.993,13.219 6.993,12.988 L6.999,6.994 C6.999,6.939 7.004,6.883 7.013,6.829 C7.702,2.744 12.213,-0.000 15.995,-0.000 C15.999,-0.000 16.005,-0.000 16.010,-0.000 C17.101,-0.000 18.262,0.227 19.369,0.656 C19.885,0.856 20.140,1.435 19.941,1.949 C19.740,2.464 19.158,2.720 18.647,2.520 Z"/>
-                        </svg>
-                        <span id="friendsTextTranslation">Друзья</span>
-                    </a>
-                </div>        
-                <div class="aside-item" id="transliteratorPageBtn">
-                    <a href="transliterator.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="35px" height="35px" viewBox="0 -6 44 44" preserveAspectRatio="xMidYMid">
-                            <path d="M42.001,32.000 L14.010,32.000 C12.908,32.000 12.010,31.104 12.010,30.001 L12.010,28.002 C12.010,27.636 12.211,27.300 12.532,27.124 L22.318,21.787 C19.040,18.242 19.004,13.227 19.004,12.995 L19.010,7.002 C19.010,6.946 19.015,6.891 19.024,6.837 C19.713,2.751 24.224,0.007 28.005,0.007 C28.006,0.007 28.008,0.007 28.009,0.007 C31.788,0.007 36.298,2.749 36.989,6.834 C36.998,6.889 37.003,6.945 37.003,7.000 L37.006,12.994 C37.006,13.225 36.970,18.240 33.693,21.785 L43.479,27.122 C43.800,27.298 44.000,27.634 44.000,28.000 L44.000,30.001 C44.000,31.104 43.103,32.000 42.001,32.000 ZM31.526,22.880 C31.233,22.720 31.039,22.425 31.008,22.093 C30.978,21.761 31.116,21.436 31.374,21.226 C34.971,18.310 35.007,13.048 35.007,12.995 L35.003,7.089 C34.441,4.089 30.883,2.005 28.005,2.005 C25.126,2.006 21.570,4.091 21.010,7.091 L21.004,12.997 C21.004,13.048 21.059,18.327 24.636,21.228 C24.895,21.438 25.033,21.763 25.002,22.095 C24.972,22.427 24.778,22.722 24.485,22.882 L14.010,28.596 L14.010,30.001 L41.999,30.001 L42.000,28.595 L31.526,22.880 ZM18.647,2.520 C17.764,2.177 16.848,1.997 15.995,1.997 C13.116,1.998 9.559,4.083 8.999,7.083 L8.993,12.989 C8.993,13.041 9.047,18.319 12.625,21.220 C12.884,21.430 13.022,21.755 12.992,22.087 C12.961,22.419 12.767,22.714 12.474,22.874 L1.999,28.588 L1.999,29.993 L8.998,29.993 C9.550,29.993 9.997,30.441 9.997,30.993 C9.997,31.545 9.550,31.993 8.998,31.993 L1.999,31.993 C0.897,31.993 -0.000,31.096 -0.000,29.993 L-0.000,27.994 C-0.000,27.629 0.200,27.292 0.521,27.117 L10.307,21.779 C7.030,18.234 6.993,13.219 6.993,12.988 L6.999,6.994 C6.999,6.939 7.004,6.883 7.013,6.829 C7.702,2.744 12.213,-0.000 15.995,-0.000 C15.999,-0.000 16.005,-0.000 16.010,-0.000 C17.101,-0.000 18.262,0.227 19.369,0.656 C19.885,0.856 20.140,1.435 19.941,1.949 C19.740,2.464 19.158,2.720 18.647,2.520 Z"/>
-                        </svg>
-                        <span id="TextTranslation">Транслитератор</span>
-                    </a>
-                </div>                        
-                <!--<div class="aside-item" id="lessonsPageBtn" onclick="togglePages('lessonsPage')">
-                    <a href="library.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="35px" height="35px" viewBox="0 0 32 32" version="1.1">
-                            <path d="M3.425 13.953c0 0 24.137 0 24.173 0 0.583-0.255 0.557-0.802 0.011-1.165-0.547-0.365-12.119-8.718-12.119-8.718s-11.482 8.353-12.065 8.718c-0.582 0.363-0.619 0.91 0 1.165zM15.49 8.195c0.965 0 1.748 0.782 1.748 1.747s-0.783 1.748-1.748 1.748-1.747-0.783-1.747-1.748 0.782-1.747 1.747-1.747zM4.027 26.932h22.968v-0.977h-22.968v0.977zM9 24.936v-8.903h0.978v-1.103h-4.993v1.003h0.978v9.002h3.037zM17.030 24.936v-8.966h0.978v-0.978h-4.992v0.94h0.977v9.002h3.037zM3.030 28.93h24.963v-0.914h-24.963v0.914zM24.998 24.936v-8.966h0.978v-0.978h-4.993v0.94h0.979v9.002h3.036z"/>
-                        </svg>
-                        <span id="lessonsPageTextTranslation">Библиотека</span>
-                    </a>
-                </div>-->
-                <div class="aside-item" id="settingsPageBtn" onclick="togglePages('settingsPage')">
+                <!--<div class="aside-item" id="settingsPageBtn" onclick="togglePages('settingsPage')">
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 24 24" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 8.00002C9.79085 8.00002 7.99999 9.79088 7.99999 12C7.99999 14.2092 9.79085 16 12 16C14.2091 16 16 14.2092 16 12C16 9.79088 14.2091 8.00002 12 8.00002ZM9.99999 12C9.99999 10.8955 10.8954 10 12 10C13.1046 10 14 10.8955 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 9.99999 13.1046 9.99999 12Z" fill="#"/>
@@ -222,15 +136,24 @@
                         </svg>
                         <span id="settingsPageTextTranslation">Настройки</span>
                     </a>
-                </div>
-                <!--<div class="aside-item" id="shopPageBtn" onclick="togglePages('shopPage')">
-                    <a href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 24 24" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.13238 1C4.07859 1 3.10207 1.5529 2.5599 2.45651L0.615776 5.69672C0.17816 6.42608 0.0121122 7.42549 0.508798 8.32014C0.789678 8.82607 1.27459 9.55181 2 10.1205V20C2 21.6569 3.34315 23 5 23H8C9.10457 23 10 22.1046 10 21V15H14V21C14 22.1046 14.8954 23 16 23H19C20.6569 23 22 21.6569 22 20V10.1205C22.7254 9.55181 23.2103 8.82607 23.4912 8.32014C23.9879 7.42548 23.8218 6.42608 23.3842 5.69672L21.4401 2.45651C20.8979 1.5529 19.9214 1 18.8676 1H5.13238ZM20 10.9697C19.8391 10.9895 19.6725 11 19.5 11C18.1259 11 17.1126 10.3216 16.4364 9.60481C16.2632 9.4211 16.1082 9.23119 15.9705 9.04325C15.2167 9.98812 13.9542 11 12 11C10.0458 11 8.7833 9.98812 8.02952 9.04325C7.89183 9.23119 7.73684 9.4211 7.56355 9.60481C6.8874 10.3216 5.87405 11 4.5 11C4.32752 11 4.16089 10.9895 4 10.9697V20C4 20.5523 4.44772 21 5 21H8V15C8 13.8954 8.89543 13 10 13H14C15.1046 13 16 13.8954 16 15V21H19C19.5523 21 20 20.5523 20 20V10.9697ZM4.27489 3.4855C4.45561 3.1843 4.78112 3 5.13238 3H18.8676C19.2189 3 19.5444 3.1843 19.7251 3.4855L21.6692 6.72571C21.8324 6.99765 21.8127 7.2231 21.7426 7.34937C21.2851 8.17345 20.5493 9 19.5 9C18.8448 9 18.323 8.69006 17.8913 8.23245C17.4506 7.76524 17.1659 7.20393 17.0284 6.88399C16.8114 6.37951 16.3329 6.21388 16.0033 6.21248C15.674 6.21109 15.1982 6.37172 14.9752 6.8683C14.6702 7.54754 13.7982 9 12 9C10.2018 9 9.32978 7.54754 9.0248 6.8683C8.80182 6.37172 8.32598 6.21109 7.99667 6.21248C7.66706 6.21388 7.18855 6.37951 6.97164 6.88399C6.83407 7.20393 6.5494 7.76524 6.10869 8.23245C5.67703 8.69006 5.15524 9 4.5 9C3.45065 9 2.71491 8.17345 2.2574 7.34937C2.1873 7.2231 2.1676 6.99765 2.33076 6.72571L4.27489 3.4855Z" fill=""/>
-                    </svg>
-                        <span id="shopTextTranslation">Магазин</span>
+                </div>-->
+                <!--<div class="aside-item">
+                    <a href="friends.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="#"/>
+                            <path d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22" fill="#"/>
+                        </svg>
+                        <span id="friendsPageTextTranslation">Друзья</span>
                     </a>
                 </div>-->
+                <div class="aside-item" id="transliteratorPageBtn">
+                    <a href="transliterator.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="35px" height="35px" viewBox="0 -6 44 44" preserveAspectRatio="xMidYMid">
+                            <path d="M42.001,32.000 L14.010,32.000 C12.908,32.000 12.010,31.104 12.010,30.001 L12.010,28.002 C12.010,27.636 12.211,27.300 12.532,27.124 L22.318,21.787 C19.040,18.242 19.004,13.227 19.004,12.995 L19.010,7.002 C19.010,6.946 19.015,6.891 19.024,6.837 C19.713,2.751 24.224,0.007 28.005,0.007 C28.006,0.007 28.008,0.007 28.009,0.007 C31.788,0.007 36.298,2.749 36.989,6.834 C36.998,6.889 37.003,6.945 37.003,7.000 L37.006,12.994 C37.006,13.225 36.970,18.240 33.693,21.785 L43.479,27.122 C43.800,27.298 44.000,27.634 44.000,28.000 L44.000,30.001 C44.000,31.104 43.103,32.000 42.001,32.000 ZM31.526,22.880 C31.233,22.720 31.039,22.425 31.008,22.093 C30.978,21.761 31.116,21.436 31.374,21.226 C34.971,18.310 35.007,13.048 35.007,12.995 L35.003,7.089 C34.441,4.089 30.883,2.005 28.005,2.005 C25.126,2.006 21.570,4.091 21.010,7.091 L21.004,12.997 C21.004,13.048 21.059,18.327 24.636,21.228 C24.895,21.438 25.033,21.763 25.002,22.095 C24.972,22.427 24.778,22.722 24.485,22.882 L14.010,28.596 L14.010,30.001 L41.999,30.001 L42.000,28.595 L31.526,22.880 ZM18.647,2.520 C17.764,2.177 16.848,1.997 15.995,1.997 C13.116,1.998 9.559,4.083 8.999,7.083 L8.993,12.989 C8.993,13.041 9.047,18.319 12.625,21.220 C12.884,21.430 13.022,21.755 12.992,22.087 C12.961,22.419 12.767,22.714 12.474,22.874 L1.999,28.588 L1.999,29.993 L8.998,29.993 C9.550,29.993 9.997,30.441 9.997,30.993 C9.997,31.545 9.550,31.993 8.998,31.993 L1.999,31.993 C0.897,31.993 -0.000,31.096 -0.000,29.993 L-0.000,27.994 C-0.000,27.629 0.200,27.292 0.521,27.117 L10.307,21.779 C7.030,18.234 6.993,13.219 6.993,12.988 L6.999,6.994 C6.999,6.939 7.004,6.883 7.013,6.829 C7.702,2.744 12.213,-0.000 15.995,-0.000 C15.999,-0.000 16.005,-0.000 16.010,-0.000 C17.101,-0.000 18.262,0.227 19.369,0.656 C19.885,0.856 20.140,1.435 19.941,1.949 C19.740,2.464 19.158,2.720 18.647,2.520 Z"/>
+                        </svg>
+                        <span id="TextTranslation">Транслитератор</span>
+                    </a>
+                </div>                        
                 <div class="aside-item">
                     <a id="logoutButton" href="login/logout.php">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 24 24" fill="none">
@@ -303,47 +226,8 @@
 <div id="coursesPage" class="page hidden coursesPage">
     <div class="container">
         <main>
-            <div class="courses">
-                <div class="course">
-                    <img src="courses_flags/chechen.png" alt="Flag">
-                    <h3 id="courseChechenTranslation" class="courses_titles">Чеченский язык</h3>
-                    <button class="add-language-button a" data-language="chechen">+</button>
-                </div>
-                <div class="course">
-                    <img src="courses_flags/lezgin.png" alt="Flag">
-                    <h3 id="courseIngushTranslation" class="courses_titles">Лезгинский язык</h3>
-                    <button class="add-language-button a" data-language="lezgin">+</button>
-                </div>
-                <div class="course">
-                    <img src="courses_flags/adyge.png" alt="Flag">
-                    <h3 id="courseAdygeTranslation" class="courses_titles">Черкесский язык</h3>
-                    <button class="add-language-button a" data-language="adyge">+</button>
-                </div>
-                <div class="course">
-                    <img src="courses_flags/udmurt.png" alt="Flag">
-                    <h3 id="courseUdmurtTranslation" class="courses_titles">Удмуртский язык</h3>
-                    <button class="add-language-button a" data-language="udmurt">+</button>
-                </div>
-                <div class="course">
-                    <img src="courses_flags/tatar.png" alt="Flag">
-                    <h3 id="courseTatarTranslation" class="courses_titles">Татарский язык</h3>
-                    <button class="add-language-button a" data-language="tatar">+</button>
-                </div>
-                <div class="course">
-                    <img src="courses_flags/moksha.png" alt="Flag">
-                    <h3 id="courseMokshaTranslation" class="courses_titles">Мокшанский язык</h3>
-                    <button class="add-language-button a" data-language="moksha">+</button>
-                </div>                
-                <div class="course">
-                    <img src="courses_flags/chuvash.png" alt="Flag">
-                    <h3 id="courseChuvashTranslation" class="courses_titles">Чувашский язык</h3>
-                    <button class="add-language-button a" data-language="chuvash">+</button>
-                </div>
-                <<div class="course">
-                    <img src="courses_flags/bashkort.png" alt="Flag">
-                    <h3 id="courseBashkortTranslation" class="courses_titles">Башкирский язык</h3>
-                    <button class="add-language-button a" data-language="bashkort">+</button>
-                </div>             
+            <div class="courses" id="coursesContainer">
+                <!-- Курсы будут добавляться динамически -->
             </div>
         </main>
     </div>
@@ -362,7 +246,6 @@
             <input type="radio" id="langFrenchSettings" name="language" value="french" onclick="changeLanguage('french')">
             <label for="langFrenchSettings"><span id="settingsLangFrenchTranslation">Французский</span></label><br>
         </div>
-
 
         <div>
             <h3><span id="settingsThemeSelectionTranslation">Выбор темы страницы:</span></h3>
@@ -427,6 +310,35 @@
         </form>
     </div>
 </div>
+
+<!-- Модальное окно для добавления курса -->
+<div id="addCourseModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Добавить новый курс</h2>
+        <div class="course-form">
+            <div class="form-group">
+                <label for="courseName">Название курса</label>
+                <input type="text" id="courseName" required>
+            </div>
+            <div class="form-group">
+                <label for="courseFlag">Флаг курса</label>
+                <input type="file" id="courseFlag" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <label for="courseDescription">Описание курса</label>
+                <textarea id="courseDescription" required></textarea>
+            </div>
+            <button type="submit" class="add-course-btn">Добавить курс</button>
+        </div>
+    </div>
+</div>
+
+<!-- Кнопка добавления курса -->
+<button id="addCourseBtn" class="add-course-button">
+    <i class="fas fa-plus"></i>
+    <span>Добавить курс</span>
+</button>
 
 
 
@@ -940,6 +852,116 @@ window.onload = function() {
 
 // Обработчик изменения размера окна
 window.onresize = handleResize;
+
+// Функция для переключения темы
+function toggleTheme() {
+    const isDark = document.body.classList.toggle('dark-theme');
+    const themeIcon = document.querySelector('#themeToggle i');
+    
+    // Сохраняем выбор пользователя
+    localStorage.setItem('currentTheme', isDark ? 'dark' : 'light');
+    
+    // Меняем иконку
+    themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    
+    // Используем существующие функции из settings.js
+    if (isDark) {
+        setThemeDark();
+    } else {
+        setThemeLight();
+    }
+}
+
+// Применяем сохраненную тему при загрузке
+function applyTheme() {
+    const savedTheme = localStorage.getItem('currentTheme');
+    const themeIcon = document.querySelector('#themeToggle i');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeIcon.className = 'fas fa-sun';
+        setThemeDark();
+    } else {
+        document.body.classList.remove('dark-theme');
+        themeIcon.className = 'fas fa-moon';
+        setThemeLight();
+    }
+}
+
+// Добавляем обработчик события для кнопки переключения темы
+document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+// Применяем тему при загрузке страницы
+document.addEventListener('DOMContentLoaded', applyTheme);
+
+// Функции для работы с курсами
+function openAddCourseModal() {
+    document.getElementById('addCourseModal').style.display = 'block';
+}
+
+function closeAddCourseModal() {
+    document.getElementById('addCourseModal').style.display = 'none';
+}
+
+function createCourseElement(courseData) {
+    const courseDiv = document.createElement('div');
+    courseDiv.className = 'course';
+    courseDiv.innerHTML = `
+        <img src="${courseData.flagUrl}" alt="${courseData.name}">
+        <h3 class="courses_titles">${courseData.name}</h3>
+        <p class="course-description">${courseData.description}</p>
+        <button class="add-language-button a" data-language="${courseData.id}">+</button>
+    `;
+    return courseDiv;
+}
+
+function handleAddCourse(event) {
+    event.preventDefault();
+    
+    const courseName = document.getElementById('courseName').value;
+    const courseFlag = document.getElementById('courseFlag').files[0];
+    const courseDescription = document.getElementById('courseDescription').value;
+    
+    if (!courseName || !courseFlag || !courseDescription) {
+        alert('Пожалуйста, заполните все поля');
+        return;
+    }
+    
+    // Создаем URL для загруженного изображения
+    const flagUrl = URL.createObjectURL(courseFlag);
+    
+    // Создаем объект с данными курса
+    const courseData = {
+        id: courseName.toLowerCase().replace(/\s+/g, '-'),
+        name: courseName,
+        flagUrl: flagUrl,
+        description: courseDescription
+    };
+    
+    // Добавляем курс на страницу
+    const coursesContainer = document.getElementById('coursesContainer');
+    const courseElement = createCourseElement(courseData);
+    coursesContainer.appendChild(courseElement);
+    
+    // Закрываем модальное окно
+    closeAddCourseModal();
+    
+    // Очищаем форму
+    event.target.reset();
+}
+
+// Добавляем обработчики событий
+document.getElementById('addCourseBtn').addEventListener('click', openAddCourseModal);
+document.querySelector('.close').addEventListener('click', closeAddCourseModal);
+document.querySelector('.course-form').addEventListener('submit', handleAddCourse);
+
+// Закрываем модальное окно при клике вне его
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('addCourseModal');
+    if (event.target === modal) {
+        closeAddCourseModal();
+    }
+});
 </script>
 
 <script src="toggle.js"></script>
@@ -953,5 +975,6 @@ window.onresize = handleResize;
 <script src="statsHandler.js"></script>
 <script src="getFriends.js"></script>
 <script src="display_course.js"></script>
+<script src="add_course.js"></script>
 </body>
 </html>

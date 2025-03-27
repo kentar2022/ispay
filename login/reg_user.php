@@ -4,6 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
 
+require_once 'config_ispay.php';
+require_once 'password_validator.php';
+
 function logWithTime($message) {
     error_log(date('Y-m-d H:i:s') . " - " . $message);
 }
@@ -11,25 +14,39 @@ function logWithTime($message) {
 logWithTime("Starting registration process");
 
 session_start();
-require 'config_ispay.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['error' => 'Invalid request method']);
     exit();
 }
 
-// Изменено с login на username для консистентности
+// Проверяем CSRF токен
+if (!verify_csrf_token()) {
+    error_log("CSRF token validation failed during registration", "SECURITY");
+    echo json_encode(['error' => 'Invalid security token']);
+    exit();
+}
+
 if (!isset($_POST['username']) || !isset($_POST['password'])) {
-    echo json_encode(['error' => 'Username or password not provided']);
+    echo json_encode(['error' => 'Username and password are required']);
     exit();
 }
 
 try {
-    $pdo_ispay->beginTransaction();
+    // Валидация входных данных
+    $username = sanitize_input($_POST['username']);
+    $password = $_POST['password'];
 
-    $username = trim($_POST['username']); // Изменено с login на username
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $csrf_token = bin2hex(random_bytes(32));
+    // Проверяем сложность пароля
+    $validator = new PasswordValidator();
+    $validation = $validator->validate($password);
+    
+    if (!$validation['isValid']) {
+        echo json_encode(['error' => 'Password does not meet security requirements', 'details' => $validation['errors']]);
+        exit();
+    }
+
+    $pdo_ispay->beginTransaction();
 
     // Проверка существующего логина
     $check_stmt = $pdo_ispay->prepare("SELECT user_id FROM users WHERE nickname = ?");
@@ -39,9 +56,13 @@ try {
         exit();
     }
 
+    // Хешируем пароль
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    $csrf_token = generate_csrf_token();
+
     // Вставка пользователя
     $stmt = $pdo_ispay->prepare("INSERT INTO users (nickname, password, csrf_token) VALUES (?, ?, ?)");
-    $stmt->execute([$username, $password, $csrf_token]);
+    $stmt->execute([$username, $hashedPassword, $csrf_token]);
     $user_id = $pdo_ispay->lastInsertId();
 
     // Создаем запись в profileStats

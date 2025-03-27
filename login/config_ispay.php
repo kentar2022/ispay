@@ -18,9 +18,9 @@ ini_set('session.cookie_path', '/');
 // Подключение к базе данных
 try {
     $pdo_ispay = new PDO(
-        "mysql:host=localhost;dbname=your_database;charset=utf8mb4",
-        "your_username",
-        "your_password",
+        "mysql:host=localhost;dbname=ispay;charset=utf8mb4",
+        "kentar",
+        "password",
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -29,11 +29,18 @@ try {
     );
 } catch (PDOException $e) {
     error_log("Database connection error: " . $e->getMessage());
-    die("Connection failed");
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Database connection failed']);
+    exit();
 }
 
 // Функция для безопасного логирования
 function secure_log($message, $type = 'INFO') {
+    // Маскируем чувствительные данные в сообщении
+    $message = preg_replace('/"token":"([^"]+)"/', '"token":"[MASKED]"', $message);
+    $message = preg_replace('/"password":"([^"]+)"/', '"password":"[MASKED]"', $message);
+    $message = preg_replace('/"csrf_token":"([^"]+)"/', '"csrf_token":"[MASKED]"', $message);
+    
     $log_file = __DIR__ . '/logs/security.log';
     $timestamp = date('Y-m-d H:i:s');
     $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';

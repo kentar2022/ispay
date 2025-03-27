@@ -9,13 +9,13 @@ CREATE TABLE IF NOT EXISTS login_attempts (
 
 -- Добавляем поля для восстановления пароля в таблицу users
 ALTER TABLE users
-ADD COLUMN IF NOT EXISTS email VARCHAR(255) UNIQUE,
-ADD COLUMN IF NOT EXISTS reset_token VARCHAR(64) DEFAULT NULL,
-ADD COLUMN IF NOT EXISTS reset_token_expiry DATETIME DEFAULT NULL;
+ADD COLUMN email VARCHAR(255) UNIQUE,
+ADD COLUMN reset_token VARCHAR(64) DEFAULT NULL,
+ADD COLUMN reset_token_expiry DATETIME DEFAULT NULL;
 
 -- Добавляем поле для CSRF токена
 ALTER TABLE users
-ADD COLUMN IF NOT EXISTS csrf_token VARCHAR(64) DEFAULT NULL;
+ADD COLUMN csrf_token VARCHAR(64) DEFAULT NULL;
 
 -- Создаем таблицу для логирования безопасности
 CREATE TABLE IF NOT EXISTS security_logs (

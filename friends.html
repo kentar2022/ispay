@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Друзья - ISPAY</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f6fa;
+            --text-color: #2c3e50;
+            --border-radius: 10px;
+            --bg-color: #f8f9fa;
+            --card-bg: white;
+            --navbar-bg: white;
+        }
+
+        body.dark-theme {
+            --text-color: #ecf0f1;
+            --bg-color: #1a1a1a;
+            --card-bg: #2c2c2c;
+            --navbar-bg: #2c2c2c;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar {
+            background-color: var(--navbar-bg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .friends-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .search-box {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .friend-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            transition: transform 0.2s, background-color 0.3s;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .friend-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .friend-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .status-online {
+            background-color: #2ecc71;
+        }
+
+        .status-offline {
+            background-color: #95a5a6;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-color);
+        }
+
+        .nav-pills .nav-link {
+            color: var(--text-color);
+        }
+
+        .btn-add-friend {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+        }
+
+        .pagination .page-link {
+            color: var(--primary-color);
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .dark-theme .text-muted {
+            color: #a0a0a0 !important;
+        }
+
+        .dark-theme .navbar-brand,
+        .dark-theme .navbar-text {
+            color: var(--text-color);
+        }
+
+        .dark-theme .input-group-text,
+        .dark-theme .form-control {
+            background-color: var(--card-bg);
+            border-color: #404040;
+            color: var(--text-color);
+        }
+
+        .dark-theme .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .dark-theme .btn-outline-danger {
+            color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        #themeToggle {
+            color: var(--text-color);
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        #themeToggle:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-chevron-left"></i> Назад
+            </a>
+            <h1 class="navbar-text mb-0 h4">Мои друзья</h1>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-link me-3" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-add-friend" data-bs-toggle="modal" data-bs-target="#addFriendModal">
+                    <i class="fas fa-user-plus"></i> Добавить друга
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="friends-container">
+        <!-- Поиск и фильтры -->
+        <div class="search-box mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="fas fa-search text-muted"></i>
+                        </span>
+                        <input type="text" class="form-control border-start-0" placeholder="Поиск друзей...">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <ul class="nav nav-pills justify-content-md-end mt-3 mt-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" data-filter="all">Все</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-filter="online">Онлайн</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-filter="offline">Оффлайн</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Сетка друзей -->
+        <div class="row g-4" id="friendsGrid">
+            <!-- Пример карточки друга (будет генерироваться динамически) -->
+            <div class="col-md-6 col-lg-4">
+                <div class="friend-card p-3">
+                    <div class="d-flex align-items-center">
+                        <img src="https://via.placeholder.com/64" alt="Friend Avatar" class="friend-avatar">
+                        <div class="ms-3">
+                            <h5 class="mb-1">Иван Петров</h5>
+                            <p class="mb-1 text-muted">
+                                <span class="status-indicator status-online"></span>
+                                Онлайн
+                            </p>
+                            <small class="text-muted">Изучает: Чеченский, Татарский</small>
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-end">
+                        <button class="btn btn-sm btn-outline-primary me-2">
+                            <i class="fas fa-comment"></i> Сообщение
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger">
+                            <i class="fas fa-user-minus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Пагинация -->
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Модальное окно добавления друга -->
+    <div class="modal fade" id="addFriendModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Добавить друга</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addFriendForm">
+                        <div class="mb-3">
+                            <label for="friendId" class="form-label">ID пользователя или Email</label>
+                            <input type="text" class="form-control" id="friendId" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="friendMessage" class="form-label">Сообщение (необязательно)</label>
+                            <textarea class="form-control" id="friendMessage" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" form="addFriendForm" class="btn btn-primary">Отправить запрос</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Функция для загрузки друзей
+        function loadFriends(filter = 'all') {
+            // Здесь будет код для загрузки друзей с сервера
+            console.log('Loading friends with filter:', filter);
+        }
+
+        // Функция для переключения темы
+        function toggleTheme() {
+            const body = document.body;
+            const isDark = body.classList.toggle('dark-theme');
+            const themeIcon = document.querySelector('#themeToggle i');
+            
+            // Сохраняем выбор пользователя
+            localStorage.setItem('darkTheme', isDark);
+            
+            // Меняем иконку
+            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Применяем сохраненную тему при загрузке
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkTheme') === 'true';
+            const themeIcon = document.querySelector('#themeToggle i');
+            
+            if (isDark) {
+                document.body.classList.add('dark-theme');
+                themeIcon.className = 'fas fa-sun';
+            }
+        }
+
+        // Обработчики событий
+        document.addEventListener('DOMContentLoaded', function() {
+            // Применяем сохраненную тему
+            applyTheme();
+
+            // Обработчик переключения темы
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+            // Загрузка друзей при загрузке страницы
+            loadFriends();
+
+            // Обработка фильтров
+            document.querySelectorAll('[data-filter]').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const filter = e.target.dataset.filter;
+                    
+                    // Обновление активного состояния кнопок
+                    document.querySelectorAll('[data-filter]').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    e.target.classList.add('active');
+                    
+                    // Загрузка отфильтрованных друзей
+                    loadFriends(filter);
+                });
+            });
+
+            // Обработка формы добавления друга
+            document.getElementById('addFriendForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const friendId = document.getElementById('friendId').value;
+                const message = document.getElementById('friendMessage').value;
+                
+                // Здесь будет код отправки запроса на добавление друга
+                console.log('Adding friend:', { friendId, message });
+                
+                // Закрытие модального окна
+                const modal = bootstrap.Modal.getInstance(document.getElementById('addFriendModal'));
+                modal.hide();
+            });
+        });
+    </script>
+</body>
+</html> 

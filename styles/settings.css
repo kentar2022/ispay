@@ -1,4 +1,3 @@
-/*
 .theme-light {
     --background-color: #ffffff;
     --text-color: #000000;
@@ -19,7 +18,7 @@ body {
     color: var(--text-color);
 }
 
-a, .a, .settingsPage *, .courses a, .profilePage * {
+a, .a, .settingsPage *, .profilePage * {
     color: var(--text-color);
 }
 
@@ -27,11 +26,9 @@ svg {
     fill: var(--text-color);
 }
 
-
 select > option, #languageSelect, #languageSelectContainer {
     background-color: var(--background-color);
-}*/
-
+}
 
 .settingsPage {
     border: 1px solid #ccc;
@@ -42,7 +39,6 @@ select > option, #languageSelect, #languageSelectContainer {
     position: fixed;
     right: 40%;
 }
-
 
 .custom-container {
     display: flex;
@@ -56,7 +52,7 @@ select > option, #languageSelect, #languageSelectContainer {
     .settingsPage {
         width: 80% !important;
         right: 10% !important;
-        font-size: 18px !important; /* Увеличиваем размер шрифта для больших экранов */
+        font-size: 18px !important;
     }
 }
 
@@ -76,6 +72,6 @@ select > option, #languageSelect, #languageSelectContainer {
         width: 100% !important;
         right: 0 !important;
         padding: 15px !important;
-        font-size: 20px !important; /* Еще больше увеличиваем размер шрифта */
+        font-size: 20px !important;
     }
 }

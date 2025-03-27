@@ -131,6 +131,60 @@
             opacity: 0.7;
             cursor: not-allowed;
         }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-group input {
+            flex: 1;
+            height: 40px;
+        }
+
+        .generate-password-btn {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--button-color, #f3166b);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 0;
+        }
+
+        .generate-password-btn:hover {
+            background: var(--button-hover-color, #e01560);
+        }
+
+        .generate-password-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .alert {
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: none;
+            font-size: 14px;
+        }
+
+        .alert-danger {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+
+        .alert-success {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
     </style>
 </head>
 <body>
@@ -140,20 +194,26 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h5 id="registerTitleTranslation" class="card-title">Créer un compte</h5>
+                <h5 id="registerTitleTranslation" class="card-title">Создать аккаунт</h5>
                 
-                <form id="registrationForm" method="post" action="reg_user.php">
+                <form id="registrationForm" method="POST" action="reg_user.php">
+                    <input type="hidden" name="csrf_token" id="csrf_token">
                     <div class="mb-3">
-                        <label class="form-label" id="emailLabelTranslation">Почта или Никнейм</label>
-                        <input type="text" class="form-control" name="username" id="login" required>
+                        <label class="form-label" id="usernameLabelTranslation">Логин</label>
+                        <input type="text" class="form-control" name="username" required>
                     </div>
-                    
                     <div class="mb-3">
                         <label class="form-label" id="passwordLabelTranslation">Пароль</label>
-                        <input type="password" class="form-control" name="password" id="password" required>
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="password" id="passwordInput" required>
+                            <button type="button" class="generate-password-btn" id="generatePasswordBtn" title="Сгенерировать пароль">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7.5 13h2v2h-2v-2zm0-4h2v2h-2V9zM15 13h2v2h-2v-2zm0-4h2v2h-2V9zm-4 4h2v2h-2v-2zm0-4h2v2h-2V9z"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    
-                    <button type="submit" class="btn-primary" id="submitBtnTranslation">Envoyer</button>
+                    <button type="submit" class="btn btn-primary" id="registerButtonTranslation">Зарегистрироваться</button>
                 </form>
                 
                 <div class="autorisation-link">
@@ -235,7 +295,7 @@ window.onload = function() {
 
     var texts = {
         russian: {
-            loginTitle: "Войти",
+            loginTitle: "Создать аккаунт",
             emailLabel: "Почта или Никнейм",
             passwordLabel: "Пароль",
             submitBtn: "Войти",
@@ -291,96 +351,132 @@ window.onload = function() {
             }
         }
 
-document.getElementById('registrationForm').addEventListener('submit', function(e) {    
-    e.preventDefault();
-    
-    const form = this;
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.innerText;
-    
-    // Показываем индикатор загрузки
-    submitButton.innerHTML = '<span class="loader"></span>Регистрация...';
-    submitButton.disabled = true;
-
-    const formData = new FormData(form);
-
-    // Устанавливаем таймаут в 15 секунд
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
-
-    fetch('reg_user.php', {
-        method: 'POST',
-        body: formData,
-        signal: controller.signal
-    })
-    .then(response => {
-        clearTimeout(timeout);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text().then(text => {
-            try {
-                return JSON.parse(text);
-            } catch (e) {
-                console.log('Server response:', text);
-                throw new Error('Invalid JSON response from server');
+document.addEventListener('DOMContentLoaded', function() {
+    // Получаем CSRF токен при загрузке страницы
+    fetch('get_csrf_token.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        });
-    })
-    .then(data => {
-        console.log('Server response:', data);
-        if (data.success) {
-            // При успешной регистрации перенаправляем на главную страницу
-            window.location.href = '../index.html';
-        } else if (data.error) {
-            alert(data.error);
-        }
-    })
-    .catch(error => {
-        if (error.name === 'AbortError') {
-            alert('Превышено время ожидания ответа от сервера. Попробуйте еще раз.');
-        } else {
+            const token = response.headers.get('X-CSRF-Token');
+            if (!token) {
+                throw new Error('CSRF token not found in response');
+            }
+            document.getElementById('csrf_token').value = token;
+            return response.json();
+        })
+        .catch(error => {
             console.error('Error:', error);
-            alert('Произошла ошибка при регистрации: ' + error.message);
-        }
-    })
-    .finally(() => {
-        // Восстанавливаем состояние кнопки
-        submitButton.innerHTML = originalButtonText;
-        submitButton.disabled = false;
+            showError('Ошибка при инициализации формы. Пожалуйста, обновите страницу.');
+        });
+
+    // Обработка отправки формы
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        
+        // Добавляем индикатор загрузки
+        submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Регистрация...';
+        submitButton.disabled = true;
+        
+        fetch('reg_user.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                window.location.href = '../index.html';
+            } else {
+                showError(data.error);
+                if (data.details) {
+                    data.details.forEach(error => {
+                        showError(error);
+                    });
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showError('Произошла ошибка при регистрации. Пожалуйста, попробуйте позже.');
+        })
+        .finally(() => {
+            submitButton.innerHTML = originalButtonText;
+            submitButton.disabled = false;
+        });
+    });
+
+    // Добавляем обработчик для кнопки генерации пароля
+    document.getElementById('generatePasswordBtn').addEventListener('click', function() {
+        const password = generateSecurePassword();
+        document.getElementById('passwordInput').value = password;
+        copyToClipboard(password);
     });
 });
 
-// Добавляем стили для индикатора загрузки, если их еще нет
-if (!document.getElementById('loaderStyles')) {
-    const styles = `
-        .loader {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 2px solid #6366F1;
-            animation: spin 1s linear infinite;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-    `;
+function showError(message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'alert alert-danger';
+    errorDiv.textContent = message;
+    document.getElementById('registrationForm').prepend(errorDiv);
     
-    const styleSheet = document.createElement("style");
-    styleSheet.id = 'loaderStyles';
-    styleSheet.textContent = styles;
-    document.head.appendChild(styleSheet);
+    setTimeout(() => {
+        errorDiv.classList.add('fade-out');
+        setTimeout(() => errorDiv.remove(), 150);
+    }, 5000);
+}
+
+// Функция для генерации надежного пароля
+function generateSecurePassword() {
+    const length = 12;
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+    let password = "";
+    
+    // Гарантируем наличие как минимум одного символа каждого типа
+    password += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random() * 26)];
+    password += "abcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random() * 26)];
+    password += "0123456789"[Math.floor(Math.random() * 10)];
+    password += "!@#$%^&*()_+-=[]{}|;:,.<>?"[Math.floor(Math.random() * 20)];
+    
+    // Добавляем случайные символы до достижения нужной длины
+    while (password.length < length) {
+        password += charset[Math.floor(Math.random() * charset.length)];
+    }
+    
+    // Перемешиваем символы
+    password = password.split('').sort(() => Math.random() - 0.5).join('');
+    
+    return password;
+}
+
+// Функция для копирования в буфер обмена
+async function copyToClipboard(text) {
+    try {
+        await navigator.clipboard.writeText(text);
+        showSuccess('Пароль скопирован в буфер обмена!');
+    } catch (err) {
+        showError('Не удалось скопировать пароль');
+    }
+}
+
+function showSuccess(message) {
+    const successDiv = document.createElement('div');
+    successDiv.className = 'alert alert-success';
+    successDiv.textContent = message;
+    document.getElementById('registrationForm').prepend(successDiv);
+    
+    setTimeout(() => {
+        successDiv.classList.add('fade-out');
+        setTimeout(() => successDiv.remove(), 150);
+    }, 3000);
 }
 </script>
 </body>
