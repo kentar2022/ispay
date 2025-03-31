@@ -75,13 +75,13 @@ function applyStyles(bodyColor, linkColor, fillColor, settingsPageTextColor, cou
         giftItem.style.backgroundColor = giftItemColor;
     });
 
-    document.getElementById('languageSelectContainer').style.backgroundColor = bodyColor;
+        document.getElementById('languageSelectContainer').style.backgroundColor = bodyColor;
 
     // Установка стилей скроллбара
     document.documentElement.style.setProperty('--scrollbar-thumb-color', scrollbarColor);
     document.documentElement.style.setProperty('--scrollbar-track-color', bodyColor);
-    centerAnimation.style.borderColor = centerAnimationBorderColor;
-    centerAnimation.style.backgroundColor = centerAnimationBgColor;
+        centerAnimation.style.borderColor = centerAnimationBorderColor;
+        centerAnimation.style.backgroundColor = centerAnimationBgColor;
 
     // Стили для карточек курсов
     const courseCards = document.querySelectorAll('.course-card');
@@ -138,28 +138,27 @@ function setThemeLight() {
     const courseCards = document.querySelectorAll('.course-card');
     courseCards.forEach(card => {
         card.style.border = '2px solid #f3166b';
-        card.style.color = '#ffffff';
-    });
-
-    // Применяем стили для кнопок добавления языка
-    const addLanguageButtons = document.querySelectorAll('.add-language-btn');
-    addLanguageButtons.forEach(button => {
-        button.style.backgroundColor = '#f3166b';
-        button.style.color = '#ffffff';
-        button.style.border = '2px solid #f3166b';
-        button.style.borderRadius = '50%';
+        card.style.color = '#293133';
     });
 
     // Применяем стили для заголовков
     const courseTitles = document.querySelectorAll('.course-title');
     courseTitles.forEach(title => {
-        title.style.color = '#ffffff';
+        title.style.color = '#293133';
     });
 
     const coursesTitle = document.querySelector('.courses-title');
     if (coursesTitle) {
-        coursesTitle.style.color = '#ffffff';
+        coursesTitle.style.color = '#293133';
     }
+
+    // Применяем стили для кнопок добавления языка
+    const addLanguageButtons = document.querySelectorAll('.add-language-btn');
+    addLanguageButtons.forEach(button => {
+        button.style.color = '#ffffff';
+        button.style.backgroundColor = '#f3166b';
+        button.style.borderColor = '#f3166b';
+    });
 
     var bodyColor = '#ffffff';
     var linkColor = '#f3166b';
@@ -192,15 +191,6 @@ function setThemeDark() {
         card.style.color = '#ffffff';
     });
 
-    // Применяем стили для кнопок добавления языка
-    const addLanguageButtons = document.querySelectorAll('.add-language-btn');
-    addLanguageButtons.forEach(button => {
-        button.style.backgroundColor = '#15E670';
-        button.style.color = '#ffffff';
-        button.style.border = '2px solid #15E670';
-        button.style.borderRadius = '50%';
-    });
-
     // Применяем стили для заголовков
     const courseTitles = document.querySelectorAll('.course-title');
     courseTitles.forEach(title => {
@@ -211,6 +201,14 @@ function setThemeDark() {
     if (coursesTitle) {
         coursesTitle.style.color = '#ffffff';
     }
+
+    // Применяем стили для кнопок добавления языка
+    const addLanguageButtons = document.querySelectorAll('.add-language-btn');
+    addLanguageButtons.forEach(button => {
+        button.style.color = '#293133';
+        button.style.backgroundColor = '#15E670';
+        button.style.borderColor = '#15E670';
+    });
 
     var bodyColor = '#293133';
     var linkColor = '#15E670';
@@ -244,10 +242,10 @@ function setTheme() {
 // Функция для загрузки сохраненной темы
 function loadTheme() {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        setThemeDark();
-    } else {
-        setThemeLight();
+        if (savedTheme === 'dark') {
+            setThemeDark();
+        } else {
+            setThemeLight();
     }
 }
 

@@ -40,10 +40,11 @@ $result = $stmt->get_result();
 
 if ($row = $result->fetch_assoc()) {
     $languages_list = $row['languages_list'];
-    $response['debug'][] = 'Languages list received: ' . $languages_list; // Отладочное сообщение
+    $response['debug'][] = 'Raw languages list from DB: ' . $languages_list;
     
     // Убедимся, что строки обрезаются по пробелам и возвращаются как массив
     $languages_array = array_map('trim', explode(',', $languages_list));
+    $response['debug'][] = 'Processed languages array: ' . print_r($languages_array, true);
     
     $response['languages'] = $languages_array;  // Добавляем массив языков в ответ
 } else {

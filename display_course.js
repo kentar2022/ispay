@@ -1,3 +1,39 @@
+// Обработка выпадающего меню языков
+document.addEventListener('DOMContentLoaded', function() {
+    const coursesToggle = document.querySelector('.courses-toggle');
+    const coursesDropdown = document.querySelector('.courses-dropdown');
+    const courseItems = document.querySelectorAll('.course-item-dropdown');
+
+    if (!coursesToggle || !coursesDropdown) {
+        console.error('Не найдены элементы выпадающего меню');
+        return;
+    }
+
+    // Показать/скрыть выпадающее меню при клике на кнопку
+    coursesToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        coursesDropdown.classList.toggle('show');
+    });
+
+    // Закрыть выпадающее меню при клике вне его
+    document.addEventListener('click', function(event) {
+        if (!coursesToggle.contains(event.target) && !coursesDropdown.contains(event.target)) {
+            coursesDropdown.classList.remove('show');
+        }
+    });
+
+    // Обработка выбора языка
+    courseItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const language = this.getAttribute('data-value');
+            // Вызываем существующие функции для обработки выбранного языка
+            showLanguage(language);
+            selectLanguage(language);
+            coursesDropdown.classList.remove('show');
+        });
+    });
+});
+
 function displayCourseData(data) {
     const container = document.getElementById('courseContent');
     if (!container) {
